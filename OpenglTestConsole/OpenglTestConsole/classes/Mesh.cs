@@ -11,12 +11,12 @@ namespace OpenglTestConsole.classes
         /// The corner amount of the mesh
         /// </summary>
         public int size { get; set; }
-        public required Camera2D Camera { get; set; } = new Camera2D(800, 600);
+        public required Camera Camera { get; set; } = new Camera(800, 600);
         public required Shader Shader { get; set; } = new Shader("shaders/default.vert", "shaders/default.frag");
         public Transform Transform { get; set; } = new Transform();
         private int VertexArrayObjectPointer { get; set; }
         [SetsRequiredMembers]
-        public Mesh(Camera2D camera, int size = 3, string vert = "", string frag = "")
+        public Mesh(Camera camera, int size = 3, string vert = "", string frag = "")
         {
             this.size = size;
             if (vert != "" || frag != "")
@@ -103,14 +103,15 @@ namespace OpenglTestConsole.classes
         public void Render(PrimitiveType type = PrimitiveType.TriangleStrip)
         {
 
-            Shader.SetMatrix4("view", Camera.GetViewMatrix());
-
             Shader.SetMatrix4("projection", Camera.GetProjectionMatrix());
+
+            Shader.SetMatrix4("view", Camera.GetViewMatrix());
 
             Shader.SetMatrix4("model", Transform.GetModelMatrix());
 
+
             GL.BindVertexArray(VertexArrayObjectPointer);
-            GL.DrawArrays(PrimitiveType.TriangleStrip, 0, size);
+            GL.DrawArrays(type, 0, size);
         }
         #endregion
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DeCell\\source\\repos\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj": {}
+    "D:\\Github\\OpenGLTests\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DeCell\\source\\repos\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj": {
+    "D:\\Github\\OpenGLTests\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DeCell\\source\\repos\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj",
+        "projectUniqueName": "D:\\Github\\OpenGLTests\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj",
         "projectName": "OpenglTestConsole",
-        "projectPath": "C:\\Users\\DeCell\\source\\repos\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj",
+        "projectPath": "D:\\Github\\OpenGLTests\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj",
         "packagesPath": "C:\\Users\\DeCell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DeCell\\source\\repos\\OpenglTestConsole\\OpenglTestConsole\\obj\\",
+        "outputPath": "D:\\Github\\OpenGLTests\\OpenglTestConsole\\OpenglTestConsole\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

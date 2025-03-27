@@ -23,7 +23,7 @@ namespace OpenglTestConsole.classes
                 _rotation = value * new Vector3((float)(Math.PI / 180f));
             }
         }
-        public Vector3 Scale { get; set; } = Vector3.One;
+        public Vector3 Scale = Vector3.One;
 
         public Matrix4 GetModelMatrix()
         {
@@ -32,7 +32,7 @@ namespace OpenglTestConsole.classes
                                Matrix4.CreateRotationY(_rotation.Y) *
                                Matrix4.CreateRotationZ(_rotation.Z);
 
-            return
+            return Matrix4.Identity *
                 Matrix4.CreateScale(Scale) *
                 rotation *
                 Matrix4.CreateTranslation(Position);
