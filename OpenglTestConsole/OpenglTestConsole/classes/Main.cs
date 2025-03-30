@@ -40,20 +40,6 @@ namespace OpenglTestConsole.classes
             base.OnLoad();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            //GL.Enable(EnableCap.DepthTest);
-
-            //  new Vector3(-1.0f, 1.0f, 0f),
-            //  new Vector3(1.0f, 1.0f, 0f),
-            //  new Vector3(-1.0f, -1.0f, 0f),
-            //  new Vector3(1.0f, -1.0f, 0f)
-
-            // new Vector3(-150.0f, -250.0f, 0f),
-            // new Vector3(150.0f, -250.0f, 0f)
-
-            //new Vector3(-150.0f, 150.0f, 0f),
-            //new Vector3(150.0f, 150.0f, 0f),
-            //new Vector3(-150.0f, -150.0f, 0f),
-            //new Vector3(150.0f, -150.0f, 0f)
 
             Mesh = new Mesh(this.Camera);
             Mesh.size = 4;
@@ -68,15 +54,6 @@ namespace OpenglTestConsole.classes
                 },
                 0
             );
-
-            //Mesh.Transform.Scale.X = 0.5f;
-            //Mesh.Transform.Scale.Y = 0.5f;
-            //Mesh.Transform.Scale.Z = 0.5f;
-
-            //Mesh.Transform.Rotation = new Vector3(0f, 0f, 45f);
-
-            //Mesh.Transform.Position.X = 10f;
-            //Mesh.Transform.Position.Y = 10f;
 
 
             Mesh.InitShader("shaders/shader.vert", "shaders/shader.frag");
@@ -121,7 +98,7 @@ namespace OpenglTestConsole.classes
                 return;
             }
 
-            float speed = 10f;
+            float speed = 1f;
             float delta = (float)args.Time;
 
             speed *= delta;
