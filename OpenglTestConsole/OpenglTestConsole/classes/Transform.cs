@@ -23,6 +23,18 @@ namespace OpenglTestConsole.classes
                 _rotation = value * new Vector3((float)(Math.PI / 180f));
             }
         }
+        public void SetRotation(float? x = null, float? y = null, float? z = null)
+        {
+            var rotation = this.Rotation;
+            if (x != null)
+                rotation.X = (float)x;
+            if (y != null)
+                rotation.Y = (float)y;
+            if (z != null)
+                rotation.Z = (float)z;
+
+            this.Rotation = rotation;
+        }
         public Vector3 Scale = Vector3.One;
 
         public Matrix4 GetModelMatrix()

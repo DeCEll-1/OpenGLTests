@@ -13,16 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="shaders\default.frag">
+    <None Update="shaders\**\*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="shaders\default.vert">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="shaders\shader.frag">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="shaders\shader.vert">
+    <None Update="textures\**\*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

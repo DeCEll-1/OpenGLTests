@@ -6,7 +6,7 @@ namespace OpenglTestConsole.classes
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Program");
+            Logger.Log($"Started app with arguments:\n{string.Concat(args)}", LogLevel.Info);
             GameWindowSettings gameWindowSettings = GameWindowSettings.Default;
             NativeWindowSettings nativeWindowSettings = new NativeWindowSettings
             {

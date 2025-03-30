@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using StbImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -12,9 +13,17 @@ namespace OpenglTestConsole.classes
     public class Shader : IDisposable
     {
         #region Main Shader Functions
+        public bool initalised = false;
+        public string vertexPath; public string fragmentPath;
         public int Handle;
         private bool disposed = false;
         public Shader(string vertexPath, string fragmentPath)
+        {
+            this.vertexPath = vertexPath;
+            this.fragmentPath = fragmentPath;
+        }
+
+        public void Init()
         {
             int vertShaderPointer = HandleVertexShader(vertexPath);
 
@@ -32,18 +41,29 @@ namespace OpenglTestConsole.classes
             if (shaderLinkSuccess == 0)
             {
                 string errorLog = GL.GetProgramInfoLog(Handle);
-                Console.WriteLine(errorLog);
+                Logger.Log($"An error occured while loading shaders for {Handle}!\nError log:\n{errorLog}", LogLevel.Error);
             }
 
             GL.DetachShader(Handle, vertShaderPointer);
             GL.DetachShader(Handle, fragShaderPointer);
             GL.DeleteShader(vertShaderPointer);
             GL.DeleteShader(fragShaderPointer);
-        }
 
+            this.initalised = true;
+        }
         private int HandleFragmentShader(string path)
         {
-            string fragSource = File.ReadAllText(path);
+            string fragSource;
+            try
+            {
+                fragSource = File.ReadAllText(path);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log($"An error occured while loading {path} for {Handle}:\n{ex.ToString()}", LogLevel.Error);
+                Logger.Log($"Using default fragment shader...", LogLevel.Warning);
+                fragSource = File.ReadAllText("shaders/default.frag");
+            }
 
             int fragShaderPointer = GL.CreateShader(ShaderType.FragmentShader);
 
@@ -56,16 +76,27 @@ namespace OpenglTestConsole.classes
             if (fragShaderSuccess == 0)
             {
                 string errorLog = GL.GetShaderInfoLog(fragShaderPointer);
-                Console.WriteLine(errorLog);
+                Logger.Log($"An error occured while loading shaders for {Handle}!\nError log:\n{errorLog}", LogLevel.Error);
             }
 
-            Console.WriteLine("Loaded Fragment Shader For " + Handle + " : " + path);
+            Logger.Log($"Loaded fragment shader for shader {Handle} : " + path, LogLevel.Info);
 
             return fragShaderPointer;
         }
         private int HandleVertexShader(string path)
         {
-            string vertSource = File.ReadAllText(path);
+            string vertSource;
+
+            try
+            {
+                vertSource = File.ReadAllText(path);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log($"An error occured while loading {path} for {Handle}:\n{ex.ToString()}", LogLevel.Error);
+                Logger.Log($"Using default vertex shader...", LogLevel.Warning);
+                vertSource = File.ReadAllText("shaders/default.vert");
+            }
 
             int vertShaderPointer = GL.CreateShader(ShaderType.VertexShader);
 
@@ -78,10 +109,10 @@ namespace OpenglTestConsole.classes
             if (vertShaderSuccess == 0)
             {
                 string errorLog = GL.GetShaderInfoLog(vertShaderPointer);
-                Console.WriteLine(errorLog);
+                Logger.Log($"An error occured while loading shaders for {Handle}!\nError log:\n{errorLog}", LogLevel.Error);
             }
 
-            Console.WriteLine("Loaded Vertex Shader: " + Handle + " : " + path);
+            Logger.Log($"Loaded vertex shader for {Handle} : " + path, LogLevel.Info);
 
             return vertShaderPointer;
         }
@@ -89,11 +120,13 @@ namespace OpenglTestConsole.classes
         {
             if (disposed == false)
             {
-                Console.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
+                Logger.Log($"GPU Resource leak for shader {Handle}! Did you forget to call Dispose()?", LogLevel.Error);
             }
         }
         public void Use()
         {
+            if (this.initalised == false)
+                Logger.Log($"Shader with {Handle} used without initalisation, initalising..", LogLevel.Warning);
             GL.UseProgram(Handle);
         }
         protected virtual void Dispose(bool disposing)
@@ -156,10 +189,15 @@ namespace OpenglTestConsole.classes
             GL.Uniform4(loc, color);
         }
 
-        public void SetTexture(string name, Texture tex)
+        public void SetTexture(string name, Texture tex, OpenTK.Graphics.OpenGL4.TextureUnit unit)
         {
+            tex.Activate(unit);
+            tex.Bind();
             int loc = GL.GetUniformLocation(Handle, name);
-            GL.Uniform1(loc, tex.Handle);
+
+            int unitint = (int)unit - (int)TextureUnit.Texture0;
+
+            GL.Uniform1(loc, unitint);
         }
 
 

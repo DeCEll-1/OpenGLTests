@@ -71,3 +71,9 @@ D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\obj\Debug\net8.0\refin
 D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\obj\Debug\net8.0\OpenglTestConsole.pdb
 D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\obj\Debug\net8.0\OpenglTestConsole.genruntimeconfig.cache
 D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\obj\Debug\net8.0\ref\OpenglTestConsole.dll
+D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\bin\Debug\net8.0\shaders\sphere.frag
+D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\bin\Debug\net8.0\shaders\sphere.vert
+D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\bin\Debug\net8.0\textures\PlaceHolder.png
+D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\bin\Debug\net8.0\textures\sebestyen.png
+D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\bin\Debug\net8.0\shaders\texture.frag
+D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\bin\Debug\net8.0\shaders\texture.vert

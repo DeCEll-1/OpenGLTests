@@ -18,21 +18,26 @@ namespace OpenglTestConsole.classes
     public class Main : GameWindow
     {
         private Stopwatch timer = new Stopwatch();
-        public required Mesh Mesh { get; set; }
+        public required Sphere Sphere { get; set; }
+        public required Mesh Square { get; set; }
+        public required Mesh SquareTextured { get; set; }
         public required Camera Camera { get; set; }
+        public Texture TestTexture { get; set; } = new Texture("textures/PlaceHolder.png");
 
         private float _sensitivity = 0.2f;
         private bool _firstMove = true;
         private Vector2 _lastPos;
+        public Light light = new Light(new Vector3(5.0f), new Vector3(1.0f));
+
         [SetsRequiredMembers]
         public Main(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
             Camera = new Camera(nativeWindowSettings.ClientSize.X, nativeWindowSettings.ClientSize.Y);
             Camera.Position.Z = 3f;
-
-            Mesh = new Mesh(this.Camera);
-
             CursorState = CursorState.Grabbed;
+
+            this.TestTexture.Init();
+
 
         }
         protected override void OnLoad()
@@ -40,10 +45,10 @@ namespace OpenglTestConsole.classes
             base.OnLoad();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-
-            Mesh = new Mesh(this.Camera);
-            Mesh.size = 4;
-            Mesh.SetVector3(
+            #region square
+            Square = new Mesh(this.Camera);
+            Square.size = 4;
+            Square.SetVector3(
                 //Square.GetSquare(400, 300),
                 new Vector3[]
                 {
@@ -54,11 +59,46 @@ namespace OpenglTestConsole.classes
                 },
                 0
             );
-
-
-            Mesh.InitShader("shaders/shader.vert", "shaders/shader.frag");
-
-            Mesh.Shader.Use();
+            Square.InitShader("shaders/shader.vert", "shaders/shader.frag");
+            Square.Shader.Use();
+            #endregion
+            #region square Textured
+            SquareTextured = new Mesh(this.Camera);
+            SquareTextured.size = 4;
+            SquareTextured.SetVector3(
+                //Square.GetSquare(400, 300),
+                new Vector3[]
+                {
+                    new Vector3(-0.5f, 0.5f, 0f),
+                    new Vector3(0.5f, 0.5f, 0f),
+                    new Vector3(-0.5f, -0.5f, 0f),
+                    new Vector3(0.5f, -0.5f, 0f)
+                },
+                0
+            );
+            SquareTextured.SetVector2(
+                [
+                    new Vector2(0f, 1f),
+                    new Vector2(1f, 1f),
+                    new Vector2(0f, 0f),
+                    new Vector2(1f, 0f)
+                ],
+                1
+            );
+            SquareTextured.InitShader("shaders/texture.vert", "shaders/texture.frag");
+            SquareTextured.Shader.Use();
+            #endregion
+            #region sphere
+            this.Sphere = new Sphere(
+                stackCount: 16,
+                sectorCount: 16,
+                radius: 0.5f,
+                camera: this.Camera,
+                texture: new Texture("textures/sebestyen.png")
+            );
+            this.Sphere.Shader.Use();
+            this.Sphere.Transform.Position = new Vector3(0f, -1.5f, 2f);
+            #endregion
 
             timer = new Stopwatch();
             timer.Start();
@@ -70,13 +110,22 @@ namespace OpenglTestConsole.classes
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            //Mesh.Transform.Position = new Vector3(0f, 0f, 0f);
+            #region square
+            Square.Transform.Position = Vector3.UnitZ * 3f;
+            Square.Shader.Use();
+            Square.Shader.SetFloat("t", (float)timer.Elapsed.TotalSeconds);
+            Square.Render();
+            #endregion square
 
-            Mesh.Shader.Use();
+            #region square texture
+            SquareTextured.Transform.Position = Vector3.UnitX * 3f;
+            //SquareTextured.Transform.SetRotation(x: 90f);
+            SquareTextured.Shader.Use();
+            SquareTextured.Shader.SetTexture("tex", TestTexture, TextureUnit.Texture0);
+            SquareTextured.Render();
+            #endregion
 
-            Mesh.Shader.SetFloat("t", (float)timer.Elapsed.TotalSeconds);
-
-            Mesh.Render();
+            Sphere.Render(light: light);
 
             SwapBuffers();
         }
@@ -103,6 +152,9 @@ namespace OpenglTestConsole.classes
 
             speed *= delta;
 
+            if (KeyboardState.IsKeyDown(Keys.LeftShift))
+                speed *= 2f;
+
             float radians = MathHelper.DegreesToRadians(Camera.Yaw);
 
             Vector3 forward = new Vector3((float)Math.Cos(MathHelper.DegreesToRadians(Camera.Yaw)), 0,
@@ -125,10 +177,10 @@ namespace OpenglTestConsole.classes
 
             Camera.Position += movement;
 
-            if (KeyboardState.IsKeyDown(Keys.Right)) Mesh.Transform.Position.X += speed;
-            if (KeyboardState.IsKeyDown(Keys.Left)) Mesh.Transform.Position.X -= speed;
-            if (KeyboardState.IsKeyDown(Keys.Up)) Mesh.Transform.Position.Y += speed;
-            if (KeyboardState.IsKeyDown(Keys.Down)) Mesh.Transform.Position.Y -= speed;
+            if (KeyboardState.IsKeyDown(Keys.Right)) Sphere.Transform.Position.X += speed;
+            if (KeyboardState.IsKeyDown(Keys.Left)) Sphere.Transform.Position.X -= speed;
+            if (KeyboardState.IsKeyDown(Keys.Up)) Sphere.Transform.Position.Y += speed;
+            if (KeyboardState.IsKeyDown(Keys.Down)) Sphere.Transform.Position.Y -= speed;
 
             var mouse = MouseState;
 

@@ -12,7 +12,7 @@ namespace OpenglTestConsole.classes
         /// </summary>
         public int size { get; set; }
         public required Camera Camera { get; set; } = new Camera(800, 600);
-        public required Shader Shader { get; set; } = new Shader("shaders/default.vert", "shaders/default.frag");
+        public required Shader Shader { get; set; }
         public Transform Transform { get; set; } = new Transform();
         private int VertexArrayObjectPointer { get; set; }
         [SetsRequiredMembers]
@@ -21,9 +21,11 @@ namespace OpenglTestConsole.classes
             this.size = size;
             if (vert != "" || frag != "")
                 InitShader(vert, frag);
+            else
+                Shader = new Shader("shaders/default.vert", "shaders/default.frag");
+
             VertexArrayObjectPointer = GL.GenVertexArray();
             Camera = camera;
-
         }
         #endregion
 
@@ -31,6 +33,7 @@ namespace OpenglTestConsole.classes
         public void InitShader(string vertLoc, string fragLoc)
         {
             Shader = new Shader(vertLoc, fragLoc);
+            Shader.Init();
         }
         public void SetVector2(Vector2[] vectors, int loc)
         {
@@ -100,9 +103,17 @@ namespace OpenglTestConsole.classes
         #endregion
 
         #region Render  
+        private void Prep()
+        {
+            if (this.Shader.initalised == false)
+            {
+                Logger.Log($"Mesh {VertexArrayObjectPointer} used without shader initalisation, initalising..", LogLevel.Warning);
+                this.Shader.Init();
+            }
+        }
         public void Render(PrimitiveType type = PrimitiveType.TriangleStrip)
         {
-
+            Prep();
             Shader.SetMatrix4("projection", Camera.GetProjectionMatrix());
 
             Shader.SetMatrix4("view", Camera.GetViewMatrix());
@@ -113,6 +124,27 @@ namespace OpenglTestConsole.classes
             GL.BindVertexArray(VertexArrayObjectPointer);
             GL.DrawArrays(type, 0, size);
         }
+        public void Render(uint[] indices, PrimitiveType type = PrimitiveType.TriangleStrip)
+        { // deadass render that shit cuh 
+            // on it boss ima render that shit cuh
+            Prep();
+
+            Shader.SetMatrix4("projection", Camera.GetProjectionMatrix());
+
+            Shader.SetMatrix4("view", Camera.GetViewMatrix());
+
+            Shader.SetMatrix4("model", Transform.GetModelMatrix());
+
+            GL.BindVertexArray(VertexArrayObjectPointer);
+
+            int elementBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, elementBufferObject);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
+
+            GL.DrawElements(type, indices.Length, DrawElementsType.UnsignedInt, 0);
+        }
+
+
         #endregion
 
 
