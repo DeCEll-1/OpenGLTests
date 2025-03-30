@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenglTestConsole.classes.api.rendering;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.classes
+namespace OpenglTestConsole.classes.impl.rendering
 {
     public class Sphere : Mesh
     {
@@ -25,28 +26,28 @@ namespace OpenglTestConsole.classes
             : base(camera: camera)
         {
             if (texture == null)
-                texture = new("textures/PlaceHolder.png");
+                texture = new("Textures/PlaceHolder.png");
             texture.Init();
 
-            this.StackCount = stackCount;
-            this.SectorCount = sectorCount;
+            StackCount = stackCount;
+            SectorCount = sectorCount;
             this.radius = radius;
-            this.Texture = texture;
+            Texture = texture;
 
-            this.Shader = new Shader("shaders/sphere.vert", "shaders/sphere.frag");
-            this.Shader.Init();
+            Shader = new Shader("Shaders/sphere.vert", "Shaders/sphere.frag");
+            Shader.Init();
 
             // what we need to do is:
             // get the shit from the GetSphere cuh
             // send them to the mesh data cuh
             // then just, nothing rly
 
-            (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, this.indices, _) = GetSphere();
+            (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, indices, _) = GetSphere();
 
-            this.size = vertices.Length; // almost forgor this lmao
-            this.SetVector3(vertices, 0);
-            this.SetVector3(normals, 1);
-            this.SetVector2(texCoords, 2);
+            size = vertices.Length; // almost forgor this lmao
+            SetVector3(vertices, 0);
+            SetVector3(normals, 1);
+            SetVector2(texCoords, 2);
         }
 
         public (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices, uint[] lineIndices) GetSphere()
@@ -117,7 +118,7 @@ namespace OpenglTestConsole.classes
                     }
 
                     // k1+1 => k2 => k2+1
-                    if (i != (StackCount - 1))
+                    if (i != StackCount - 1)
                     {
                         indices.Add(k1 + 1);
                         indices.Add(k2);
@@ -150,17 +151,17 @@ namespace OpenglTestConsole.classes
         // TODO: make this take a light array or list instead of a singular light cuz, we can, yk, use more lights
         public void Render(Light light, OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
         {
-            this.Shader.Use();
+            Shader.Use();
 
-            this.Shader.SetTexture("tex", this.Texture, OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
+            Shader.SetTexture("tex", Texture, OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
 
-            this.Shader.SetVector3("lightPos", light.Location);
-            this.Shader.SetVector3("lightColor", new Vector3(light.Color));
+            Shader.SetVector3("lightPos", light.Location);
+            Shader.SetVector3("lightColor", new Vector3(light.Color));
 
-            this.Shader.SetVector3("viewPos", this.Camera.Position);
+            Shader.SetVector3("viewPos", Camera.Position);
 
             GL.Enable(EnableCap.CullFace);
-            this.Render(this.indices, type);
+            Render(indices, type);
             GL.Disable(EnableCap.CullFace);
         }
     }

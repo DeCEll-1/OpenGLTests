@@ -1,4 +1,5 @@
-﻿using OpenTK.Windowing.Desktop;
+﻿using OpenglTestConsole.classes.api.misc;
+using OpenTK.Windowing.Desktop;
 
 namespace OpenglTestConsole.classes
 {

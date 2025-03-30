@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.classes
+namespace OpenglTestConsole.classes.api.rendering
 {
     public class Light
     {

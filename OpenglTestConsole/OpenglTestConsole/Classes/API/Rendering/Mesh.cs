@@ -1,8 +1,9 @@
 ﻿using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
 using System.Diagnostics.CodeAnalysis;
+using OpenglTestConsole.classes.api.misc;
 
-namespace OpenglTestConsole.classes
+namespace OpenglTestConsole.classes.api.rendering
 {
     public class Mesh
     {
@@ -22,7 +23,7 @@ namespace OpenglTestConsole.classes
             if (vert != "" || frag != "")
                 InitShader(vert, frag);
             else
-                Shader = new Shader("shaders/default.vert", "shaders/default.frag");
+                Shader = new Shader("Shaders/default.vert", "Shaders/default.frag");
 
             VertexArrayObjectPointer = GL.GenVertexArray();
             Camera = camera;
@@ -105,10 +106,10 @@ namespace OpenglTestConsole.classes
         #region Render  
         private void Prep()
         {
-            if (this.Shader.initalised == false)
+            if (Shader.initalised == false)
             {
-                Logger.Log($"Mesh {VertexArrayObjectPointer} used without shader initalisation, initalising..", LogLevel.Warning);
-                this.Shader.Init();
+                Logger.Log($"Mesh {LogColors.BrightWhite(VertexArrayObjectPointer)} used without shader initalisation, initalising..", LogLevel.Warning);
+                Shader.Init();
             }
         }
         public void Render(PrimitiveType type = PrimitiveType.TriangleStrip)

@@ -1,14 +1,16 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenglTestConsole.classes.api.misc;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using StbImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.classes
+namespace OpenglTestConsole.classes.api.rendering
 {
     public class Shader : IDisposable
     {
@@ -25,11 +27,11 @@ namespace OpenglTestConsole.classes
 
         public void Init()
         {
+            Handle = GL.CreateProgram();
+
             int vertShaderPointer = HandleVertexShader(vertexPath);
 
             int fragShaderPointer = HandleFragmentShader(fragmentPath);
-
-            Handle = GL.CreateProgram();
 
             GL.AttachShader(Handle, vertShaderPointer);
             GL.AttachShader(Handle, fragShaderPointer);
@@ -41,7 +43,7 @@ namespace OpenglTestConsole.classes
             if (shaderLinkSuccess == 0)
             {
                 string errorLog = GL.GetProgramInfoLog(Handle);
-                Logger.Log($"An error occured while loading shaders for {Handle}!\nError log:\n{errorLog}", LogLevel.Error);
+                Logger.Log($"An error occured while loading shaders for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}", LogLevel.Error);
             }
 
             GL.DetachShader(Handle, vertShaderPointer);
@@ -49,7 +51,7 @@ namespace OpenglTestConsole.classes
             GL.DeleteShader(vertShaderPointer);
             GL.DeleteShader(fragShaderPointer);
 
-            this.initalised = true;
+            initalised = true;
         }
         private int HandleFragmentShader(string path)
         {
@@ -60,9 +62,9 @@ namespace OpenglTestConsole.classes
             }
             catch (Exception ex)
             {
-                Logger.Log($"An error occured while loading {path} for {Handle}:\n{ex.ToString()}", LogLevel.Error);
+                Logger.Log($"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(Handle)}:\n{ex.ToString()}", LogLevel.Error);
                 Logger.Log($"Using default fragment shader...", LogLevel.Warning);
-                fragSource = File.ReadAllText("shaders/default.frag");
+                fragSource = File.ReadAllText("Shaders/default.frag");
             }
 
             int fragShaderPointer = GL.CreateShader(ShaderType.FragmentShader);
@@ -76,10 +78,10 @@ namespace OpenglTestConsole.classes
             if (fragShaderSuccess == 0)
             {
                 string errorLog = GL.GetShaderInfoLog(fragShaderPointer);
-                Logger.Log($"An error occured while loading shaders for {Handle}!\nError log:\n{errorLog}", LogLevel.Error);
+                Logger.Log($"An error occured while loading shaders for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}", LogLevel.Error);
             }
 
-            Logger.Log($"Loaded fragment shader for shader {Handle} : " + path, LogLevel.Info);
+            Logger.Log($"Loaded fragment shader for shader {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}", LogLevel.Detail);
 
             return fragShaderPointer;
         }
@@ -93,9 +95,9 @@ namespace OpenglTestConsole.classes
             }
             catch (Exception ex)
             {
-                Logger.Log($"An error occured while loading {path} for {Handle}:\n{ex.ToString()}", LogLevel.Error);
+                Logger.Log($"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(Handle)}:\n{ex.ToString()}", LogLevel.Error);
                 Logger.Log($"Using default vertex shader...", LogLevel.Warning);
-                vertSource = File.ReadAllText("shaders/default.vert");
+                vertSource = File.ReadAllText("Shaders/default.vert");
             }
 
             int vertShaderPointer = GL.CreateShader(ShaderType.VertexShader);
@@ -109,10 +111,10 @@ namespace OpenglTestConsole.classes
             if (vertShaderSuccess == 0)
             {
                 string errorLog = GL.GetShaderInfoLog(vertShaderPointer);
-                Logger.Log($"An error occured while loading shaders for {Handle}!\nError log:\n{errorLog}", LogLevel.Error);
+                Logger.Log($"An error occured while loading shaders for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}", LogLevel.Error);
             }
 
-            Logger.Log($"Loaded vertex shader for {Handle} : " + path, LogLevel.Info);
+            Logger.Log($"Loaded vertex shader for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}", LogLevel.Detail);
 
             return vertShaderPointer;
         }
@@ -120,13 +122,15 @@ namespace OpenglTestConsole.classes
         {
             if (disposed == false)
             {
-                Logger.Log($"GPU Resource leak for shader {Handle}! Did you forget to call Dispose()?", LogLevel.Error);
+                Logger.Log($"GPU Resource leak for shader {LogColors.BrightWhite(Handle)}! Did you forget to call Dispose()?", LogLevel.Error);
+                Logger.Log($"Disposing {LogColors.BrightWhite(Handle)}...", LogLevel.Warning);
+                GL.DeleteProgram(Handle);
             }
         }
         public void Use()
         {
-            if (this.initalised == false)
-                Logger.Log($"Shader with {Handle} used without initalisation, initalising..", LogLevel.Warning);
+            if (initalised == false)
+                Logger.Log($"Shader with {LogColors.BrightWhite(Handle)} used without initalisation, initalising..", LogLevel.Warning);
             GL.UseProgram(Handle);
         }
         protected virtual void Dispose(bool disposing)

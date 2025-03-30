@@ -73,7 +73,7 @@ namespace OpenglTestConsole.classes
         public Matrix4 GetProjectionMatrix()
         {
             return Matrix4.CreatePerspectiveFieldOfView(
-                MathHelper.DegreesToRadians(90f),
+                _fov,
                 screenWidth / screenHeight,
                 depthNear,
                 depthFar

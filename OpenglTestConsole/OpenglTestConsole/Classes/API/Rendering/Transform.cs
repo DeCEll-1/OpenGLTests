@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.classes
+namespace OpenglTestConsole.classes.api.rendering
 {
     public class Transform
     {
@@ -25,7 +25,7 @@ namespace OpenglTestConsole.classes
         }
         public void SetRotation(float? x = null, float? y = null, float? z = null)
         {
-            var rotation = this.Rotation;
+            var rotation = Rotation;
             if (x != null)
                 rotation.X = (float)x;
             if (y != null)
@@ -33,7 +33,7 @@ namespace OpenglTestConsole.classes
             if (z != null)
                 rotation.Z = (float)z;
 
-            this.Rotation = rotation;
+            Rotation = rotation;
         }
         public Vector3 Scale = Vector3.One;
 

@@ -6,6 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenglTestConsole.classes.api.rendering;
+using OpenglTestConsole.classes.impl.EFSs;
+using OpenglTestConsole.classes.impl.rendering;
 using OpenTK;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -17,16 +20,16 @@ namespace OpenglTestConsole.classes
 {
     public class Main : GameWindow
     {
+
         private Stopwatch timer = new Stopwatch();
+        public required Camera Camera { get; set; }
+        public List<EveryFrameScript> EveryFrameScripts { get; set; } = new List<EveryFrameScript>();
+        
         public required Sphere Sphere { get; set; }
         public required Mesh Square { get; set; }
         public required Mesh SquareTextured { get; set; }
-        public required Camera Camera { get; set; }
-        public Texture TestTexture { get; set; } = new Texture("textures/PlaceHolder.png");
+        public Texture TestTexture { get; set; } = new Texture("Textures/PlaceHolder.png");
 
-        private float _sensitivity = 0.2f;
-        private bool _firstMove = true;
-        private Vector2 _lastPos;
         public Light light = new Light(new Vector3(5.0f), new Vector3(1.0f));
 
         [SetsRequiredMembers]
@@ -37,6 +40,14 @@ namespace OpenglTestConsole.classes
             CursorState = CursorState.Grabbed;
 
             this.TestTexture.Init();
+
+            this.EveryFrameScripts.AddRange(
+                [
+                    new HandleMovement(),
+                    new HandleMouse(),
+                    new HandleZoom(),
+                ]
+            );
 
 
         }
@@ -59,7 +70,7 @@ namespace OpenglTestConsole.classes
                 },
                 0
             );
-            Square.InitShader("shaders/shader.vert", "shaders/shader.frag");
+            Square.InitShader("Shaders/shader.vert", "Shaders/shader.frag");
             Square.Shader.Use();
             #endregion
             #region square Textured
@@ -85,7 +96,7 @@ namespace OpenglTestConsole.classes
                 ],
                 1
             );
-            SquareTextured.InitShader("shaders/texture.vert", "shaders/texture.frag");
+            SquareTextured.InitShader("Shaders/texture.vert", "Shaders/texture.frag");
             SquareTextured.Shader.Use();
             #endregion
             #region sphere
@@ -94,7 +105,7 @@ namespace OpenglTestConsole.classes
                 sectorCount: 16,
                 radius: 0.5f,
                 camera: this.Camera,
-                texture: new Texture("textures/sebestyen.png")
+                texture: new Texture("Textures/sebestyen.png")
             );
             this.Sphere.Shader.Use();
             this.Sphere.Transform.Position = new Vector3(0f, -1.5f, 2f);
@@ -147,58 +158,13 @@ namespace OpenglTestConsole.classes
                 return;
             }
 
-            float speed = 1f;
-            float delta = (float)args.Time;
-
-            speed *= delta;
-
-            if (KeyboardState.IsKeyDown(Keys.LeftShift))
-                speed *= 2f;
-
-            float radians = MathHelper.DegreesToRadians(Camera.Yaw);
-
-            Vector3 forward = new Vector3((float)Math.Cos(MathHelper.DegreesToRadians(Camera.Yaw)), 0,
-                                          (float)Math.Sin(MathHelper.DegreesToRadians(Camera.Yaw)));
-
-            Vector3 right = new Vector3((float)Math.Cos(MathHelper.DegreesToRadians(Camera.Yaw) + MathHelper.PiOver2), 0,
-                                        (float)Math.Sin(MathHelper.DegreesToRadians(Camera.Yaw) + MathHelper.PiOver2));
-            // Movement vector
-            Vector3 movement = Vector3.Zero;
-
-            // Move based on key presses
-            if (KeyboardState.IsKeyDown(Keys.W))
-                movement += forward * speed;
-            if (KeyboardState.IsKeyDown(Keys.S))
-                movement -= forward * speed;
-            if (KeyboardState.IsKeyDown(Keys.D))
-                movement += right * speed;
-            if (KeyboardState.IsKeyDown(Keys.A))
-                movement -= right * speed;
-
-            Camera.Position += movement;
-
-            if (KeyboardState.IsKeyDown(Keys.Right)) Sphere.Transform.Position.X += speed;
-            if (KeyboardState.IsKeyDown(Keys.Left)) Sphere.Transform.Position.X -= speed;
-            if (KeyboardState.IsKeyDown(Keys.Up)) Sphere.Transform.Position.Y += speed;
-            if (KeyboardState.IsKeyDown(Keys.Down)) Sphere.Transform.Position.Y -= speed;
-
-            var mouse = MouseState;
-
-            if (_firstMove) // This bool variable is initially set to true.
+            foreach (var script in EveryFrameScripts)
             {
-                _lastPos = new Vector2(mouse.X, mouse.Y);
-                _firstMove = false;
-            }
-            else
-            {
-                // Calculate the offset of the mouse position
-                var deltaX = mouse.X - _lastPos.X;
-                var deltaY = mouse.Y - _lastPos.Y;
-                _lastPos = new Vector2(mouse.X, mouse.Y);
-
-                // Apply the camera pitch and yaw (we clamp the pitch in the camera class)
-                Camera.Yaw += deltaX * _sensitivity;
-                Camera.Pitch -= deltaY * _sensitivity; // Reversed since y-coordinates range from bottom to top
+                script.args = args;
+                script.KeyboardState = this.KeyboardState;
+                script.MouseState = this.MouseState;
+                script.Camera = this.Camera;
+                script.Advance();
             }
 
             if (KeyboardState.IsKeyDown(Keys.Escape))
@@ -206,6 +172,7 @@ namespace OpenglTestConsole.classes
                 Close();
             }
         }
+
 
     }
 }
