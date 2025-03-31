@@ -16,7 +16,8 @@ namespace OpenglTestConsole.classes
             NativeWindowSettings nativeWindowSettings = new NativeWindowSettings
             {
                 ClientSize = new OpenTK.Mathematics.Vector2i(800, 800),
-                Title = "OpenGL Test Console"
+                Title = "OpenGL Test Console",
+                DepthBits = 24,
             };
 
             

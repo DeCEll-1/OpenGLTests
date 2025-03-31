@@ -50,6 +50,9 @@ namespace OpenglTestConsole.classes
             Camera.Position.Z = 3f;
             CursorState = CursorState.Grabbed;
 
+            GL.Enable(EnableCap.DepthTest);
+            GL.DepthFunc(DepthFunction.Less);
+
             #region EFSs
             this.EveryFrameScripts.AddRange(
                 [
@@ -122,7 +125,7 @@ namespace OpenglTestConsole.classes
         {
             base.OnRenderFrame(args);
 
-            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             foreach (var script in RenderScripts)
             {
