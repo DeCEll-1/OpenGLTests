@@ -1,4 +1,5 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenglTestConsole.Classes.Implementations.Classes;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
@@ -11,9 +12,11 @@ namespace OpenglTestConsole.classes.impl.EFSs
 {
     public class HandleMouse : EveryFrameScript
     {
-        private float _sensitivity = 0.2f;
         private bool _firstMove = true;
         private Vector2 _lastPos;
+        public override void Init()
+        {
+        }
         public override void Advance()
         {
             var mouse = MouseState;
@@ -31,8 +34,8 @@ namespace OpenglTestConsole.classes.impl.EFSs
                 _lastPos = new Vector2(mouse.X, mouse.Y);
 
                 // Apply the camera pitch and yaw (we clamp the pitch in the camera class)
-                Camera.Yaw += deltaX * _sensitivity;
-                Camera.Pitch -= deltaY * _sensitivity; // Reversed since y-coordinates range from bottom to top
+                Camera.Yaw += deltaX * Settings.MouseSensitivity;
+                Camera.Pitch -= deltaY * Settings.MouseSensitivity; // Reversed since y-coordinates range from bottom to top
             }
         }
     }

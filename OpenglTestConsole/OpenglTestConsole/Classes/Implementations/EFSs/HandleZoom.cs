@@ -1,4 +1,5 @@
 ﻿using OpenglTestConsole.classes.api.misc;
+using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
@@ -12,18 +13,26 @@ namespace OpenglTestConsole.classes.impl.EFSs
     public class HandleZoom : EveryFrameScript
     {
         private float zoomPercent = 0f;
-        private const float mainFov = 90f;
-        private const float zoomAmount = 45f;
         private const float zoomSpeedMult = 1.5f;
+
+        private float mainSensitivity= 0.2f;
+        private float sensitivityChangeAmount = 0.1f;
+
+        private float mainFov = 90f;
+        private const float zoomAmount = 45f;
+        public override void Init()
+        {
+            this.mainSensitivity = Settings.MouseSensitivity;
+            this.mainFov = Settings.Fov;
+        }
         public override void Advance()
         {
-
             if (KeyboardState.IsKeyDown(Keys.X))
             {
                 if (zoomPercent<=1.0f)
                 {
                     zoomPercent += (float)args.Time * zoomSpeedMult;
-                    Camera.Fov = mainFov - (EasingFunctions.InOutCubic(zoomPercent) * zoomAmount);
+                    UpdateView();
                 }
             }
             else
@@ -31,10 +40,16 @@ namespace OpenglTestConsole.classes.impl.EFSs
                 if (zoomPercent >= 0.0f)
                 {
                     zoomPercent -= (float)args.Time * zoomSpeedMult;
-                    Camera.Fov = mainFov - (EasingFunctions.InOutCubic(zoomPercent) * zoomAmount);
+                    UpdateView();
                 }
             }
-
         }
+
+        private void UpdateView()
+        {
+            Settings.Fov = mainFov - (EasingFunctions.InOutCubic(zoomPercent) * zoomAmount);
+            Settings.MouseSensitivity = mainSensitivity - (EasingFunctions.InOutCubic(zoomPercent) * sensitivityChangeAmount);
+        }
+
     }
 }

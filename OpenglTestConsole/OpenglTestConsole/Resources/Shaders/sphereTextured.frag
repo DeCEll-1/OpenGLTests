@@ -6,15 +6,16 @@ in vec2 TexCoord; // tex coordinates from the cpu
 
 uniform sampler2D tex; // tex
 uniform vec3 lightPos; // light pos
-uniform vec3 lightColor; // light color
+uniform vec4 lightColorIn; // light color
+uniform vec4 ambientIn; // ambient color
 uniform vec3 viewPos; // camera
 
 out vec4 FragColor;
 
 void main()
 {
-    float ambientStrenght = .1f;
-    vec3 ambient = ambientStrenght * lightColor;
+    vec3 ambient = ambientIn.rgb * ambientIn.a; // multiply the color by alpha because wwe dont want transparent textures
+    vec3 lightColor = lightColorIn.rgb * lightColorIn.a;
 
     //We calculate the light direction, and make sure the normal is normalized.
     vec3 norm = normalize(Normal);
@@ -39,5 +40,5 @@ void main()
     vec3 res = (ambient + diffuse + specular) * texColor.rgb;
 
     // Apply lighting to the texture color
-    FragColor = vec4(texColor.rgb, 1.0);
+    FragColor = vec4(res.rgb, 1.0);
 }

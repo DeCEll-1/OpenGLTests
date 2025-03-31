@@ -38,7 +38,7 @@ namespace OpenglTestConsole.classes.api.rendering
             {
                 Logger.Log($"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(Handle)}:\n{ex.ToString()}", LogLevel.Error);
                 Logger.Log($"Using default texture...", LogLevel.Warning);
-                image = ImageResult.FromStream(File.OpenRead("Textures/PlaceHolder.png"), ColorComponents.RedGreenBlueAlpha);
+                image = ImageResult.FromStream(File.OpenRead("Resources/Textures/PlaceHolder.png"), ColorComponents.RedGreenBlueAlpha);
             }
 
             GL.BindTexture(TextureTarget.Texture2D, Handle);

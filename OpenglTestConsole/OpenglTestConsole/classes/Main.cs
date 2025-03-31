@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 using OpenglTestConsole.classes.api.rendering;
 using OpenglTestConsole.classes.impl.EFSs;
 using OpenglTestConsole.classes.impl.rendering;
+using OpenglTestConsole.Classes.API.Misc;
+using OpenglTestConsole.Classes.API.Rendering;
+using OpenglTestConsole.Classes.Implementations.Classes;
+using OpenglTestConsole.Classes.Implementations.RenderScripts;
+using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
 using OpenTK;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -21,16 +26,22 @@ namespace OpenglTestConsole.classes
     public class Main : GameWindow
     {
 
-        private Stopwatch timer = new Stopwatch();
+        private Stopwatch Timer = new Stopwatch();
         public required Camera Camera { get; set; }
         public List<EveryFrameScript> EveryFrameScripts { get; set; } = new List<EveryFrameScript>();
-        
+        public List<RenderScript> RenderScripts { get; set; } = new List<RenderScript>();
+        public static Dictionary<string, Texture> Textures { get; set; } = new();
+        public static Dictionary<string, Shader> Shaders { get; set; } = new();
+
+
         public required Sphere Sphere { get; set; }
         public required Mesh Square { get; set; }
         public required Mesh SquareTextured { get; set; }
-        public Texture TestTexture { get; set; } = new Texture("Textures/PlaceHolder.png");
-
-        public Light light = new Light(new Vector3(5.0f), new Vector3(1.0f));
+        public Light light = new Light(
+            location: new Vector3(0f, 50f, 0f),
+            color: new Vector4(1.0f),
+            ambient: new Vector4(1f, 1f, 1f, 0.6f)
+        );
 
         [SetsRequiredMembers]
         public Main(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
@@ -39,8 +50,7 @@ namespace OpenglTestConsole.classes
             Camera.Position.Z = 3f;
             CursorState = CursorState.Grabbed;
 
-            this.TestTexture.Init();
-
+            #region EFSs
             this.EveryFrameScripts.AddRange(
                 [
                     new HandleMovement(),
@@ -48,6 +58,36 @@ namespace OpenglTestConsole.classes
                     new HandleZoom(),
                 ]
             );
+            #endregion
+
+            #region Render Scripts
+            this.RenderScripts.AddRange(
+                [
+                    new TestSphere(),
+                    new RenderStarscapeMap(),
+                ]
+            );
+            #endregion
+
+            #region Add Textures
+            Textures.Add("Resources/Textures/PlaceHolder.png", new("Resources/Textures/PlaceHolder.png"));
+            Textures.Add("Resources/Textures/sebestyen.png", new("Resources/Textures/sebestyen.png"));
+
+            foreach (var tex in Textures)
+                tex.Value.Init();
+            #endregion
+
+            #region Add Shaders
+            Shaders.Add("default", new("Resources/Shaders/default.vert", "Resources/Shaders/default.frag"));
+            Shaders.Add("greenBlink", new("Resources/Shaders/greenBlink.vert", "Resources/Shaders/greenBlink.frag"));
+            Shaders.Add("sphereMonoColor", new("Resources/Shaders/sphereMonoColor.vert", "Resources/Shaders/sphereMonoColor.frag"));
+            Shaders.Add("sphereTextured", new Shader("Resources/Shaders/sphereTextured.vert", "Resources/Shaders/sphereTextured.frag"));
+            Shaders.Add("texture", new("Resources/Shaders/texture.vert", "Resources/Shaders/texture.frag"));
+
+            //foreach (var shader in Shaders)
+            //    shader.Value.Init();
+
+            #endregion
 
 
         }
@@ -56,63 +96,26 @@ namespace OpenglTestConsole.classes
             base.OnLoad();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            #region square
-            Square = new Mesh(this.Camera);
-            Square.size = 4;
-            Square.SetVector3(
-                //Square.GetSquare(400, 300),
-                new Vector3[]
-                {
-                    new Vector3(-0.5f, 0.5f, 0f),
-                    new Vector3(0.5f, 0.5f, 0f),
-                    new Vector3(-0.5f, -0.5f, 0f),
-                    new Vector3(0.5f, -0.5f, 0f)
-                },
-                0
-            );
-            Square.InitShader("Shaders/shader.vert", "Shaders/shader.frag");
-            Square.Shader.Use();
-            #endregion
-            #region square Textured
-            SquareTextured = new Mesh(this.Camera);
-            SquareTextured.size = 4;
-            SquareTextured.SetVector3(
-                //Square.GetSquare(400, 300),
-                new Vector3[]
-                {
-                    new Vector3(-0.5f, 0.5f, 0f),
-                    new Vector3(0.5f, 0.5f, 0f),
-                    new Vector3(-0.5f, -0.5f, 0f),
-                    new Vector3(0.5f, -0.5f, 0f)
-                },
-                0
-            );
-            SquareTextured.SetVector2(
-                [
-                    new Vector2(0f, 1f),
-                    new Vector2(1f, 1f),
-                    new Vector2(0f, 0f),
-                    new Vector2(1f, 0f)
-                ],
-                1
-            );
-            SquareTextured.InitShader("Shaders/texture.vert", "Shaders/texture.frag");
-            SquareTextured.Shader.Use();
-            #endregion
-            #region sphere
-            this.Sphere = new Sphere(
-                stackCount: 16,
-                sectorCount: 16,
-                radius: 0.5f,
-                camera: this.Camera,
-                texture: new Texture("Textures/sebestyen.png")
-            );
-            this.Sphere.Shader.Use();
-            this.Sphere.Transform.Position = new Vector3(0f, -1.5f, 2f);
-            #endregion
 
-            timer = new Stopwatch();
-            timer.Start();
+            foreach (var script in RenderScripts)
+            {
+                script.Timer = this.Timer;
+                script.Camera = this.Camera;
+                script.Main = this;
+                script.Init();
+            }
+
+            foreach (var script in EveryFrameScripts)
+            {
+                script.KeyboardState = this.KeyboardState;
+                script.MouseState = this.MouseState;
+                script.Camera = this.Camera;
+                script.Main = this;
+                script.Advance();
+            }
+
+            Timer = new Stopwatch();
+            Timer.Start();
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
@@ -121,22 +124,13 @@ namespace OpenglTestConsole.classes
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            #region square
-            Square.Transform.Position = Vector3.UnitZ * 3f;
-            Square.Shader.Use();
-            Square.Shader.SetFloat("t", (float)timer.Elapsed.TotalSeconds);
-            Square.Render();
-            #endregion square
-
-            #region square texture
-            SquareTextured.Transform.Position = Vector3.UnitX * 3f;
-            //SquareTextured.Transform.SetRotation(x: 90f);
-            SquareTextured.Shader.Use();
-            SquareTextured.Shader.SetTexture("tex", TestTexture, TextureUnit.Texture0);
-            SquareTextured.Render();
-            #endregion
-
-            Sphere.Render(light: light);
+            foreach (var script in RenderScripts)
+            {
+                script.Camera = this.Camera;
+                script.Timer = this.Timer;
+                script.Main = this;
+                script.Render();
+            }
 
             SwapBuffers();
         }
@@ -164,6 +158,7 @@ namespace OpenglTestConsole.classes
                 script.KeyboardState = this.KeyboardState;
                 script.MouseState = this.MouseState;
                 script.Camera = this.Camera;
+                script.Main = this;
                 script.Advance();
             }
 

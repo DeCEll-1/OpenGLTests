@@ -13,7 +13,9 @@ namespace OpenglTestConsole.classes
         public MouseState MouseState { get; set; }
         public KeyboardState KeyboardState { get; set; }
         public Camera Camera { get; set; }
+        public Main Main { get; set; }
         public FrameEventArgs args { get; set; }
+        public abstract void Init();
         public abstract void Advance();
 
     }

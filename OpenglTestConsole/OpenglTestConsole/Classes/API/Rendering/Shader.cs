@@ -64,7 +64,7 @@ namespace OpenglTestConsole.classes.api.rendering
             {
                 Logger.Log($"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(Handle)}:\n{ex.ToString()}", LogLevel.Error);
                 Logger.Log($"Using default fragment shader...", LogLevel.Warning);
-                fragSource = File.ReadAllText("Shaders/default.frag");
+                fragSource = File.ReadAllText("Resources/Shaders/default.frag");
             }
 
             int fragShaderPointer = GL.CreateShader(ShaderType.FragmentShader);
@@ -97,7 +97,7 @@ namespace OpenglTestConsole.classes.api.rendering
             {
                 Logger.Log($"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(Handle)}:\n{ex.ToString()}", LogLevel.Error);
                 Logger.Log($"Using default vertex shader...", LogLevel.Warning);
-                vertSource = File.ReadAllText("Shaders/default.vert");
+                vertSource = File.ReadAllText("Resources/Shaders/default.vert");
             }
 
             int vertShaderPointer = GL.CreateShader(ShaderType.VertexShader);
@@ -122,15 +122,16 @@ namespace OpenglTestConsole.classes.api.rendering
         {
             if (disposed == false)
             {
-                Logger.Log($"GPU Resource leak for shader {LogColors.BrightWhite(Handle)}! Did you forget to call Dispose()?", LogLevel.Error);
-                Logger.Log($"Disposing {LogColors.BrightWhite(Handle)}...", LogLevel.Warning);
-                GL.DeleteProgram(Handle);
+                Logger.Log($"GPU Resource leak! Did you forget to call Dispose()?", LogLevel.Error);
             }
         }
         public void Use()
         {
             if (initalised == false)
+            {
                 Logger.Log($"Shader with {LogColors.BrightWhite(Handle)} used without initalisation, initalising..", LogLevel.Warning);
+                this.Init();
+            }
             GL.UseProgram(Handle);
         }
         protected virtual void Dispose(bool disposing)

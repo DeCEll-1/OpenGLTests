@@ -15,15 +15,12 @@ namespace OpenglTestConsole.classes.api.rendering
         public required Camera Camera { get; set; } = new Camera(800, 600);
         public required Shader Shader { get; set; }
         public Transform Transform { get; set; } = new Transform();
-        private int VertexArrayObjectPointer { get; set; }
+        public int VertexArrayObjectPointer { get; set; }
         [SetsRequiredMembers]
-        public Mesh(Camera camera, int size = 3, string vert = "", string frag = "")
+        public Mesh(Camera camera, int size = 3, string shader = "default")
         {
             this.size = size;
-            if (vert != "" || frag != "")
-                InitShader(vert, frag);
-            else
-                Shader = new Shader("Shaders/default.vert", "Shaders/default.frag");
+            InitShader(shader);
 
             VertexArrayObjectPointer = GL.GenVertexArray();
             Camera = camera;
@@ -31,10 +28,9 @@ namespace OpenglTestConsole.classes.api.rendering
         #endregion
 
         #region Shader
-        public void InitShader(string vertLoc, string fragLoc)
+        public void InitShader(string shader)
         {
-            Shader = new Shader(vertLoc, fragLoc);
-            Shader.Init();
+            Shader = Main.Shaders[shader];
         }
         public void SetVector2(Vector2[] vectors, int loc)
         {
@@ -87,7 +83,7 @@ namespace OpenglTestConsole.classes.api.rendering
 
 
             GL.VertexAttribPointer(loc, 4, VertexAttribPointerType.Float, false, 4 * sizeof(float), 0); // bind the buffer to location 0
-
+                
             GL.EnableVertexAttribArray(loc); // enable loc 0
         }
         public void SetMatrix4(Matrix4[] matrices, int loc)
@@ -137,10 +133,6 @@ namespace OpenglTestConsole.classes.api.rendering
             Shader.SetMatrix4("model", Transform.GetModelMatrix());
 
             GL.BindVertexArray(VertexArrayObjectPointer);
-
-            int elementBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, elementBufferObject);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
 
             GL.DrawElements(type, indices.Length, DrawElementsType.UnsignedInt, 0);
         }

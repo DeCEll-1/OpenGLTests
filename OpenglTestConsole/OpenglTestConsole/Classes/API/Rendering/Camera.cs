@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Mathematics;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -17,7 +18,6 @@ namespace OpenglTestConsole.classes
         public float depthFar = 100f;
         private float _pitch;
         private float _yaw = -MathHelper.PiOver2;
-        private float _fov = MathHelper.PiOver2;
         private Vector3 _front = -Vector3.UnitZ;
         private Vector3 _up = Vector3.UnitY;
         private Vector3 _right = Vector3.UnitX;
@@ -45,16 +45,7 @@ namespace OpenglTestConsole.classes
                 UpdateVectors();
             }
         }
-        // The field of view (FOV) is the vertical angle of the camera view.
-        public float Fov
-        {
-            get => MathHelper.RadiansToDegrees(_fov);
-            set
-            {
-                var angle = MathHelper.Clamp(value, 1f, 90f);
-                _fov = MathHelper.DegreesToRadians(angle);
-            }
-        }
+
 
 
 
@@ -73,7 +64,7 @@ namespace OpenglTestConsole.classes
         public Matrix4 GetProjectionMatrix()
         {
             return Matrix4.CreatePerspectiveFieldOfView(
-                _fov,
+                Settings.FOVRadian,
                 screenWidth / screenHeight,
                 depthNear,
                 depthFar

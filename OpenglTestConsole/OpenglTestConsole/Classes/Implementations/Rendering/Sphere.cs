@@ -4,6 +4,7 @@ using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Security.Principal;
@@ -19,23 +20,42 @@ namespace OpenglTestConsole.classes.impl.rendering
         public float radius;
         public uint[] indices;
         public Texture Texture;
+        public Vector4 Color;
+        public bool UsesTexture = false;
 
-        [SetsRequiredMembers]
         // TODO: make it so that if theres no texture, its just a color thats specified
-        public Sphere(int stackCount, int sectorCount, float radius, Camera camera, Texture texture = null)
+        [SetsRequiredMembers]
+        public Sphere(Camera camera, int stackCount, int sectorCount, float radius, Texture texture)
             : base(camera: camera)
         {
-            if (texture == null)
-                texture = new("Textures/PlaceHolder.png");
-            texture.Init();
-
-            StackCount = stackCount;
-            SectorCount = sectorCount;
+            this.StackCount = stackCount;
+            this.SectorCount = sectorCount;
             this.radius = radius;
-            Texture = texture;
+            this.Texture = texture;
+            this.UsesTexture = true;
+            Init();
+        }
 
-            Shader = new Shader("Shaders/sphere.vert", "Shaders/sphere.frag");
-            Shader.Init();
+        [SetsRequiredMembers]
+        public Sphere(Camera camera, int stackCount, int sectorCount, float radius, Vector4 color)
+            : base(camera: camera)
+        {
+            this.StackCount = stackCount;
+            this.SectorCount = sectorCount;
+            this.radius = radius;
+            this.Color = color;
+            Init();
+        }
+
+        private void Init()
+        {
+            if (this.UsesTexture)
+                Shader = Main.Shaders["sphereTexture"];
+            else
+                Shader = Main.Shaders["sphereMonoColor"];
+
+            if (Shader.initalised == false)
+                Shader.Init();
 
             // what we need to do is:
             // get the shit from the GetSphere cuh
@@ -47,7 +67,14 @@ namespace OpenglTestConsole.classes.impl.rendering
             size = vertices.Length; // almost forgor this lmao
             SetVector3(vertices, 0);
             SetVector3(normals, 1);
-            SetVector2(texCoords, 2);
+            if (this.UsesTexture)
+                SetVector2(texCoords, 2);
+
+            GL.BindVertexArray(VertexArrayObjectPointer);
+
+            int elementBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, elementBufferObject);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
         }
 
         public (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices, uint[] lineIndices) GetSphere()
@@ -153,14 +180,18 @@ namespace OpenglTestConsole.classes.impl.rendering
         {
             Shader.Use();
 
-            Shader.SetTexture("tex", Texture, OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
+            if (this.UsesTexture)
+                Shader.SetTexture("tex", Texture, OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
+            else
+                Shader.SetVector4("color", this.Color);
 
             Shader.SetVector3("lightPos", light.Location);
-            Shader.SetVector3("lightColor", new Vector3(light.Color));
+            Shader.SetVector4("lightColorIn", light.Color);
+            Shader.SetVector4("ambientIn", light.Ambient);
 
             Shader.SetVector3("viewPos", Camera.Position);
 
-            GL.Enable(EnableCap.CullFace);
+            GL.Enable(EnableCap.CullFace); // so that it doesnt render the back side
             Render(indices, type);
             GL.Disable(EnableCap.CullFace);
         }
