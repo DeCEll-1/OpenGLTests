@@ -38,9 +38,9 @@ namespace OpenglTestConsole.classes
         public required Mesh Square { get; set; }
         public required Mesh SquareTextured { get; set; }
         public Light light = new Light(
-            location: new Vector3(0f, 50f, 0f),
-            color: new Vector4(1.0f),
-            ambient: new Vector4(1f, 1f, 1f, 0.6f)
+            location: new Vector3(0f, 5f, 0f),
+            color: new Vector4(1f, 1f, 1f, 0.9f),
+            ambient: new Vector4(1f, 1f, 1f, 0.4f)
         );
 
         [SetsRequiredMembers]
@@ -95,7 +95,7 @@ namespace OpenglTestConsole.classes
         {
             base.OnLoad();
 
-            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
             foreach (var script in RenderScripts)
             {

@@ -52,13 +52,22 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 
                 Sphere sector = new(
                         camera: this.Camera,
-                        stackCount: 2,
-                        sectorCount: 3,
-                        radius: 1f,
+                        stackCount: 8,
+                        sectorCount: 12,
+                        radius: 0.5f,
                         color: color
                     );
 
-                sector.Transform.Position = data.Position / 50f;
+                Vector3 realPos = data.Position / 25f;
+                realPos.Z *= 3f;
+
+                Vector3 mirroredPos = new Vector3(-realPos.X, realPos.Y, realPos.Z);
+
+                Vector3 rotatedPos = new Vector3(-mirroredPos.Y, mirroredPos.X, mirroredPos.Z);
+
+                Vector3 upsidedPos = new Vector3(rotatedPos.X, rotatedPos.Z, -rotatedPos.Y);
+
+                sector.Transform.Position = upsidedPos;
 
                 spheres.Add(sector);
             }

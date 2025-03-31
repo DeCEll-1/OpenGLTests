@@ -15,7 +15,7 @@ namespace OpenglTestConsole.classes
         public Vector3 Position = Vector3.Zero;
         public int screenWidth, screenHeight;
         public float depthNear = 0.1f;
-        public float depthFar = 100f;
+        public float depthFar = 200f;
         private float _pitch;
         private float _yaw = -MathHelper.PiOver2;
         private Vector3 _front = -Vector3.UnitZ;
@@ -47,8 +47,6 @@ namespace OpenglTestConsole.classes
         }
 
 
-
-
         public Camera(int screenWidth, int screenHeight)
         {
             this.screenWidth = screenWidth;
@@ -66,6 +64,8 @@ namespace OpenglTestConsole.classes
             return Matrix4.CreatePerspectiveFieldOfView(
                 Settings.FOVRadian,
                 screenWidth / screenHeight,
+                //1.333f, // 1.333 looks less trippy so
+                //1f,
                 depthNear,
                 depthFar
             );

@@ -17,8 +17,7 @@ namespace OpenglTestConsole.Classes.Implementations.Classes
             get => MathHelper.RadiansToDegrees(FOVRadian);
             set
             {
-                var angle = MathHelper.Clamp(value, 1f, 90f);
-                FOVRadian = MathHelper.DegreesToRadians(angle);
+                FOVRadian = MathHelper.DegreesToRadians(value);
             }
         }
 
