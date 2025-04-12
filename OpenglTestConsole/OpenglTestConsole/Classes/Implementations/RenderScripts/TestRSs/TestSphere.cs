@@ -1,6 +1,7 @@
 ﻿using OpenglTestConsole.classes.api.rendering;
 using OpenglTestConsole.classes.impl.rendering;
 using OpenglTestConsole.Classes.API.Rendering;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -24,12 +25,14 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
             //texture: Main.Textures["Resources/Textures/sebestyen.png"]
             );
 
-            this.Sphere.Transform.Position = new Vector3(0f, 0f, 0f);
+            this.Sphere.Transform.Position = new Vector3(-3f, 0f, 3f);
         }
 
         public override void Render()
         {
-            this.Sphere.Render(Main.light);
+            Sphere.PrepareRender(MainInstance.light);
+            Sphere.Render();
+            Sphere.EndRender();
         }
     }
 }

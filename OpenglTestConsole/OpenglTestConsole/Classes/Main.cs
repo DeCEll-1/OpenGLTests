@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenglTestConsole.classes.api.rendering;
 using OpenglTestConsole.classes.impl.EFSs;
 using OpenglTestConsole.classes.impl.rendering;
-using OpenglTestConsole.Classes.API.Misc;
+using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenglTestConsole.Classes.Implementations.RenderScripts;
 using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
-using OpenTK;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using static OpenglTestConsole.Classes.API.JSON.MCSDFJSON;
 
 namespace OpenglTestConsole.classes
 {
@@ -32,11 +25,7 @@ namespace OpenglTestConsole.classes
         public List<RenderScript> RenderScripts { get; set; } = new List<RenderScript>();
         public static Dictionary<string, Texture> Textures { get; set; } = new();
         public static Dictionary<string, Shader> Shaders { get; set; } = new();
-
-
-        public required Sphere Sphere { get; set; }
-        public required Mesh Square { get; set; }
-        public required Mesh SquareTextured { get; set; }
+        public static Dictionary<string, FontJson> Fonts { get; set; } = new();
         public Light light = new Light(
             location: new Vector3(0f, 5f, 0f),
             color: new Vector4(1f, 1f, 1f, 0.9f),
@@ -67,7 +56,9 @@ namespace OpenglTestConsole.classes
             this.RenderScripts.AddRange(
                 [
                     new TestSphere(),
-                    new RenderStarscapeMap(),
+                    new TestCylinder(),
+                    //new RenderStarscapeMap(),
+                    new TextRendering(),
                 ]
             );
             #endregion
@@ -75,6 +66,7 @@ namespace OpenglTestConsole.classes
             #region Add Textures
             Textures.Add("Resources/Textures/PlaceHolder.png", new("Resources/Textures/PlaceHolder.png"));
             Textures.Add("Resources/Textures/sebestyen.png", new("Resources/Textures/sebestyen.png"));
+            Textures.Add("Resources/Fonts/ComicSans.png", new("Resources/Fonts/ComicSans.png"));
 
             foreach (var tex in Textures)
                 tex.Value.Init();
@@ -83,13 +75,22 @@ namespace OpenglTestConsole.classes
             #region Add Shaders
             Shaders.Add("default", new("Resources/Shaders/default.vert", "Resources/Shaders/default.frag"));
             Shaders.Add("greenBlink", new("Resources/Shaders/greenBlink.vert", "Resources/Shaders/greenBlink.frag"));
-            Shaders.Add("sphereMonoColor", new("Resources/Shaders/sphereMonoColor.vert", "Resources/Shaders/sphereMonoColor.frag"));
-            Shaders.Add("sphereTextured", new Shader("Resources/Shaders/sphereTextured.vert", "Resources/Shaders/sphereTextured.frag"));
+
+            Shaders.Add("objectMonoColor", new("Resources/Shaders/objectMonoColor.vert", "Resources/Shaders/objectMonoColor.frag"));
+            Shaders.Add("objectTextured", new("Resources/Shaders/objectTextured.vert", "Resources/Shaders/objectTextured.frag"));
+
             Shaders.Add("texture", new("Resources/Shaders/texture.vert", "Resources/Shaders/texture.frag"));
+
+            Shaders.Add("MCSDF", new("Resources/Shaders/MCSDF.vert", "Resources/Shaders/MCSDF.frag"));
 
             //foreach (var shader in Shaders)
             //    shader.Value.Init();
 
+            #endregion
+
+            #region Add Fonts
+            // i WİLL come back to fonts, i dont need it rn
+            Fonts.Add("Resources/Fonts/ComicSans.json", MCSDFJSON.GetFontJson("Resources/Fonts/ComicSans.json"));
             #endregion
 
 
@@ -104,7 +105,7 @@ namespace OpenglTestConsole.classes
             {
                 script.Timer = this.Timer;
                 script.Camera = this.Camera;
-                script.Main = this;
+                script.MainInstance = this;
                 script.Init();
             }
 
@@ -131,7 +132,7 @@ namespace OpenglTestConsole.classes
             {
                 script.Camera = this.Camera;
                 script.Timer = this.Timer;
-                script.Main = this;
+                script.MainInstance = this;
                 script.Render();
             }
 

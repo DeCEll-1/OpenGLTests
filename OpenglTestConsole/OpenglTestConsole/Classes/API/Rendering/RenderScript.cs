@@ -12,7 +12,7 @@ namespace OpenglTestConsole.Classes.API.Rendering
     {
         public Camera Camera { get; set; }
         public Stopwatch Timer { get; set; }
-        public Main Main { get; set; }
+        public Main MainInstance { get; set; }
         public abstract void Init();
         public abstract void Render();
     }

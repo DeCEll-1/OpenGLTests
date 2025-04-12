@@ -83,7 +83,7 @@ namespace OpenglTestConsole.classes.api.rendering
 
 
             GL.VertexAttribPointer(loc, 4, VertexAttribPointerType.Float, false, 4 * sizeof(float), 0); // bind the buffer to location 0
-                
+
             GL.EnableVertexAttribArray(loc); // enable loc 0
         }
         public void SetMatrix4(Matrix4[] matrices, int loc)
@@ -96,6 +96,14 @@ namespace OpenglTestConsole.classes.api.rendering
             GL.BufferData(BufferTarget.ArrayBuffer, matrices.Length * 16 * sizeof(float), matrices, BufferUsageHint.StaticDraw); // put data in buffer
             GL.VertexAttribPointer(loc, 16, VertexAttribPointerType.Float, false, 16 * sizeof(float), 0); // bind the buffer to location 0
             GL.EnableVertexAttribArray(loc); // enable loc 0
+        }
+        public void SetIndices(uint[] indices)
+        {
+            GL.BindVertexArray(VertexArrayObjectPointer);
+
+            int elementBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, elementBufferObject);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
         }
         #endregion
 

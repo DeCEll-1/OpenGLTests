@@ -2,6 +2,7 @@
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.Classes;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -77,10 +78,13 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 
         public override void Render()
         {
+
+            spheres[0].PrepareRender(MainInstance.light);
             foreach (var sphere in spheres)
             {
-                sphere.Render(Main.light);
+                sphere.Render();
             }
+            spheres[0].EndRender();
         }
     }
 }

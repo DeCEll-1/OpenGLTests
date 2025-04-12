@@ -1,4 +1,5 @@
 ﻿using OpenglTestConsole.classes.api.rendering;
+using OpenglTestConsole.Classes.API.Misc;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
@@ -50,12 +51,10 @@ namespace OpenglTestConsole.classes.impl.rendering
         private void Init()
         {
             if (this.UsesTexture)
-                Shader = Main.Shaders["sphereTexture"];
+                Shader = Main.Shaders["objectTextured"];
             else
-                Shader = Main.Shaders["sphereMonoColor"];
+                Shader = Main.Shaders["objectMonoColor"];
 
-            if (Shader.initalised == false)
-                Shader.Init();
 
             // what we need to do is:
             // get the shit from the GetSphere cuh
@@ -69,20 +68,12 @@ namespace OpenglTestConsole.classes.impl.rendering
             SetVector3(normals, 1);
             if (this.UsesTexture)
                 SetVector2(texCoords, 2);
-
-            GL.BindVertexArray(VertexArrayObjectPointer);
-
-            int elementBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, elementBufferObject);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
+            SetIndices(indices);
         }
 
         public (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices, uint[] lineIndices) GetSphere()
         {
             // make variables for quick access as we are using floats and all deez are returning doubles
-            float PI = (float)Math.PI;
-            Func<double, float> cosf = delegate (double x) { return (float)Math.Cos(x); };
-            Func<double, float> sinf = delegate (double x) { return (float)Math.Sin(x); };
 
             // list because itd be annoying to use arrays from the start
             List<Vector3> vertices = new List<Vector3>();
@@ -90,22 +81,22 @@ namespace OpenglTestConsole.classes.impl.rendering
             List<Vector2> texCoords = new List<Vector2>();
 
             float lengthInv = 1.0f / radius;
-            float sectorStep = 2 * PI / SectorCount;
-            float stackStep = PI / StackCount;
+            float sectorStep = 2 * MathMisc.PI / SectorCount;
+            float stackStep = MathMisc.PI / StackCount;
 
             for (int i = 0; i <= StackCount; i++)
             {
-                float stackAngle = PI / 2 - i * stackStep;        // starting from pi/2 to -pi/2
-                float xy = radius * cosf(stackAngle);             // r * cos(u)
-                float z = radius * sinf(stackAngle);              // r * sin(u)
+                float stackAngle = MathMisc.PI / 2 - i * stackStep;        // starting from pi/2 to -pi/2
+                float xy = radius * MathMisc.cosfRad(stackAngle);             // r * cos(u)
+                float z = radius * MathMisc.sinfRad(stackAngle);              // r * sin(u)
 
                 for (int j = 0; j <= SectorCount; j++)
                 {
                     float sectorAngle = j * sectorStep;           // starting from 0 to 2pi
 
                     // vertex position (x, y, z)
-                    float x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
-                    float y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
+                    float x = xy * MathMisc.cosfRad(sectorAngle);             // r * cos(u) * cos(v)
+                    float y = xy * MathMisc.sinfRad(sectorAngle);             // r * cos(u) * sin(v)
                     vertices.Add(new Vector3(x, y, z));
 
                     float normalisedX = x * lengthInv;
@@ -174,26 +165,36 @@ namespace OpenglTestConsole.classes.impl.rendering
                 );
             // plz work i dont know how this works
         }
-
-        // TODO: make this take a light array or list instead of a singular light cuz, we can, yk, use more lights
-        public void Render(Light light, OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
+        public new void Render(OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
         {
-            Shader.Use();
+            //Shader.Use();
 
             if (this.UsesTexture)
                 Shader.SetTexture("tex", Texture, OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
             else
                 Shader.SetVector4("color", this.Color);
 
+            //GL.Enable(EnableCap.CullFace); // so that it doesnt render the back side
+            Render(indices, type);
+            //GL.Disable(EnableCap.CullFace);
+        }
+
+        // TODO: make this take a light array or list instead of a singular light cuz, we can, yk, use more lights
+        public void SetStaticUniforms(Light light)
+        {
             Shader.SetVector3("lightPos", light.Location);
             Shader.SetVector4("lightColorIn", light.Color);
             Shader.SetVector4("ambientIn", light.Ambient);
 
             Shader.SetVector3("viewPos", Camera.Position);
-
-            GL.Enable(EnableCap.CullFace); // so that it doesnt render the back side
-            Render(indices, type);
-            GL.Disable(EnableCap.CullFace);
         }
+        public void PrepareRender(Light light)
+        {
+            this.Shader.Use();
+            this.SetStaticUniforms(light);
+            GL.Enable(EnableCap.CullFace); // so that it doesnt render the back side
+        }
+        public void EndRender() => GL.Disable(EnableCap.CullFace); 
+
     }
 }
