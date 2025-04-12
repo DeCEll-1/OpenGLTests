@@ -70,29 +70,27 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
             List<Vector2> texCoords = new();
 
             // put side vertices to arrays
-            for (int i = 0; i < StackCount; ++i)
+            for (int i = 0; i <= StackCount; i++)
             {
                 float stackStep = Height / StackCount;
                 float h = -Height / 2.0f + i * stackStep;
                 float t = 1.0f - i;                              // vertical tex coord; 1 to 0
 
-                for (int j = 0; j <= SectorCount; ++j)
+                for (int j = 0; j < SectorCount; j++)
                 {
-                    float ux = unitVertices[j].X;
-                    float uy = unitVertices[j].Y;
-                    float uz = unitVertices[j].Z;
+                    Vector3 unit = unitVertices[j];
 
                     vertices.Add(new(
-                        ux * Radius,                // vx
-                        uy * Radius,                // vy
-                        h                                // vz
+                        unit.X * Radius,                // vx
+                        unit.Y * Radius,                // vy
+                        h                                   // vz
                     ));
 
                     // normal vector
                     normals.Add(new(
-                        ux, // nx
-                        uy, // ny
-                        uz   // nz
+                        unit.X,                         // nx
+                        unit.Y,                         // ny
+                        unit.Z                          // nz
                     ));
 
                     // texture coordinate
@@ -103,92 +101,106 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
                 }
             }
 
-            // the starting index for the base/top surface
-            uint baseCenterIndex = (uint)vertices.Count;
-            uint topCenterIndex = (uint)(baseCenterIndex + SectorCount + 1); // include center vertex
-            //uint baseCenterIndex = (uint)((StackCount + 1) * (SectorCount + 1));
-            //uint topCenterIndex = (uint)(baseCenterIndex + SectorCount + 1);
+            #region top and bottom vertices
+            // bottom Center point
+            float lidHeight = -(Height / 2f);
+            float nz = -1;
+            vertices.Add(new Vector3(0, 0, lidHeight));
+            normals.Add(new Vector3(0, 0, nz));
+            texCoords.Add(new Vector2(0.5f, 0.5f));
 
-            // Put base and top vertices to arrays
-            for (int i = 0; i < 2; ++i)
-            {
-                float h = -Height / 2.0f + i * Height;      // z value; -h/2 to h/2
-                float nz = -1 + i * 2;                      // z value of normal; -1 to 1
-
-                // Center point
-                vertices.Add(new Vector3(0, 0, h));
-                normals.Add(new Vector3(0, 0, nz));
-                texCoords.Add(new Vector2(0.5f, 0.5f));
-
-                for (int j = 0; j < SectorCount; ++j)
-                {
-                    Vector3 unit = unitVertices[j];
-                    // Position vector
-                    vertices.Add(new Vector3(unit.X * Radius, unit.Y * Radius, h));
-                    // Normal vector
-                    normals.Add(new Vector3(0, 0, nz));
-                    // Texture coordinate
-                    texCoords.Add(new Vector2(-unit.X * 0.5f + 0.5f, -unit.Y * 0.5f + 0.5f));
-                }
-            }
-
+            // top center point
+            lidHeight = (Height / 2f);
+            nz = -1;
+            vertices.Add(new Vector3(0, 0, lidHeight));
+            normals.Add(new Vector3(0, 0, nz));
+            texCoords.Add(new Vector2(0.5f, 0.5f));
+            #endregion
 
             List<uint> indices = new List<uint>();
+            uint uintSectorCount = Convert.ToUInt32(SectorCount);
+            uint uintStackCount = Convert.ToUInt32(StackCount);
 
-            uint ringVertexCount = (uint)(SectorCount + 1);
+            #region side indices
 
             for (uint i = 0; i < StackCount; ++i)
             {
-                uint k1 = i * ringVertexCount;         // beginning of current stack ring
-                uint k2 = k1 + ringVertexCount;        // beginning of next stack ring
+                uint k1 = i * uintSectorCount;          // beginning of current stack
+                uint k2 = k1 + uintSectorCount;       // beginning of next stack
 
-                for (int j = 0; j < SectorCount; ++j, ++k1, ++k2)
+                for (int j = 0; j < SectorCount; j++, ++k1, ++k2)
                 {
                     // First triangle of quad
                     indices.Add(k1);
                     indices.Add(k1 + 1);
                     indices.Add(k2);
 
+                    // 0 2 5 
                     // Second triangle of quad
-                    indices.Add(k2);
-                    indices.Add(k1 + 1);
-                    indices.Add(k2 + 1);
+                    if (j + 1 != SectorCount)
+                    {// normal stuff
+                        indices.Add(k2);         // 5
+                        indices.Add(k1 + 1);    // 3
+                        indices.Add(k2 + 1);    // 6
+                    }
+                    else
+                    { // we need 3 0 and 2
+                        indices.Add(k1); // 2
+                        indices.Add(uintSectorCount * i); // 0
+                        indices.Add(k1 + 1); // 3
+                        //indices.Add(Math.Min(k1 - uintSectorCount, 0));
+                        //indices.Add((uintSectorCount * i));
+                    }
                 }
             }
 
-            // indices for the base surface
-            for (uint i = 0, k = baseCenterIndex + 1; i < SectorCount; ++i, ++k)
+            #endregion
+
+            #region top and bottom indices
+
+            #region top
+
+            uint bottomIndex = (uint)(vertices.Count - 2); // bottom center point
+            uint bottomK1 = 0;
+            uint bottomK2 = 1;
+
+            for (int j = 0; j < SectorCount; j++, bottomK1++, bottomK2++)
             {
-                if (i < SectorCount - 1)
-                {
-                    indices.Add(baseCenterIndex);
-                    indices.Add(k + 1);
-                    indices.Add(k);
-                }
-                else // wrap around for the last triangle
-                {
-                    indices.Add(baseCenterIndex);
-                    indices.Add(baseCenterIndex + 1);
-                    indices.Add(k);
-                }
+                // First triangle 
+                indices.Add(bottomIndex); // center point
+                indices.Add(bottomK1);
+                // 3 is the next stacks starting index, which is the number of sectors we have
+                // so it not being 3 means we are in the same stack
+                if (bottomK2 != SectorCount)
+                    indices.Add(bottomK2);
+                else
+                    indices.Add(bottomK2 - uintSectorCount); // 0
             }
 
-            // indices for the top surface
-            for (uint i = 0, k = topCenterIndex + 1; i < SectorCount; ++i, ++k)
+            #endregion
+
+            #region bottom
+
+            uint topIndex = (uint)(vertices.Count - 1);             // top center point
+            uint topK1 = uintSectorCount * uintStackCount;         // beginning of current stack
+            uint topK2 = topK1 + 1;                                                     // beginning of next stack
+
+            for (int j = 0; j < SectorCount; j++, topK1++, topK2++)
             {
-                if (i < SectorCount - 1)
-                {
-                    indices.Add(topCenterIndex);
-                    indices.Add(k);
-                    indices.Add(k + 1);
-                }
-                else // wrap around for the last triangle
-                {
-                    indices.Add(topCenterIndex);
-                    indices.Add(k);
-                    indices.Add(topCenterIndex + 1);
-                }
+                // First triangle of quad
+                indices.Add(topIndex); // center point
+                indices.Add(topK1);
+                // 3 is the next stacks starting index, which is the number of sectors we have
+                // so it not being 3 means we are in the same stack
+                if (topK2 != vertices.Count - 2)
+                    indices.Add(topK2);
+                else
+                    indices.Add(uintSectorCount * uintStackCount); // 0
             }
+
+            #endregion
+
+            #endregion
 
             return (
                 vertices.ToArray(),
@@ -202,7 +214,7 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
         private List<Vector3> GetUnitVertices(int sectorCount)
         {
             List<Vector3> unitVertices = new();
-            for (int i = 0; i <= sectorCount; i++)
+            for (int i = 0; i < sectorCount; i++)
             {
                 float currentAngle = i * (360f / sectorCount); // current angle in degrees
 

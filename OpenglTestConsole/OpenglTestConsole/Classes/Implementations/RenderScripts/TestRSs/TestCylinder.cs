@@ -18,8 +18,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
         {
             this.Cylinder = new Cylinder(
                 camera: this.Camera,
-                StackCount: 8,
-                SectorCount: 8,
+                StackCount: 2,
+                SectorCount: 16,
                 Radius: 0.5f,
                 Height: 1.0f,
                 color: new Vector4(1f, 1f, 1f, 1f)
