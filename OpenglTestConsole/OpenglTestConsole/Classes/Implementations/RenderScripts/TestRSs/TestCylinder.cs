@@ -18,7 +18,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
         {
             this.Cylinder = new Cylinder(
                 camera: this.Camera,
-                StackCount: 2,
+                StackCount: 1,
                 SectorCount: 16,
                 Radius: 0.5f,
                 Height: 1.0f,

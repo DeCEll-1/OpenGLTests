@@ -15,11 +15,11 @@ namespace OpenglTestConsole.classes.api.rendering
         public Vector3 Rotation
         {
             get
-            {
+            { // radian to angle
                 return _rotation * new Vector3((float)(180f / Math.PI));
             }
             set
-            {
+            { // angle to radian
                 _rotation = value * new Vector3((float)(Math.PI / 180f));
             }
         }
@@ -35,11 +35,11 @@ namespace OpenglTestConsole.classes.api.rendering
 
             Rotation = rotation;
         }
+
         public Vector3 Scale = Vector3.One;
 
         public Matrix4 GetModelMatrix()
         {
-
             Matrix4 rotation = Matrix4.CreateRotationX(_rotation.X) *
                                Matrix4.CreateRotationY(_rotation.Y) *
                                Matrix4.CreateRotationZ(_rotation.Z);

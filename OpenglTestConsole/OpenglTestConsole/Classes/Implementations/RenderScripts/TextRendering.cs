@@ -2,6 +2,7 @@
 using OpenglTestConsole.classes.api.rendering;
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -79,11 +80,15 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
             Mesh = new Mesh(this.Camera, vertices.Count, "MCSDF");
             Mesh.SetVector3(vertices.ToArray(), 0);
             Mesh.SetVector2(texCoords.ToArray(), 1);
-            Mesh.Transform.Position = new Vector3(0f, 0f, -5f);
+            Mesh.Transform.Position = new Vector3(0f, 0f, -3f);
         }
 
         public override void Render()
         {
+
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusConstantAlpha);
+
             Mesh.Shader.Use();
             Mesh.Shader.SetTexture("msdf", this.Texture, OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
             Mesh.Shader.SetVector4("bgColor", new(0f));
@@ -92,7 +97,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 
             Mesh.Render(OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles);
 
-
+            GL.Disable(EnableCap.Blend);
         }
     }
 }

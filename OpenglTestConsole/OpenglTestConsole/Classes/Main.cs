@@ -56,8 +56,10 @@ namespace OpenglTestConsole.classes
             this.RenderScripts.AddRange(
                 [
                     new TestSphere(),
-                    new TestCylinder(),
-                    //new RenderStarscapeMap(),
+                    //new TestCylinder(),
+                    //new RenderStarscapeMap(0.1f),
+                    //new RenderStarscapeConnections(0.1f),
+                    new RenderCoordinates(),
                     new TextRendering(),
                 ]
             );
@@ -73,6 +75,7 @@ namespace OpenglTestConsole.classes
             #endregion
 
             #region Add Shaders
+
             Shaders.Add("default", new("Resources/Shaders/default.vert", "Resources/Shaders/default.frag"));
             Shaders.Add("greenBlink", new("Resources/Shaders/greenBlink.vert", "Resources/Shaders/greenBlink.frag"));
 
@@ -83,8 +86,8 @@ namespace OpenglTestConsole.classes
 
             Shaders.Add("MCSDF", new("Resources/Shaders/MCSDF.vert", "Resources/Shaders/MCSDF.frag"));
 
-            //foreach (var shader in Shaders)
-            //    shader.Value.Init();
+            foreach (var shader in Shaders)
+                shader.Value.Init();
 
             #endregion
 
@@ -99,7 +102,8 @@ namespace OpenglTestConsole.classes
         {
             base.OnLoad();
 
-            GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+            GL.ClearColor(0.0f, 0.1f, 0.05f, 1.0f);
 
             foreach (var script in RenderScripts)
             {

@@ -15,11 +15,12 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 {
     public class RenderStarscapeMap : RenderScript
     {
-        private List<StarscapeSystemData> SystemsData { get; set; } = new List<StarscapeSystemData>();
-        private List<Sphere> spheres { get; set; } = new List<Sphere>();
+        public RenderStarscapeMap(float scale) { this.scale = scale; }
+        private float scale;
+        private List<Sphere> Spheres { get; set; } = new List<Sphere>();
         public override void Init()
         {
-            this.SystemsData = LoadJsonFromFile<List<StarscapeSystemData>>.Load("Resources/map.json");
+            List<StarscapeSystemData> SystemsData = LoadJsonFromFile<List<StarscapeSystemData>>.Load("Resources/map.json");
 
             foreach (var data in SystemsData)
             {
@@ -59,32 +60,43 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                         color: color
                     );
 
-                Vector3 realPos = data.Position / 25f;
-                realPos.Z *= 3f;
+                Vector3 realPos = data.Position * scale;
 
-                Vector3 mirroredPos = new Vector3(-realPos.X, realPos.Y, realPos.Z);
+                // Create the transformation matrix
+                Matrix3 mirrorMatrix = new Matrix3(
+                    -1, 0, 0,   // First row
+                    0, 1, 0,    // Second row
+                    0, 0, 1    // Third row
+                );
 
-                Vector3 rotatedPos = new Vector3(-mirroredPos.Y, mirroredPos.X, mirroredPos.Z);
+                Matrix3 rotationMatrix = new Matrix3(
+                    0, 1, 0,   // First row
+                    -1, 0, 0,    // Second row
+                    0, 0, 1    // Third row
+                );
 
-                Vector3 upsidedPos = new Vector3(rotatedPos.X, rotatedPos.Z, -rotatedPos.Y);
+                Matrix3 otherMatrix = new Matrix3(
+                    1, 0, 0,   // First row
+                    0, 0, 1,    // Second row
+                    0, -1, 0    // Third row
+                );
 
-                sector.Transform.Position = upsidedPos;
+                sector.Transform.Position = realPos * mirrorMatrix * rotationMatrix * otherMatrix;
 
-                spheres.Add(sector);
+                Spheres.Add(sector);
             }
 
-            this.SystemsData = new();
         }
 
         public override void Render()
         {
 
-            spheres[0].PrepareRender(MainInstance.light);
-            foreach (var sphere in spheres)
+            Spheres[0].PrepareRender(MainInstance.light);
+            foreach (var sphere in Spheres)
             {
                 sphere.Render();
             }
-            spheres[0].EndRender();
+            Spheres[0].EndRender();
         }
     }
 }

@@ -26,15 +26,16 @@ void main()
     float diff = max(dot(norm, lightDir), 0.0); //We make sure the value is non negative with the max function.
     vec3 diffuse = diff * lightColor;
 
-    //The specular light is the light that shines from the object, like light hitting metal.
-    //The calculations are explained much more detailed in the web version of the tutorials.
-    float specularStrength = 0.5;
-    vec3 viewDir = normalize(viewPos - FragPos);
-    vec3 reflectDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32); //The 32 is the shininess of the material.
-    vec3 specular = specularStrength * spec * lightColor;
+    // //The specular light is the light that shines from the object, like light hitting metal.
+    // //The calculations are explained much more detailed in the web version of the tutorials.
+    // float specularStrength = 0.5;
+    // vec3 viewDir = normalize(viewPos - FragPos);
+    // vec3 reflectDir = reflect(-lightDir, norm);
+    // float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32); //The 32 is the shininess of the material.
+    // vec3 specular = specularStrength * spec * lightColor;
 
-    vec3 res = (ambient + diffuse + specular) * (color.rgb * color.a);
+    // vec3 res = (ambient + diffuse + specular) * (color.rgb * color.a);
+    vec3 res = (ambient + diffuse) * (color.rgb * color.a);
 
     // Apply lighting to the texture color
     FragColor = vec4(res.rgb, 1.0);

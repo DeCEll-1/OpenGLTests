@@ -15,7 +15,7 @@ namespace OpenglTestConsole.classes
         public Vector3 Position = Vector3.Zero;
         public int screenWidth, screenHeight;
         public float depthNear = 0.1f;
-        public float depthFar = 200f;
+        public float depthFar = 100f;
         private float _pitch;
         private float _yaw = -MathHelper.PiOver2;
         private Vector3 _front = -Vector3.UnitZ;

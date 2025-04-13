@@ -167,14 +167,14 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
             for (int j = 0; j < SectorCount; j++, bottomK1++, bottomK2++)
             {
                 // First triangle 
-                indices.Add(bottomIndex); // center point
-                indices.Add(bottomK1);
                 // 3 is the next stacks starting index, which is the number of sectors we have
                 // so it not being 3 means we are in the same stack
                 if (bottomK2 != SectorCount)
                     indices.Add(bottomK2);
                 else
                     indices.Add(bottomK2 - uintSectorCount); // 0
+                indices.Add(bottomK1);
+                indices.Add(bottomIndex); // center point
             }
 
             #endregion
@@ -218,8 +218,8 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
             {
                 float currentAngle = i * (360f / sectorCount); // current angle in degrees
 
-                float x = MathMisc.cosf(currentAngle);
-                float y = MathMisc.sinf(currentAngle);
+                float x = MathMisc.Cosf(currentAngle);
+                float y = MathMisc.Sinf(currentAngle);
 
                 unitVertices.Add(new(x, y, 0));
             }

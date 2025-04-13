@@ -87,16 +87,16 @@ namespace OpenglTestConsole.classes.impl.rendering
             for (int i = 0; i <= StackCount; i++)
             {
                 float stackAngle = MathMisc.PI / 2 - i * stackStep;        // starting from pi/2 to -pi/2
-                float xy = radius * MathMisc.cosfRad(stackAngle);             // r * cos(u)
-                float z = radius * MathMisc.sinfRad(stackAngle);              // r * sin(u)
+                float xy = radius * MathMisc.CosfRad(stackAngle);             // r * cos(u)
+                float z = radius * MathMisc.SinfRad(stackAngle);              // r * sin(u)
 
                 for (int j = 0; j <= SectorCount; j++)
                 {
                     float sectorAngle = j * sectorStep;           // starting from 0 to 2pi
 
                     // vertex position (x, y, z)
-                    float x = xy * MathMisc.cosfRad(sectorAngle);             // r * cos(u) * cos(v)
-                    float y = xy * MathMisc.sinfRad(sectorAngle);             // r * cos(u) * sin(v)
+                    float x = xy * MathMisc.CosfRad(sectorAngle);             // r * cos(u) * cos(v)
+                    float y = xy * MathMisc.SinfRad(sectorAngle);             // r * cos(u) * sin(v)
                     vertices.Add(new Vector3(x, y, z));
 
                     float normalisedX = x * lengthInv;
