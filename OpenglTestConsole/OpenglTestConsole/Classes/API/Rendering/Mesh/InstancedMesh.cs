@@ -23,7 +23,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
             Matrix4[] matrices = new Matrix4[Meshes.Count];
             for (int i = 0; i < Meshes.Count; i++)
             {
-                Meshes[i].Transform.Position = new Vector3(1f, 1f, 1f);
+                //Meshes[i].Transform.Position = new Vector3(5f, 5f, 5f);
                 matrices[i] = Meshes[i].Transform.GetModelMatrix();
             }
             //matrices = new Matrix4[1] { Matrix4.CreateTranslation(0f, 0f, 0f) }; // Example translation

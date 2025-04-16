@@ -16,12 +16,12 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
         public RenderStarscapeConnections(float scale) { this.scale = scale; }
         private float scale;
         private InstancedMesh<Cylinder> CylinderInstanceRenderer = new();
-        private InstancedMesh<Square> HELP2 = new();
-        private Square HELP3;
+        //private InstancedMesh<Square> HELP2 = new();
+        //private Square HELP3;
         public override void Init()
         {
             List<StarscapeSystemConnectionData> ConnectionData = LoadJsonFromFile<List<StarscapeSystemConnectionData>>.Load(ResourcePaths.StarscapeMapDatas.cylinders_json)!;
-            foreach (StarscapeSystemConnectionData connection in ConnectionData.Take(0))
+            foreach (StarscapeSystemConnectionData connection in ConnectionData)
             {
 
                 Cylinder cylinder = new Cylinder(
@@ -67,51 +67,56 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 CylinderInstanceRenderer.Meshes.Add(cylinder);
             }
 
-            var HELP = new Cylinder(
-                camera: this.Camera,
-                StackCount: 1,
-                SectorCount: 3,
-                Radius: 0.1f,
-                Height: 5f,
-                Shader: ResourcePaths.ShaderNames.instancedRenderingMonoColor,
-                color: new OpenTK.Mathematics.Vector4(1f, 0.5f, 0f, 1f)
-            );
+            //var HELP = new Cylinder(
+            //    camera: this.Camera,
+            //    StackCount: 1,
+            //    SectorCount: 3,
+            //    Radius: 0.1f,
+            //    Height: 5f,
+            //    Shader: ResourcePaths.ShaderNames.instancedRenderingMonoColor,
+            //    color: new OpenTK.Mathematics.Vector4(1f, 0.5f, 0f, 1f)
+            //);
 
-            CylinderInstanceRenderer.Meshes.Add(HELP);
+            //CylinderInstanceRenderer.Meshes.Add(HELP);
 
             CylinderInstanceRenderer.FinishAddingElemets();
 
-            Vector3 square = new Vector3(2f, 2f, 0f);
+            //Vector3 square = new Vector3(2f, 2f, 0f);
 
-            HELP2.Meshes.Add(new Square(
-                camera: this.Camera,
-                vectors: square.CreateSquare(),
-                shader: ResourcePaths.ShaderNames.instancedRenderingMonoColor,
-                color: new Vector4(1f, 0.5f, 0f, 1f)
-            ));
+            //HELP2.Meshes.Add(new Square(
+            //    camera: this.Camera,
+            //    vectors: square.CreateSquare(),
+            //    shader: ResourcePaths.ShaderNames.instancedRenderingMonoColor,
+            //    color: new Vector4(1f, 0.5f, 0f, 1f)
+            //));
+            //HELP2.Meshes[0].Transform.Rotation = new Vector3(45f, 45f, 45f);
+            //HELP2.FinishAddingElemets();
 
-            HELP2.FinishAddingElemets();
+            //HELP3 = new Square(
+            //    camera: this.Camera,
+            //    vectors: square.CreateSquare(),
+            //    shader: ResourcePaths.ShaderNames.objectMonoColor,
+            //    color: new Vector4(1f, 0.5f, 0f, 1f)
+            //);
 
-            HELP3 = new Square(
-                camera: this.Camera,
-                vectors: square.CreateSquare(),
-                shader: ResourcePaths.ShaderNames.objectMonoColor,
-                color: new Vector4(1f, 0.5f, 0f, 1f)
-            );
-
-            HELP3.Transform.Position = new(1f, 1f, 1f);
+            //HELP3.Transform.Position = new(1f, 1f, 1f);
 
         }
 
         public override void Render()
         {
-            HELP2.PrepareRender(MainInstance.light);
-            HELP2.RenderWithIndices();
-            HELP2.EndRender();
 
-            HELP3.PrepareRender(MainInstance.light);
-            HELP3.Render();
-            HELP3.EndRender();
+            CylinderInstanceRenderer.PrepareRender(MainInstance.light);
+            CylinderInstanceRenderer.RenderWithIndices();
+            CylinderInstanceRenderer.EndRender();
+
+            //HELP2.PrepareRender(MainInstance.light);
+            //HELP2.RenderWithIndices();
+            //HELP2.EndRender();
+
+            //HELP3.PrepareRender(MainInstance.light);
+            //HELP3.Render();
+            //HELP3.EndRender();
 
         }
     }
