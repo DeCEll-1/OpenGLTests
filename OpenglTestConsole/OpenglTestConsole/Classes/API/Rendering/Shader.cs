@@ -1,4 +1,4 @@
-﻿using OpenglTestConsole.Classes.api.misc;
+﻿using OpenglTestConsole.Classes.API.misc;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using StbImageSharp;
@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.Classes.api.rendering
+namespace OpenglTestConsole.Classes.API.Rendering
 {
     public class Shader : IDisposable
     {

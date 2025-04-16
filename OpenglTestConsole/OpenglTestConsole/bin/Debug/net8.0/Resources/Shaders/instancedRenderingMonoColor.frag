@@ -2,11 +2,11 @@
 
 in vec3 FragPos; // moved frag pos
 in vec3 Normal; // normals from the cpu
+in vec4 Color; // tex coordinates from the cpu
 
 uniform vec3 lightPos; // light pos
 uniform vec4 lightColorIn; // light color
 uniform vec4 ambientIn; // ambient color
-uniform vec4 color;
 uniform vec3 viewPos; // camera
 
 out vec4 FragColor;
@@ -34,8 +34,9 @@ void main()
     // vec3 specular = specularStrength * spec * lightColor;
 
     // vec3 res = (ambient + diffuse + specular) * (color.rgb * color.a);
-    vec3 res = (ambient + diffuse) * (color.rgb * color.a);
+    vec3 res = (ambient + diffuse); //* (Color.rgb * Color.a);
 
     // Apply lighting to the texture color
-    FragColor = vec4(res.rgb, 1.0);
+    // FragColor = vec4(res.rgb, 1.0);
+    FragColor = vec4(1.0);
 }

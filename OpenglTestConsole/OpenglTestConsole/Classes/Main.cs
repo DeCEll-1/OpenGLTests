@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using OpenglTestConsole.Classes.api.rendering;
+using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.impl.EFSs;
 using OpenglTestConsole.Classes.impl.rendering;
 using OpenglTestConsole.Classes;
@@ -15,7 +15,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using static OpenglTestConsole.Classes.API.JSON.MCSDFJSON;
-using OpenglTestConsole.Classes.api.misc;
+using OpenglTestConsole.Classes.API.misc;
 
 namespace OpenglTestConsole.Classes
 {
@@ -57,12 +57,12 @@ namespace OpenglTestConsole.Classes
             #region Render Scripts
             this.RenderScripts.AddRange(
                 [
-                    new TestSphere(),
-                    //new TestCylinder(),
-                    new RenderStarscapeMap(0.1f),
-                    new RenderStarscapeConnections(0.1f),
                     new RenderCoordinates(),
-                    new TextRendering(),
+                    //new TestSphere(),
+                    //new TestCylinder(),
+                    //new TextRendering(),
+                    //new RenderStarscapeMap(0.1f),
+                    new RenderStarscapeConnections(0.1f),
                 ]
             );
             #endregion
@@ -83,17 +83,21 @@ namespace OpenglTestConsole.Classes
 
             #region Add Shaders
 
-            Resources.Shaders.Add(ResourcePaths.Shaders.defaultShader, new(ResourcePaths.Shaders.default_vert, ResourcePaths.Shaders.default_frag));
+            Resources.Shaders.Add(ResourcePaths.ShaderNames.defaultShader, new(ResourcePaths.ShaderFilePaths.default_vert, ResourcePaths.ShaderFilePaths.default_frag));
 
-            Resources.Shaders.Add(ResourcePaths.Shaders.greenBlink, new(ResourcePaths.Shaders.greenBlink_vert, ResourcePaths.Shaders.greenBlink_frag));
+            Resources.Shaders.Add(ResourcePaths.ShaderNames.greenBlink, new(ResourcePaths.ShaderFilePaths.greenBlink_vert, ResourcePaths.ShaderFilePaths.greenBlink_frag));
 
-            Resources.Shaders.Add(ResourcePaths.Shaders.objectMonoColor, new(ResourcePaths.Shaders.objectMonoColor_vert, ResourcePaths.Shaders.objectMonoColor_frag));
+            Resources.Shaders.Add(ResourcePaths.ShaderNames.objectMonoColor, new(ResourcePaths.ShaderFilePaths.objectMonoColor_vert, ResourcePaths.ShaderFilePaths.objectMonoColor_frag));
 
-            Resources.Shaders.Add(ResourcePaths.Shaders.objectTextured, new(ResourcePaths.Shaders.objectTextured_vert, ResourcePaths.Shaders.objectTextured_frag));
+            Resources.Shaders.Add(ResourcePaths.ShaderNames.objectTextured, new(ResourcePaths.ShaderFilePaths.objectTextured_vert, ResourcePaths.ShaderFilePaths.objectTextured_frag));
 
-            Resources.Shaders.Add(ResourcePaths.Shaders.texture, new(ResourcePaths.Shaders.texture_vert, ResourcePaths.Shaders.texture_frag));
+            Resources.Shaders.Add(ResourcePaths.ShaderNames.texture, new(ResourcePaths.ShaderFilePaths.texture_vert, ResourcePaths.ShaderFilePaths.texture_frag));
 
-            Resources.Shaders.Add(ResourcePaths.Shaders.MCSDF, new(ResourcePaths.Shaders.MCSDF_vert, ResourcePaths.Shaders.MCSDF_frag));
+            Resources.Shaders.Add(ResourcePaths.ShaderNames.MCSDF, new(ResourcePaths.ShaderFilePaths.MCSDF_vert, ResourcePaths.ShaderFilePaths.MCSDF_frag));
+
+            // DO TEXTURE İNSTANCE RENDERİNG THİNG LATER
+
+            Resources.Shaders.Add(ResourcePaths.ShaderNames.instancedRenderingMonoColor, new(ResourcePaths.ShaderFilePaths.instancedRenderingMonoColor_vert, ResourcePaths.ShaderFilePaths.instancedRenderingMonoColor_frag));
 
             foreach (var shader in Resources.Shaders)
                 shader.Value.Init();

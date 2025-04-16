@@ -1,5 +1,5 @@
 ﻿using OpenglTestConsole.Classes;
-using OpenglTestConsole.Classes.api.rendering;
+using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.Paths;
 using OpenTK.Mathematics;
@@ -23,33 +23,32 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
         public Vector4 Color;
         public bool UsesTexture { get { return this.Texture != null; } }
         [SetsRequiredMembers]
-        public Square(Camera camera, float size, Texture texture = null, Vector4? col = null) : base(camera)
-        {
-            float width = size / 2f;
-            float height = size / 2f;
-            LeftTop = new(-width, height, 0.0f);
-            RightTop = new(width, height, 0.0f);
-            LeftBottom = new(-width, -height, 0.0f);
-            RightBottom = new(width, -height, 0.0f);
-            if (col == null) { this.Texture = texture; } else { this.Color = col.Value; }
-            Init();
-        }
-        [SetsRequiredMembers]
-        public Square(Camera camera, Vector3[] vectors, Texture texture = null, Vector4? color = null) : base(camera)
+        public Square(Camera camera, Vector3[] vectors, Vector4 color, string shader) : base(camera)
         {
             LeftTop = vectors[0];
             RightTop = vectors[1];
             LeftBottom = vectors[2];
             RightBottom = vectors[3];
-            if (color == null) { this.Texture = texture; } else { this.Color = color.Value; }
-            Init();
+            this.Color = color;
+            Init(shader);
         }
-        private void Init()
+        [SetsRequiredMembers]
+        public Square(Camera camera, Vector3[] vectors, Texture texture, string shader) : base(camera)
         {
-            if (this.UsesTexture)
-                Shader = Resources.Shaders[ResourcePaths.Shaders.objectTextured];
-            else
-                Shader = Resources.Shaders[ResourcePaths.Shaders.objectMonoColor];
+            LeftTop = vectors[0];
+            RightTop = vectors[1];
+            LeftBottom = vectors[2];
+            RightBottom = vectors[3];
+            this.Texture = texture;
+            Init(shader);
+        }
+        private void Init(string shader)
+        {
+            //if (this.UsesTexture)
+            //    Shader = Resources.Shaders[ResourcePaths.Shaders.objectTextured];
+            //else
+            //    Shader = Resources.Shaders[ResourcePaths.Shaders.objectMonoColor];
+            Shader = Resources.Shaders[shader];
 
             if (this.UsesTexture)
                 Shader.SetTexture("tex", Texture, OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);

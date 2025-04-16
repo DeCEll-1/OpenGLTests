@@ -1,9 +1,9 @@
 ﻿using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
 using System.Diagnostics.CodeAnalysis;
-using OpenglTestConsole.Classes.api.misc;
+using OpenglTestConsole.Classes.API.misc;
 using OpenglTestConsole.Classes.Paths;
-using OpenglTestConsole.Classes.api.rendering;
+using OpenglTestConsole.Classes.API.Rendering;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Mesh
 {
@@ -20,7 +20,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
         public Transform Transform { get; set; } = new Transform();
         public int VertexArrayObjectPointer { get; private set; }
         [SetsRequiredMembers]
-        public Mesh(Camera camera, int size = 3, string shader = ResourcePaths.Shaders.defaultShader)
+        public Mesh(Camera camera, int size = 3, string shader = ResourcePaths.ShaderNames.defaultShader)
         {
             this.size = size;
             InitShader(shader);

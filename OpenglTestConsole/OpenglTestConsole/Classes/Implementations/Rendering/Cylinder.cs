@@ -1,5 +1,5 @@
 ﻿using OpenglTestConsole.Classes;
-using OpenglTestConsole.Classes.api.rendering;
+using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.Paths;
 using OpenTK.Graphics.OpenGL;
@@ -30,24 +30,26 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
         // then you star from angle 0, then increase it by 360/sector count
 
         [SetsRequiredMembers]
-        public Cylinder(Camera camera, int StackCount, int SectorCount, float Height, float Radius, Texture texture) : base(camera)
+        public Cylinder(Camera camera, int StackCount, int SectorCount, float Height, float Radius, string Shader, Texture texture) : base(camera)
         {
             this.StackCount = StackCount; this.SectorCount = SectorCount; this.Height = Height; this.Radius = Radius; this.Texture = texture;
             UsesTexture = true;
-            Init();
+            Init(Shader);
         }
         [SetsRequiredMembers]
-        public Cylinder(Camera camera, int StackCount, int SectorCount, float Height, float Radius, Vector4 color) : base(camera)
+        public Cylinder(Camera camera, int StackCount, int SectorCount, float Height, float Radius, string Shader, Vector4 color) : base(camera)
         {
             this.StackCount = StackCount; this.SectorCount = SectorCount; this.Height = Height; this.Radius = Radius; this.Color = color;
-            Init();
+            Init(Shader);
         }
-        private void Init()
+        private void Init(string shader)
         {
-            if (this.UsesTexture)
-                Shader = Resources.Shaders[ResourcePaths.Shaders.objectTextured];
-            else
-                Shader = Resources.Shaders[ResourcePaths.Shaders.objectMonoColor];
+            //if (this.UsesTexture)
+            //    Shader = Resources.Shaders[ResourcePaths.Shaders.objectTextured];
+            //else
+            //    Shader = Resources.Shaders[ResourcePaths.Shaders.objectMonoColor];
+
+            Shader = Resources.Shaders[shader];
 
             (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices) = GetCylinder();
             SetVector3(vertices, 0);

@@ -1,5 +1,5 @@
 ﻿using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.Classes.api.rendering;
+using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering;
 using System;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 RenderMisc.DefaultTextureCoordinates,
                 1
             );
-            SquareTextured.InitShader(ResourcePaths.Shaders.texture); 
+            SquareTextured.InitShader(ResourcePaths.ShaderNames.texture); 
 
             Texture = Resources.Textures[ResourcePaths.Textures.PlaceHolder_png];
         }

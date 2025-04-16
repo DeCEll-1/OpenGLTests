@@ -25,6 +25,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 SectorCount: 3,
                 Radius: 0.1f,
                 Height: 5f,
+                Shader: ResourcePaths.ShaderNames.objectMonoColor,
                 color: new OpenTK.Mathematics.Vector4(1f, 0f, 0f, 1f)
             );
             axes[0].Transform.Rotation = new Vector3(0f, 90f, 0f);
@@ -43,6 +44,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 SectorCount: 3,
                 Radius: 0.1f,
                 Height: 5f,
+                Shader: ResourcePaths.ShaderNames.objectMonoColor,
                 color: new OpenTK.Mathematics.Vector4(0f, 1f, 0f, 1f)
             );
             axes[1].Transform.Rotation = new Vector3(90f, 0f, 0f);
@@ -61,6 +63,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 SectorCount: 3,
                 Radius: 0.1f,
                 Height: 5f,
+                Shader: ResourcePaths.ShaderNames.objectMonoColor,
                 color: new OpenTK.Mathematics.Vector4(0f, 0f, 1f, 1f)
             );
             axes[2].Transform.Rotation = new Vector3(0f, 0f, 0f);
@@ -73,9 +76,12 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
             );
             sides[2].Transform.Position = new Vector3(0f, -1f, 0f);
 
+            Vector3 coordinateSystemSize = new Vector3(2f, 1f, 0f);
+            Vector3[] coordinateSystem = coordinateSystemSize.CreateSquare();
             images[0] = new Square(
                 camera: this.Camera,
-                size: 2f,
+                vectors: coordinateSystem,
+                shader: ResourcePaths.ShaderNames.objectTextured,
                 texture: Resources.Textures[ResourcePaths.Textures.CoordinateSystem_png]
             );
             images[0].Transform.Position = new Vector3(-2f, 1.5f, 0f);
@@ -85,6 +91,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
             images[1] = new Square(
                 camera: this.Camera,
                 vectors: rotationSystem,
+                shader: ResourcePaths.ShaderNames.objectTextured,
                 texture: Resources.Textures[ResourcePaths.Textures.RotationSystem_png]
             );
             images[1].Transform.Position = new Vector3(2f, 1.5f, 0f);

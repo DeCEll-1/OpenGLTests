@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using OpenglTestConsole.Classes.Paths;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 {
@@ -22,6 +23,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 SectorCount: 16,
                 Radius: 0.5f,
                 Height: 1.0f,
+                Shader: ResourcePaths.ShaderNames.objectMonoColor,
                 color: new Vector4(1f, 1f, 1f, 1f)
             );
 

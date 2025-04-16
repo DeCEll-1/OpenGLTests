@@ -1,4 +1,4 @@
-﻿using OpenglTestConsole.Classes.api.rendering;
+﻿using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.Implementations.Rendering;
@@ -53,9 +53,9 @@ namespace OpenglTestConsole.Classes.impl.rendering
         private void Init()
         {
             if (this.UsesTexture)
-                Shader = Resources.Shaders[ResourcePaths.Shaders.objectTextured];
+                Shader = Resources.Shaders[ResourcePaths.ShaderNames.objectTextured];
             else
-                Shader = Resources.Shaders[ResourcePaths.Shaders.objectMonoColor];
+                Shader = Resources.Shaders[ResourcePaths.ShaderNames.objectMonoColor];
 
 
             // what we need to do is:

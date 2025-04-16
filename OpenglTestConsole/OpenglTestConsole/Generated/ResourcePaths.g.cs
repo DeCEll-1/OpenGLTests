@@ -7,26 +7,35 @@ public static class ResourcePaths
         public const string ComicSans_json = "Resources/Fonts/ComicSans.json";
         public const string ComicSans_png = "Resources/Fonts/ComicSans.png";
     }
-    public static class Shaders
+    public static class ShaderFilePaths
     {
         public const string default_frag = "Resources/Shaders/default.frag";
         public const string default_vert = "Resources/Shaders/default.vert";
-        public const string defaultShader = "defaultShader";
         public const string greenBlink_frag = "Resources/Shaders/greenBlink.frag";
         public const string greenBlink_vert = "Resources/Shaders/greenBlink.vert";
-        public const string greenBlink = "greenBlink";
         public const string MCSDF_frag = "Resources/Shaders/MCSDF.frag";
         public const string MCSDF_vert = "Resources/Shaders/MCSDF.vert";
-        public const string MCSDF = "MCSDF";
         public const string objectMonoColor_frag = "Resources/Shaders/objectMonoColor.frag";
         public const string objectMonoColor_vert = "Resources/Shaders/objectMonoColor.vert";
-        public const string objectMonoColor = "objectMonoColor";
         public const string objectTextured_frag = "Resources/Shaders/objectTextured.frag";
         public const string objectTextured_vert = "Resources/Shaders/objectTextured.vert";
-        public const string objectTextured = "objectTextured";
         public const string texture_frag = "Resources/Shaders/texture.frag";
         public const string texture_vert = "Resources/Shaders/texture.vert";
+        public const string instancedRenderingTextured_vert = "Resources/Shaders/instancedRenderingTextured.vert";
+        public const string instancedRenderingTextured_frag = "Resources/Shaders/instancedRenderingTextured.frag";
+        public const string instancedRenderingMonoColor_vert = "Resources/Shaders/instancedRenderingMonoColor.vert";
+        public const string instancedRenderingMonoColor_frag = "Resources/Shaders/instancedRenderingMonoColor.frag";
+    }
+    public static class ShaderNames
+    {
+        public const string defaultShader = "defaultShader";
+        public const string greenBlink = "greenBlink";
+        public const string MCSDF = "MCSDF";
+        public const string objectTextured = "objectTextured";
+        public const string objectMonoColor = "objectMonoColor";
         public const string texture = "texture";
+        public const string instancedRenderingTextured = "instancedRenderingTextured";
+        public const string instancedRenderingMonoColor = "instancedRenderingMonoColor";
     }
     public static class StarscapeMapDatas
     {

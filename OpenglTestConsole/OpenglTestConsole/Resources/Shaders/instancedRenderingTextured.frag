@@ -1,12 +1,16 @@
+// DOESNT WORK WİTH TEXTURES
+// BECAUSE YOU CANT PASS TEXTURES PER İNSTANCE
+// FİX LATER WİTH TEXTURE ARRAY OR WHATEVER İDK
 #version 330 core
 
 in vec3 FragPos; // moved frag pos
 in vec3 Normal; // normals from the cpu
+in vec2 TexCoord; // tex coordinates from the cpu
 
+uniform sampler2D tex; // tex
 uniform vec3 lightPos; // light pos
 uniform vec4 lightColorIn; // light color
 uniform vec4 ambientIn; // ambient color
-uniform vec4 color;
 uniform vec3 viewPos; // camera
 
 out vec4 FragColor;
@@ -33,8 +37,11 @@ void main()
     // float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32); //The 32 is the shininess of the material.
     // vec3 specular = specularStrength * spec * lightColor;
 
-    // vec3 res = (ambient + diffuse + specular) * (color.rgb * color.a);
-    vec3 res = (ambient + diffuse) * (color.rgb * color.a);
+    // Sample the texture
+    vec4 texColor = texture(tex, TexCoord);
+
+    // vec3 res = (ambient + diffuse + specular) * texColor.rgb;
+    vec3 res = (ambient + diffuse) * texColor.rgb;
 
     // Apply lighting to the texture color
     FragColor = vec4(res.rgb, 1.0);

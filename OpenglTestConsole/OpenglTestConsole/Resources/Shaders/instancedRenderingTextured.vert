@@ -2,7 +2,9 @@
 layout(location = 0) in vec3 aPosition;
 layout(location = 1) in vec3 aNormal;
 layout(location = 2) in vec2 aTexCoord;
-
+// DOESNT WORK WİTH TEXTURES
+// BECAUSE YOU CANT PASS TEXTURES PER İNSTANCE
+// FİX LATER WİTH TEXTURE ARRAY OR WHATEVER İDK
 // for transformations
 layout(location = 12) in mat4 model; // uses 12,13,14,15
 

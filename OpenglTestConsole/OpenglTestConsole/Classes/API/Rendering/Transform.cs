@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.Classes.api.rendering
+namespace OpenglTestConsole.Classes.API.Rendering
 {
     public class Transform
     {

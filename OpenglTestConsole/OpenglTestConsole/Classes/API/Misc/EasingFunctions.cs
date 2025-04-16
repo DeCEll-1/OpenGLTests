@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenglTestConsole.Classes.api.misc
+namespace OpenglTestConsole.Classes.API.misc
 { // source: https://gist.github.com/Kryzarel/bba64622057f21a1d6d44879f9cd7bd4#file-easingfunctions-cs
     // Made with the help of this great post: https://joshondesign.com/2013/03/01/improvedEasingEquations
 

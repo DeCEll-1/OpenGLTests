@@ -1,4 +1,4 @@
-﻿using OpenglTestConsole.Classes.api.rendering;
+﻿using OpenglTestConsole.Classes.API.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -28,7 +28,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 ],
                 0
             );
-            Square.InitShader(ResourcePaths.Shaders.greenBlink);
+            Square.InitShader(ResourcePaths.ShaderNames.greenBlink);
             Square.Transform.Position = Vector3.UnitZ * 3f;
         }
 

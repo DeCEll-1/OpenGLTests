@@ -2,7 +2,6 @@
 
 in vec3 FragPos; // moved frag pos
 in vec3 Normal; // normals from the cpu
-in vec2 TexCoord; // tex coordinates from the cpu
 
 uniform vec3 lightPos; // light pos
 uniform vec4 lightColorIn; // light color

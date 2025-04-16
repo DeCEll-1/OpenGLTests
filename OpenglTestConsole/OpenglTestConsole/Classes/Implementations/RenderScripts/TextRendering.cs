@@ -1,5 +1,5 @@
 ﻿using OpenglTestConsole.Classes;
-using OpenglTestConsole.Classes.api.rendering;
+using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Mesh;

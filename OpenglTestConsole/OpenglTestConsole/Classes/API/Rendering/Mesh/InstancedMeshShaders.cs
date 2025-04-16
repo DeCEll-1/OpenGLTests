@@ -14,13 +14,14 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
 
         public void SetMatrix4(Matrix4[] matrices, int loc, int offset = 1)
         {
+            int vbo = GL.GenBuffer();
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
+            GL.BufferData(BufferTarget.ArrayBuffer, matrices.Length * Marshal.SizeOf<Matrix4>(), matrices, BufferUsageHint.StaticDraw);
+
             foreach (T mesh in Meshes)
             {
                 GL.BindVertexArray(mesh.VertexArrayObjectPointer); // bind the vertex array so that the buffer we made is used on this
-
-                int vbo = GL.GenBuffer();
-                GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
-                GL.BufferData(BufferTarget.ArrayBuffer, matrices.Length * Marshal.SizeOf<Matrix4>(), matrices, BufferUsageHint.StaticDraw);
 
                 int matrixSize = Marshal.SizeOf<Matrix4>();
 
@@ -29,13 +30,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
                 {
                     int attribLocation = loc + i;
                     GL.EnableVertexAttribArray(attribLocation);
-                    GL.VertexAttribPointer(attribLocation, 4, VertexAttribPointerType.Float, false, matrixSize, i * 4 * sizeof(float));
+                    GL.VertexAttribPointer(attribLocation, 4, VertexAttribPointerType.Float, false, matrixSize, i * Vector4.SizeInBytes);
                     GL.VertexAttribDivisor(attribLocation, offset);
                 }
             }
         }
-
-
-
     }
 }

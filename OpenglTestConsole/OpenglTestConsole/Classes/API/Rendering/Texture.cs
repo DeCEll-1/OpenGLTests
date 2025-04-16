@@ -9,9 +9,9 @@ using StbImageSharp;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using OpenglTestConsole.Classes.api.misc;
+using OpenglTestConsole.Classes.API.misc;
 
-namespace OpenglTestConsole.Classes.api.rendering
+namespace OpenglTestConsole.Classes.API.Rendering
 {
     public class Texture
     {
