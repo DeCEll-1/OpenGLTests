@@ -56,7 +56,7 @@ namespace OpenglTestConsole.Classes.API.JSON
         #endregion
 
         
-        public static FontJson GetFontJson(string jsonPath) => LoadJsonFromFile<FontJson>.Load(jsonPath);
+        public static FontJson? GetFontJson(string jsonPath) => LoadJsonFromFile<FontJson>.Load(jsonPath)!;
 
     }
 }

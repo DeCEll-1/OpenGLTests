@@ -1,10 +1,11 @@
-﻿using OpenglTestConsole.classes.impl.rendering;
+﻿using OpenglTestConsole.Classes.impl.rendering;
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenglTestConsole.Classes.Implementations.Rendering;
 using OpenTK.Mathematics;
+using OpenglTestConsole.Classes.API.Extensions;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 {
@@ -15,7 +16,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
         private List<Cylinder> Cylinders { get; set; } = new List<Cylinder>();
         public override void Init()
         {
-            List<StarscapeSystemConnectionData> ConnectionData = LoadJsonFromFile<List<StarscapeSystemConnectionData>>.Load("Resources/cylinders.json");
+            List<StarscapeSystemConnectionData> ConnectionData = LoadJsonFromFile<List<StarscapeSystemConnectionData>>.Load("Resources/StarscapeMapDatas/cylinders.json");
             foreach (StarscapeSystemConnectionData connection in ConnectionData)
             {
 
@@ -52,7 +53,9 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 
                 Vector3 transformedDirection = connection.Direction * mirrorMatrix * rotationMatrix * otherMatrix;
 
+                transformedDirection = transformedDirection.TurnToEulerRadians().ToDegrees();
 
+                cylinder.Transform.Rotation = transformedDirection;
 
                 // use direction vectors to set the rotation
 

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.classes.impl.EFSs
+namespace OpenglTestConsole.Classes.impl.EFSs
 {
     public class HandleMouse : EveryFrameScript
     {

@@ -1,10 +1,13 @@
-﻿using OpenglTestConsole.classes;
+﻿using OpenglTestConsole.Classes;
+using OpenglTestConsole.Classes.api.rendering;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static OpenglTestConsole.Classes.API.JSON.MCSDFJSON;
 
 namespace OpenglTestConsole.Classes.API.Rendering
 {

@@ -1,7 +1,8 @@
-﻿using OpenglTestConsole.classes.impl.rendering;
+﻿using OpenglTestConsole.Classes.impl.rendering;
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.Classes;
+using OpenglTestConsole.Classes.Paths;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
@@ -20,7 +21,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
         private List<Sphere> Spheres { get; set; } = new List<Sphere>();
         public override void Init()
         {
-            List<StarscapeSystemData> SystemsData = LoadJsonFromFile<List<StarscapeSystemData>>.Load("Resources/map.json");
+            List<StarscapeSystemData> SystemsData = LoadJsonFromFile<List<StarscapeSystemData>>.Load(ResourcePaths.StarscapeMapDatas.map_json)!;
 
             foreach (var data in SystemsData)
             {

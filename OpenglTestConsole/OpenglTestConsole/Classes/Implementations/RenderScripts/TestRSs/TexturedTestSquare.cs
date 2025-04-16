@@ -1,5 +1,5 @@
 ﻿using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.classes.api.rendering;
+using OpenglTestConsole.Classes.api.rendering;
 using OpenglTestConsole.Classes.API.Rendering;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using OpenglTestConsole.classes;
+using OpenglTestConsole.Classes;
+using OpenglTestConsole.Classes.Paths;
+using OpenglTestConsole.Classes.API.Rendering.Mesh;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 {
@@ -35,9 +37,9 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 RenderMisc.DefaultTextureCoordinates,
                 1
             );
-            SquareTextured.InitShader("texture");
+            SquareTextured.InitShader(ResourcePaths.Shaders.texture); 
 
-            Texture = Main.Textures["Resources/Textures/PlaceHolder.png"];
+            Texture = Resources.Textures[ResourcePaths.Textures.PlaceHolder_png];
         }
 
         public override void Render()

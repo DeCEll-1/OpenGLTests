@@ -1,6 +1,7 @@
-﻿using OpenglTestConsole.classes.api.rendering;
-using OpenglTestConsole.Classes.API.Rendering;
+﻿using OpenglTestConsole.Classes.API.Rendering;
+using OpenglTestConsole.Classes.API.Rendering.Mesh;
 using OpenglTestConsole.Classes.Implementations.Rendering;
+using OpenglTestConsole.Classes.Paths;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 ],
                 0
             );
-            Square.InitShader("greenBlink");
+            Square.InitShader(ResourcePaths.Shaders.greenBlink);
             Square.Transform.Position = Vector3.UnitZ * 3f;
         }
 

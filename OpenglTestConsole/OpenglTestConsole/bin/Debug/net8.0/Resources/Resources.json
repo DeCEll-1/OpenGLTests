@@ -1,0 +1,44 @@
+{
+    "Resources": {
+        "Fonts": {
+            "ComicSans_json": "Resources/Fonts/ComicSans.json",
+            "ComicSans_png": "Resources/Fonts/ComicSans.png"
+        },
+        "Shaders": {
+            "default_frag": "Resources/Shaders/default.frag",
+            "default_vert": "Resources/Shaders/default.vert",
+            "defaultShader": "defaultShader",
+
+            "greenBlink_frag": "Resources/Shaders/greenBlink.frag",
+            "greenBlink_vert": "Resources/Shaders/greenBlink.vert",
+            "greenBlink": "greenBlink",
+
+            "MCSDF_frag": "Resources/Shaders/MCSDF.frag",
+            "MCSDF_vert": "Resources/Shaders/MCSDF.vert",
+            "MCSDF": "MCSDF",
+
+            "objectMonoColor_frag": "Resources/Shaders/objectMonoColor.frag",
+            "objectMonoColor_vert": "Resources/Shaders/objectMonoColor.vert",
+            "objectMonoColor": "objectMonoColor",
+
+            "objectTextured_frag": "Resources/Shaders/objectTextured.frag",
+            "objectTextured_vert": "Resources/Shaders/objectTextured.vert",
+            "objectTextured": "objectTextured",
+
+            "texture_frag": "Resources/Shaders/texture.frag",
+            "texture_vert": "Resources/Shaders/texture.vert",
+            "texture": "texture"
+        },
+        "StarscapeMapDatas": {
+            "cylinders_json": "Resources/StarscapeMapDatas/cylinders.json",
+            "links_json": "Resources/StarscapeMapDatas/links.json",
+            "map_json": "Resources/StarscapeMapDatas/map.json"
+        },
+        "Textures": {
+            "CoordinateSystem_png": "Resources/Textures/CoordinateSystem.png",
+            "PlaceHolder_png": "Resources/Textures/PlaceHolder.png",
+            "RotationSystem_png": "Resources/Textures/RotationSystem.png",
+            "sebestyen_png": "Resources/Textures/sebestyen.png"
+        }
+    }
+}

@@ -1,4 +1,4 @@
-﻿using OpenglTestConsole.classes.impl.rendering;
+﻿using OpenglTestConsole.Classes.impl.rendering;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.Rendering;
 using OpenTK.Mathematics;

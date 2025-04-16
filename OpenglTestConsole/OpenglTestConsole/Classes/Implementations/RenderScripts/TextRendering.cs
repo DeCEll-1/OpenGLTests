@@ -1,7 +1,9 @@
-﻿using OpenglTestConsole.classes;
-using OpenglTestConsole.classes.api.rendering;
+﻿using OpenglTestConsole.Classes;
+using OpenglTestConsole.Classes.api.rendering;
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering;
+using OpenglTestConsole.Classes.API.Rendering.Mesh;
+using OpenglTestConsole.Classes.Paths;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
@@ -25,8 +27,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 
         public override void Init()
         {
-            Font = MCSDFJSON.GetFontJson("Resources/Fonts/ComicSans.json");
-            Texture = Main.Textures["Resources/Fonts/ComicSans.png"];
+            Font = MCSDFJSON.GetFontJson(ResourcePaths.Fonts.ComicSans_json)!;
+            Texture = Resources.Textures[ResourcePaths.Fonts.ComicSans_png];
             float scale = 1.0f;
             string text = "god daymn!!!";
             float penX = 0f;

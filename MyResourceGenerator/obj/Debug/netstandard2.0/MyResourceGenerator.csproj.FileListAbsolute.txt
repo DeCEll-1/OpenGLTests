@@ -1,0 +1,11 @@
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\bin\Debug\netstandard2.0\MyResourceGenerator.deps.json
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\bin\Debug\netstandard2.0\MyResourceGenerator.dll
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\bin\Debug\netstandard2.0\MyResourceGenerator.pdb
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\obj\Debug\netstandard2.0\MyResourceGenerator.csproj.AssemblyReference.cache
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\obj\Debug\netstandard2.0\MyResourceGenerator.GeneratedMSBuildEditorConfig.editorconfig
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\obj\Debug\netstandard2.0\MyResourceGenerator.AssemblyInfoInputs.cache
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\obj\Debug\netstandard2.0\MyResourceGenerator.AssemblyInfo.cs
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\obj\Debug\netstandard2.0\MyResourceGenerator.csproj.CoreCompileInputs.cache
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\obj\Debug\netstandard2.0\MyResourceGenerator.sourcelink.json
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\obj\Debug\netstandard2.0\MyResourceGenerator.dll
+D:\Github\OpenGLTests\OpenglTestConsole\MyResourceGenerator\obj\Debug\netstandard2.0\MyResourceGenerator.pdb

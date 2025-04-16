@@ -1,6 +1,7 @@
-﻿using OpenglTestConsole.classes;
-using OpenglTestConsole.classes.api.rendering;
+﻿using OpenglTestConsole.Classes;
+using OpenglTestConsole.Classes.api.rendering;
 using OpenglTestConsole.Classes.API.Misc;
+using OpenglTestConsole.Classes.Paths;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.Implementations.Rendering
 {
-    internal class Cylinder : Mesh
+    public class Cylinder : LightEffectedMesh
     {
         private int StackCount;
         private int SectorCount;
@@ -22,7 +23,6 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
         private Texture Texture;
         private Vector4 Color;
         private bool UsesTexture = false;
-        private uint[] indices;
 
         // its not that hard to draw a FUCKİNG CYLİNDER
         // YOU NEED TO DRAW A CİRCLE
@@ -45,9 +45,9 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
         private void Init()
         {
             if (this.UsesTexture)
-                Shader = Main.Shaders["objectTextured"];
+                Shader = Resources.Shaders[ResourcePaths.Shaders.objectTextured];
             else
-                Shader = Main.Shaders["objectMonoColor"];
+                Shader = Resources.Shaders[ResourcePaths.Shaders.objectMonoColor];
 
             (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices) = GetCylinder();
             SetVector3(vertices, 0);
@@ -240,20 +240,5 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
             Render(this.indices, type);
             //GL.Disable(EnableCap.CullFace);
         }
-        public void SetStaticUniforms(Light light)
-        {
-            Shader.SetVector3("lightPos", light.Location);
-            Shader.SetVector4("lightColorIn", light.Color);
-            Shader.SetVector4("ambientIn", light.Ambient);
-
-            Shader.SetVector3("viewPos", Camera.Position);
-        }
-        public void PrepareRender(Light light)
-        {
-            this.Shader.Use();
-            this.SetStaticUniforms(light);
-            GL.Enable(EnableCap.CullFace); // so that it doesnt render the back side
-        }
-        public void EndRender() => GL.Disable(EnableCap.CullFace);
     }
 }

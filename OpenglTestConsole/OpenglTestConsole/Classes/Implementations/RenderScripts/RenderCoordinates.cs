@@ -1,11 +1,14 @@
-﻿using OpenglTestConsole.classes.impl.rendering;
+﻿using OpenglTestConsole.Classes.impl.rendering;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.Rendering;
+using OpenglTestConsole.Classes.Paths;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenglTestConsole.Classes.API.Extensions;
+using OpenTK.Mathematics;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 {
@@ -13,6 +16,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
     {
         private Cylinder[] axes = new Cylinder[3];
         private Sphere[] sides = new Sphere[3];
+        private Square[] images = new Square[2];
         public override void Init()
         {
             axes[0] = new Cylinder(
@@ -23,7 +27,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 Height: 5f,
                 color: new OpenTK.Mathematics.Vector4(1f, 0f, 0f, 1f)
             );
-            axes[0].Transform.Rotation = new OpenTK.Mathematics.Vector3(0f, 90f, 0f);
+            axes[0].Transform.Rotation = new Vector3(0f, 90f, 0f);
             sides[0] = new Sphere(
                 camera: this.Camera,
                 stackCount: 8,
@@ -31,7 +35,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 radius: 0.3f,
                 color: new OpenTK.Mathematics.Vector4(1f, 0f, 0f, 1f)
             );
-            sides[0].Transform.Position = new OpenTK.Mathematics.Vector3(0f, 1f, 0f);
+            sides[0].Transform.Position = new Vector3(0f, 0f, 1f);
 
             axes[1] = new Cylinder(
                 camera: this.Camera,
@@ -41,7 +45,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 Height: 5f,
                 color: new OpenTK.Mathematics.Vector4(0f, 1f, 0f, 1f)
             );
-            axes[1].Transform.Rotation = new OpenTK.Mathematics.Vector3(90f, 0f, 0f);
+            axes[1].Transform.Rotation = new Vector3(90f, 0f, 0f);
             sides[1] = new Sphere(
                 camera: this.Camera,
                 stackCount: 8,
@@ -49,7 +53,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 radius: 0.3f,
                 color: new OpenTK.Mathematics.Vector4(0f, 1f, 0f, 1f)
             );
-            sides[1].Transform.Position = new OpenTK.Mathematics.Vector3(1f, 0f, 0f);
+            sides[1].Transform.Position = new Vector3(1f, 0f, 0f);
 
             axes[2] = new Cylinder(
                 camera: this.Camera,
@@ -59,7 +63,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 Height: 5f,
                 color: new OpenTK.Mathematics.Vector4(0f, 0f, 1f, 1f)
             );
-            axes[2].Transform.Rotation = new OpenTK.Mathematics.Vector3(0f, 0f, 0f);
+            axes[2].Transform.Rotation = new Vector3(0f, 0f, 0f);
             sides[2] = new Sphere(
                 camera: this.Camera,
                 stackCount: 8,
@@ -67,7 +71,23 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 radius: 0.3f,
                 color: new OpenTK.Mathematics.Vector4(0f, 0f, 1f, 1f)
             );
-            sides[2].Transform.Position = new OpenTK.Mathematics.Vector3(0f, 0f, 1f);
+            sides[2].Transform.Position = new Vector3(0f, -1f, 0f);
+
+            images[0] = new Square(
+                camera: this.Camera,
+                size: 2f,
+                texture: Resources.Textures[ResourcePaths.Textures.CoordinateSystem_png]
+            );
+            images[0].Transform.Position = new Vector3(-2f, 1.5f, 0f);
+
+            Vector3 rotationSystemSize = new Vector3(2.5f, 1.5f, 0f);
+            Vector3[] rotationSystem = rotationSystemSize.CreateSquare();
+            images[1] = new Square(
+                camera: this.Camera,
+                vectors: rotationSystem,
+                texture: Resources.Textures[ResourcePaths.Textures.RotationSystem_png]
+            );
+            images[1].Transform.Position = new Vector3(2f, 1.5f, 0f);
         }
 
         public override void Render()
@@ -81,6 +101,11 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
             foreach (Sphere side in sides)
                 side.Render();
             sides[0].EndRender();
+
+            images[0].PrepareRender(MainInstance.light);
+            foreach (Square image in images)
+                image.Render();
+            images[0].EndRender();
         }
     }
 }

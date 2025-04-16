@@ -1,5 +1,8 @@
-﻿using OpenglTestConsole.classes.api.rendering;
+﻿using OpenglTestConsole.Classes.api.rendering;
+using OpenglTestConsole.Classes;
 using OpenglTestConsole.Classes.API.Misc;
+using OpenglTestConsole.Classes.Implementations.Rendering;
+using OpenglTestConsole.Classes.Paths;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
@@ -12,14 +15,13 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.classes.impl.rendering
+namespace OpenglTestConsole.Classes.impl.rendering
 {
-    public class Sphere : Mesh
+    public class Sphere : LightEffectedMesh
     {
         public int SectorCount;
         public int StackCount;
         public float radius;
-        public uint[] indices;
         public Texture Texture;
         public Vector4 Color;
         public bool UsesTexture = false;
@@ -51,9 +53,9 @@ namespace OpenglTestConsole.classes.impl.rendering
         private void Init()
         {
             if (this.UsesTexture)
-                Shader = Main.Shaders["objectTextured"];
+                Shader = Resources.Shaders[ResourcePaths.Shaders.objectTextured];
             else
-                Shader = Main.Shaders["objectMonoColor"];
+                Shader = Resources.Shaders[ResourcePaths.Shaders.objectMonoColor];
 
 
             // what we need to do is:
@@ -178,23 +180,6 @@ namespace OpenglTestConsole.classes.impl.rendering
             Render(indices, type);
             //GL.Disable(EnableCap.CullFace);
         }
-
-        // TODO: make this take a light array or list instead of a singular light cuz, we can, yk, use more lights
-        public void SetStaticUniforms(Light light)
-        {
-            Shader.SetVector3("lightPos", light.Location);
-            Shader.SetVector4("lightColorIn", light.Color);
-            Shader.SetVector4("ambientIn", light.Ambient);
-
-            Shader.SetVector3("viewPos", Camera.Position);
-        }
-        public void PrepareRender(Light light)
-        {
-            this.Shader.Use();
-            this.SetStaticUniforms(light);
-            GL.Enable(EnableCap.CullFace); // so that it doesnt render the back side
-        }
-        public void EndRender() => GL.Disable(EnableCap.CullFace); 
 
     }
 }

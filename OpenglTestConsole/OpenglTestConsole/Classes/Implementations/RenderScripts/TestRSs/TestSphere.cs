@@ -1,5 +1,5 @@
-﻿using OpenglTestConsole.classes.api.rendering;
-using OpenglTestConsole.classes.impl.rendering;
+﻿using OpenglTestConsole.Classes.api.rendering;
+using OpenglTestConsole.Classes.impl.rendering;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;

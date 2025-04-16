@@ -1,4 +1,4 @@
-﻿using OpenglTestConsole.classes.api.misc;
+﻿using OpenglTestConsole.Classes.api.misc;
 using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.classes.impl.EFSs
+namespace OpenglTestConsole.Classes.impl.EFSs
 {
     public class HandleZoom : EveryFrameScript
     {

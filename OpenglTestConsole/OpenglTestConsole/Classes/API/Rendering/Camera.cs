@@ -8,7 +8,7 @@ using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Mathematics;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace OpenglTestConsole.classes
+namespace OpenglTestConsole.Classes
 {
     public class Camera
     {

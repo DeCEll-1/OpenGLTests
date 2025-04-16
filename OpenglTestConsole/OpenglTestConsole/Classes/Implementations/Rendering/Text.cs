@@ -1,5 +1,5 @@
-﻿using OpenglTestConsole.classes;
-using OpenglTestConsole.classes.api.rendering;
+﻿using OpenglTestConsole.Classes;
+using OpenglTestConsole.Classes.API.Rendering.Mesh;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;

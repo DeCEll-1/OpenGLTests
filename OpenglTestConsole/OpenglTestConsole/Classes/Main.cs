@@ -1,20 +1,23 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using OpenglTestConsole.classes.api.rendering;
-using OpenglTestConsole.classes.impl.EFSs;
-using OpenglTestConsole.classes.impl.rendering;
+using OpenglTestConsole.Classes.api.rendering;
+using OpenglTestConsole.Classes.impl.EFSs;
+using OpenglTestConsole.Classes.impl.rendering;
+using OpenglTestConsole.Classes;
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.RenderScripts;
 using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
+using OpenglTestConsole.Classes.Paths;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using static OpenglTestConsole.Classes.API.JSON.MCSDFJSON;
+using OpenglTestConsole.Classes.api.misc;
 
-namespace OpenglTestConsole.classes
+namespace OpenglTestConsole.Classes
 {
     public class Main : GameWindow
     {
@@ -23,9 +26,6 @@ namespace OpenglTestConsole.classes
         public required Camera Camera { get; set; }
         public List<EveryFrameScript> EveryFrameScripts { get; set; } = new List<EveryFrameScript>();
         public List<RenderScript> RenderScripts { get; set; } = new List<RenderScript>();
-        public static Dictionary<string, Texture> Textures { get; set; } = new();
-        public static Dictionary<string, Shader> Shaders { get; set; } = new();
-        public static Dictionary<string, FontJson> Fonts { get; set; } = new();
         public Light light = new Light(
             location: new Vector3(0f, 5f, 0f),
             color: new Vector4(1f, 1f, 1f, 0.9f),
@@ -38,6 +38,8 @@ namespace OpenglTestConsole.classes
             Camera = new Camera(nativeWindowSettings.ClientSize.X, nativeWindowSettings.ClientSize.Y);
             Camera.Position.Z = 3f;
             CursorState = CursorState.Grabbed;
+
+            //Logger.Log($"{GL.GetInteger(GetPName.MaxVertexAttribs)}", LogLevel.Info);
 
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
@@ -57,43 +59,50 @@ namespace OpenglTestConsole.classes
                 [
                     new TestSphere(),
                     //new TestCylinder(),
-                    //new RenderStarscapeMap(0.1f),
-                    //new RenderStarscapeConnections(0.1f),
+                    new RenderStarscapeMap(0.1f),
+                    new RenderStarscapeConnections(0.1f),
                     new RenderCoordinates(),
                     new TextRendering(),
                 ]
             );
             #endregion
 
-            #region Add Textures
-            Textures.Add("Resources/Textures/PlaceHolder.png", new("Resources/Textures/PlaceHolder.png"));
-            Textures.Add("Resources/Textures/sebestyen.png", new("Resources/Textures/sebestyen.png"));
-            Textures.Add("Resources/Fonts/ComicSans.png", new("Resources/Fonts/ComicSans.png"));
 
-            foreach (var tex in Textures)
+            #region Add Textures
+            Resources.Textures.Add(ResourcePaths.Textures.PlaceHolder_png, new(ResourcePaths.Textures.PlaceHolder_png));
+            Resources.Textures.Add(ResourcePaths.Textures.sebestyen_png, new(ResourcePaths.Textures.sebestyen_png));
+            Resources.Textures.Add(ResourcePaths.Fonts.ComicSans_png, new(ResourcePaths.Fonts.ComicSans_png));
+
+            Resources.Textures.Add(ResourcePaths.Textures.CoordinateSystem_png, new(ResourcePaths.Textures.CoordinateSystem_png));
+
+            Resources.Textures.Add(ResourcePaths.Textures.RotationSystem_png, new(ResourcePaths.Textures.RotationSystem_png));
+
+            foreach (var tex in Resources.Textures)
                 tex.Value.Init();
             #endregion
 
             #region Add Shaders
 
-            Shaders.Add("default", new("Resources/Shaders/default.vert", "Resources/Shaders/default.frag"));
-            Shaders.Add("greenBlink", new("Resources/Shaders/greenBlink.vert", "Resources/Shaders/greenBlink.frag"));
+            Resources.Shaders.Add(ResourcePaths.Shaders.defaultShader, new(ResourcePaths.Shaders.default_vert, ResourcePaths.Shaders.default_frag));
 
-            Shaders.Add("objectMonoColor", new("Resources/Shaders/objectMonoColor.vert", "Resources/Shaders/objectMonoColor.frag"));
-            Shaders.Add("objectTextured", new("Resources/Shaders/objectTextured.vert", "Resources/Shaders/objectTextured.frag"));
+            Resources.Shaders.Add(ResourcePaths.Shaders.greenBlink, new(ResourcePaths.Shaders.greenBlink_vert, ResourcePaths.Shaders.greenBlink_frag));
 
-            Shaders.Add("texture", new("Resources/Shaders/texture.vert", "Resources/Shaders/texture.frag"));
+            Resources.Shaders.Add(ResourcePaths.Shaders.objectMonoColor, new(ResourcePaths.Shaders.objectMonoColor_vert, ResourcePaths.Shaders.objectMonoColor_frag));
 
-            Shaders.Add("MCSDF", new("Resources/Shaders/MCSDF.vert", "Resources/Shaders/MCSDF.frag"));
+            Resources.Shaders.Add(ResourcePaths.Shaders.objectTextured, new(ResourcePaths.Shaders.objectTextured_vert, ResourcePaths.Shaders.objectTextured_frag));
 
-            foreach (var shader in Shaders)
+            Resources.Shaders.Add(ResourcePaths.Shaders.texture, new(ResourcePaths.Shaders.texture_vert, ResourcePaths.Shaders.texture_frag));
+
+            Resources.Shaders.Add(ResourcePaths.Shaders.MCSDF, new(ResourcePaths.Shaders.MCSDF_vert, ResourcePaths.Shaders.MCSDF_frag));
+
+            foreach (var shader in Resources.Shaders)
                 shader.Value.Init();
 
             #endregion
 
             #region Add Fonts
             // i WİLL come back to fonts, i dont need it rn
-            Fonts.Add("Resources/Fonts/ComicSans.json", MCSDFJSON.GetFontJson("Resources/Fonts/ComicSans.json"));
+            Resources.Fonts.Add(ResourcePaths.Fonts.ComicSans_json, MCSDFJSON.GetFontJson(ResourcePaths.Fonts.ComicSans_json)!);
             #endregion
 
 

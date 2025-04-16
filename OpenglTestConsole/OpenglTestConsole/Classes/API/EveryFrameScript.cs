@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.classes
+namespace OpenglTestConsole.Classes
 {
     public abstract class EveryFrameScript
     {
