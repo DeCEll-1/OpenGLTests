@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,5 +36,47 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
                 }
             }
         }
+
+        public void SetVector4(Vector4[] vectors, int loc, int offset = 1)
+        {
+            int VBOPointer = GL.GenBuffer();
+
+            // generate vertex buffer object
+            GL.BindBuffer(BufferTarget.ArrayBuffer, VBOPointer); // bind buffer
+            GL.BufferData(BufferTarget.ArrayBuffer, vectors.Length * Vector4.SizeInBytes, vectors, BufferUsageHint.StaticDraw); // put data in buffer
+
+            foreach (T mesh in Meshes)
+            {
+                GL.BindVertexArray(mesh.VertexArrayObjectPointer); // bind the vertex array so that the buffer we made is used on this
+
+                GL.EnableVertexAttribArray(loc); // enable loc 0
+
+                GL.VertexAttribPointer(loc, 4, VertexAttribPointerType.Float, false, Vector4.SizeInBytes, 0); // bind the buffer to location 0
+
+                GL.VertexAttribDivisor(loc, offset);
+            }
+        }
+
+
+        public Y[] GetFieldValuesFromMeshes<Y>(string fieldOrPropertyName)
+        { // is this dumb? probably, but i dont care
+            return Meshes.Select(mesh =>
+            {
+                var type = mesh.GetType();
+
+                // Try to get a field first
+                var field = type.GetField(fieldOrPropertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                if (field != null && field.FieldType == typeof(Y))
+                    return (Y)field.GetValue(mesh)!;
+
+                // Try to get a property if field not found
+                var prop = type.GetProperty(fieldOrPropertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                if (prop != null && prop.PropertyType == typeof(Y))
+                    return (Y)prop.GetValue(mesh)!;
+
+                throw new Exception($"Field or property '{fieldOrPropertyName}' not found or not of type {typeof(Y).Name} in mesh.");
+            }).ToArray()!;
+        }
+
     }
 }

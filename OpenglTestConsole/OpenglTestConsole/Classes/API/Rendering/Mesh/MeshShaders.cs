@@ -70,17 +70,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
 
             GL.EnableVertexAttribArray(loc); // enable loc 0
         }
-        public void SetMatrix4(Matrix4[] matrices, int loc)
-        {
-            GL.BindVertexArray(VertexArrayObjectPointer); // bind the vertex array so that the buffer we made is used on this
-
-            // generate vertex buffer object
-            int VBOPointer = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, VBOPointer); // bind buffer
-            GL.BufferData(BufferTarget.ArrayBuffer, matrices.Length * 16 * sizeof(float), matrices, BufferUsageHint.StaticDraw); // put data in buffer
-            GL.VertexAttribPointer(loc, 16, VertexAttribPointerType.Float, false, 16 * sizeof(float), 0); // bind the buffer to location 0
-            GL.EnableVertexAttribArray(loc); // enable loc 0
-        }
         public void SetIndices(uint[] indices)
         {
             GL.BindVertexArray(VertexArrayObjectPointer);

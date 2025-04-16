@@ -8,7 +8,6 @@ layout(location = 12) in mat4 model; // uses 12,13,14,15
 
 uniform mat4 view;
 uniform mat4 projection;
-// uniform mat4 model;
 
 out vec3 FragPos; // Position to fragment shader
 out vec3 Normal; // Normal to fragment shader
@@ -19,6 +18,8 @@ void main()
     FragPos = vec3(model * vec4(aPos, 1.0)); // Calculate world position
     Normal = normalize(mat3(transpose(inverse(model))) * aNormal);
     // Normal = mat3(transpose(inverse(model))) * aNormal; // Transform normal to world space
+
+    Color = aColor;
 
     // note that we read the multiplication from right to left
     gl_Position = vec4(aPos, 1.0) * model * view * projection;

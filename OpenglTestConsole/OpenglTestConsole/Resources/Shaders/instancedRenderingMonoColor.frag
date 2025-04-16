@@ -34,9 +34,9 @@ void main()
     // vec3 specular = specularStrength * spec * lightColor;
 
     // vec3 res = (ambient + diffuse + specular) * (color.rgb * color.a);
-    vec3 res = (ambient + diffuse); //* (Color.rgb * Color.a);
+    vec3 res = (ambient + diffuse) * (Color.rgb * Color.a);
 
     // Apply lighting to the texture color
-    // FragColor = vec4(res.rgb, 1.0);
-    FragColor = vec4(1.0);
+    FragColor = vec4(res.rgb, 1.0);
+    // FragColor = vec4(1.0);
 }

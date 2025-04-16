@@ -23,10 +23,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
             Matrix4[] matrices = new Matrix4[Meshes.Count];
             for (int i = 0; i < Meshes.Count; i++)
             {
-                //Meshes[i].Transform.Position = new Vector3(5f, 5f, 5f);
                 matrices[i] = Meshes[i].Transform.GetModelMatrix();
             }
-            //matrices = new Matrix4[1] { Matrix4.CreateTranslation(0f, 0f, 0f) }; // Example translation
             // for GOD KNOWS WHY
             // matrix turns when i put them in the vertex shader, so i will turn them here (or chatgpt will ig idk m*th)
             Matrix4[] rotatedMatrixes = new Matrix4[matrices.Length];
@@ -65,14 +63,12 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
         #region render
         public void Render(PrimitiveType type = PrimitiveType.Triangles)
         {
-            Meshes[0].Shader.SetMatrix4("projection", Meshes[0].Camera.GetProjectionMatrix());
-            Meshes[0].Shader.SetMatrix4("view", Meshes[0].Camera.GetViewMatrix());
+            T ourMesh = Meshes[0];
+            ourMesh.Shader.SetMatrix4("projection", ourMesh.Camera.GetProjectionMatrix());
+            ourMesh.Shader.SetMatrix4("view", ourMesh.Camera.GetViewMatrix());
 
-            foreach (Mesh mesh in Meshes)
-            {
-                GL.BindVertexArray(mesh.VertexArrayObjectPointer);
-                GL.DrawArraysInstanced(type, 0, mesh.size, Meshes.Count);
-            }
+            GL.BindVertexArray(ourMesh.VertexArrayObjectPointer);
+            GL.DrawArraysInstanced(type, 0, ourMesh.size, Meshes.Count);
         }
         public void RenderWithIndices(PrimitiveType type = PrimitiveType.Triangles)
         {
@@ -80,7 +76,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
 
             ourMesh.Shader.SetMatrix4("projection", ourMesh.Camera.GetProjectionMatrix());
             ourMesh.Shader.SetMatrix4("view", ourMesh.Camera.GetViewMatrix());
-            ourMesh.Shader.SetMatrix4("model", ourMesh.Transform.GetModelMatrix());
 
             GL.BindVertexArray(ourMesh.VertexArrayObjectPointer);
             GL.DrawElementsInstanced(type, ourMesh.indices.Length, DrawElementsType.UnsignedInt, 0, Meshes.Count); // render the mesh
