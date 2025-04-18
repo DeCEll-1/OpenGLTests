@@ -5,7 +5,6 @@ using OpenglTestConsole.Classes.impl.EFSs;
 using OpenglTestConsole.Classes.impl.rendering;
 using OpenglTestConsole.Classes;
 using OpenglTestConsole.Classes.API.JSON;
-using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.RenderScripts;
 using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
 using OpenglTestConsole.Classes.Paths;
@@ -44,6 +43,7 @@ namespace OpenglTestConsole.Classes
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
 
+
             #region EFSs
             this.EveryFrameScripts.AddRange(
                 [
@@ -60,9 +60,9 @@ namespace OpenglTestConsole.Classes
                     new RenderCoordinates(),
                     //new TestSphere(),
                     //new TestCylinder(),
-                    //new TextRendering(),
                     new RenderStarscapeMap(0.1f),
                     new RenderStarscapeConnections(0.1f),
+                    new TextRendering(),
                 ]
             );
             #endregion
@@ -147,6 +147,7 @@ namespace OpenglTestConsole.Classes
 
             foreach (var script in RenderScripts)
             {
+                script.args = args;
                 script.Camera = this.Camera;
                 script.Timer = this.Timer;
                 script.MainInstance = this;

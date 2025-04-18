@@ -1,5 +1,6 @@
 ﻿using OpenglTestConsole.Classes;
 using OpenglTestConsole.Classes.API.Rendering;
+using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ namespace OpenglTestConsole.Classes.API.Rendering
 {
     public abstract class RenderScript
     {
+        public FrameEventArgs args;
         public Camera Camera { get; set; }
         public Stopwatch Timer { get; set; }
         public Main MainInstance { get; set; }

@@ -22,7 +22,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
         {
             SquareTextured = new Mesh(Camera);
             SquareTextured.size = 4;
-            SquareTextured.SetVector3(
+            SquareTextured.BufferManager.SetVector3(
                 //Square.GetSquare(400, 300),
                 new Vector3[]
                 {
@@ -33,7 +33,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 },
                 0
             );
-            SquareTextured.SetVector2(
+            SquareTextured.BufferManager.SetVector2(
                 RenderMisc.DefaultTextureCoordinates,
                 1
             );

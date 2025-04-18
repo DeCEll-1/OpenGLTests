@@ -18,6 +18,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
         public required Camera Camera { get; set; } = new Camera(800, 600);
         public required Shader Shader { get; set; }
         public Transform Transform { get; set; } = new Transform();
+        public BufferManager BufferManager { get; }
         public int VertexArrayObjectPointer { get; private set; }
         [SetsRequiredMembers]
         public Mesh(Camera camera, int size = 3, string shader = ResourcePaths.ShaderNames.defaultShader)
@@ -26,7 +27,13 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
             InitShader(shader);
 
             VertexArrayObjectPointer = GL.GenVertexArray();
+            BufferManager = new BufferManager(VertexArrayObjectPointer);
             Camera = camera;
+        }
+
+        public void InitShader(string shader)
+        {
+            Shader = Resources.Shaders[shader];
         }
         #endregion
 

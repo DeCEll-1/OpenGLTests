@@ -23,5 +23,6 @@ void main() {
     float sd = median(msd.r, msd.g, msd.b);
     float screenPxDistance = screenPxRange() * (sd - 0.5);
     float opacity = clamp(screenPxDistance + 0.5, 0.0, 1.0);
-    color = mix(bgColor, fgColor, opacity);
+    vec4 mixedCol = mix(bgColor, fgColor, opacity);
+    color = vec4(mixedCol);
 }

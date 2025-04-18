@@ -62,17 +62,17 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
             var b = LeftBottom - LeftTop;
             Vector3.Cross(a, b, out Vector3 normal);
 
-            SetVector3([LeftTop, RightTop, LeftBottom, RightBottom], 0);
-            SetVector3([normal, normal, normal, normal], 1);
+            BufferManager.SetVector3([LeftTop, RightTop, LeftBottom, RightBottom], 0);
+            BufferManager.SetVector3([normal, normal, normal, normal], 1);
 
             if (this.UsesTexture)
-                SetVector2(RenderMisc.DefaultTextureCoordinates, 2);
+                BufferManager.SetVector2(RenderMisc.DefaultTextureCoordinates, 2);
 
             this.indices = [0, 1, 2, 2, 1, 3];
-            SetIndices(this.indices);
+            BufferManager.SetIndices(this.indices);
         }
 
-        public new void Render(OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
+        public override void Render(OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
         {
             //Shader.Use();
 
@@ -82,7 +82,7 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
                 Shader.SetVector4("color", this.Color);
 
             //GL.Enable(EnableCap.CullFace); // so that it doesnt render the back side
-            Render(indices, type);
+            base.Render(indices, type);
             //GL.Disable(EnableCap.CullFace);
         }
         public override void PrepareRender(Light light)

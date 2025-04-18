@@ -1,9 +1,11 @@
 ﻿using OpenTK.Mathematics;
+using System.Globalization;
 
 namespace OpenglTestConsole.Classes.API.Extensions
 {
-    public static class Vector3Extensions
+    public static class VectorExtensions
     {
+        #region m*th
         public static Vector3 ToRadians(this Vector3 angles)
         {
             return new Vector3(
@@ -64,8 +66,19 @@ namespace OpenglTestConsole.Classes.API.Extensions
             outVector.Z = MathF.Sin(radians.Y);
             return outVector;
         }
+        #endregion
 
-
+        #region colors
+        public static Vector4 ToVector4(this Color4 color) => new(color.R, color.G, color.B, color.A);
+        public static Color4 ToColor4(this Vector4 color) => new(color.X, color.Y, color.Z, color.W);
+        public static string ToHex(this Vector4 color) => $"{(int)(color.X * 255):X2}{(int)(color.Y * 255):X2}{(int)(color.Z * 255):X2}{(int)(color.W * 255):X2}";
+        public static Vector4 FromHex(string hex) => new Vector4(
+                byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber) / 255f,
+                byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber) / 255f,
+                byte.Parse(hex.Substring(4, 2), NumberStyles.HexNumber) / 255f,
+                byte.Parse(hex.Substring(6, 2), NumberStyles.HexNumber) / 255f
+            );
+        #endregion
 
 
     }

@@ -23,9 +23,7 @@ namespace OpenglTestConsole
                 DepthBits = 24,
             };
 
-
-
-            nativeWindowSettings.Vsync = OpenTK.Windowing.Common.VSyncMode.On;
+            gameWindowSettings.UpdateFrequency = 60;
 
             Main main = new Main(gameWindowSettings, nativeWindowSettings);
             main.Run();

@@ -69,11 +69,11 @@ namespace OpenglTestConsole.Classes.impl.rendering
             (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, indices, _) = GetSphere();
 
             size = vertices.Length; // almost forgor this lmao
-            SetVector3(vertices, 0);
-            SetVector3(normals, 1);
+            BufferManager.SetVector3(vertices, 0);
+            BufferManager.SetVector3(normals, 1);
             if (this.UsesTexture)
-                SetVector2(texCoords, 2);
-            SetIndices(indices);
+                BufferManager.SetVector2(texCoords, 2);
+            BufferManager.SetIndices(indices);
         }
 
         public (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices, uint[] lineIndices) GetSphere()
@@ -170,7 +170,8 @@ namespace OpenglTestConsole.Classes.impl.rendering
                 );
             // plz work i dont know how this works
         }
-        public new void Render(OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
+
+        public override void Render(OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
         {
             //Shader.Use();
 
@@ -180,7 +181,7 @@ namespace OpenglTestConsole.Classes.impl.rendering
                 Shader.SetVector4("color", this.Color);
 
             //GL.Enable(EnableCap.CullFace); // so that it doesnt render the back side
-            Render(indices, type);
+            base.Render(indices, type);
             //GL.Disable(EnableCap.CullFace);
         }
 

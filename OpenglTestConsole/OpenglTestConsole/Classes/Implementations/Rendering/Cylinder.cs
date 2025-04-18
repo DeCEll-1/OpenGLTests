@@ -52,11 +52,11 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
             Shader = Resources.Shaders[shader];
 
             (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices) = GetCylinder();
-            SetVector3(vertices, 0);
-            SetVector3(normals, 1);
+            BufferManager.SetVector3(vertices, 0);
+            BufferManager.SetVector3(normals, 1);
             if (this.UsesTexture)
-                SetVector2(texCoords, 2);
-            SetIndices(indices);
+                BufferManager.SetVector2(texCoords, 2);
+            BufferManager.SetIndices(indices);
             this.indices = indices;
             //SetColor(new Color4[vertices.Length], 3);
             //SetMatrix4(new Matrix4[vertices.Length], 4);
@@ -229,7 +229,7 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
             return unitVertices;
         }
 
-        public new void Render(OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
+        public override void Render(OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
         {
             //Shader.Use();
 
@@ -239,7 +239,7 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
                 Shader.SetVector4("color", this.Color);
 
             //GL.Enable(EnableCap.CullFace); // so that it doesnt render the back side
-            Render(this.indices, type);
+            base.Render(this.indices, type);
             //GL.Disable(EnableCap.CullFace);
         }
     }

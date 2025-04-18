@@ -18,7 +18,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
         {
             Square = new Mesh(Camera);
             Square.size = 4;
-            Square.SetVector3(
+            Square.BufferManager.SetVector3(
                 //Square.GetSquare(400, 300),
                 [
                     new Vector3(-0.5f, 0.5f, 0f),

@@ -1,7 +1,9 @@
 ﻿using OpenglTestConsole.Classes;
+using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Mesh;
-using OpenTK.Graphics.OpenGL4;
+using OpenglTestConsole.Classes.Paths;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -29,25 +31,24 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
                 UpdateText();
             }
         }
-
         private FontJson Font { get; set; }
+        private Texture Texture;
         private List<Vector3> vertices = new List<Vector3>();
         private List<Vector2> texCoords = new List<Vector2>();
         public Vector4 ForeColor = new Vector4(1f, 1f, 1f, 1f);
         public Vector4 BackColor = new Vector4(0f, 0f, 0f, 1f);
-        private Texture Texture;
         private float scale = 1f;
 
         [SetsRequiredMembers]
-        public Text(Camera camera, string shader = "MCSDF") : base(camera, shader: shader)
+        public Text(Camera camera, string fontJson, string fontTexture, string text = "Hello World!", float scale = 1f) : base(camera)
         {
-
+            this.Shader = Resources.Shaders[ResourcePaths.ShaderNames.MCSDF];
+            this.Font = MCSDFJSON.GetFontJson(fontJson)!;
+            this.Texture = Resources.Textures[fontTexture];
+            this.scale = scale;
+            this.TextString = text;
         }
-        private void Init()
-        {
-
-        }
-        private void UpdateText()
+        public void UpdateText()
         {
             float penX = 0f;
             vertices.Clear();
@@ -99,12 +100,13 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
                 penX += glyph.advance;
             }
             this.size = vertices.Count;
+            this.BufferManager.SetVector3(vertices.ToArray(), 0, BufferUsageHint.StreamDraw);
+            this.BufferManager.SetVector2(texCoords.ToArray(), 1, BufferUsageHint.StreamDraw);
         }
-
-        public override void Render(PrimitiveType type = PrimitiveType.Triangles)
+        public override void Render(OpenTK.Graphics.OpenGL4.PrimitiveType type = OpenTK.Graphics.OpenGL4.PrimitiveType.Triangles)
         {
             GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusConstantAlpha);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             this.Shader.Use();
             // our texture for text rendering
@@ -112,10 +114,9 @@ namespace OpenglTestConsole.Classes.Implementations.Rendering
             this.Shader.SetVector4("bgColor", this.BackColor);
             this.Shader.SetVector4("fgColor", this.ForeColor);
             this.Shader.SetFloat("pxRange", 1f); // precision or smthin idk
-            this.Render(type);
+            base.Render(type);
 
             GL.Disable(EnableCap.Blend);
         }
-
     }
 }
