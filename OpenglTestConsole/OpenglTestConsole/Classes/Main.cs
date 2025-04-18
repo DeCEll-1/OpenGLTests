@@ -61,7 +61,7 @@ namespace OpenglTestConsole.Classes
                     //new TestSphere(),
                     //new TestCylinder(),
                     //new TextRendering(),
-                    //new RenderStarscapeMap(0.1f),
+                    new RenderStarscapeMap(0.1f),
                     new RenderStarscapeConnections(0.1f),
                 ]
             );

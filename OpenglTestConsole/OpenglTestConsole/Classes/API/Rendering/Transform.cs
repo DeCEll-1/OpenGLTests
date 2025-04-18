@@ -40,14 +40,20 @@ namespace OpenglTestConsole.Classes.API.Rendering
 
         public Matrix4 GetModelMatrix()
         {
-            Matrix4 rotation = Matrix4.CreateRotationX(_rotation.X) *
-                               Matrix4.CreateRotationY(_rotation.Y) *
-                               Matrix4.CreateRotationZ(_rotation.Z);
+            Matrix4 rotation = Matrix4.CreateRotationX(_rotation.Y) *
+                               Matrix4.CreateRotationY(_rotation.Z) *
+                               Matrix4.CreateRotationZ(_rotation.X);
 
-            return Matrix4.Identity *
-                Matrix4.CreateScale(Scale) *
-                rotation *
-                Matrix4.CreateTranslation(Position);
+            return
+            rotation *
+            Matrix4.CreateScale(Scale) *
+            Matrix4.CreateTranslation(Position) *
+            Matrix4.Identity;
+
+
+
+
+
         }
 
     }

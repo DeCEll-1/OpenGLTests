@@ -27,7 +27,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                  StackCount: 1,
                  SectorCount: 3,
                  Radius: 0.1f,
-                 Height: connection.Height * scale ,
+                 Height: 1f,
                  Shader: ResourcePaths.ShaderNames.instancedRenderingMonoColor,
                  color: new Vector4(1f, 1f, 1f, 1f)
                 );
@@ -50,24 +50,50 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                     0, -1, 0    // Third row
                 );
 
+                #region position
                 Vector3 scaledPos = connection.Center * scale;
 
                 cylinder.Transform.Position = scaledPos * mirrorMatrix * rotationMatrix * otherMatrix;
-
+                #endregion
+                #region rotation
                 Vector3 transformedDirection = connection.Direction * mirrorMatrix * rotationMatrix * otherMatrix;
 
-                transformedDirection = transformedDirection.TurnToEulerRadians().ToDegrees();
+                transformedDirection = transformedDirection.DirectionToEulerRadians().ToDegrees();
 
                 cylinder.Transform.Rotation = transformedDirection;
+                #endregion
+                #region lenght
+                float lenght = connection.Height * scale;
 
-                // use direction vectors to set the rotation
+                cylinder.Transform.Scale = new Vector3(1f, 1f, lenght);
+                #endregion
 
                 CylinderInstanceRenderer.Meshes.Add(cylinder);
             }
 
+            #region test cylinder
+            Cylinder cylinder1 = new Cylinder(
+ camera: this.Camera,
+ StackCount: 1,
+ SectorCount: 3,
+ Radius: 0.1f,
+ Height: 1f,
+ Shader: ResourcePaths.ShaderNames.instancedRenderingMonoColor,
+ color: new Vector4(0.5f, 0.2f, 0.7f, 1f)
+);
+
+            cylinder1.Transform.Position = new(2, 2, -2);
+            cylinder1.Transform.Rotation = new(45, 45, 45);
+            float lenght1 = 3;
+
+            cylinder1.Transform.Scale = new Vector3(1f, 1f, lenght1);
+
+            CylinderInstanceRenderer.Meshes.Add(cylinder1);
+            #endregion
+
             CylinderInstanceRenderer.FinishAddingElemets();
 
-           Vector4[] colors = CylinderInstanceRenderer.GetFieldValuesFromMeshes<Vector4>("Color");
+            Vector4[] colors = CylinderInstanceRenderer.GetFieldValuesFromMeshes<Vector4>("Color");
 
             CylinderInstanceRenderer.SetVector4(colors, 2);
 

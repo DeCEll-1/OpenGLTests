@@ -19,6 +19,9 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
         private Square[] images = new Square[2];
         public override void Init()
         {
+            // y -> z
+            // x -> y
+            // z -> x
             axes[0] = new Cylinder(
                 camera: this.Camera,
                 StackCount: 1,
@@ -28,7 +31,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 Shader: ResourcePaths.ShaderNames.objectMonoColor,
                 color: new OpenTK.Mathematics.Vector4(1f, 0f, 0f, 1f)
             );
-            axes[0].Transform.Rotation = new Vector3(0f, 90f, 0f);
+            axes[0].Transform.Rotation = new Vector3(90f, 0f, 0f);
             sides[0] = new Sphere(
                 camera: this.Camera,
                 stackCount: 8,
@@ -47,7 +50,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 Shader: ResourcePaths.ShaderNames.objectMonoColor,
                 color: new OpenTK.Mathematics.Vector4(0f, 1f, 0f, 1f)
             );
-            axes[1].Transform.Rotation = new Vector3(90f, 0f, 0f);
+            axes[1].Transform.Rotation = new Vector3(0f, 90f, 0f);
             sides[1] = new Sphere(
                 camera: this.Camera,
                 stackCount: 8,
@@ -66,7 +69,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 Shader: ResourcePaths.ShaderNames.objectMonoColor,
                 color: new OpenTK.Mathematics.Vector4(0f, 0f, 1f, 1f)
             );
-            axes[2].Transform.Rotation = new Vector3(0f, 0f, 0f);
+            axes[2].Transform.Rotation = new Vector3(0f, 0f, 90f);
             sides[2] = new Sphere(
                 camera: this.Camera,
                 stackCount: 8,

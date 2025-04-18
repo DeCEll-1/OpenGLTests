@@ -42,13 +42,13 @@ namespace OpenglTestConsole.Classes.API.Extensions
         /// </summary>
         /// <param name="directionVector"></param>
         /// <returns></returns>
-        public static Vector3 TurnToEulerRadians(this Vector3 directionVector)
+        public static Vector3 DirectionToEulerRadians(this Vector3 directionVector)
         {
             directionVector = Vector3.Normalize(directionVector);
             float yaw = MathF.Atan2(directionVector.X, directionVector.Z);
             float pitch = MathF.Asin(-directionVector.Y);
             float roll = 0f;
-            return new Vector3(pitch, yaw, roll);
+            return new Vector3(roll, pitch, yaw);
         }
 
         /// <summary>
