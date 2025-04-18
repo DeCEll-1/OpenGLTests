@@ -23,10 +23,6 @@
             "texture_frag": "Resources/Shaders/texture.frag",
             "texture_vert": "Resources/Shaders/texture.vert",
 
-            "instancedRenderingTextured_vert": "Resources/Shaders/instancedRenderingTextured.vert",
-            "instancedRenderingTextured_frag": "Resources/Shaders/instancedRenderingTextured.frag",
-
-
             "instancedRenderingMonoColor_vert": "Resources/Shaders/instancedRenderingMonoColor.vert",
             "instancedRenderingMonoColor_frag": "Resources/Shaders/instancedRenderingMonoColor.frag"
 
@@ -39,7 +35,6 @@
             "objectTextured": "objectTextured",
             "objectMonoColor": "objectMonoColor",
             "texture": "texture",
-            "instancedRenderingTextured": "instancedRenderingTextured",
             "instancedRenderingMonoColor": "instancedRenderingMonoColor"
         },
         "StarscapeMapDatas": {

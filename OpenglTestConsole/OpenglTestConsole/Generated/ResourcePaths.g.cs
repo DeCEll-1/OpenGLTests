@@ -21,8 +21,6 @@ public static class ResourcePaths
         public const string objectTextured_vert = "Resources/Shaders/objectTextured.vert";
         public const string texture_frag = "Resources/Shaders/texture.frag";
         public const string texture_vert = "Resources/Shaders/texture.vert";
-        public const string instancedRenderingTextured_vert = "Resources/Shaders/instancedRenderingTextured.vert";
-        public const string instancedRenderingTextured_frag = "Resources/Shaders/instancedRenderingTextured.frag";
         public const string instancedRenderingMonoColor_vert = "Resources/Shaders/instancedRenderingMonoColor.vert";
         public const string instancedRenderingMonoColor_frag = "Resources/Shaders/instancedRenderingMonoColor.frag";
     }
@@ -34,7 +32,6 @@ public static class ResourcePaths
         public const string objectTextured = "objectTextured";
         public const string objectMonoColor = "objectMonoColor";
         public const string texture = "texture";
-        public const string instancedRenderingTextured = "instancedRenderingTextured";
         public const string instancedRenderingMonoColor = "instancedRenderingMonoColor";
     }
     public static class StarscapeMapDatas

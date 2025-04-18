@@ -32,17 +32,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
 
 
         #region Render  
-        private void Prep()
+
+        public virtual void Render(PrimitiveType type = PrimitiveType.Triangles)
         {
-            if (Shader.initalised == false)
-            {
-                Logger.Log($"Mesh {LogColors.BrightWhite(VertexArrayObjectPointer)} used without shader initalisation, initalising..", LogLevel.Warning);
-                Shader.Init();
-            }
-        }
-        public void Render(PrimitiveType type = PrimitiveType.TriangleStrip)
-        {
-            Prep();
             Shader.SetMatrix4("projection", Camera.GetProjectionMatrix());
 
             Shader.SetMatrix4("view", Camera.GetViewMatrix());
@@ -53,10 +45,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
             GL.BindVertexArray(VertexArrayObjectPointer);
             GL.DrawArrays(type, 0, size);
         }
-        public void Render(uint[] indices, PrimitiveType type = PrimitiveType.Triangles)
+        public virtual void Render(uint[] indices, PrimitiveType type = PrimitiveType.Triangles)
         { // deadass render that shit cuh 
             // on it boss ima render that shit cuh
-            Prep();
 
             Shader.SetMatrix4("projection", Camera.GetProjectionMatrix());
 

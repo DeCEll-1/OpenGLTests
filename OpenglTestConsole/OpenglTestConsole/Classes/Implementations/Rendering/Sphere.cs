@@ -28,7 +28,7 @@ namespace OpenglTestConsole.Classes.impl.rendering
 
         // TODO: make it so that if theres no texture, its just a color thats specified
         [SetsRequiredMembers]
-        public Sphere(Camera camera, int stackCount, int sectorCount, float radius, Texture texture)
+        public Sphere(Camera camera, int stackCount, int sectorCount, float radius, Texture texture, string shader)
             : base(camera: camera)
         {
             this.StackCount = stackCount;
@@ -36,26 +36,29 @@ namespace OpenglTestConsole.Classes.impl.rendering
             this.radius = radius;
             this.Texture = texture;
             this.UsesTexture = true;
-            Init();
+            Init(shader);
         }
 
         [SetsRequiredMembers]
-        public Sphere(Camera camera, int stackCount, int sectorCount, float radius, Vector4 color)
+        public Sphere(Camera camera, int stackCount, int sectorCount, float radius, Vector4 color, string shader)
             : base(camera: camera)
         {
             this.StackCount = stackCount;
             this.SectorCount = sectorCount;
             this.radius = radius;
             this.Color = color;
-            Init();
+            Init(shader);
         }
 
-        private void Init()
+        private void Init(string shader)
         {
-            if (this.UsesTexture)
-                Shader = Resources.Shaders[ResourcePaths.ShaderNames.objectTextured];
-            else
-                Shader = Resources.Shaders[ResourcePaths.ShaderNames.objectMonoColor];
+            //if (this.UsesTexture)
+            //    Shader = Resources.Shaders[ResourcePaths.ShaderNames.objectTextured];
+            //else
+            //    Shader = Resources.Shaders[ResourcePaths.ShaderNames.objectMonoColor];
+
+            Shader = Resources.Shaders[shader];
+
 
 
             // what we need to do is:

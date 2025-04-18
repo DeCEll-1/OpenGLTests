@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenglTestConsole.Classes.Paths;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 {
@@ -21,7 +22,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 stackCount: 16,
                 sectorCount: 16,
                 radius: 0.5f,
-                color: new Vector4(1f, 1f, 1f, 1f)
+                color: new Vector4(1f, 1f, 1f, 1f),
+                shader: ResourcePaths.ShaderNames.objectMonoColor
             //texture: Main.Textures["Resources/Textures/sebestyen.png"]
             );
 

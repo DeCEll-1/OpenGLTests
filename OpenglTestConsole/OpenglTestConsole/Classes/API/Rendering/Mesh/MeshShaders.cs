@@ -16,19 +16,33 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
         {
             Shader = Resources.Shaders[shader];
         }
+
+        private Dictionary<int, int> _vboCache = new(); // loc -> VBO
+
         public void SetVector2(Vector2[] vectors, int loc)
         {
-            GL.BindVertexArray(VertexArrayObjectPointer); // bind the vertex array so that the buffer we made is used on this
+            GL.BindVertexArray(VertexArrayObjectPointer);
 
-            // generate vertex buffer object
-            int VBOPointer = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, VBOPointer); // bind buffer
-            GL.BufferData(BufferTarget.ArrayBuffer, vectors.Length * Vector2.SizeInBytes, vectors, BufferUsageHint.StaticDraw); // put data in buffer
+            if (!_vboCache.TryGetValue(loc, out int vbo))
+            {
+                // Create new buffer and cache it
+                vbo = GL.GenBuffer();
+                _vboCache[loc] = vbo;
 
-            GL.VertexAttribPointer(loc, 2, VertexAttribPointerType.Float, false, Vector2.SizeInBytes, 0); // bind the buffer to location 0
+                GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
+                GL.BufferData(BufferTarget.ArrayBuffer, vectors.Length * Vector2.SizeInBytes, vectors, BufferUsageHint.StaticDraw);
 
-            GL.EnableVertexAttribArray(loc); // enable loc 0
+                GL.VertexAttribPointer(loc, 2, VertexAttribPointerType.Float, false, Vector2.SizeInBytes, 0);
+                GL.EnableVertexAttribArray(loc);
+            }
+            else
+            {
+                // Update existing buffer
+                GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
+                GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, vectors.Length * Vector2.SizeInBytes, vectors);
+            }
         }
+
         public void SetVector3(Vector3[] vectors, int loc)
         {
             GL.BindVertexArray(VertexArrayObjectPointer); // bind the vertex array so that the buffer we made is used on this

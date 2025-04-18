@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using OpenglTestConsole.Classes.API.Extensions;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.Rendering;
 using OpenTK.Graphics.OpenGL;
@@ -31,17 +32,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Mesh
             for (int i = 0; i < matrices.Length; i++)
             {
                 Matrix4 matrix = matrices[i];
-                // Extract translation from last row
-                Vector3 translation = new Vector3(matrix.M41, matrix.M42, matrix.M43);
-
-                // Create a fixed matrix with translation in the last column
-                Matrix4 fixedMatrix = new Matrix4(
-                matrix.M11, matrix.M12, matrix.M13, translation.X,
-                matrix.M21, matrix.M22, matrix.M23, translation.Y,
-                matrix.M31, matrix.M32, matrix.M33, translation.Z,
-                0, 0, 0, 1
-                );
-                rotatedMatrixes[i] = fixedMatrix;
+              
+                rotatedMatrixes[i] = matrix.RotateMatrixForInstancedRendering();
             }
             SetMatrix4(rotatedMatrixes, 12, 1);
         }

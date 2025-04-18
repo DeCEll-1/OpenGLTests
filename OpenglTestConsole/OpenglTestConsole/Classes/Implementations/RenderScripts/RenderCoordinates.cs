@@ -37,7 +37,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 stackCount: 8,
                 sectorCount: 12,
                 radius: 0.3f,
-                color: new OpenTK.Mathematics.Vector4(1f, 0f, 0f, 1f)
+                color: new OpenTK.Mathematics.Vector4(1f, 0f, 0f, 1f),
+                shader: ResourcePaths.ShaderNames.objectMonoColor
             );
             sides[0].Transform.Position = new Vector3(0f, 0f, 1f);
 
@@ -56,7 +57,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 stackCount: 8,
                 sectorCount: 12,
                 radius: 0.3f,
-                color: new OpenTK.Mathematics.Vector4(0f, 1f, 0f, 1f)
+                color: new OpenTK.Mathematics.Vector4(0f, 1f, 0f, 1f),
+                shader: ResourcePaths.ShaderNames.objectMonoColor
             );
             sides[1].Transform.Position = new Vector3(1f, 0f, 0f);
 
@@ -75,7 +77,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 stackCount: 8,
                 sectorCount: 12,
                 radius: 0.3f,
-                color: new OpenTK.Mathematics.Vector4(0f, 0f, 1f, 1f)
+                color: new OpenTK.Mathematics.Vector4(0f, 0f, 1f, 1f),
+                shader: ResourcePaths.ShaderNames.objectMonoColor
             );
             sides[2].Transform.Position = new Vector3(0f, -1f, 0f);
 

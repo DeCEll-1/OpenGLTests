@@ -15,6 +15,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
     {
         public RenderStarscapeConnections(float scale) { this.scale = scale; }
         private float scale;
+        private Cylinder test;
         private InstancedMesh<Cylinder> CylinderInstanceRenderer = new();
         public override void Init()
         {
@@ -89,6 +90,23 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
             cylinder1.Transform.Scale = new Vector3(1f, 1f, lenght1);
 
             CylinderInstanceRenderer.Meshes.Add(cylinder1);
+
+
+
+            test = new Cylinder(
+                camera: this.Camera,
+                StackCount: 1,
+                SectorCount: 3,
+                Radius: 0.1f,
+                Height: 1f,
+                Shader: ResourcePaths.ShaderNames.objectMonoColor,
+                color: new Vector4(0.5f, 0.2f, 0.7f, 1f)
+            );
+            test.Transform.Position = new(-2, 2, -2);
+
+            test.Transform.Rotation = new(45, 45, 45);
+
+            test.Transform.Scale = new Vector3(1f, 1f, lenght1);
             #endregion
 
             CylinderInstanceRenderer.FinishAddingElemets();
@@ -105,6 +123,10 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
             CylinderInstanceRenderer.PrepareRender(MainInstance.light);
             CylinderInstanceRenderer.RenderWithIndices();
             CylinderInstanceRenderer.EndRender();
+
+            test.PrepareRender(MainInstance.light);
+            test.Render();
+            test.EndRender();
 
         }
     }

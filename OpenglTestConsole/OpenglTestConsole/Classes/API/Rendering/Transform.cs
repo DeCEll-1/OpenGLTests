@@ -45,13 +45,10 @@ namespace OpenglTestConsole.Classes.API.Rendering
                                Matrix4.CreateRotationZ(_rotation.X);
 
             return
-            rotation *
             Matrix4.CreateScale(Scale) *
+            rotation *
             Matrix4.CreateTranslation(Position) *
             Matrix4.Identity;
-
-
-
 
 
         }

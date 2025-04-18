@@ -11,14 +11,15 @@ using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using OpenglTestConsole.Classes.API.Rendering.Mesh;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 {
     public class RenderStarscapeMap : RenderScript
     {
         public RenderStarscapeMap(float scale) { this.scale = scale; }
+        private InstancedMesh<Sphere> SphereInstancedRenderer = new();
         private float scale;
-        private List<Sphere> Spheres { get; set; } = new List<Sphere>();
         public override void Init()
         {
             List<StarscapeSystemData> SystemsData = LoadJsonFromFile<List<StarscapeSystemData>>.Load(ResourcePaths.StarscapeMapDatas.map_json)!;
@@ -57,8 +58,9 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                         camera: this.Camera,
                         stackCount: 8,
                         sectorCount: 12,
-                        radius: 0.5f,
-                        color: color
+                        radius: 0.7f,
+                        color: color,
+                        shader: ResourcePaths.ShaderNames.instancedRenderingMonoColor
                     );
 
                 Vector3 realPos = data.Position * scale;
@@ -84,20 +86,22 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 
                 sector.Transform.Position = realPos * mirrorMatrix * rotationMatrix * otherMatrix;
 
-                Spheres.Add(sector);
+                SphereInstancedRenderer.Meshes.Add(sector);
             }
+
+            SphereInstancedRenderer.FinishAddingElemets();
+
+            Vector4[] colors = SphereInstancedRenderer.GetFieldValuesFromMeshes<Vector4>("Color");
+
+            SphereInstancedRenderer.SetVector4(colors, 2);
 
         }
 
         public override void Render()
         {
-
-            Spheres[0].PrepareRender(MainInstance.light);
-            foreach (var sphere in Spheres)
-            {
-                sphere.Render();
-            }
-            Spheres[0].EndRender();
+            SphereInstancedRenderer.PrepareRender(MainInstance.light);
+            SphereInstancedRenderer.RenderWithIndices();
+            SphereInstancedRenderer.EndRender();
         }
     }
 }
