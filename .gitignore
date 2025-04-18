@@ -1,3 +1,5 @@
 /OpenglTestConsole/.vs
 /OpenglTestConsole/OpenglTestConsole/obj/Debug
 /MyResourceGenerator/obj
+/OpenglTestConsole/obj
+/OpenglTestConsole/ResourcesClassGenerator/obj
