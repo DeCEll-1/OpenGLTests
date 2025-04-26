@@ -1,5 +1,4 @@
-﻿using OpenglTestConsole.Classes.impl.rendering;
-using OpenglTestConsole.Classes.API.JSON;
+﻿using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenglTestConsole.Classes.Paths;
@@ -12,6 +11,7 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using OpenglTestConsole.Classes.API.Rendering.Mesh;
+using OpenglTestConsole.Classes.API.Rendering.Geometries;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 {

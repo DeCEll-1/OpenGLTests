@@ -47,7 +47,7 @@ function Get-DirectionVector {
 }
 
 # Load the links JSON file
-$linkData = Get-Content "links.json" -Raw | ConvertFrom-Json
+$linkData = Get-Content "OpenglTestConsole\Resources\StarscapeMapDatas\linksColored.json" -Raw | ConvertFrom-Json
 
 # Prepare the list for cylinder objects
 $cylinderObjects = @()
@@ -68,9 +68,11 @@ foreach ($link in $linkData) {
 
     # Prepare the cylinder object
     $cylinder = [PSCustomObject]@{
-        center    = $midpoint
-        direction = $directionVector
-        height    = $height
+        startSecurity = $link.startSecurity
+        endSecurity   = $link.endSecurity
+        center        = $midpoint
+        direction     = $directionVector
+        height        = $height
     }
 
     # Add to the list
@@ -78,6 +80,6 @@ foreach ($link in $linkData) {
 }
 
 # Convert the list to JSON and output it to a file
-$cylinderObjects | ConvertTo-Json -Depth 3 | Out-File "cylinders.json" -Encoding utf8
+$cylinderObjects | ConvertTo-Json -Depth 3 | Out-File "OpenglTestConsole\Resources\StarscapeMapDatas\cylinders.json" -Encoding utf8
 
 Write-Host "Cylinder data written to cylinders.json"

@@ -1,0 +1,34 @@
+{
+    "Resources": {
+        "Fonts": {
+            "ComicSans_json": "Resources/Fonts/ComicSans.json",
+            "ComicSans_png": "Resources/Fonts/ComicSans.png"
+        },
+        // KEEP THE SHADERS İN SYNC
+        "VertexShaders": {
+            "MCSDF_vert": "Resources/Shaders/MCSDF.vert",
+            "PhongMaterial_vert": "Resources/Shaders/PhongMaterial.vert",
+            "TextureMaterial_vert": "Resources/Shaders/TextureMaterial.vert"
+        },
+        "FragmentShaders": {
+            "MCSDF_frag": "Resources/Shaders/MCSDF.frag",
+            "PhongMaterial_frag": "Resources/Shaders/PhongMaterial.frag",
+            "TextureMaterial_frag": "Resources/Shaders/TextureMaterial.frag"
+        },
+        "ShaderNames": {
+            "MCSDF": "MCSDF",
+            "PhongMaterial": "PhongMaterial",
+            "TextureMaterial": "TextureMaterial"
+        },
+        "StarscapeMapDatas": {
+            "cylinders_json": "Resources/StarscapeMapDatas/cylinders.json",
+            "links_json": "Resources/StarscapeMapDatas/links.json",
+            "map_json": "Resources/StarscapeMapDatas/map.json"
+        },
+        "Textures": {
+            "CoordinateSystem_png": "Resources/Textures/CoordinateSystem.png",
+            "RotationSystem_png": "Resources/Textures/RotationSystem.png",
+            "cobble_stone_png": "Resources/Textures/cobble_stone.png"
+        }
+    }
+}

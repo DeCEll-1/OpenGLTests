@@ -85,24 +85,5 @@ namespace OpenglTestConsole.Classes.API.Rendering
             GL.ActiveTexture(unit);
         }
 
-        public void GenerateMipmaps(byte[] data)
-        {
-            // i, really, dont know how to use this with fragment shader, so i wont use it
-            // not like im rendering humongusly anyways...
-            GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-            nint pointer = handle.AddrOfPinnedObject();
-
-            Bind();
-            GL.TexStorage2D(TextureTarget2d.Texture2D, 4, SizedInternalFormat.Rgba8, width, height);
-            GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, width, height, PixelFormat.Rgba, PixelType.UnsignedByte, pointer);
-            GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.LinearMipmapLinear);
-
-            handle.Free();
-        }
-
     }
 }

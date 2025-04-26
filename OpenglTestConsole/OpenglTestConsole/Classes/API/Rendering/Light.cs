@@ -10,15 +10,13 @@ namespace OpenglTestConsole.Classes.API.Rendering
     public class Light
     {
 
-        public Vector3 Location = Vector3.Zero;
-        public Vector4 Color = Vector4.Zero;
-        public Vector4 Ambient = Vector4.Zero;
+        public Vector3 Position = Vector3.Zero;
+        public Vector3 Color = Vector3.Zero;
 
-        public Light(Vector3 location, Vector4 color, Vector4 ambient)
+        public Light(Vector3 location, Vector3 color)
         {
-            Location = location;
+            Position = location;
             Color = color;
-            Ambient = ambient;
         }
     }
 }

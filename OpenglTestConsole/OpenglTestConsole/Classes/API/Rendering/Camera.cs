@@ -13,7 +13,8 @@ namespace OpenglTestConsole.Classes
     public class Camera
     {
         public Vector3 Position = Vector3.Zero;
-        public int screenWidth, screenHeight;
+        public int screenWidth;
+        public int screenHeight;
         public float depthNear = 0.1f;
         public float depthFar = 400f;
         private float _pitch;

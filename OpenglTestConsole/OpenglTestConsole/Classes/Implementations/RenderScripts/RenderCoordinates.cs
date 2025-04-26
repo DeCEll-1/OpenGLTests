@@ -1,6 +1,4 @@
-﻿using OpenglTestConsole.Classes.impl.rendering;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.Implementations.Rendering;
+﻿using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Paths;
 using System;
 using System.Collections.Generic;
@@ -9,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenglTestConsole.Classes.API.Extensions;
 using OpenTK.Mathematics;
+using OpenglTestConsole.Classes.API.Rendering.Geometries;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 {

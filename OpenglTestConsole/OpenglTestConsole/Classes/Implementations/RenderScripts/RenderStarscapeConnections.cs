@@ -3,11 +3,10 @@ using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.Implementations.Classes;
-using OpenglTestConsole.Classes.Implementations.Rendering;
 using OpenTK.Mathematics;
 using OpenglTestConsole.Classes.API.Extensions;
-using OpenglTestConsole.Classes.API.Rendering.Mesh;
 using OpenglTestConsole.Classes.Paths;
+using OpenglTestConsole.Classes.API.Rendering.Geometries;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 {

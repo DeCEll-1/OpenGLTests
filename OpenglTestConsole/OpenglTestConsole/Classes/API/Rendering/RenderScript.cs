@@ -17,7 +17,7 @@ namespace OpenglTestConsole.Classes.API.Rendering
         public FrameEventArgs args;
         public Camera Camera { get; set; }
         public Stopwatch Timer { get; set; }
-        public Main MainInstance { get; set; }
+        public Scene Scene { get; set; }
         public abstract void Init();
         public abstract void Render();
     }

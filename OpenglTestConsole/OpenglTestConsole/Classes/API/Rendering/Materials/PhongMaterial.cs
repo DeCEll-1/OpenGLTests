@@ -1,0 +1,46 @@
+﻿using OpenglTestConsole.Classes.API.Rendering.Shaders;
+using OpenglTestConsole.Classes.Paths;
+using OpenTK.Mathematics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OpenglTestConsole.Classes.API.Rendering.Materials
+{
+    public partial class PhongMaterial : Material
+    {
+
+        // color of the ambient lightning
+        public Vector3 Ambient { get; set; }
+        // color of the diffuse lightning
+        public Vector3 Diffuse { get; set; }
+        // color of the specular lightning
+        public Vector3 Specular { get; set; }
+        // size of the specular light
+        public float Shininess { get; set; }
+        public PhongMaterial() { this.Shader = Resources.Shaders[ResourcePaths.ShaderNames.PhongMaterial]; }
+        public PhongMaterial(Vector3 ambient, Vector3 diffuse, Vector3 specular, float shininess)
+        {
+            this.Ambient = ambient; this.Diffuse = diffuse; this.Specular = specular; this.Shininess = shininess * 128f;
+            this.Shader = Resources.Shaders[ResourcePaths.ShaderNames.PhongMaterial];
+        }
+        public override void Apply()
+        {
+            Shader.SetVector3("material.ambient", Ambient);
+            Shader.SetVector3("material.diffuse", Diffuse);
+            Shader.SetVector3("material.specular", Specular);
+            Shader.SetFloat("material.shininess", Shininess);
+
+            // update this to allow more lights
+            Shader.SetVector3("light.position", Scene.Lights[0].Position);
+            Shader.SetVector3("light.color", Scene.Lights[0].Color);
+        }
+
+
+
+
+    }
+}

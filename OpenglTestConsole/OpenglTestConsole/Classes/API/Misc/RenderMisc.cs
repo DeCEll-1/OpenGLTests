@@ -1,4 +1,5 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,10 @@ namespace OpenglTestConsole.Classes.API.Misc
                 ];
             }
         }
+    
+        public static void EnableCullFace()=> GL.Enable(EnableCap.CullFace);
+        public static void DisableCullFace() => GL.Disable(EnableCap.CullFace);
+
+
     }
 }

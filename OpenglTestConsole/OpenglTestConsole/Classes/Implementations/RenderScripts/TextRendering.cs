@@ -1,8 +1,6 @@
 ﻿using OpenglTestConsole.Classes;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.JSON;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.API.Rendering.Mesh;
 using OpenglTestConsole.Classes.Paths;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;

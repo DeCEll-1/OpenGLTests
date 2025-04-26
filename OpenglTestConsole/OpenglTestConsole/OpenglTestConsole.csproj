@@ -24,16 +24,27 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Classes\API\Rendering\MeshClasses\InstancedMesh.cs" />
+	  <Compile Remove="Classes\API\Rendering\MeshClasses\InstancedMeshShaders.cs" />
+	  <Compile Remove="Classes\Implementations\Rendering\Text.cs" />
+	  <Compile Remove="Classes\Implementations\RenderScripts\RenderCoordinates.cs" />
+	  <Compile Remove="Classes\Implementations\RenderScripts\RenderStarscapeConnections.cs" />
+	  <Compile Remove="Classes\Implementations\RenderScripts\RenderStarscapeMap.cs" />
+	  <Compile Remove="Classes\Implementations\RenderScripts\TextRendering.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\ResourcesClassGenerator\ResourcesClassGenerator.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Classes\Implementations\Rendering\" />
 		<Folder Include="Generated\" />
 	</ItemGroup>
 
 	<Target Name="GenerateSomeFile" BeforeTargets="Build">
 		<PropertyGroup>
-			<SourceFile>$(MsBuildThisFileDirectory)Resources\Resources.json</SourceFile>
+			<SourceFile>$(MsBuildThisFileDirectory)Resources\Resources.hjson</SourceFile>
 			<TargetFile>$(MsBuildThisFileDirectory)Generated</TargetFile>
 		</PropertyGroup>
 		<Exec Command="..\ResourcesClassGenerator\bin\Debug\net8.0\ResourcesClassGenerator.exe $(SourceFile) $(TargetFile)"></Exec>

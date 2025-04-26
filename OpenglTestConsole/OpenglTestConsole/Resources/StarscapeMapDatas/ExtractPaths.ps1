@@ -1,5 +1,5 @@
 # Load and parse JSON from file
-$jsonData = Get-Content "Resources/map.json" -Raw | ConvertFrom-Json
+$jsonData = Get-Content "OpenglTestConsole\Resources\StarscapeMapDatas\map.json" -Raw | ConvertFrom-Json
 
 # Create a map of system names to system objects
 $nameToSystem = @{}
@@ -13,8 +13,9 @@ $linkObjects = @()
 
 # Process each system and its links
 foreach ($system in $jsonData) {
-    $fromName = $system.name
+    $fromSecurity = $system.security
     $fromPos = $system.position
+    $fromName = $system.name
 
     foreach ($toName in $system.links) {
         # Create a unique key for the link, sorted to avoid duplicates
@@ -26,9 +27,9 @@ foreach ($system in $jsonData) {
             if ($nameToSystem.ContainsKey($toName)) {
                 $toSystem = $nameToSystem[$toName]
                 $linkObjects += [PSCustomObject]@{
-                    startName     = $fromName
+                    startSecurity = $fromSecurity
                     startLocation = $fromPos
-                    endName       = $toName
+                    endSecurity   = $toSystem.security
                     endLocation   = $toSystem.position
                 }
             } else {
@@ -39,6 +40,6 @@ foreach ($system in $jsonData) {
 }
 
 # Convert to JSON and write to output
-$linkObjects | ConvertTo-Json -Depth 3 | Out-File "Resources/links.json" -Encoding utf8
+$linkObjects | ConvertTo-Json -Depth 3 | Out-File "OpenglTestConsole\Resources\StarscapeMapDatas\linksColored.json" -Encoding utf8
 
 Write-Host "Links written to links.json"

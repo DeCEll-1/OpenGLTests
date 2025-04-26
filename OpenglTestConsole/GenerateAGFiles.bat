@@ -1,5 +1,5 @@
 @echo off
-set path1=%~dp0OpenglTestConsole\Resources\Resources.json
+set path1=%~dp0OpenglTestConsole\Resources\Resources.hjson
 set path2=%~dp0OpenglTestConsole\Generated
 echo %path1%
 echo %path2%
