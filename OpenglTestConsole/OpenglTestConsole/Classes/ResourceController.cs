@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.Classes.Implementations.Classes
+namespace OpenglTestConsole.Classes
 {
     public class ResourceController
     {
@@ -61,8 +61,8 @@ namespace OpenglTestConsole.Classes.Implementations.Classes
                 string fontPath = (string)fontField.GetValue(null)!;
                 if (fontPath.Contains("_json"))// add the json part of the font
                     AddFont(fontField);
-                
-                 if (fontPath.Contains("_png"))// add the png part of the font
+
+                if (fontPath.Contains("_png"))// add the png part of the font
                     AddTexture(fontField);
             }
         }

@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.impl.EFSs;
-using OpenglTestConsole.Classes;
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.Implementations.RenderScripts;
 using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
@@ -14,7 +13,6 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using static OpenglTestConsole.Classes.API.JSON.MCSDFJSON;
 using OpenglTestConsole.Classes.API.misc;
-using OpenglTestConsole.Classes.Implementations.Classes;
 
 namespace OpenglTestConsole.Classes
 {
