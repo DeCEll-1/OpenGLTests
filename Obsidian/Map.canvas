@@ -1,0 +1,560 @@
+{
+  "edges": [
+    {
+      "color": "4",
+      "fromNode": "0780b423e6a2c14b",
+      "fromSide": "bottom",
+      "id": "ab77494712ebbf70",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "0acbea86bfe00867",
+      "toSide": "top"
+    },
+    {
+      "color": "4",
+      "fromNode": "0780b423e6a2c14b",
+      "fromSide": "bottom",
+      "id": "9afacfe31e94f2d8",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "91588326f81929d6",
+      "toSide": "top"
+    },
+    {
+      "color": "4",
+      "fromNode": "0780b423e6a2c14b",
+      "fromSide": "bottom",
+      "id": "cae17b9a3d87b92f",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "8c2b92f09a193bf9",
+      "toSide": "top"
+    },
+    {
+      "fromNode": "eaced716bc7a3dfe",
+      "fromSide": "bottom",
+      "id": "f909541789cdad84",
+      "toNode": "b69cb5b2dc392f43",
+      "toSide": "top"
+    },
+    {
+      "color": "4",
+      "fromNode": "b69cb5b2dc392f43",
+      "fromSide": "left",
+      "id": "6523d4d3bc912afd",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "97e57544b73e58da",
+      "toSide": "top"
+    },
+    {
+      "fromNode": "37aaf8efebf9e0b0",
+      "fromSide": "left",
+      "id": "c3ee0267ba4f8a1d",
+      "toNode": "6760ead675a4f4d0",
+      "toSide": "right"
+    },
+    {
+      "color": "1",
+      "fromNode": "8c2b92f09a193bf9",
+      "fromSide": "bottom",
+      "id": "12fe2e157d3fff13",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "57d23d9b22b46d0e",
+      "toSide": "top"
+    },
+    {
+      "color": "5",
+      "fromNode": "d0f5b6f6371f2d5c",
+      "fromSide": "left",
+      "id": "83223aa484509f13",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "47d149524c9dde5a",
+      "toSide": "top"
+    },
+    {
+      "color": "2",
+      "fromNode": "57d23d9b22b46d0e",
+      "fromSide": "bottom",
+      "id": "ec61c090f94d6d67",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "d4d1e7d857baf760",
+      "toSide": "right"
+    },
+    {
+      "color": "6",
+      "fromNode": "7166859a08fae576",
+      "fromSide": "right",
+      "id": "a8d2b204c5ace003",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "47d149524c9dde5a",
+      "toSide": "bottom"
+    },
+    {
+      "color": "#94b0c2",
+      "fromNode": "f13ea93ff5ad7efe",
+      "fromSide": "bottom",
+      "id": "ea1931fdb2c81d94",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "d0f5b6f6371f2d5c",
+      "toSide": "top"
+    },
+    {
+      "color": "3",
+      "fromNode": "b69cb5b2dc392f43",
+      "fromSide": "right",
+      "id": "b0ef90a034efc250",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "f13ea93ff5ad7efe",
+      "toSide": "top"
+    },
+    {
+      "color": "5",
+      "fromNode": "d4d1e7d857baf760",
+      "fromSide": "bottom",
+      "id": "d99f489a7b05f94a",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "47d149524c9dde5a",
+      "toSide": "left"
+    },
+    {
+      "color": "6",
+      "fromNode": "a4e55d871309cf74",
+      "fromSide": "right",
+      "id": "69664e5f5bd1c451",
+      "styleAttributes": {
+      },
+      "toNode": "7166859a08fae576",
+      "toSide": "left"
+    },
+    {
+      "color": "2",
+      "fromNode": "4cc6bc06a71e5101",
+      "fromSide": "right",
+      "id": "f330315cfe7f6718",
+      "styleAttributes": {
+      },
+      "toNode": "d4d1e7d857baf760",
+      "toSide": "left"
+    },
+    {
+      "color": "2",
+      "fromNode": "f13ea93ff5ad7efe",
+      "fromSide": "bottom",
+      "id": "3a62db7c372c688b",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "0b0998c61d8f99f5",
+      "toSide": "top"
+    },
+    {
+      "color": "2",
+      "fromNode": "0b0998c61d8f99f5",
+      "fromSide": "bottom",
+      "id": "9dec4b92e4f6c202",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "d4d1e7d857baf760",
+      "toSide": "top"
+    },
+    {
+      "color": "#314949",
+      "fromNode": "27e0158443c05758",
+      "fromSide": "bottom",
+      "id": "0aedb335306de67c",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "a8f40590bd277a68",
+      "toSide": "top"
+    },
+    {
+      "color": "#314949",
+      "fromNode": "f13ea93ff5ad7efe",
+      "fromSide": "bottom",
+      "id": "290c05a1359294f3",
+      "styleAttributes": {
+      },
+      "toNode": "27e0158443c05758",
+      "toSide": "top"
+    },
+    {
+      "color": "4",
+      "fromNode": "e42230d321fff6a7",
+      "fromSide": "bottom",
+      "id": "5f0775b70518e230",
+      "styleAttributes": {
+      },
+      "toNode": "0780b423e6a2c14b",
+      "toSide": "top"
+    },
+    {
+      "color": "#f34f96",
+      "fromNode": "91588326f81929d6",
+      "fromSide": "bottom",
+      "id": "9e4ef15541eceb47",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "f3e5b5fbdb513a14",
+      "toSide": "top"
+    }
+  ],
+  "nodes": [
+    {
+      "color": "#314949",
+      "height": 2240,
+      "id": "a8f40590bd277a68",
+      "label": "Rendering",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "group",
+      "width": 3440,
+      "x": -2960,
+      "y": 1440
+    },
+    {
+      "color": "3",
+      "height": 840,
+      "id": "a7d720d96ee4d6e8",
+      "label": "Scene",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 1600,
+      "x": 240,
+      "y": -160
+    },
+    {
+      "color": "4",
+      "height": 840,
+      "id": "97e57544b73e58da",
+      "label": "Resources",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 1360,
+      "x": -1840,
+      "y": -160
+    },
+    {
+      "color": "2",
+      "height": 840,
+      "id": "4cc6bc06a71e5101",
+      "label": "Materials",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "group",
+      "width": 1120,
+      "x": -2800,
+      "y": 1680
+    },
+    {
+      "color": "6",
+      "height": 828,
+      "id": "a4e55d871309cf74",
+      "label": "Geometries",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "group",
+      "width": 1120,
+      "x": -2800,
+      "y": 2706
+    },
+    {
+      "color": "5",
+      "height": 400,
+      "id": "47d149524c9dde5a",
+      "label": "Mesh",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "group",
+      "width": 1040,
+      "x": -720,
+      "y": 2320
+    },
+    {
+      "color": "4",
+      "file": "Resources/Fonts.md",
+      "height": 137,
+      "id": "0acbea86bfe00867",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1800,
+      "y": 480
+    },
+    {
+      "color": "4",
+      "file": "Resources/Resources.md",
+      "height": 160,
+      "id": "0780b423e6a2c14b",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1360,
+      "y": 160
+    },
+    {
+      "color": "4",
+      "file": "Resources/Textures.md",
+      "height": 130,
+      "id": "91588326f81929d6",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1360,
+      "y": 484
+    },
+    {
+      "color": "4",
+      "file": "Resources/ResourceController.md",
+      "height": 160,
+      "id": "e42230d321fff6a7",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1360,
+      "y": -120
+    },
+    {
+      "color": "2",
+      "file": "Rendering/Shaders/Materials/Phong.md",
+      "height": 187,
+      "id": "31b0016fd0ee8964",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "file",
+      "width": 400,
+      "x": -2760,
+      "y": 1720
+    },
+    {
+      "color": "6",
+      "file": "Rendering/Geometry3D/Sphere.md",
+      "height": 154,
+      "id": "0d352c8dcecb29f1",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "file",
+      "width": 400,
+      "x": -2760,
+      "y": 2740
+    },
+    {
+      "color": "4",
+      "file": "Resources/Shaders.md",
+      "height": 131,
+      "id": "8c2b92f09a193bf9",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -920,
+      "y": 483
+    },
+    {
+      "color": "4",
+      "file": "Resources/Shaders.md",
+      "height": 131,
+      "id": "2d3b4eb3d8702142",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -920,
+      "y": 483
+    },
+    {
+      "color": "1",
+      "file": "Rendering/Shaders/Shader.md",
+      "height": 194,
+      "id": "57d23d9b22b46d0e",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "file",
+      "width": 400,
+      "x": -920,
+      "y": 1713
+    },
+    {
+      "color": "2",
+      "file": "Rendering/Shaders/Material.md",
+      "height": 180,
+      "id": "d4d1e7d857baf760",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1560,
+      "y": 2010
+    },
+    {
+      "color": "5",
+      "file": "Rendering/Mesh/BufferManager.md",
+      "height": 160,
+      "id": "37aaf8efebf9e0b0",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "file",
+      "width": 400,
+      "x": -160,
+      "y": 2430
+    },
+    {
+      "color": "5",
+      "file": "Rendering/Mesh/Mesh.md",
+      "height": 290,
+      "id": "6760ead675a4f4d0",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "file",
+      "width": 400,
+      "x": -680,
+      "y": 2365
+    },
+    {
+      "color": "6",
+      "file": "Rendering/Geometry3D/Cylinder.md",
+      "height": 154,
+      "id": "f767273853e36613",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "file",
+      "width": 400,
+      "x": -2760,
+      "y": 2957
+    },
+    {
+      "color": "6",
+      "file": "Rendering/Mesh/Geometry3D.md",
+      "height": 172,
+      "id": "7166859a08fae576",
+      "styleAttributes": {
+        "border": null
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1560,
+      "y": 3034
+    },
+    {
+      "color": "2",
+      "file": "Rendering/Shaders/Materials/TextureMaterial.md",
+      "height": 187,
+      "id": "f3e5b5fbdb513a14",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -2280,
+      "y": 1720
+    },
+    {
+      "file": "Main.md",
+      "height": 160,
+      "id": "b69cb5b2dc392f43",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -200,
+      "y": -400
+    },
+    {
+      "file": "Program.md",
+      "height": 111,
+      "id": "eaced716bc7a3dfe",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -200,
+      "y": -680
+    },
+    {
+      "color": "3",
+      "file": "Scene/Scene.md",
+      "height": 185,
+      "id": "f13ea93ff5ad7efe",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 840,
+      "y": 0
+    },
+    {
+      "color": "#94b0c2",
+      "file": "Scene/Camera.md",
+      "height": 131,
+      "id": "d0f5b6f6371f2d5c",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 280,
+      "y": 483
+    },
+    {
+      "color": "#314949",
+      "height": 131,
+      "id": "27e0158443c05758",
+      "styleAttributes": {
+        "textAlign": "center"
+      },
+      "text": "# Render Loop",
+      "type": "text",
+      "width": 400,
+      "x": 840,
+      "y": 483
+    },
+    {
+      "color": "2",
+      "file": "Scene/Light.md",
+      "height": 131,
+      "id": "0b0998c61d8f99f5",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 1400,
+      "y": 483
+    }
+  ]
+}
