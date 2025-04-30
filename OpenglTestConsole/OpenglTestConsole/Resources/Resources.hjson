@@ -6,19 +6,25 @@
         },
         // KEEP THE SHADERS İN SYNC
         "VertexShaders": {
-            "MCSDF_vert": "Resources/Shaders/MCSDF.vert",
-            "PhongMaterial_vert": "Resources/Shaders/PhongMaterial.vert",
-            "TextureMaterial_vert": "Resources/Shaders/TextureMaterial.vert"
+            "MCSDF_vert": "Resources/Shaders/Vertex/MCSDF.vert",
+            "PhongMaterial_vert": "Resources/Shaders/Vertex/PhongMaterial.vert",
+            "TextureMaterial_vert": "Resources/Shaders/Vertex/TextureMaterial.vert"
         },
         "FragmentShaders": {
-            "MCSDF_frag": "Resources/Shaders/MCSDF.frag",
-            "PhongMaterial_frag": "Resources/Shaders/PhongMaterial.frag",
-            "TextureMaterial_frag": "Resources/Shaders/TextureMaterial.frag"
+            "MCSDF_frag": "Resources/Shaders/Frag/MCSDF.frag",
+            "PhongMaterial_frag": "Resources/Shaders/Frag/PhongMaterial.frag",
+            "TextureMaterial_frag": "Resources/Shaders/Frag/TextureMaterial.frag"
         },
         "ShaderNames": {
             "MCSDF": "MCSDF",
             "PhongMaterial": "PhongMaterial",
             "TextureMaterial": "TextureMaterial"
+        },
+        "ComputeShaders": {
+            "MyComputeShader_comp": "Resources/Shaders/Comp/MyComputeShader.comp"
+        },
+        "CompShaderNames": {
+            "MyComputeShader": "MyComputeShader"
         },
         "StarscapeMapDatas": {
             "cylinders_json": "Resources/StarscapeMapDatas/cylinders.json",

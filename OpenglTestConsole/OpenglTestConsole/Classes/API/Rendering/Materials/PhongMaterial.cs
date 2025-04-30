@@ -29,18 +29,18 @@ namespace OpenglTestConsole.Classes.API.Rendering.Materials
         }
         public override void Apply()
         {
-            Shader.SetVector3("material.ambient", Ambient);
-            Shader.SetVector3("material.diffuse", Diffuse);
-            Shader.SetVector3("material.specular", Specular);
-            Shader.SetFloat("material.shininess", Shininess);
+            Shader.UniformManager.SetVector3("material.ambient", Ambient);
+            Shader.UniformManager.SetVector3("material.diffuse", Diffuse);
+            Shader.UniformManager.SetVector3("material.specular", Specular);
+            Shader.UniformManager.SetFloat("material.shininess", Shininess);
 
             // update this to allow more lights
-            Shader.SetVector3("light.position", Scene.Lights[0].Position);
-            Shader.SetVector3("light.color", Scene.Lights[0].Color);
+            Shader.UniformManager.SetVector3("light.position", Scene.Lights[0].Position);
+            Shader.UniformManager.SetVector3("light.specular", Scene.Lights[0].Specular);
+            Shader.UniformManager.SetVector3("light.diffuse", Scene.Lights[0].Diffuse);
+            Shader.UniformManager.SetVector3("light.ambient", Scene.Lights[0].Ambient);
+
+            Shader.UniformManager.SetVector3("viewPos", Scene.Camera.Position);
         }
-
-
-
-
     }
 }

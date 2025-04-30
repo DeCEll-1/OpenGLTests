@@ -13,21 +13,27 @@ using OpenglTestConsole.Classes.API.misc;
 
 namespace OpenglTestConsole.Classes.API.Rendering
 {
-    public class Texture
+    public class Texture : IDisposable
     {
         public int Handle { get; set; }
         public bool initalised = false;
-        public string path;
         public int width, height;
+        private bool disposed = false;
 
-        public Texture(string path)
+        public Texture()
         {
-            this.path = path;
         }
 
-        public byte[] Init()
+        public static Texture LoadFromFile(string path)
         {
-            Handle = GL.GenTexture();
+            Texture texture = new();
+            texture.Handle = GL.GenTexture();
+
+            if (texture.Handle == 0)
+                Logger.Log($"Failed to generate texture for {LogColors.BrightWhite(path)}", LogLevel.Error);
+
+            GL.BindTexture(TextureTarget.Texture2D, texture.Handle);
+
             StbImage.stbi_set_flip_vertically_on_load(1);
             ImageResult image;
             try
@@ -36,12 +42,11 @@ namespace OpenglTestConsole.Classes.API.Rendering
             }
             catch (Exception ex)
             {
-                Logger.Log($"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(Handle)}:\n{ex.ToString()}", LogLevel.Error);
+                Logger.Log($"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(texture.Handle)}:\n{ex.ToString()}", LogLevel.Error);
+                // this aint working properly fix it sometime ig
                 Logger.Log($"Using default texture...", LogLevel.Warning);
                 image = ImageResult.FromStream(File.OpenRead("Resources/Textures/PlaceHolder.png"), ColorComponents.RedGreenBlueAlpha);
             }
-
-            GL.BindTexture(TextureTarget.Texture2D, Handle);
 
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
@@ -60,19 +65,44 @@ namespace OpenglTestConsole.Classes.API.Rendering
                 PixelType.UnsignedByte,
                 image.Data
             );
-            width = image.Width;
-            height = image.Height;
+            texture.width = image.Width;
+            texture.height = image.Height;
 
-            initalised = true;
-            Logger.Log($"Loaded texture {LogColors.BrightWhite(Handle)}: {LogColors.BrightWhite(path)}", LogLevel.Detail);
-            return image.Data;
+            texture.initalised = true;
+            Logger.Log($"Loaded texture {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(path)}", LogLevel.Detail);
+            return texture;
+        }
+        public static Texture LoadFromSize(int width, int height)
+        {
+            Texture texture = new Texture();
+            texture.Handle = GL.GenTexture();
+            texture.width = width;
+            texture.height = height;
+            GL.BindTexture(TextureTarget.Texture2D, texture.Handle);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureBaseLevel, 0);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 0);
+            GL.TexImage2D(
+                TextureTarget.Texture2D,
+                0,
+                PixelInternalFormat.Rgba,
+                width,
+                height,
+                0,
+                PixelFormat.Rgba,
+                PixelType.UnsignedByte,
+                IntPtr.Zero
+            );
+            texture.initalised = true;
+            Logger.Log($"Loaded empty texture {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(width)}x{LogColors.BrightWhite(height)}", LogLevel.Detail);
+            return texture;
         }
         private void Check()
         {
             if (initalised)
                 return;
-            Logger.Log($"Texture {Handle} used without initalisation, initalising..", LogLevel.Warning);
-            Init();
+            Logger.Log($"Texture {Handle} used without initalisation..", LogLevel.Error);
         }
         public void Bind()
         {
@@ -85,5 +115,29 @@ namespace OpenglTestConsole.Classes.API.Rendering
             GL.ActiveTexture(unit);
         }
 
+        ~Texture()
+        {
+            if (disposed == false)
+            {
+                Logger.Log($"GPU Resource leak for texture! Did you forget to call Dispose()?", LogLevel.Error);
+            }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                Logger.Log($"{LogColors.BrightYellow("Disposed")} texture {LogColors.BrightWhite(Handle)}", LogLevel.Detail);
+
+                GL.DeleteTexture(Handle);
+                Handle = 0;
+                disposed = true;
+            }
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

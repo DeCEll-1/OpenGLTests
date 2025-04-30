@@ -47,9 +47,7 @@ namespace OpenglTestConsole.Classes
 
                 script.Render();
             }
-
         }
-
 
     }
 }

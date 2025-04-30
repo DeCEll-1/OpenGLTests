@@ -1,0 +1,22 @@
+#version 430 core
+
+layout(local_size_x = 32, local_size_y = 32) in;
+
+// object that we will write our data to
+// image2d is basically a part of texture with read *and* write access
+// we arent using sampler2d because its the whole texture including mipmaps and overall,
+// the whole texture and we dont want that
+// also, we arent using floating points for pixel coordinates but use integers instead because we need presicion
+layout(rgba32f, binding = 0) uniform image2D imgOutput;
+
+void main() {
+    vec4 value = vec4(0.0, 0.0, 1.0, 1.0);
+    // the location of the thread
+    ivec2 texelCoord = ivec2(gl_GlobalInvocationID.xy);
+
+    // assign r and g of the color
+    value.x = float(texelCoord.x) / (gl_NumWorkGroups.x);
+    value.y = float(texelCoord.y) / (gl_NumWorkGroups.y);
+
+    imageStore(imgOutput, texelCoord, value);
+}

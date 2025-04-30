@@ -1,9 +1,7 @@
-﻿using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.Classes.API.Rendering;
+﻿using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Materials;
 using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenglTestConsole.Classes.Paths;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
@@ -13,20 +11,21 @@ using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 {
-    internal class TextureMaterialTests : RenderScript
+    public class SquareTest : RenderScript
     {
         private Mesh Mesh { get; set; }
         public override void Init()
         {
-            Sphere geometry = new Sphere(16, 16, 1f);
+            //Sphere geometry = new Sphere(16, 16, 1f);
             //Cylinder geometry = new Cylinder(1, 3, 3f, 1f);
-            TextureMaterial material = new TextureMaterial(Resources.Textures[ResourcePaths.Textures.cobble_stone_png]);
+
+            Cube geometry = new Cube(new(1));
+
+            PhongMaterial material = PhongMaterial.Pearl;
 
             this.Mesh = new Mesh(geometry, material);
-
-            Mesh.Transform.Position.X += 3;
-            Mesh.Transform.Rotation.Y = 90;
-            Mesh.Transform.UpdateMatrix();
+            this.Mesh.Transform.Position.X -= 3;
+            this.Mesh.Transform.UpdateMatrix();
             this.Mesh.CapsToEnable.Add(EnableCap.CullFace);
         }
 
@@ -37,8 +36,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 
         public override void OnResourceRefresh()
         {
-            Mesh.Material = new TextureMaterial(Resources.Textures[ResourcePaths.Textures.cobble_stone_png]);
+            Mesh.Material = PhongMaterial.Pearl;
         }
-
     }
 }

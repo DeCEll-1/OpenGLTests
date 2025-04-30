@@ -18,5 +18,9 @@ namespace OpenglTestConsole.Classes.API.Rendering
             Position = location;
             Color = color;
         }
+
+        public Vector3 Specular { get => Color; }
+        public Vector3 Diffuse { get => Color * 0.7f; }
+        public Vector3 Ambient { get => Color * 0.4f; }
     }
 }

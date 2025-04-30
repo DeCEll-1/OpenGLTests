@@ -9,21 +9,29 @@ public static class ResourcePaths
     }
     public static class VertexShaders
     {
-        public const string MCSDF_vert = "Resources/Shaders/MCSDF.vert";
-        public const string PhongMaterial_vert = "Resources/Shaders/PhongMaterial.vert";
-        public const string TextureMaterial_vert = "Resources/Shaders/TextureMaterial.vert";
+        public const string MCSDF_vert = "Resources/Shaders/Vertex/MCSDF.vert";
+        public const string PhongMaterial_vert = "Resources/Shaders/Vertex/PhongMaterial.vert";
+        public const string TextureMaterial_vert = "Resources/Shaders/Vertex/TextureMaterial.vert";
     }
     public static class FragmentShaders
     {
-        public const string MCSDF_frag = "Resources/Shaders/MCSDF.frag";
-        public const string PhongMaterial_frag = "Resources/Shaders/PhongMaterial.frag";
-        public const string TextureMaterial_frag = "Resources/Shaders/TextureMaterial.frag";
+        public const string MCSDF_frag = "Resources/Shaders/Frag/MCSDF.frag";
+        public const string PhongMaterial_frag = "Resources/Shaders/Frag/PhongMaterial.frag";
+        public const string TextureMaterial_frag = "Resources/Shaders/Frag/TextureMaterial.frag";
     }
     public static class ShaderNames
     {
         public const string MCSDF = "MCSDF";
         public const string PhongMaterial = "PhongMaterial";
         public const string TextureMaterial = "TextureMaterial";
+    }
+    public static class ComputeShaders
+    {
+        public const string MyComputeShader_comp = "Resources/Shaders/Comp/MyComputeShader.comp";
+    }
+    public static class CompShaderNames
+    {
+        public const string MyComputeShader = "MyComputeShader";
     }
     public static class StarscapeMapDatas
     {

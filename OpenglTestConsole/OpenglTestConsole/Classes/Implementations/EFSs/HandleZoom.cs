@@ -15,8 +15,8 @@ namespace OpenglTestConsole.Classes.impl.EFSs
         private float zoomPercent = 0f;
         private const float zoomSpeedMult = 1.5f;
 
-        private float mainSensitivity= 0.2f;
-        private float sensitivityChangeAmount = 0.1f;
+        private float mainSensitivity= 0.1f;
+        private float sensitivityChangeAmount = 0.05f;
 
         private float mainFov = 90f;
         private const float zoomAmount = 45f;

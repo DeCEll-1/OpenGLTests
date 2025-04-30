@@ -13,6 +13,7 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using static OpenglTestConsole.Classes.API.JSON.MCSDFJSON;
 using OpenglTestConsole.Classes.API.misc;
+using OpenglTestConsole.Classes.Implementations.EFSs;
 
 namespace OpenglTestConsole.Classes
 {
@@ -35,6 +36,7 @@ namespace OpenglTestConsole.Classes
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
 
+            Scene.Lights.Add(new Light(new Vector3(5f, 5f, 5f), new Vector3(1.0f, 1.0f, 1.0f)));
 
             #region EFSs
             this.EveryFrameScripts.AddRange(
@@ -42,6 +44,7 @@ namespace OpenglTestConsole.Classes
                     new HandleMovement(),
                     new HandleMouse(),
                     new HandleZoom(),
+                    new HandleResourceRefreshes(),
                 ]
             );
             #endregion
@@ -57,16 +60,13 @@ namespace OpenglTestConsole.Classes
                     //new TextRendering(),
                     new PhongTest(),
                     new TextureMaterialTests(),
+                    new SquareTest(),
+                    new RenderLight(),
                 ]
             );
             #endregion
 
             ResourceController.Init();
-
-            Scene.Lights.Add(new Light(new Vector3(5f, 5f, 3f), new Vector3(1.0f, 1.0f, 1.0f)));
-
-
-
 
         }
         protected override void OnLoad()

@@ -3,6 +3,7 @@ using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Materials;
 using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -24,13 +25,17 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
             PhongMaterial material = PhongMaterial.Pearl;
 
             this.Mesh = new Mesh(geometry, material);
+            this.Mesh.CapsToEnable.Add(EnableCap.CullFace);
         }
 
         public override void Render()
         {
-            RenderMisc.EnableCullFace();
             Mesh.Render();
-            RenderMisc.DisableCullFace();
+        }
+
+        public override void OnResourceRefresh()
+        {
+            this.Mesh.Material = PhongMaterial.Pearl;
         }
     }
 }

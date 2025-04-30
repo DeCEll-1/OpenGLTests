@@ -125,7 +125,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
                 indices: indices.ToArray(),
                 lineIndices: lineIndices.ToArray()
                 );
-            // plz work i dont know how this works
         }
 
         public override void Apply(BufferManager BufferManager)

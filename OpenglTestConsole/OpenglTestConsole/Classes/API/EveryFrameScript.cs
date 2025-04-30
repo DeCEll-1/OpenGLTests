@@ -17,6 +17,7 @@ namespace OpenglTestConsole.Classes
         public FrameEventArgs args { get; set; }
         public abstract void Init();
         public abstract void Advance();
+        public virtual void OnResourceRefresh() { }
 
     }
 }

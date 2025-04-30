@@ -17,13 +17,17 @@ namespace OpenglTestConsole.Classes.API.Rendering.Materials
         public TextureMaterial() { this.Shader = Resources.Shaders[ResourcePaths.ShaderNames.TextureMaterial]; }
         public TextureMaterial(Texture texture, Vector4? color = null)
         {
+            // FUCK 
+            // SHİT 
+            // WE ARE PASSİNG TEXTURES TO THİS BUT İTS **NOT** UPDATİNG
+            // FCUKKKk
             this.Texture = texture; this.Color = color ?? new Vector4(1f, 1f, 1f, 1f);
             this.Shader = Resources.Shaders[ResourcePaths.ShaderNames.TextureMaterial];
         }
         public override void Apply()
         {
-            Shader.SetTexture("material.texture", Texture, OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
-            Shader.SetVector4("material.colMultiplier", Color);
+            Shader.UniformManager.SetTexture("material.texture", Texture, OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
+            Shader.UniformManager.SetVector4("material.colMultiplier", Color);
         }
     }
 }

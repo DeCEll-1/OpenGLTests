@@ -20,5 +20,6 @@ namespace OpenglTestConsole.Classes.API.Rendering
         public Scene Scene { get; set; }
         public abstract void Init();
         public abstract void Render();
+        public virtual void OnResourceRefresh() { }
     }
 }
