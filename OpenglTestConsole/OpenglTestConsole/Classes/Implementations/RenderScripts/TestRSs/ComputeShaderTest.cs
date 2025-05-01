@@ -1,4 +1,5 @@
-﻿using OpenglTestConsole.Classes.API.Rendering;
+﻿using OpenglTestConsole.Classes.API;
+using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Materials;
 using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
@@ -38,7 +39,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
         {
             Shader.UnitManager.ApplyTextures();
             Shader.DispatchForSize(512, 512, 1);
-            GL.MemoryBarrier(MemoryBarrierFlags.ShaderImageAccessBarrierBit);
+            //GL.MemoryBarrier(MemoryBarrierFlags.ShaderImageAccessBarrierBit);
             this.Mesh.Render();
         }
     }

@@ -1,50 +1,95 @@
 {
   "edges": [
     {
-      "color": "4",
-      "fromNode": "0780b423e6a2c14b",
-      "fromSide": "bottom",
-      "id": "ab77494712ebbf70",
+      "color": "6",
+      "fromNode": "ccbe598985060be6",
+      "fromSide": "top",
+      "id": "3077869b03b507b9",
       "styleAttributes": {
         "pathfindingMethod": "square"
       },
-      "toNode": "0acbea86bfe00867",
-      "toSide": "top"
+      "toNode": "47d149524c9dde5a",
+      "toSide": "right"
     },
     {
-      "color": "4",
-      "fromNode": "0780b423e6a2c14b",
-      "fromSide": "bottom",
-      "id": "9afacfe31e94f2d8",
+      "color": "6",
+      "fromNode": "a4e55d871309cf74",
+      "fromSide": "right",
+      "id": "2f92c5c96e375ac8",
       "styleAttributes": {
         "pathfindingMethod": "square"
       },
-      "toNode": "91588326f81929d6",
-      "toSide": "top"
+      "toNode": "ccbe598985060be6",
+      "toSide": "left"
     },
     {
-      "color": "4",
-      "fromNode": "0780b423e6a2c14b",
-      "fromSide": "bottom",
-      "id": "cae17b9a3d87b92f",
+      "color": "6",
+      "fromNode": "ec0e8a4d8a03f6fa",
+      "fromSide": "right",
+      "id": "a57b94f15b441a1d",
+      "styleAttributes": {
+      },
+      "toNode": "1bc932936bb3bbaf",
+      "toSide": "left"
+    },
+    {
+      "color": "6",
+      "fromNode": "a4e55d871309cf74",
+      "fromSide": "right",
+      "id": "5ca9d1c29fba4ba7",
       "styleAttributes": {
         "pathfindingMethod": "square"
       },
-      "toNode": "8c2b92f09a193bf9",
-      "toSide": "top"
+      "toNode": "c100f8dc778d0400",
+      "toSide": "left"
     },
     {
-      "fromNode": "eaced716bc7a3dfe",
-      "fromSide": "bottom",
-      "id": "f909541789cdad84",
-      "toNode": "b69cb5b2dc392f43",
-      "toSide": "top"
+      "color": "6",
+      "fromNode": "c100f8dc778d0400",
+      "fromSide": "top",
+      "id": "3df3dde54ade405b",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "ccbe598985060be6",
+      "toSide": "bottom"
     },
     {
-      "color": "4",
-      "fromNode": "b69cb5b2dc392f43",
+      "color": "2",
+      "fromNode": "4cc6bc06a71e5101",
+      "fromSide": "top",
+      "id": "0593b342e11e7d9f",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "6846b4d16d244eab",
+      "toSide": "bottom"
+    },
+    {
+      "color": "5",
+      "fromNode": "9c9b0ba14c7ee7d3",
       "fromSide": "left",
-      "id": "6523d4d3bc912afd",
+      "id": "4bf926f8accab883",
+      "styleAttributes": {
+      },
+      "toNode": "99dfd3b867cfa972",
+      "toSide": "right"
+    },
+    {
+      "color": "4",
+      "fromNode": "d30310ee032c7437",
+      "fromSide": "bottom",
+      "id": "26338aec0fd1c8f1",
+      "styleAttributes": {
+      },
+      "toNode": "489ae8067549c062",
+      "toSide": "top"
+    },
+    {
+      "color": "4",
+      "fromNode": "97f6ae139b8cad5d",
+      "fromSide": "right",
+      "id": "d6e2be3a2d41de7a",
       "styleAttributes": {
         "pathfindingMethod": "square"
       },
@@ -52,178 +97,185 @@
       "toSide": "top"
     },
     {
-      "fromNode": "37aaf8efebf9e0b0",
-      "fromSide": "left",
-      "id": "c3ee0267ba4f8a1d",
-      "toNode": "6760ead675a4f4d0",
-      "toSide": "right"
-    },
-    {
-      "color": "1",
-      "fromNode": "8c2b92f09a193bf9",
-      "fromSide": "bottom",
-      "id": "12fe2e157d3fff13",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "57d23d9b22b46d0e",
-      "toSide": "top"
-    },
-    {
-      "color": "5",
-      "fromNode": "d0f5b6f6371f2d5c",
-      "fromSide": "left",
-      "id": "83223aa484509f13",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "47d149524c9dde5a",
-      "toSide": "top"
-    },
-    {
       "color": "2",
-      "fromNode": "57d23d9b22b46d0e",
-      "fromSide": "bottom",
-      "id": "ec61c090f94d6d67",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "d4d1e7d857baf760",
-      "toSide": "right"
-    },
-    {
-      "color": "6",
-      "fromNode": "7166859a08fae576",
-      "fromSide": "right",
-      "id": "a8d2b204c5ace003",
+      "fromNode": "6846b4d16d244eab",
+      "fromSide": "left",
+      "id": "9654ad4bca4e4e20",
       "styleAttributes": {
         "pathfindingMethod": "square"
       },
       "toNode": "47d149524c9dde5a",
+      "toSide": "right"
+    },
+    {
+      "color": "3",
+      "fromNode": "97f6ae139b8cad5d",
+      "fromSide": "left",
+      "id": "961674d11b04617c",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "a7d720d96ee4d6e8",
+      "toSide": "top"
+    },
+    {
+      "color": "#b82e85",
+      "fromNode": "6d465300ad286918",
+      "fromSide": "left",
+      "id": "4a2a4fd1fadaf500",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "bee97ef31979d362",
+      "toSide": "right"
+    },
+    {
+      "color": "#b82e85",
+      "fromNode": "564c4bc9e20bf73b",
+      "fromSide": "left",
+      "id": "dba54c0ef1a3fed2",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "ef1696964e68bf84",
       "toSide": "bottom"
     },
     {
-      "color": "#94b0c2",
-      "fromNode": "f13ea93ff5ad7efe",
-      "fromSide": "bottom",
-      "id": "ea1931fdb2c81d94",
+      "color": "#5a751f",
+      "fromNode": "ef1696964e68bf84",
+      "fromSide": "right",
+      "id": "3131793da0e5a02b",
       "styleAttributes": {
         "pathfindingMethod": "square"
       },
-      "toNode": "d0f5b6f6371f2d5c",
+      "toNode": "564c4bc9e20bf73b",
+      "toSide": "top"
+    },
+    {
+      "color": "#5a751f",
+      "fromNode": "ef1696964e68bf84",
+      "fromSide": "left",
+      "id": "391f73b6b943d8ea",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "9a87d2af19adfa99",
+      "toSide": "right"
+    },
+    {
+      "color": "#5a751f",
+      "fromNode": "ef1696964e68bf84",
+      "fromSide": "right",
+      "id": "6d2a5efbe58abd7f",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "5da87c1b0639e670",
+      "toSide": "bottom"
+    },
+    {
+      "color": "#5f56a4",
+      "fromNode": "5da87c1b0639e670",
+      "fromSide": "left",
+      "id": "7f99e77a06c7a583",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "6846b4d16d244eab",
+      "toSide": "right"
+    },
+    {
+      "color": "#5f56a4",
+      "fromNode": "97e57544b73e58da",
+      "fromSide": "right",
+      "id": "dfc88da86c207d16",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "5da87c1b0639e670",
+      "toSide": "right"
+    },
+    {
+      "color": "#a45687",
+      "fromNode": "97e57544b73e58da",
+      "fromSide": "right",
+      "id": "1223d3c565cc7597",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "564c4bc9e20bf73b",
+      "toSide": "right"
+    },
+    {
+      "color": "#5a751f",
+      "fromNode": "97e57544b73e58da",
+      "fromSide": "right",
+      "id": "9d04e2e3a40d9537",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "ef1696964e68bf84",
+      "toSide": "top"
+    },
+    {
+      "color": "#a45656",
+      "fromNode": "a185a02c931d5b72",
+      "fromSide": "bottom",
+      "id": "d2524dcddcc5029d",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "e342e122423d7ae1",
+      "toSide": "top"
+    },
+    {
+      "color": "#a45656",
+      "fromNode": "d02a84543b42c28d",
+      "fromSide": "bottom",
+      "id": "efa9f3010571fd4b",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "e342e122423d7ae1",
+      "toSide": "top"
+    },
+    {
+      "color": "#5f56a4",
+      "fromNode": "c4de05930a556f3c",
+      "fromSide": "left",
+      "id": "712e09d67759f6ac",
+      "styleAttributes": {
+      },
+      "toNode": "0a8d16db93bba184",
+      "toSide": "right"
+    },
+    {
+      "color": "3",
+      "fromNode": "8c8eee75c65b59f3",
+      "fromSide": "bottom",
+      "id": "7aa61fa69335a81e",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "d02a84543b42c28d",
       "toSide": "top"
     },
     {
       "color": "3",
-      "fromNode": "b69cb5b2dc392f43",
-      "fromSide": "right",
-      "id": "b0ef90a034efc250",
+      "fromNode": "8c8eee75c65b59f3",
+      "fromSide": "bottom",
+      "id": "628f867b358673f6",
       "styleAttributes": {
         "pathfindingMethod": "square"
       },
-      "toNode": "f13ea93ff5ad7efe",
-      "toSide": "top"
-    },
-    {
-      "color": "5",
-      "fromNode": "d4d1e7d857baf760",
-      "fromSide": "bottom",
-      "id": "d99f489a7b05f94a",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "47d149524c9dde5a",
-      "toSide": "left"
-    },
-    {
-      "color": "6",
-      "fromNode": "a4e55d871309cf74",
-      "fromSide": "right",
-      "id": "69664e5f5bd1c451",
-      "styleAttributes": {
-      },
-      "toNode": "7166859a08fae576",
-      "toSide": "left"
-    },
-    {
-      "color": "2",
-      "fromNode": "4cc6bc06a71e5101",
-      "fromSide": "right",
-      "id": "f330315cfe7f6718",
-      "styleAttributes": {
-      },
-      "toNode": "d4d1e7d857baf760",
-      "toSide": "left"
-    },
-    {
-      "color": "2",
-      "fromNode": "f13ea93ff5ad7efe",
-      "fromSide": "bottom",
-      "id": "3a62db7c372c688b",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "0b0998c61d8f99f5",
-      "toSide": "top"
-    },
-    {
-      "color": "2",
-      "fromNode": "0b0998c61d8f99f5",
-      "fromSide": "bottom",
-      "id": "9dec4b92e4f6c202",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "d4d1e7d857baf760",
-      "toSide": "top"
-    },
-    {
-      "color": "#314949",
-      "fromNode": "27e0158443c05758",
-      "fromSide": "bottom",
-      "id": "0aedb335306de67c",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "a8f40590bd277a68",
-      "toSide": "top"
-    },
-    {
-      "color": "#314949",
-      "fromNode": "f13ea93ff5ad7efe",
-      "fromSide": "bottom",
-      "id": "290c05a1359294f3",
-      "styleAttributes": {
-      },
-      "toNode": "27e0158443c05758",
-      "toSide": "top"
-    },
-    {
-      "color": "4",
-      "fromNode": "e42230d321fff6a7",
-      "fromSide": "bottom",
-      "id": "5f0775b70518e230",
-      "styleAttributes": {
-      },
-      "toNode": "0780b423e6a2c14b",
-      "toSide": "top"
-    },
-    {
-      "color": "#f34f96",
-      "fromNode": "91588326f81929d6",
-      "fromSide": "bottom",
-      "id": "9e4ef15541eceb47",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "f3e5b5fbdb513a14",
+      "toNode": "a185a02c931d5b72",
       "toSide": "top"
     }
   ],
   "nodes": [
     {
       "color": "#314949",
-      "height": 2240,
+      "height": 1920,
       "id": "a8f40590bd277a68",
       "label": "Rendering",
       "styleAttributes": {
@@ -231,8 +283,44 @@
       },
       "type": "group",
       "width": 3440,
-      "x": -2960,
-      "y": 1440
+      "x": -4000,
+      "y": 1200
+    },
+    {
+      "color": "#a45656",
+      "height": 2300,
+      "id": "e342e122423d7ae1",
+      "label": "Shaders",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 2540,
+      "x": -240,
+      "y": 1200
+    },
+    {
+      "color": "#a45687",
+      "height": 1020,
+      "id": "564c4bc9e20bf73b",
+      "label": "Compute Shaders",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 1540,
+      "x": 760,
+      "y": 2480
+    },
+    {
+      "color": "#5f56a4",
+      "height": 960,
+      "id": "5da87c1b0639e670",
+      "label": "Vertex & Fragment Shaders",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 1540,
+      "x": 760,
+      "y": 1200
     },
     {
       "color": "3",
@@ -243,20 +331,21 @@
       },
       "type": "group",
       "width": 1600,
-      "x": 240,
+      "x": -4000,
       "y": -160
     },
     {
-      "color": "4",
-      "height": 840,
-      "id": "97e57544b73e58da",
-      "label": "Resources",
+      "color": "6",
+      "height": 854,
+      "id": "a4e55d871309cf74",
+      "label": "Geometries",
       "styleAttributes": {
+        "border": null
       },
       "type": "group",
-      "width": 1360,
-      "x": -1840,
-      "y": -160
+      "width": 1120,
+      "x": -3840,
+      "y": 1980
     },
     {
       "color": "2",
@@ -268,21 +357,8 @@
       },
       "type": "group",
       "width": 1120,
-      "x": -2800,
-      "y": 1680
-    },
-    {
-      "color": "6",
-      "height": 828,
-      "id": "a4e55d871309cf74",
-      "label": "Geometries",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "group",
-      "width": 1120,
-      "x": -2800,
-      "y": 2706
+      "x": -1820,
+      "y": 2100
     },
     {
       "color": "5",
@@ -294,266 +370,278 @@
       },
       "type": "group",
       "width": 1040,
-      "x": -720,
-      "y": 2320
+      "x": -3840,
+      "y": 1420
     },
     {
       "color": "4",
-      "file": "Resources/Fonts.md",
-      "height": 137,
-      "id": "0acbea86bfe00867",
+      "height": 560,
+      "id": "97e57544b73e58da",
+      "label": "Resources",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 480,
+      "x": -1840,
+      "y": -160
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Light.cs",
+      "height": 131,
+      "id": "a185a02c931d5b72",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -2840,
+      "y": 483
+    },
+    {
+      "color": "4",
+      "file": "API/ResourceController.cs",
+      "height": 160,
+      "id": "d30310ee032c7437",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
       "x": -1800,
-      "y": 480
-    },
-    {
-      "color": "4",
-      "file": "Resources/Resources.md",
-      "height": 160,
-      "id": "0780b423e6a2c14b",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -1360,
-      "y": 160
-    },
-    {
-      "color": "4",
-      "file": "Resources/Textures.md",
-      "height": 130,
-      "id": "91588326f81929d6",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -1360,
-      "y": 484
-    },
-    {
-      "color": "4",
-      "file": "Resources/ResourceController.md",
-      "height": 160,
-      "id": "e42230d321fff6a7",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -1360,
-      "y": -120
-    },
-    {
-      "color": "2",
-      "file": "Rendering/Shaders/Materials/Phong.md",
-      "height": 187,
-      "id": "31b0016fd0ee8964",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "file",
-      "width": 400,
-      "x": -2760,
-      "y": 1720
-    },
-    {
-      "color": "6",
-      "file": "Rendering/Geometry3D/Sphere.md",
-      "height": 154,
-      "id": "0d352c8dcecb29f1",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "file",
-      "width": 400,
-      "x": -2760,
-      "y": 2740
-    },
-    {
-      "color": "4",
-      "file": "Resources/Shaders.md",
-      "height": 131,
-      "id": "8c2b92f09a193bf9",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -920,
-      "y": 483
-    },
-    {
-      "color": "4",
-      "file": "Resources/Shaders.md",
-      "height": 131,
-      "id": "2d3b4eb3d8702142",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -920,
-      "y": 483
-    },
-    {
-      "color": "1",
-      "file": "Rendering/Shaders/Shader.md",
-      "height": 194,
-      "id": "57d23d9b22b46d0e",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "file",
-      "width": 400,
-      "x": -920,
-      "y": 1713
-    },
-    {
-      "color": "2",
-      "file": "Rendering/Shaders/Material.md",
-      "height": 180,
-      "id": "d4d1e7d857baf760",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "file",
-      "width": 400,
-      "x": -1560,
-      "y": 2010
-    },
-    {
-      "color": "5",
-      "file": "Rendering/Mesh/BufferManager.md",
-      "height": 160,
-      "id": "37aaf8efebf9e0b0",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "file",
-      "width": 400,
-      "x": -160,
-      "y": 2430
-    },
-    {
-      "color": "5",
-      "file": "Rendering/Mesh/Mesh.md",
-      "height": 290,
-      "id": "6760ead675a4f4d0",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "file",
-      "width": 400,
-      "x": -680,
-      "y": 2365
-    },
-    {
-      "color": "6",
-      "file": "Rendering/Geometry3D/Cylinder.md",
-      "height": 154,
-      "id": "f767273853e36613",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "file",
-      "width": 400,
-      "x": -2760,
-      "y": 2957
-    },
-    {
-      "color": "6",
-      "file": "Rendering/Mesh/Geometry3D.md",
-      "height": 172,
-      "id": "7166859a08fae576",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "file",
-      "width": 400,
-      "x": -1560,
-      "y": 3034
-    },
-    {
-      "color": "2",
-      "file": "Rendering/Shaders/Materials/TextureMaterial.md",
-      "height": 187,
-      "id": "f3e5b5fbdb513a14",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -2280,
-      "y": 1720
-    },
-    {
-      "file": "Main.md",
-      "height": 160,
-      "id": "b69cb5b2dc392f43",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -200,
-      "y": -400
+      "y": -80
     },
     {
       "file": "Program.md",
-      "height": 111,
-      "id": "eaced716bc7a3dfe",
+      "height": 160,
+      "id": "97f6ae139b8cad5d",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
-      "x": -200,
-      "y": -680
+      "x": -2560,
+      "y": -800
+    },
+    {
+      "color": "4",
+      "file": "API/Resources.cs",
+      "height": 160,
+      "id": "489ae8067549c062",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1800,
+      "y": 185
+    },
+    {
+      "color": "5",
+      "file": "API/Rendering/MeshClasses/Mesh.cs",
+      "height": 290,
+      "id": "99dfd3b867cfa972",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3800,
+      "y": 1465
+    },
+    {
+      "color": "5",
+      "file": "API/Rendering/MeshClasses/BufferManager.cs",
+      "height": 160,
+      "id": "9c9b0ba14c7ee7d3",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3280,
+      "y": 1530
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Cylinder.cs",
+      "height": 154,
+      "id": "942f2af2ee5f67c8",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3800,
+      "y": 2253
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Square.cs",
+      "height": 154,
+      "id": "ec0e8a4d8a03f6fa",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3800,
+      "y": 2634
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Cube.cs",
+      "height": 154,
+      "id": "1bc932936bb3bbaf",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3360,
+      "y": 2634
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Sphere.cs",
+      "height": 154,
+      "id": "05ad698827cba06a",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3800,
+      "y": 2034
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Shaders/Material.cs",
+      "height": 180,
+      "id": "6846b4d16d244eab",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1960,
+      "y": 1590
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Materials/PhongMaterial.cs",
+      "height": 180,
+      "id": "7f706f732c765556",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1780,
+      "y": 2147
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Materials/TextureMaterial.cs",
+      "height": 180,
+      "id": "9a87d2af19adfa99",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1340,
+      "y": 2147
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Geometry3D.cs",
+      "height": 154,
+      "id": "ccbe598985060be6",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -2440,
+      "y": 2330
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/MergedGeometry.cs",
+      "height": 154,
+      "id": "c100f8dc778d0400",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -2440,
+      "y": 2557
+    },
+    {
+      "color": "#5a751f",
+      "file": "API/Rendering/Shaders/Texture.cs",
+      "height": 200,
+      "id": "ef1696964e68bf84",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 160,
+      "y": 2200
+    },
+    {
+      "color": "#5f56a4",
+      "file": "API/Rendering/Shaders/Shader.cs",
+      "height": 200,
+      "id": "0a8d16db93bba184",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 800,
+      "y": 1240
+    },
+    {
+      "color": "#5f56a4",
+      "file": "API/Rendering/Shaders/ShaderUniformManager.cs",
+      "height": 200,
+      "id": "c4de05930a556f3c",
+      "type": "file",
+      "width": 400,
+      "x": 1840,
+      "y": 1240
+    },
+    {
+      "color": "#b82e85",
+      "file": "API/Rendering/Shaders/ComputeShader.cs",
+      "height": 200,
+      "id": "bee97ef31979d362",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 800,
+      "y": 2540
+    },
+    {
+      "color": "#b82e85",
+      "file": "API/Rendering/Shaders/ComputeShaderUnitManager.cs",
+      "height": 200,
+      "id": "6d465300ad286918",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 1840,
+      "y": 2540
     },
     {
       "color": "3",
-      "file": "Scene/Scene.md",
+      "file": "API/Rendering/Scene.cs",
       "height": 185,
-      "id": "f13ea93ff5ad7efe",
-      "styleAttributes": {
-      },
+      "id": "8c8eee75c65b59f3",
       "type": "file",
       "width": 400,
-      "x": 840,
+      "x": -3400,
       "y": 0
     },
     {
       "color": "#94b0c2",
-      "file": "Scene/Camera.md",
+      "file": "API/Rendering/Camera.cs",
       "height": 131,
-      "id": "d0f5b6f6371f2d5c",
+      "id": "d02a84543b42c28d",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
-      "x": 280,
-      "y": 483
-    },
-    {
-      "color": "#314949",
-      "height": 131,
-      "id": "27e0158443c05758",
-      "styleAttributes": {
-        "textAlign": "center"
-      },
-      "text": "# Render Loop",
-      "type": "text",
-      "width": 400,
-      "x": 840,
-      "y": 483
-    },
-    {
-      "color": "2",
-      "file": "Scene/Light.md",
-      "height": 131,
-      "id": "0b0998c61d8f99f5",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 1400,
+      "x": -3960,
       "y": 483
     }
   ]

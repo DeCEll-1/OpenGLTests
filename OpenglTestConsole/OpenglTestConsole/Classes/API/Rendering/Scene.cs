@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.Classes
+namespace OpenglTestConsole.Classes.API
 {
     public class Scene
     { // i am going for a threejs like api
@@ -26,8 +26,8 @@ namespace OpenglTestConsole.Classes
 
             foreach (RenderScript script in renderScripts)
             {
-                script.Camera = Scene.Camera;
-                script.Timer = this.Timer;
+                script.Camera = Camera;
+                script.Timer = Timer;
                 script.Scene = this;
 
                 script.Init();
@@ -41,8 +41,8 @@ namespace OpenglTestConsole.Classes
             foreach (RenderScript script in renderScripts)
             {
                 script.args = args;
-                script.Camera = Scene.Camera;
-                script.Timer = this.Timer;
+                script.Camera = Camera;
+                script.Timer = Timer;
                 script.Scene = this;
 
                 script.Render();

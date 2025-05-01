@@ -1,4 +1,0 @@
-Is:
-#Material
-
-Uses [[Material]]

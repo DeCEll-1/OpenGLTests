@@ -13,10 +13,13 @@ void main() {
     vec4 value = vec4(0.0, 0.0, 1.0, 1.0);
     // the location of the thread
     ivec2 texelCoord = ivec2(gl_GlobalInvocationID.xy);
+    vec2 uv =
+        vec2(
+            float(texelCoord.x) / (gl_NumWorkGroups.x * gl_WorkGroupSize.x),
+            float(texelCoord.y) / (gl_NumWorkGroups.y * gl_WorkGroupSize.y)
+        );
 
-    // assign r and g of the color
-    value.x = float(texelCoord.x) / (gl_NumWorkGroups.x * gl_WorkGroupSize.x);
-    value.y = float(texelCoord.y) / (gl_NumWorkGroups.y * gl_WorkGroupSize.y);
+    value.xy = uv.xy;
 
     imageStore(imgOutput, texelCoord, value);
 }

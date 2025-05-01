@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using OpenglTestConsole.Classes.API.misc;
 
-namespace OpenglTestConsole.Classes.API.Rendering
+namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 {
     public class Texture : IDisposable
     {
@@ -92,7 +92,7 @@ namespace OpenglTestConsole.Classes.API.Rendering
                 0,
                 PixelFormat.Rgba,
                 type,
-                IntPtr.Zero
+                nint.Zero
             );
             texture.initalised = true;
             Logger.Log($"Loaded empty texture {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(width)}x{LogColors.BrightWhite(height)}", LogLevel.Detail);
@@ -118,9 +118,7 @@ namespace OpenglTestConsole.Classes.API.Rendering
         ~Texture()
         {
             if (disposed == false)
-            {
                 Logger.Log($"GPU Resource leak for texture! Did you forget to call Dispose()?", LogLevel.Error);
-            }
         }
 
         protected virtual void Dispose(bool disposing)

@@ -1,5 +1,4 @@
 ﻿using OpenglTestConsole.Classes.API.JSON;
-using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Shaders;
 using OpenglTestConsole.Classes.Paths;
 using System;
@@ -9,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.Classes
+namespace OpenglTestConsole.Classes.API
 {
     public class ResourceController
     {

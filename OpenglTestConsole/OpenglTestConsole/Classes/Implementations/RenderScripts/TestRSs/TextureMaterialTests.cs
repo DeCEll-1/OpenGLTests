@@ -1,4 +1,5 @@
-﻿using OpenglTestConsole.Classes.API.Misc;
+﻿using OpenglTestConsole.Classes.API;
+using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Materials;

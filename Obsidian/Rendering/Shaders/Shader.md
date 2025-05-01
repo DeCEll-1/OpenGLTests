@@ -1,4 +1,0 @@
-Is:
-#Shader 
-
-uses [[Shaders]]

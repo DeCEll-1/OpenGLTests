@@ -1,5 +1,4 @@
-﻿using OpenglTestConsole.Classes;
-using OpenglTestConsole.Classes.API.Rendering;
+﻿using OpenglTestConsole.Classes.API.Rendering;
 using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,0 @@
-Is:
-#Mesh 
-
-Uses [[Shader]]

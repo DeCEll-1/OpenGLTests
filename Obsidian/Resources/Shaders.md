@@ -1,2 +1,0 @@
-Is a:
-#Resource
