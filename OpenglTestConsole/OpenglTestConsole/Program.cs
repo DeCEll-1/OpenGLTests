@@ -1,9 +1,8 @@
-﻿using OpenglTestConsole.Classes;
+﻿global using OpenTK.Graphics.OpenGL;
+using OpenglTestConsole.Classes;
 using OpenglTestConsole.Classes.API.misc;
 using OpenglTestConsole.Classes.Implementations.Classes;
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Windowing.Desktop;
-
 namespace OpenglTestConsole
 {
     public class Program

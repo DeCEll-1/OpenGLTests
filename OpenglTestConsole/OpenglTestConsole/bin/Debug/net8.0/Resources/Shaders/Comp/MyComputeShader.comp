@@ -15,8 +15,8 @@ void main() {
     ivec2 texelCoord = ivec2(gl_GlobalInvocationID.xy);
 
     // assign r and g of the color
-    value.x = float(texelCoord.x) / (gl_NumWorkGroups.x);
-    value.y = float(texelCoord.y) / (gl_NumWorkGroups.y);
+    value.x = float(texelCoord.x) / (gl_NumWorkGroups.x * gl_WorkGroupSize.x);
+    value.y = float(texelCoord.y) / (gl_NumWorkGroups.y * gl_WorkGroupSize.y);
 
     imageStore(imgOutput, texelCoord, value);
 }

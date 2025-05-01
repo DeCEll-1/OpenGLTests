@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using StbImageSharp;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -24,7 +24,7 @@ namespace OpenglTestConsole.Classes.API.Rendering
         {
         }
 
-        public static Texture LoadFromFile(string path)
+        public static Texture LoadFromFile(string path, PixelInternalFormat format = PixelInternalFormat.Rgba, PixelType type = PixelType.UnsignedByte)
         {
             Texture texture = new();
             texture.Handle = GL.GenTexture();
@@ -57,12 +57,12 @@ namespace OpenglTestConsole.Classes.API.Rendering
             GL.TexImage2D(
                 TextureTarget.Texture2D,
                 0,
-                PixelInternalFormat.Rgba,
+                format,
                 image.Width,
                 image.Height,
                 0,
                 PixelFormat.Rgba,
-                PixelType.UnsignedByte,
+                type,
                 image.Data
             );
             texture.width = image.Width;
@@ -72,7 +72,7 @@ namespace OpenglTestConsole.Classes.API.Rendering
             Logger.Log($"Loaded texture {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(path)}", LogLevel.Detail);
             return texture;
         }
-        public static Texture LoadFromSize(int width, int height)
+        public static Texture LoadFromSize(int width, int height, PixelInternalFormat format = PixelInternalFormat.Rgba, PixelType type = PixelType.UnsignedByte)
         {
             Texture texture = new Texture();
             texture.Handle = GL.GenTexture();
@@ -86,12 +86,12 @@ namespace OpenglTestConsole.Classes.API.Rendering
             GL.TexImage2D(
                 TextureTarget.Texture2D,
                 0,
-                PixelInternalFormat.Rgba,
+                format,
                 width,
                 height,
                 0,
                 PixelFormat.Rgba,
-                PixelType.UnsignedByte,
+                type,
                 IntPtr.Zero
             );
             texture.initalised = true;

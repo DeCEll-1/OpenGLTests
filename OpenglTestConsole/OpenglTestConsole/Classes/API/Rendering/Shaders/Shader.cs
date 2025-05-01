@@ -153,7 +153,5 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
         }
 
         #endregion
-
-
     }
 }

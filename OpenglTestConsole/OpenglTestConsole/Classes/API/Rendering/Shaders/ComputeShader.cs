@@ -1,5 +1,4 @@
 ﻿using OpenglTestConsole.Classes.API.misc;
-using OpenTK.Graphics.ES30;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +14,15 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
         public bool initalised = false;
         public string computeShaderPath;
         public int Handle;
+        public ComputeShaderUnitManager UnitManager;
+        public ShaderUniformManager UniformManager;
         private bool disposed = false;
         public Vector3 groupSize { get; private set; }
         public ComputeShader(string computeShaderPath)
         {
             this.computeShaderPath = computeShaderPath;
+            UnitManager = new ComputeShaderUnitManager(Handle);
+            UniformManager = new ShaderUniformManager(Handle);
         }
 
         public void Init()
@@ -82,7 +85,22 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 
             return computeShaderPointer;
         }
+        public void DispatchForSize(int x, int y, int z)
+        {
+            Dispatch((int)(x / groupSize.X), (int)(y / groupSize.Y), (int)(z / groupSize.Z));
+        }
+        public void Dispatch(int x, int y, int z)
+        {
+            this.Use();
+            if (initalised == false)
+            {
+                Logger.Log($"Shader with {LogColors.BrightWhite(Handle)} used without initalisation, initalising..", LogLevel.Warning);
+                Init();
+            }
+            GL.DispatchCompute(x, y, z);
+        }
 
+        #region unimportants
         ~ComputeShader()
         {
             if (disposed == false)
@@ -90,7 +108,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
                 Logger.Log($"GPU Resource leak! Did you forget to call Dispose()?", LogLevel.Error);
             }
         }
-
         public void Use()
         {
             if (initalised == false)
@@ -114,5 +131,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        #endregion
     }
 }

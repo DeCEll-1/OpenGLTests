@@ -6,7 +6,6 @@ using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.Implementations.RenderScripts;
 using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
 using OpenglTestConsole.Classes.Paths;
-using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -62,6 +61,7 @@ namespace OpenglTestConsole.Classes
                     new TextureMaterialTests(),
                     new SquareTest(),
                     new RenderLight(),
+                    new ComputeShaderTest(),
                 ]
             );
             #endregion

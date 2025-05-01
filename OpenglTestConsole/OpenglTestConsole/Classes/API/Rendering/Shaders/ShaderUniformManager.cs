@@ -118,7 +118,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             }
         }
 
-        public void SetTexture(string name, Texture tex, OpenTK.Graphics.OpenGL4.TextureUnit unit)
+        public void SetTexture(string name, Texture tex, OpenTK.Graphics.OpenGL.TextureUnit unit)
         {
             tex.Activate(unit);
             tex.Bind();
