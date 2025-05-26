@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenglTestConsole.Classes.Implementations.Classes;
+﻿using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Mathematics;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace OpenglTestConsole.Classes
+namespace OpenglTestConsole.Classes.API.Rendering
 {
     public class Camera
     {
@@ -22,7 +15,6 @@ namespace OpenglTestConsole.Classes
         private Vector3 _front = -Vector3.UnitZ;
         private Vector3 _up = Vector3.UnitY;
         private Vector3 _right = Vector3.UnitX;
-
 
         public float Pitch
         {
@@ -47,7 +39,6 @@ namespace OpenglTestConsole.Classes
             }
         }
 
-
         public Camera(int screenWidth, int screenHeight)
         {
             this.screenWidth = screenWidth;
@@ -58,7 +49,6 @@ namespace OpenglTestConsole.Classes
         {
             return Matrix4.LookAt(Position, Position + _front, _up);
         }
-
 
         public Matrix4 GetProjectionMatrix()
         {
@@ -90,5 +80,4 @@ namespace OpenglTestConsole.Classes
             _up = Vector3.Normalize(Vector3.Cross(_right, _front));
         }
     }
-
 }

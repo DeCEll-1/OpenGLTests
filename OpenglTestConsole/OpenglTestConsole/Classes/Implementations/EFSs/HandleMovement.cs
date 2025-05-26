@@ -1,20 +1,13 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenglTestConsole.Classes.API;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.impl.EFSs
 {
     public class HandleMovement : EveryFrameScript
     {
-        public override void Init()
-        {
-        }
+        public override void Init() { }
+
         public override void Advance()
         {
             float speed = 10f;
@@ -27,11 +20,17 @@ namespace OpenglTestConsole.Classes.impl.EFSs
 
             float radians = MathHelper.DegreesToRadians(Camera.Yaw);
 
-            Vector3 forward = new Vector3((float)Math.Cos(MathHelper.DegreesToRadians(Camera.Yaw)), 0,
-                                          (float)Math.Sin(MathHelper.DegreesToRadians(Camera.Yaw)));
+            Vector3 forward = new Vector3(
+                (float)Math.Cos(MathHelper.DegreesToRadians(Camera.Yaw)),
+                0,
+                (float)Math.Sin(MathHelper.DegreesToRadians(Camera.Yaw))
+            );
 
-            Vector3 right = new Vector3((float)Math.Cos(MathHelper.DegreesToRadians(Camera.Yaw) + MathHelper.PiOver2), 0,
-                                        (float)Math.Sin(MathHelper.DegreesToRadians(Camera.Yaw) + MathHelper.PiOver2));
+            Vector3 right = new Vector3(
+                (float)Math.Cos(MathHelper.DegreesToRadians(Camera.Yaw) + MathHelper.PiOver2),
+                0,
+                (float)Math.Sin(MathHelper.DegreesToRadians(Camera.Yaw) + MathHelper.PiOver2)
+            );
 
             Vector3 up = Vector3.UnitY;
 

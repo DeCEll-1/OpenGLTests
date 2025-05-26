@@ -1,16 +1,10 @@
-﻿using OpenglTestConsole.Classes.API.misc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
+using OpenglTestConsole.Classes.API.misc;
 
-namespace OpenglTestConsole.Classes.API.Rendering.Shaders
+namespace OpenglTestConsole.Classes.API.Rendering.Shaders.Compute
 {
     public class ComputeShader : IDisposable
     { // https://learnopengl.com/Guest-Articles/2022/Compute-Shaders/Introduction
-
         public bool initalised = false;
         public string computeShaderPath;
         public int Handle;
@@ -18,6 +12,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
         public ShaderUniformManager UniformManager;
         private bool disposed = false;
         public Vector3 groupSize { get; private set; }
+
         public ComputeShader(string computeShaderPath)
         {
             this.computeShaderPath = computeShaderPath;
@@ -40,7 +35,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             if (shaderLinkSuccess == 0)
             {
                 string errorLog = GL.GetProgramInfoLog(Handle);
-                Logger.Log($"An error occured while loading compute shader for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}", LogLevel.Error);
+                Logger.Log(
+                    $"An error occured while loading compute shader for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}",
+                    LogLevel.Error
+                );
             }
 
             // get the group size
@@ -52,7 +50,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             GL.DeleteShader(computeShaderPointer);
 
             initalised = true;
-
         }
 
         public int HandleComputeShader(string path)
@@ -65,7 +62,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             }
             catch (Exception e)
             {
-                Logger.Log($"An error occured while reading compute shader {LogColors.BrightWhite(path)}!\nError log:\n{e}", LogLevel.Error);
+                Logger.Log(
+                    $"An error occured while reading compute shader {LogColors.BrightWhite(path)}!\nError log:\n{e}",
+                    LogLevel.Error
+                );
                 return -1;
             }
 
@@ -75,26 +75,38 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 
             GL.CompileShader(computeShaderPointer);
 
-            GL.GetShader(computeShaderPointer, ShaderParameter.CompileStatus, out int shaderCompileSuccess);
+            GL.GetShader(
+                computeShaderPointer,
+                ShaderParameter.CompileStatus,
+                out int shaderCompileSuccess
+            );
 
             if (shaderCompileSuccess == 0)
             {
                 string errorLog = GL.GetShaderInfoLog(computeShaderPointer);
-                Logger.Log($"An error occured while loading compute shader {LogColors.BrightWhite(path)}!\nError log:\n{errorLog}", LogLevel.Error);
+                Logger.Log(
+                    $"An error occured while loading compute shader {LogColors.BrightWhite(path)}!\nError log:\n{errorLog}",
+                    LogLevel.Error
+                );
             }
 
             return computeShaderPointer;
         }
+
         public void DispatchForSize(int x, int y, int z)
         {
             Dispatch((int)(x / groupSize.X), (int)(y / groupSize.Y), (int)(z / groupSize.Z));
         }
+
         public void Dispatch(int x, int y, int z)
         {
-            this.Use();
+            Use();
             if (initalised == false)
             {
-                Logger.Log($"Shader with {LogColors.BrightWhite(Handle)} used without initalisation, initalising..", LogLevel.Warning);
+                Logger.Log(
+                    $"Shader with {LogColors.BrightWhite(Handle)} used without initalisation, initalising..",
+                    LogLevel.Warning
+                );
                 Init();
             }
             GL.DispatchCompute(x, y, z);
@@ -104,28 +116,35 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
         ~ComputeShader()
         {
             if (disposed == false)
-            {
                 Logger.Log($"GPU Resource leak! Did you forget to call Dispose()?", LogLevel.Error);
-            }
         }
+
         public void Use()
         {
             if (initalised == false)
             {
-                Logger.Log($"Shader with {LogColors.BrightWhite(Handle)} used without initalisation, initalising..", LogLevel.Warning);
+                Logger.Log(
+                    $"Shader with {LogColors.BrightWhite(Handle)} used without initalisation, initalising..",
+                    LogLevel.Warning
+                );
                 Init();
             }
             GL.UseProgram(Handle);
         }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
             {
                 GL.DeleteProgram(Handle);
-                Logger.Log($"{LogColors.BrightYellow("Disposed")} compute shader {LogColors.BrightWhite(Handle)}", LogLevel.Detail);
+                Logger.Log(
+                    $"{LogColors.BrightYellow("Disposed")} compute shader {LogColors.BrightWhite(Handle)}",
+                    LogLevel.Detail
+                );
                 disposed = true;
             }
         }
+
         public void Dispose()
         {
             Dispose(true);

@@ -1,15 +1,9 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Rendering
 {
     public class Light
     {
-
         public Vector3 Position = Vector3.Zero;
         public Vector3 Color = Vector3.Zero;
 
@@ -19,8 +13,17 @@ namespace OpenglTestConsole.Classes.API.Rendering
             Color = color;
         }
 
-        public Vector3 Specular { get => Color; }
-        public Vector3 Diffuse { get => Color * 0.7f; }
-        public Vector3 Ambient { get => Color * 0.4f; }
+        public Vector3 Specular
+        {
+            get => Color;
+        }
+        public Vector3 Diffuse
+        {
+            get => Color * 0.7f;
+        }
+        public Vector3 Ambient
+        {
+            get => Color * 0.4f;
+        }
     }
 }

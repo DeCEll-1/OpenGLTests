@@ -1,17 +1,15 @@
 ﻿using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 {
     public abstract class Geometry3D
     {
         public int size;
-        public int IndicesLength { get => this.Indices.Length; }
+        public int IndicesLength
+        {
+            get => this.Indices.Length;
+        }
         public uint[] Indices = [];
 
         public Vector3[] Vertices = Array.Empty<Vector3>();
@@ -26,7 +24,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
             BufferManager.SetVector2(this.TexCoords, 2);
             BufferManager.SetIndices(this.Indices);
         }
-
 
         public void ApplyTransformation(Matrix4 transform)
         {
@@ -66,6 +63,5 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
             mergedGeometry.Indices = indices.ToArray();
             return mergedGeometry;
         }
-
     }
 }

@@ -1,19 +1,28 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 {
     internal class Cube : Geometry3D
     {
         public Vector3 shape { get; private set; }
-        public Cube(Vector3 shape) { this.shape = shape; Init(); }
-        private void Init() { (this.Vertices, this.Normals, this.TexCoords, this.Indices) = GetCube(); }
 
-        private (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices) GetCube()
+        public Cube(Vector3 shape)
+        {
+            this.shape = shape;
+            Init();
+        }
+
+        private void Init()
+        {
+            (this.Vertices, this.Normals, this.TexCoords, this.Indices) = GetCube();
+        }
+
+        private (
+            Vector3[] vertices,
+            Vector3[] normals,
+            Vector2[] texCoords,
+            uint[] indices
+        ) GetCube()
         {
             List<Vector3> vertices = new List<Vector3>();
             List<Vector3> normals = new List<Vector3>();
@@ -69,7 +78,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
             dummy.UpdateMatrix();
             bottom.ApplyTransformation(dummy.GetModelMatrix());
 
-            MergedGeometry merged = Geometry3D.MergeGeometries([front, back, left, right, top, bottom]);
+            MergedGeometry merged = Geometry3D.MergeGeometries(
+                [front, back, left, right, top, bottom]
+            );
 
             vertices.AddRange(merged.Vertices);
             normals.AddRange(merged.Normals);

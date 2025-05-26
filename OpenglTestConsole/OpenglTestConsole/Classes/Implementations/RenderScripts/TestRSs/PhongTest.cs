@@ -3,34 +3,53 @@ using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Materials;
 using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 {
     internal class PhongTest : RenderScript
     {
         private Mesh Mesh { get; set; }
+        private Vector3 origPos = new();
         public override void Init()
         {
+            // create geometry
             Sphere geometry = new Sphere(16, 16, 1f);
-            //Cylinder geometry = new Cylinder(1, 3, 3f, 1f);
+
+            // create material
             PhongMaterial material = PhongMaterial.Pearl;
 
+            // create mesh
             this.Mesh = new Mesh(geometry, material);
+
+            // add our mesh to the scene
+            Scene.Add(this.Mesh);
+
+            // change the position
+            this.Mesh.Transform.Position.X += 5;
+            this.Mesh.Transform.Position.Y += 5;
+
+            // original position for reference for spinning
+            this.origPos = new(this.Mesh.Transform.Position);
+
+
+            // add the cullfacing
             this.Mesh.CapsToEnable.Add(EnableCap.CullFace);
         }
-
-        public override void Render()
+        public override void Advance()
         {
-            Mesh.Render();
+            float t = (float)Timer.Elapsed.TotalMilliseconds * 0.04f;
+            float sin = MathMisc.Sinf(t);
+            float cos = MathMisc.Cosf(t);
+
+            this.Mesh.Transform.Position = new Vector3(
+                origPos.X * sin,
+                origPos.Y * cos,
+                origPos.Z
+                );
+
+            this.Mesh.Transform.UpdateMatrix();
+
         }
 
         public override void OnResourceRefresh()

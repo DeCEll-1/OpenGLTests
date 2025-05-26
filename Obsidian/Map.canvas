@@ -6,6 +6,7 @@
       "fromSide": "top",
       "id": "3077869b03b507b9",
       "styleAttributes": {
+        "path": "long-dashed",
         "pathfindingMethod": "square"
       },
       "toNode": "47d149524c9dde5a",
@@ -102,6 +103,7 @@
       "fromSide": "left",
       "id": "9654ad4bca4e4e20",
       "styleAttributes": {
+        "path": "long-dashed",
         "pathfindingMethod": "square"
       },
       "toNode": "47d149524c9dde5a",
@@ -117,17 +119,6 @@
       },
       "toNode": "a7d720d96ee4d6e8",
       "toSide": "top"
-    },
-    {
-      "color": "#b82e85",
-      "fromNode": "6d465300ad286918",
-      "fromSide": "left",
-      "id": "4a2a4fd1fadaf500",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "bee97ef31979d362",
-      "toSide": "right"
     },
     {
       "color": "#b82e85",
@@ -150,17 +141,6 @@
       },
       "toNode": "564c4bc9e20bf73b",
       "toSide": "top"
-    },
-    {
-      "color": "#5a751f",
-      "fromNode": "ef1696964e68bf84",
-      "fromSide": "left",
-      "id": "391f73b6b943d8ea",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "9a87d2af19adfa99",
-      "toSide": "right"
     },
     {
       "color": "#5a751f",
@@ -190,6 +170,7 @@
       "fromSide": "right",
       "id": "dfc88da86c207d16",
       "styleAttributes": {
+        "path": "long-dashed",
         "pathfindingMethod": "square"
       },
       "toNode": "5da87c1b0639e670",
@@ -201,6 +182,7 @@
       "fromSide": "right",
       "id": "1223d3c565cc7597",
       "styleAttributes": {
+        "path": "dotted",
         "pathfindingMethod": "square"
       },
       "toNode": "564c4bc9e20bf73b",
@@ -212,6 +194,7 @@
       "fromSide": "right",
       "id": "9d04e2e3a40d9537",
       "styleAttributes": {
+        "path": "long-dashed",
         "pathfindingMethod": "square"
       },
       "toNode": "ef1696964e68bf84",
@@ -223,17 +206,7 @@
       "fromSide": "bottom",
       "id": "d2524dcddcc5029d",
       "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "e342e122423d7ae1",
-      "toSide": "top"
-    },
-    {
-      "color": "#a45656",
-      "fromNode": "d02a84543b42c28d",
-      "fromSide": "bottom",
-      "id": "efa9f3010571fd4b",
-      "styleAttributes": {
+        "path": "long-dashed",
         "pathfindingMethod": "square"
       },
       "toNode": "e342e122423d7ae1",
@@ -250,10 +223,33 @@
       "toSide": "right"
     },
     {
-      "color": "3",
-      "fromNode": "8c8eee75c65b59f3",
+      "color": "#a45656",
+      "fromNode": "d02a84543b42c28d",
       "fromSide": "bottom",
-      "id": "7aa61fa69335a81e",
+      "id": "efa9f3010571fd4b",
+      "styleAttributes": {
+        "path": "long-dashed",
+        "pathfindingMethod": "square"
+      },
+      "toNode": "e342e122423d7ae1",
+      "toSide": "top"
+    },
+    {
+      "color": "3",
+      "fromNode": "dd5a3f8e84d7f191",
+      "fromSide": "right",
+      "id": "99ccaccefee571f5",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "a185a02c931d5b72",
+      "toSide": "top"
+    },
+    {
+      "color": "3",
+      "fromNode": "dd5a3f8e84d7f191",
+      "fromSide": "left",
+      "id": "9d80098a255fa9ff",
       "styleAttributes": {
         "pathfindingMethod": "square"
       },
@@ -261,15 +257,91 @@
       "toSide": "top"
     },
     {
-      "color": "3",
-      "fromNode": "8c8eee75c65b59f3",
+      "color": "5",
+      "fromNode": "dd5a3f8e84d7f191",
       "fromSide": "bottom",
-      "id": "628f867b358673f6",
+      "id": "fe1cd10845b5f502",
+      "styleAttributes": {
+      },
+      "toNode": "b4ae6f3872525dfd",
+      "toSide": "top"
+    },
+    {
+      "color": "#b82e85",
+      "fromNode": "0f7779e266290cd6",
+      "fromSide": "left",
+      "id": "6b58a599b32c1388",
+      "styleAttributes": {
+      },
+      "toNode": "9025ee135ffb309c",
+      "toSide": "right"
+    },
+    {
+      "color": "#5f56a4",
+      "fromNode": "89275a94baea1cd0",
+      "fromSide": "top",
+      "id": "54ee212a74fa9368",
+      "styleAttributes": {
+      },
+      "toNode": "0a8d16db93bba184",
+      "toSide": "bottom"
+    },
+    {
+      "color": "#566da4",
+      "fromNode": "97e57544b73e58da",
+      "fromSide": "right",
+      "id": "fc12598eb43424e1",
+      "styleAttributes": {
+        "path": "short-dashed",
+        "pathfindingMethod": "square"
+      },
+      "toNode": "77c0af78d13c4b2f",
+      "toSide": "right"
+    },
+    {
+      "color": "#b87f51",
+      "fromNode": "97f6ae139b8cad5d",
+      "fromSide": "bottom",
+      "id": "81b5366009275c2e",
+      "styleAttributes": {
+        "path": null,
+        "pathfindingMethod": "square"
+      },
+      "toNode": "98c76a31be1e6a33",
+      "toSide": "top"
+    },
+    {
+      "color": "5",
+      "fromNode": "6785275875bcb09e",
+      "fromSide": "left",
+      "id": "d4bfea5ce38e8d51",
       "styleAttributes": {
         "pathfindingMethod": "square"
       },
-      "toNode": "a185a02c931d5b72",
-      "toSide": "top"
+      "toNode": "b4ae6f3872525dfd",
+      "toSide": "right"
+    },
+    {
+      "color": "5",
+      "fromNode": "47d149524c9dde5a",
+      "fromSide": "top",
+      "id": "356c2c996726c4a0",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "6785275875bcb09e",
+      "toSide": "bottom"
+    },
+    {
+      "color": "#566da4",
+      "fromNode": "77c0af78d13c4b2f",
+      "fromSide": "left",
+      "id": "cdd2f844858af777",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "99dfd3b867cfa972",
+      "toSide": "bottom"
     }
   ],
   "nodes": [
@@ -277,7 +349,7 @@
       "color": "#314949",
       "height": 1920,
       "id": "a8f40590bd277a68",
-      "label": "Rendering",
+      "label": "Mesh",
       "styleAttributes": {
         "border": null
       },
@@ -297,6 +369,18 @@
       "width": 2540,
       "x": -240,
       "y": 1200
+    },
+    {
+      "color": "#b87f51",
+      "height": 1140,
+      "id": "98c76a31be1e6a33",
+      "label": "Scripts",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 2200,
+      "x": -1960,
+      "y": -580
     },
     {
       "color": "#a45687",
@@ -332,7 +416,31 @@
       "type": "group",
       "width": 1600,
       "x": -4000,
-      "y": -160
+      "y": -580
+    },
+    {
+      "color": "#b87f51",
+      "height": 1040,
+      "id": "ac03b7d638727d89",
+      "label": "EFS",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 1100,
+      "x": -860,
+      "y": -480
+    },
+    {
+      "color": "#51b8ac",
+      "height": 1040,
+      "id": "6785275875bcb09e",
+      "label": "Render Script",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 1100,
+      "x": -1960,
+      "y": -480
     },
     {
       "color": "6",
@@ -361,6 +469,18 @@
       "y": 2100
     },
     {
+      "color": "#566da4",
+      "height": 400,
+      "id": "77c0af78d13c4b2f",
+      "label": "Geometry Shaders",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 1540,
+      "x": 760,
+      "y": 1760
+    },
+    {
       "color": "5",
       "height": 400,
       "id": "47d149524c9dde5a",
@@ -370,8 +490,8 @@
       },
       "type": "group",
       "width": 1040,
-      "x": -3840,
-      "y": 1420
+      "x": -3680,
+      "y": 1440
     },
     {
       "color": "4",
@@ -382,8 +502,45 @@
       },
       "type": "group",
       "width": 480,
-      "x": -1840,
-      "y": -160
+      "x": -700,
+      "y": -1260
+    },
+    {
+      "color": "3",
+      "file": "API/Scene.cs",
+      "height": 205,
+      "id": "dd5a3f8e84d7f191",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3400,
+      "y": -420
+    },
+    {
+      "color": "5",
+      "height": 131,
+      "id": "b4ae6f3872525dfd",
+      "styleAttributes": {
+        "textAlign": "center"
+      },
+      "text": "Mesh List",
+      "type": "text",
+      "width": 400,
+      "x": -3400,
+      "y": -68
+    },
+    {
+      "color": "#94b0c2",
+      "file": "API/Rendering/Camera.cs",
+      "height": 131,
+      "id": "d02a84543b42c28d",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3960,
+      "y": 63
     },
     {
       "color": "2",
@@ -395,19 +552,7 @@
       "type": "file",
       "width": 400,
       "x": -2840,
-      "y": 483
-    },
-    {
-      "color": "4",
-      "file": "API/ResourceController.cs",
-      "height": 160,
-      "id": "d30310ee032c7437",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -1800,
-      "y": -80
+      "y": 63
     },
     {
       "file": "Program.md",
@@ -418,7 +563,19 @@
       "type": "file",
       "width": 400,
       "x": -2560,
-      "y": -800
+      "y": -1600
+    },
+    {
+      "color": "4",
+      "file": "API/ResourceController.cs",
+      "height": 160,
+      "id": "d30310ee032c7437",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -660,
+      "y": -1180
     },
     {
       "color": "4",
@@ -429,8 +586,8 @@
       },
       "type": "file",
       "width": 400,
-      "x": -1800,
-      "y": 185
+      "x": -660,
+      "y": -915
     },
     {
       "color": "5",
@@ -441,8 +598,8 @@
       },
       "type": "file",
       "width": 400,
-      "x": -3800,
-      "y": 1465
+      "x": -3640,
+      "y": 1485
     },
     {
       "color": "5",
@@ -453,44 +610,20 @@
       },
       "type": "file",
       "width": 400,
-      "x": -3280,
-      "y": 1530
+      "x": -3120,
+      "y": 1550
     },
     {
-      "color": "6",
-      "file": "API/Rendering/Geometries/Cylinder.cs",
-      "height": 154,
-      "id": "942f2af2ee5f67c8",
+      "color": "2",
+      "file": "API/Rendering/Shaders/Material.cs",
+      "height": 180,
+      "id": "6846b4d16d244eab",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
-      "x": -3800,
-      "y": 2253
-    },
-    {
-      "color": "6",
-      "file": "API/Rendering/Geometries/Square.cs",
-      "height": 154,
-      "id": "ec0e8a4d8a03f6fa",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3800,
-      "y": 2634
-    },
-    {
-      "color": "6",
-      "file": "API/Rendering/Geometries/Cube.cs",
-      "height": 154,
-      "id": "1bc932936bb3bbaf",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3360,
-      "y": 2634
+      "x": -1960,
+      "y": 1590
     },
     {
       "color": "6",
@@ -505,16 +638,16 @@
       "y": 2034
     },
     {
-      "color": "2",
-      "file": "API/Rendering/Shaders/Material.cs",
-      "height": 180,
-      "id": "6846b4d16d244eab",
+      "color": "#5a751f",
+      "file": "API/Rendering/Shaders/Texture.cs",
+      "height": 200,
+      "id": "ef1696964e68bf84",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
-      "x": -1960,
-      "y": 1590
+      "x": 160,
+      "y": 2200
     },
     {
       "color": "2",
@@ -542,6 +675,42 @@
     },
     {
       "color": "6",
+      "file": "API/Rendering/Geometries/Cylinder.cs",
+      "height": 154,
+      "id": "942f2af2ee5f67c8",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3800,
+      "y": 2253
+    },
+    {
+      "color": "#5f56a4",
+      "file": "API/Rendering/Shaders/Shader.cs",
+      "height": 200,
+      "id": "0a8d16db93bba184",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 800,
+      "y": 1240
+    },
+    {
+      "color": "#566da4",
+      "file": "API/Rendering/Shaders/Geometry/Shader.cs",
+      "height": 200,
+      "id": "89275a94baea1cd0",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 800,
+      "y": 1800
+    },
+    {
+      "color": "6",
       "file": "API/Rendering/Geometries/Geometry3D.cs",
       "height": 154,
       "id": "ccbe598985060be6",
@@ -565,34 +734,48 @@
       "y": 2557
     },
     {
-      "color": "#5a751f",
-      "file": "API/Rendering/Shaders/Texture.cs",
+      "color": "#b82e85",
+      "file": "API/Rendering/Shaders/Compute/ComputeShader.cs",
       "height": 200,
-      "id": "ef1696964e68bf84",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 160,
-      "y": 2200
-    },
-    {
-      "color": "#5f56a4",
-      "file": "API/Rendering/Shaders/Shader.cs",
-      "height": 200,
-      "id": "0a8d16db93bba184",
+      "id": "9025ee135ffb309c",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
       "x": 800,
-      "y": 1240
+      "y": 2540
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Square.cs",
+      "height": 154,
+      "id": "ec0e8a4d8a03f6fa",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3800,
+      "y": 2634
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Cube.cs",
+      "height": 154,
+      "id": "1bc932936bb3bbaf",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3360,
+      "y": 2634
     },
     {
       "color": "#5f56a4",
       "file": "API/Rendering/Shaders/ShaderUniformManager.cs",
       "height": 200,
       "id": "c4de05930a556f3c",
+      "styleAttributes": {
+      },
       "type": "file",
       "width": 400,
       "x": 1840,
@@ -600,49 +783,15 @@
     },
     {
       "color": "#b82e85",
-      "file": "API/Rendering/Shaders/ComputeShader.cs",
+      "file": "API/Rendering/Shaders/Compute/ComputeShaderUnitManager.cs",
       "height": 200,
-      "id": "bee97ef31979d362",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 800,
-      "y": 2540
-    },
-    {
-      "color": "#b82e85",
-      "file": "API/Rendering/Shaders/ComputeShaderUnitManager.cs",
-      "height": 200,
-      "id": "6d465300ad286918",
+      "id": "0f7779e266290cd6",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
       "x": 1840,
       "y": 2540
-    },
-    {
-      "color": "3",
-      "file": "API/Rendering/Scene.cs",
-      "height": 185,
-      "id": "8c8eee75c65b59f3",
-      "type": "file",
-      "width": 400,
-      "x": -3400,
-      "y": 0
-    },
-    {
-      "color": "#94b0c2",
-      "file": "API/Rendering/Camera.cs",
-      "height": 131,
-      "id": "d02a84543b42c28d",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3960,
-      "y": 483
     }
   ]
 }

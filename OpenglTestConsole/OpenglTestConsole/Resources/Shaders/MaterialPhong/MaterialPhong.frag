@@ -1,7 +1,9 @@
 #version 330 core
 
-in vec3 FragPos; // moved frag pos
-in vec3 Normal; // normals from the cpu
+in vec3 FragPos0; // moved frag pos
+in vec3 Normal0; // normals from the cpu
+flat in vec3 flatNormal0; // normals from the cpu
+in vec2 TexCoord0;
 
 struct Material {
     vec3 ambient;
@@ -27,19 +29,21 @@ uniform vec3 viewPos; // camera
 
 out vec4 FragColor;
 
+in vec3 EdgeDistance0;
+
 void main()
 {
     //ambient
     vec3 ambient = light.ambient * material.ambient; //Remember to use the material here.
 
     //diffuse
-    vec3 norm = normalize(Normal);
-    vec3 lightDir = normalize(light.position - FragPos);
+    vec3 norm = normalize(flatNormal0);
+    vec3 lightDir = normalize(light.position - FragPos0);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = light.diffuse * (diff * material.diffuse); //Remember to use the material here.
 
     //specular
-    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 viewDir = normalize(viewPos - FragPos0);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = light.specular * (spec * material.specular); //Remember to use the material here.
@@ -48,5 +52,13 @@ void main()
     //multiply the light with the object here, instead we do it for each element seperatly. This allows much better control
     //over how each element is applied to different objects.
     vec3 result = ambient + diffuse + specular;
-    FragColor = vec4(result, 1.0);
+
+    float d = min(EdgeDistance0.x, min(EdgeDistance0.y, EdgeDistance0.z));
+
+    if (d < 0.01)
+        result = vec3(1.);
+    else
+        result = vec3(0.);
+
+    FragColor = vec4(result, 1.);
 }

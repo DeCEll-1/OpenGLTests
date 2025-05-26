@@ -3,6 +3,7 @@ using OpenglTestConsole.Classes;
 using OpenglTestConsole.Classes.API.misc;
 using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Windowing.Desktop;
+
 namespace OpenglTestConsole
 {
     public class Program
@@ -10,7 +11,6 @@ namespace OpenglTestConsole
         static void Main(string[] args)
         {
             Logger.Log($"Started app with arguments:\n{string.Concat(args)}", LogLevel.Info);
-
 
             Settings.Fov = 90f;
 
@@ -26,7 +26,6 @@ namespace OpenglTestConsole
 
             Main main = new Main(gameWindowSettings, nativeWindowSettings);
             main.Run();
-
         }
     }
 }

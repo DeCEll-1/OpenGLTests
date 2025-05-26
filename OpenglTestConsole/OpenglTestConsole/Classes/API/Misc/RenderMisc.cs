@@ -1,10 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenglTestConsole.Classes.API.Rendering.Shaders;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Misc
 {
@@ -14,18 +9,49 @@ namespace OpenglTestConsole.Classes.API.Misc
         {
             get
             {
-                return [
+                return
+                [
                     new Vector2(0f, 1f),
                     new Vector2(1f, 1f),
                     new Vector2(0f, 0f),
-                    new Vector2(1f, 0f)
+                    new Vector2(1f, 0f),
                 ];
             }
         }
-    
-        public static void EnableCullFace()=> GL.Enable(EnableCap.CullFace);
-        public static void DisableCullFace() => GL.Disable(EnableCap.CullFace);
 
+        public static Texture GetScreenTexture()
+        {
+            int[] k = new int[4];
 
+            GL.GetInteger(GetIndexedPName.Viewport, 0, k);
+
+            Vector2i size = new(k[2], k[3]);
+
+            byte[] output = new byte[
+                4 *
+                size.X *
+                size.Y
+            ];
+
+            unsafe
+            {
+                fixed (byte* outputPtr = output)
+                {
+                    GL.ReadPixels(
+                        0,
+                        0,
+                        size.X,
+                        size.Y,
+                        PixelFormat.Rgba,
+                        PixelType.UnsignedByte,
+                        (IntPtr)outputPtr
+                    );
+                }
+            }
+
+            Texture tex = Texture.LoadFromBytes(output, k[2], k[3]);
+
+            return tex;
+        }
     }
 }

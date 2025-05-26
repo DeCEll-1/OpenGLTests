@@ -1,42 +1,46 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
+using OpenglTestConsole.Classes.API;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.impl.EFSs;
-using OpenglTestConsole.Classes.API.JSON;
+using OpenglTestConsole.Classes.Implementations.EFSs;
 using OpenglTestConsole.Classes.Implementations.RenderScripts;
 using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
-using OpenglTestConsole.Classes.Paths;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using static OpenglTestConsole.Classes.API.JSON.MCSDFJSON;
-using OpenglTestConsole.Classes.API.misc;
-using OpenglTestConsole.Classes.Implementations.EFSs;
-using OpenglTestConsole.Classes.API;
 
 namespace OpenglTestConsole.Classes
 {
     public class Main : GameWindow
     {
         public static Scene mainScene = new Scene();
-        public List<EveryFrameScript> EveryFrameScripts { get; set; } = new List<EveryFrameScript>();
+        public List<EveryFrameScript> EveryFrameScripts { get; set; } =
+            new List<EveryFrameScript>();
         public List<RenderScript> RenderScripts { get; set; } = new List<RenderScript>();
         private Camera Camera => Scene.Camera;
 
         [SetsRequiredMembers]
-        public Main(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
+        public Main(
+            GameWindowSettings gameWindowSettings,
+            NativeWindowSettings nativeWindowSettings
+        )
+            : base(gameWindowSettings, nativeWindowSettings)
         {
-            Scene.Camera = new Camera(nativeWindowSettings.ClientSize.X, nativeWindowSettings.ClientSize.Y);
+            Scene.Camera = new Camera(
+                nativeWindowSettings.ClientSize.X,
+                nativeWindowSettings.ClientSize.Y
+            );
             Scene.Camera.Position.Z = 3f;
             CursorState = CursorState.Grabbed;
 
             //Logger.Log($"{GL.GetInteger(GetPName.MaxVertexAttribs)}", LogLevel.Info);
 
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
 
-            Scene.Lights.Add(new Light(new Vector3(5f, 5f, 5f), new Vector3(1.0f, 1.0f, 1.0f)));
+            Scene.Lights.Add(new Light(new Vector3(0f, 0f, 5f), new Vector3(1.0f, 1.0f, 1.0f)));
 
             #region EFSs
             this.EveryFrameScripts.AddRange(
@@ -45,6 +49,7 @@ namespace OpenglTestConsole.Classes
                     new HandleMouse(),
                     new HandleZoom(),
                     new HandleResourceRefreshes(),
+                    new HandlePrintScreen(),
                 ]
             );
             #endregion
@@ -68,12 +73,11 @@ namespace OpenglTestConsole.Classes
             #endregion
 
             ResourceController.Init();
-
         }
+
         protected override void OnLoad()
         {
             base.OnLoad();
-
 
             GL.ClearColor(0.0f, 0.1f, 0.05f, 1.0f);
 
@@ -84,11 +88,10 @@ namespace OpenglTestConsole.Classes
                 script.KeyboardState = this.KeyboardState;
                 script.MouseState = this.MouseState;
                 script.Camera = Scene.Camera;
-                script.Main = this;
+                script.MainInstance = this;
 
                 script.Init();
             }
-
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
@@ -123,7 +126,7 @@ namespace OpenglTestConsole.Classes
                 script.KeyboardState = this.KeyboardState;
                 script.MouseState = this.MouseState;
                 script.Camera = this.Camera;
-                script.Main = this;
+                script.MainInstance = this;
                 script.Advance();
             }
 
@@ -132,7 +135,5 @@ namespace OpenglTestConsole.Classes
                 Close();
             }
         }
-
-
     }
 }

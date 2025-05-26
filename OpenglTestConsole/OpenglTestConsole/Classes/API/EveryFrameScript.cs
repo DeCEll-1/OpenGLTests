@@ -1,23 +1,19 @@
-﻿using OpenTK.Windowing.Common;
+﻿using OpenglTestConsole.Classes.API.Rendering;
+using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpenglTestConsole.Classes
+namespace OpenglTestConsole.Classes.API
 {
     public abstract class EveryFrameScript
     {
         public MouseState MouseState { get; set; }
         public KeyboardState KeyboardState { get; set; }
         public Camera Camera { get; set; }
-        public Main Main { get; set; }
+        public Main MainInstance { get; set; }
         public FrameEventArgs args { get; set; }
         public abstract void Init();
         public abstract void Advance();
-        public virtual void OnResourceRefresh() { }
 
+        public virtual void OnResourceRefresh() { }
     }
 }

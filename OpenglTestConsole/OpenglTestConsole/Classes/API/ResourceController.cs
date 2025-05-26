@@ -1,18 +1,13 @@
-﻿using OpenglTestConsole.Classes.API.JSON;
+﻿using System.Reflection;
+using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering.Shaders;
-using OpenglTestConsole.Classes.Paths;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using OpenglTestConsole.Classes.API.Rendering.Shaders.Compute;
+using OpenglTestConsole.Generated.Paths;
 
 namespace OpenglTestConsole.Classes.API
 {
     public class ResourceController
     {
-
         public static void Refresh()
         {
             foreach (KeyValuePair<string, Shader> item in Resources.Shaders)
@@ -44,9 +39,10 @@ namespace OpenglTestConsole.Classes.API
 
         private static void AddTextures()
         {
-            foreach (FieldInfo texture in typeof(ResourcePaths.Textures).GetFields())
+            foreach (FieldInfo texture in typeof(ResourcePaths.Resources.Textures).GetFields())
                 AddTexture(texture);
         }
+
         private static void AddTexture(FieldInfo texture)
         {
             // get the constant path value from the class
@@ -54,60 +50,64 @@ namespace OpenglTestConsole.Classes.API
             // add the texture to the resources
             Resources.Textures.Add(texturePath, Texture.LoadFromFile(texturePath));
         }
+
         private static void AddComputeShaders()
         {
-            int i = 0;
-            foreach (FieldInfo compShader in typeof(ResourcePaths.ComputeShaders).GetFields())
+            foreach (Type compShader in typeof(ResourcePaths.ComputeShaders).GetNestedTypes())
             {
-                AddComputeShader(i);
-                i++;
+                AddComputeShader(compShader);
             }
         }
-        private static void AddComputeShader(int i)
+
+        private static void AddComputeShader(Type type)
         {
-            // get the shader information
-            string shaderName = (string)typeof(ResourcePaths.CompShaderNames).GetFields()[i].GetValue(null)!;
-            string compShaderPath = (string)typeof(ResourcePaths.ComputeShaders).GetFields()[i].GetValue(null)!;
+            string shaderName = (string)type!.GetField("Name")!.GetValue(null)!;
+            string compute = (string)type!.GetField("Compute")!.GetValue(null)!;
             // add the shader to the resources
-            Resources.CompShaders.Add(shaderName, new(compShaderPath));
+            Resources.CompShaders.Add(shaderName, new(compute));
             Resources.CompShaders[shaderName].Init();
         }
+
         private static void AddShaders()
         {
-            int i = 0;
-            foreach (var shader in typeof(ResourcePaths.VertexShaders).GetFields())
+            foreach (var shader in typeof(ResourcePaths.Materials).GetNestedTypes())
             {
-                AddShader(i);
-                i++;
+                AddShader(shader);
             }
         }
-        private static void AddShader(int i)
+
+        private static void AddShader(Type type)
         {
             // get the shader information
-            string shaderName = (string)typeof(ResourcePaths.ShaderNames).GetFields()[i].GetValue(null)!;
-            string vertexShaderPath = (string)typeof(ResourcePaths.VertexShaders).GetFields()[i].GetValue(null)!;
-            string fragmentShaderPath = (string)typeof(ResourcePaths.FragmentShaders).GetFields()[i].GetValue(null)!;
+            string shaderName = (string)type!.GetField("Name")!.GetValue(null)!;
+            string fragment = (string)type!.GetField("Fragment")!.GetValue(null)!;
+            string vertex = (string)type!.GetField("Vertex")!.GetValue(null)!;
+
+            string? geometry = (string?)type?.GetField("Geometry")?.GetValue(null);
+            if (string.IsNullOrEmpty(geometry))
+                Resources.Shaders.Add(shaderName, new(vertex, fragment));
+            else
+                Resources.Shaders.Add(shaderName, new(vertex, fragment, geometry));
             // add the shader to the resources
-            Resources.Shaders.Add(shaderName, new(vertexShaderPath, fragmentShaderPath));
             Resources.Shaders[shaderName].Init();
         }
+
         private static void AddFonts()
         {
-            foreach (FieldInfo fontField in typeof(ResourcePaths.Fonts).GetFields())
+            foreach (var font in typeof(ResourcePaths.Fonts).GetNestedTypes())
             {
-                // get the constant value from the class
-                string fontPath = (string)fontField.GetValue(null)!;
-                if (fontPath.Contains("_json"))// add the json part of the font
-                    AddFont(fontField);
-
-                if (fontPath.Contains("_png"))// add the png part of the font
-                    AddTexture(fontField);
+                AddFont(font);
             }
         }
-        private static void AddFont(FieldInfo fontField)
+
+        private static void AddFont(Type type)
         {
-            string fontPath = (string)fontField.GetValue(null)!;
-            Resources.Fonts.Add(fontPath, MCSDFJSON.GetFontJson(fontPath)!);
+            string fontName = (string)type!.GetField("Name")!.GetValue(null)!;
+            string fontJSONPath = (string)type!.GetField("JSON")!.GetValue(null)!;
+            FieldInfo fontPNGField = type.GetField("PNG")!;
+            Resources.Fonts.Add(fontName, MCSDFJSON.GetFontJson(fontJSONPath)!);
+
+            AddTexture(fontPNGField);
         }
     }
 }

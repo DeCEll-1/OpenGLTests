@@ -1,31 +1,5 @@
 {
     "Resources": {
-        "Fonts": {
-            "ComicSans_json": "Resources/Fonts/ComicSans.json",
-            "ComicSans_png": "Resources/Fonts/ComicSans.png"
-        },
-        // KEEP THE SHADERS İN SYNC
-        "VertexShaders": {
-            "MCSDF_vert": "Resources/Shaders/Vertex/MCSDF.vert",
-            "PhongMaterial_vert": "Resources/Shaders/Vertex/PhongMaterial.vert",
-            "TextureMaterial_vert": "Resources/Shaders/Vertex/TextureMaterial.vert"
-        },
-        "FragmentShaders": {
-            "MCSDF_frag": "Resources/Shaders/Frag/MCSDF.frag",
-            "PhongMaterial_frag": "Resources/Shaders/Frag/PhongMaterial.frag",
-            "TextureMaterial_frag": "Resources/Shaders/Frag/TextureMaterial.frag"
-        },
-        "ShaderNames": {
-            "MCSDF": "MCSDF",
-            "PhongMaterial": "PhongMaterial",
-            "TextureMaterial": "TextureMaterial"
-        },
-        "ComputeShaders": {
-            "MyComputeShader_comp": "Resources/Shaders/Comp/MyComputeShader.comp"
-        },
-        "CompShaderNames": {
-            "MyComputeShader": "MyComputeShader"
-        },
         "StarscapeMapDatas": {
             "cylinders_json": "Resources/StarscapeMapDatas/cylinders.json",
             "links_json": "Resources/StarscapeMapDatas/links.json",
@@ -35,6 +9,42 @@
             "CoordinateSystem_png": "Resources/Textures/CoordinateSystem.png",
             "RotationSystem_png": "Resources/Textures/RotationSystem.png",
             "cobble_stone_png": "Resources/Textures/cobble_stone.png"
+        }
+    },
+    "Materials": {
+        "MCSDF": {
+            "Name": "MCSDF",
+            "Fragment": "Resources/Shaders/MaterialMCSDF/MCSDF.frag",
+            "Vertex": "Resources/Shaders/MaterialMCSDF/MCSDF.vert"
+        },
+        "Phong": {
+            "Name": "PhongMaterial",
+            "Fragment": "Resources/Shaders/MaterialPhong/MaterialPhong.frag",
+            "Vertex": "Resources/Shaders/MaterialPhong/MaterialPhong.vert",
+            "Geometry": "Resources/Shaders/MaterialPhong/MaterialPhong.geom"
+        },
+        "Texture": {
+            "Name": "TextureMaterial",
+            "Fragment": "Resources/Shaders/MaterialTexture/MaterialTexture.frag",
+            "Vertex": "Resources/Shaders/MaterialTexture/MaterialTexture.vert"
+        },
+        "MonoColor": {
+            "Name": "MonoColorMaterial",
+            "Fragment": "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.frag",
+            "Vertex": "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.vert"
+        }
+    },
+    "ComputeShaders": {
+        "MyComputeShader": {
+            "Name": "MyComputeShader",
+            "Compute": "Resources/Shaders/Comp/MyComputeShader.comp"
+        }
+    },
+    "Fonts": {
+        "ComicSans": {
+            "Name": "ComicSans",
+            "JSON": "Resources/Fonts/ComicSans.json",
+            "PNG": "Resources/Fonts/ComicSans.png"
         }
     }
 }

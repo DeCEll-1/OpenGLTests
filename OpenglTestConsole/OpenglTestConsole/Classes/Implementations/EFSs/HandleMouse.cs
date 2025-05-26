@@ -1,12 +1,6 @@
-﻿using OpenglTestConsole.Classes.Implementations.Classes;
+﻿using OpenglTestConsole.Classes.API;
+using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.impl.EFSs
 {
@@ -14,9 +8,9 @@ namespace OpenglTestConsole.Classes.impl.EFSs
     {
         private bool _firstMove = true;
         private Vector2 _lastPos;
-        public override void Init()
-        {
-        }
+
+        public override void Init() { }
+
         public override void Advance()
         {
             var mouse = MouseState;

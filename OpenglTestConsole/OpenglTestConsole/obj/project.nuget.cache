@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SpkH1tLOcaU=",
+  "dgSpecHash": "x/eB0Z5XnTw=",
   "success": true,
   "projectFilePath": "D:\\Github\\OpenGLTests\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj",
   "expectedPackageFiles": [
@@ -16,7 +16,7 @@
     "C:\\Users\\DeCell\\.nuget\\packages\\opentk.windowing.common\\4.9.4\\opentk.windowing.common.4.9.4.nupkg.sha512",
     "C:\\Users\\DeCell\\.nuget\\packages\\opentk.windowing.desktop\\4.9.4\\opentk.windowing.desktop.4.9.4.nupkg.sha512",
     "C:\\Users\\DeCell\\.nuget\\packages\\opentk.windowing.graphicslibraryframework\\4.9.4\\opentk.windowing.graphicslibraryframework.4.9.4.nupkg.sha512",
-    "C:\\Users\\DeCell\\.nuget\\packages\\stbimagesharp\\2.30.15\\stbimagesharp.2.30.15.nupkg.sha512",
+    "C:\\Users\\DeCell\\.nuget\\packages\\sixlabors.imagesharp\\3.1.8\\sixlabors.imagesharp.3.1.8.nupkg.sha512",
     "C:\\Users\\DeCell\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []

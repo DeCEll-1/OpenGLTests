@@ -1,17 +1,11 @@
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 {
     public class ShaderUniformManager
     {
         private int Handle;
+
         public ShaderUniformManager(int handle)
         {
             Handle = handle;
@@ -20,6 +14,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
         #region Uniform Functions
         // cache uniforms so we dont run *expensive* get uniform location a shit ton
         private Dictionary<string, int> uniformCache = new Dictionary<string, int>();
+
         public void SetMatrix4(string name, Matrix4 matrix)
         {
             if (uniformCache.ContainsKey(name))

@@ -1,9 +1,5 @@
 ﻿using OpenglTestConsole.Classes.API.Rendering.Shaders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenglTestConsole.Classes.API.Rendering.Shaders.Compute;
 using static OpenglTestConsole.Classes.API.JSON.MCSDFJSON;
 
 namespace OpenglTestConsole.Classes.API

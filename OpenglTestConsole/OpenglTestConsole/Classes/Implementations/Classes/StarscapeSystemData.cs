@@ -1,11 +1,5 @@
 ﻿using Newtonsoft.Json;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.Implementations.Classes
 {
@@ -33,7 +27,10 @@ namespace OpenglTestConsole.Classes.Implementations.Classes
         public bool Uncharted { get; set; }
 
         [JsonProperty("position")]
-        public float[] PosArray { set { Position = new(value[0], value[1], value[2]); } }
+        public float[] PosArray
+        {
+            set { Position = new(value[0], value[1], value[2]); }
+        }
         public Vector3 Position { get; set; }
 
         [JsonProperty("warfare")]
@@ -58,8 +55,9 @@ namespace OpenglTestConsole.Classes.Implementations.Classes
         Yellow,
         Orange,
         Silver,
-        None
+        None,
     }
+
     public enum SpectralClass
     {
         K,
@@ -67,8 +65,9 @@ namespace OpenglTestConsole.Classes.Implementations.Classes
         B,
         F,
         A,
-        G
+        G,
     }
+
     public enum Faction
     {
         Neutral,
@@ -77,8 +76,9 @@ namespace OpenglTestConsole.Classes.Implementations.Classes
         Kavani,
         TradeUnion,
         Syndicate,
-        MiningGuild
+        MiningGuild,
     }
+
     public enum Security
     {
         Wild,
@@ -87,6 +87,7 @@ namespace OpenglTestConsole.Classes.Implementations.Classes
         Contested,
         Core,
     }
+
     public enum Region
     {
         Arkana,

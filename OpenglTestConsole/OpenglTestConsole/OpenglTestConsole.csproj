@@ -5,16 +5,21 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="OpenTK" Version="4.9.4" />
-		<PackageReference Include="StbImageSharp" Version="2.30.15" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.8" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Update="Resources\**\*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+
+		<None Update="Screenshots">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
@@ -40,6 +45,7 @@
 	<ItemGroup>
 		<Folder Include="Classes\Implementations\Rendering\" />
 		<Folder Include="Generated\" />
+		<Folder Include="Screenshots\" />
 	</ItemGroup>
 
 	<Target Name="GenerateSomeFile" BeforeTargets="Build">
@@ -49,6 +55,14 @@
 		</PropertyGroup>
 		<Exec Command="..\ResourcesClassGenerator\bin\Debug\net8.0\ResourcesClassGenerator.exe $(SourceFile) $(TargetFile)"></Exec>
 	</Target>
+
+	<ItemGroup>
+	  <EditorConfigFiles Remove="D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\.editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="D:\Github\OpenGLTests\OpenglTestConsole\OpenglTestConsole\.editorconfig" />
+	</ItemGroup>
 
 
 </Project>

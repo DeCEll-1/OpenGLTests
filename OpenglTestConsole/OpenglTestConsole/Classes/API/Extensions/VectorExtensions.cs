@@ -1,5 +1,5 @@
-﻿using OpenTK.Mathematics;
-using System.Globalization;
+﻿using System.Globalization;
+using OpenTK.Mathematics;
 
 namespace OpenglTestConsole.Classes.API.Extensions
 {
@@ -31,12 +31,13 @@ namespace OpenglTestConsole.Classes.API.Extensions
         /// <returns></returns>
         public static Vector3[] CreateSquare(this Vector3 vector)
         {
-            return [
+            return
+            [
                 new(-vector.X / 2f, vector.Y / 2f, 0f),
                 new(vector.X / 2f, vector.Y / 2f, 0f),
                 new(-vector.X / 2f, -vector.Y / 2f, 0f),
                 new(vector.X / 2f, -vector.Y / 2f, 0f),
-                ];
+            ];
         }
 
         /// <summary>
@@ -69,17 +70,22 @@ namespace OpenglTestConsole.Classes.API.Extensions
         #endregion
 
         #region colors
-        public static Vector4 ToVector4(this Color4 color) => new(color.R, color.G, color.B, color.A);
-        public static Color4 ToColor4(this Vector4 color) => new(color.X, color.Y, color.Z, color.W);
-        public static string ToHex(this Vector4 color) => $"{(int)(color.X * 255):X2}{(int)(color.Y * 255):X2}{(int)(color.Z * 255):X2}{(int)(color.W * 255):X2}";
-        public static Vector4 FromHex(string hex) => new Vector4(
+        public static Vector4 ToVector4(this Color4 color) =>
+            new(color.R, color.G, color.B, color.A);
+
+        public static Color4 ToColor4(this Vector4 color) =>
+            new(color.X, color.Y, color.Z, color.W);
+
+        public static string ToHex(this Vector4 color) =>
+            $"{(int)(color.X * 255):X2}{(int)(color.Y * 255):X2}{(int)(color.Z * 255):X2}{(int)(color.W * 255):X2}";
+
+        public static Vector4 FromHex(string hex) =>
+            new Vector4(
                 byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber) / 255f,
                 byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber) / 255f,
                 byte.Parse(hex.Substring(4, 2), NumberStyles.HexNumber) / 255f,
                 byte.Parse(hex.Substring(6, 2), NumberStyles.HexNumber) / 255f
             );
         #endregion
-
-
     }
 }

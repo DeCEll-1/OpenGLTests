@@ -1,20 +1,28 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 {
     internal class Square : Geometry3D
     {
         public Vector2 shape { get; private set; }
-        public Square(Vector2 shape) { this.shape = shape; Init(); }
 
-        private void Init() { (this.Vertices, this.Normals, this.TexCoords, this.Indices) = GetPlane(); }
-        public (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices) GetPlane()
+        public Square(Vector2 shape)
+        {
+            this.shape = shape;
+            Init();
+        }
+
+        private void Init()
+        {
+            (this.Vertices, this.Normals, this.TexCoords, this.Indices) = GetPlane();
+        }
+
+        public (
+            Vector3[] vertices,
+            Vector3[] normals,
+            Vector2[] texCoords,
+            uint[] indices
+        ) GetPlane()
         {
             // make variables for quick access as we are using floats and all deez are returning doubles
             // list because itd be annoying to use arrays from the start
@@ -38,7 +46,15 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
             texCoords.Add(new Vector2(1, 1));
             texCoords.Add(new Vector2(0, 1));
 
-            return (vertices.ToArray(), normals.ToArray(), texCoords.ToArray(), new uint[] { 0, 1, 2, 2, 3, 0 });
+            return (
+                vertices.ToArray(),
+                normals.ToArray(),
+                texCoords.ToArray(),
+                new uint[] {
+                    0, 1, 2,
+                    2, 3, 0
+                }
+            );
         }
     }
 }

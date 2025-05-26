@@ -1,16 +1,6 @@
-using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.Classes.Paths;
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
+using OpenTK.Mathematics;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 {
@@ -27,8 +17,18 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
         // then you star from angle 0, then increase it by 360/sector count
 
         public Cylinder(int StackCount, int SectorCount, float Height, float Radius)
-        { this.StackCount = StackCount; this.SectorCount = SectorCount; this.Height = Height; this.Radius = Radius; Init(); }
-        private void Init() { (this.Vertices, this.Normals, this.TexCoords, this.Indices) = GetCylinder(); }
+        {
+            this.StackCount = StackCount;
+            this.SectorCount = SectorCount;
+            this.Height = Height;
+            this.Radius = Radius;
+            Init();
+        }
+
+        private void Init()
+        {
+            (this.Vertices, this.Normals, this.TexCoords, this.Indices) = GetCylinder();
+        }
 
         public override void Apply(BufferManager BufferManager)
         {
@@ -38,7 +38,12 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
             BufferManager.SetIndices(Indices);
         }
 
-        private (Vector3[] vertices, Vector3[] normals, Vector2[] texCoords, uint[] indices) GetCylinder()
+        private (
+            Vector3[] vertices,
+            Vector3[] normals,
+            Vector2[] texCoords,
+            uint[] indices
+        ) GetCylinder()
         {
             List<Vector3> unitVertices = GetUnitVertices(SectorCount);
 
@@ -49,7 +54,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
             // put side vertices to arrays
             for (int i = 0; i <= StackCount; i++)
             {
-                float stackStep = Height / (float)StackCount;
+                float stackStep = Height / StackCount;
                 float h = -Height / 2.0f + i * stackStep;
                 // t goes from 1.0 down to 0.0 as i goes from 0 to StackCount
                 float t = 1.0f - (float)i / StackCount;
@@ -58,24 +63,30 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
                 {
                     Vector3 unit = unitVertices[j];
 
-                    vertices.Add(new(
-                        unit.X * Radius,                // vx
-                        unit.Y * Radius,                // vy
-                        h                                   // vz
-                    ));
+                    vertices.Add(
+                        new(
+                            unit.X * Radius, // vx
+                            unit.Y * Radius, // vy
+                            h // vz
+                        )
+                    );
 
                     // normal vector
-                    normals.Add(new(
-                        unit.X,                         // nx
-                        unit.Y,                         // ny
-                        unit.Z                          // nz
-                    ));
+                    normals.Add(
+                        new(
+                            unit.X, // nx
+                            unit.Y, // ny
+                            unit.Z // nz
+                        )
+                    );
 
                     // texture coordinate
-                    texCoords.Add(new(
-                       (float)(j / (float)SectorCount),    // s
-                        t                           // t
-                    ));
+                    texCoords.Add(
+                        new(
+                            (float)(j / (float)SectorCount), // s
+                            t // t
+                        )
+                    );
                 }
             }
 
@@ -103,8 +114,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 
             for (uint i = 0; i < StackCount; ++i)
             {
-                uint k1 = i * uintSectorCount;          // beginning of current stack
-                uint k2 = k1 + uintSectorCount;       // beginning of next stack
+                uint k1 = i * uintSectorCount; // beginning of current stack
+                uint k2 = k1 + uintSectorCount; // beginning of next stack
 
                 for (int j = 0; j < SectorCount; j++, ++k1, ++k2)
                 {
@@ -113,13 +124,13 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
                     indices.Add(k1 + 1);
                     indices.Add(k2);
 
-                    // 0 2 5 
+                    // 0 2 5
                     // Second triangle of quad
                     if (j + 1 != SectorCount)
-                    {// normal stuff
-                        indices.Add(k2);         // 5
-                        indices.Add(k1 + 1);    // 3
-                        indices.Add(k2 + 1);    // 6
+                    { // normal stuff
+                        indices.Add(k2); // 5
+                        indices.Add(k1 + 1); // 3
+                        indices.Add(k2 + 1); // 6
                     }
                     else
                     { // we need 3 0 and 2
@@ -144,7 +155,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 
             for (int j = 0; j < SectorCount; j++, bottomK1++, bottomK2++)
             {
-                // First triangle 
+                // First triangle
                 // 3 is the next stacks starting index, which is the number of sectors we have
                 // so it not being 3 means we are in the same stack
                 if (bottomK2 != SectorCount)
@@ -159,9 +170,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 
             #region bottom
 
-            uint topIndex = (uint)(vertices.Count - 1);             // top center point
-            uint topK1 = uintSectorCount * uintStackCount;         // beginning of current stack
-            uint topK2 = topK1 + 1;                                                     // beginning of next stack
+            uint topIndex = (uint)(vertices.Count - 1); // top center point
+            uint topK1 = uintSectorCount * uintStackCount; // beginning of current stack
+            uint topK2 = topK1 + 1; // beginning of next stack
 
             for (int j = 0; j < SectorCount; j++, topK1++, topK2++)
             {
@@ -180,13 +191,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 
             #endregion
 
-            return (
-                vertices.ToArray(),
-                normals.ToArray(),
-                texCoords.ToArray(),
-                indices.ToArray()
-            );
-
+            return (vertices.ToArray(), normals.ToArray(), texCoords.ToArray(), indices.ToArray());
         }
 
         private List<Vector3> GetUnitVertices(int sectorCount)
@@ -204,7 +209,5 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 
             return unitVertices;
         }
-
-
     }
 }

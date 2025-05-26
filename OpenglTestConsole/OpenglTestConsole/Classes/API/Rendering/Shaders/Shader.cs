@@ -1,30 +1,19 @@
 ﻿using OpenglTestConsole.Classes.API.misc;
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
-using StbImageSharp;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 {
-    public class Shader : IDisposable
+    public partial class Shader : IDisposable
     {
         #region Main Shader Functions
         public bool initalised = false;
-        public string vertexPath; public string fragmentPath;
+        public string vertexPath;
+        public string fragmentPath;
         public int Handle;
         private bool disposed = false;
         public ShaderUniformManager UniformManager;
+
         public Shader(string vertexPath, string fragmentPath)
-        {
-            this.vertexPath = vertexPath;
-            this.fragmentPath = fragmentPath;
-        }
+        { this.vertexPath = vertexPath; this.fragmentPath = fragmentPath; }
 
         public void Init()
         {
@@ -32,12 +21,15 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 
             this.UniformManager = new ShaderUniformManager(Handle);
 
-            int vertShaderPointer = HandleVertexShader(vertexPath);
+            int vertShaderPointer = HandleShader(vertexPath, ShaderType.VertexShader);
 
-            int fragShaderPointer = HandleFragmentShader(fragmentPath);
+            int fragShaderPointer = HandleShader(fragmentPath, ShaderType.FragmentShader);
 
             GL.AttachShader(Handle, vertShaderPointer);
             GL.AttachShader(Handle, fragShaderPointer);
+
+            // init the geometry shader, if we have one
+            InitGeometry();
 
             GL.LinkProgram(Handle);
 
@@ -46,7 +38,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             if (shaderLinkSuccess == 0)
             {
                 string errorLog = GL.GetProgramInfoLog(Handle);
-                Logger.Log($"An error occured while loading shaders for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}", LogLevel.Error);
+                Logger.Log(
+                    $"An error occured while loading shaders for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}",
+                    LogLevel.Error
+                );
             }
 
             GL.DetachShader(Handle, vertShaderPointer);
@@ -56,96 +51,91 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 
             initalised = true;
         }
-        private int HandleFragmentShader(string path)
+
+        private int HandleShader(string path, ShaderType type)
         {
-            string fragSource;
-            try
-            {
-                fragSource = File.ReadAllText(path);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log($"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(Handle)}:\n{ex.ToString()}", LogLevel.Error);
-                Logger.Log($"Using default fragment shader...", LogLevel.Warning);
-                fragSource = File.ReadAllText("Resources/Shaders/default.frag");
-            }
-
-            int fragShaderPointer = GL.CreateShader(ShaderType.FragmentShader);
-
-            GL.ShaderSource(fragShaderPointer, fragSource);
-
-            GL.CompileShader(fragShaderPointer);
-
-            GL.GetShader(fragShaderPointer, ShaderParameter.CompileStatus, out int fragShaderSuccess);
-
-            if (fragShaderSuccess == 0)
-            {
-                string errorLog = GL.GetShaderInfoLog(fragShaderPointer);
-                Logger.Log($"An error occured while loading shaders for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}", LogLevel.Error);
-            }
-
-            Logger.Log($"Loaded fragment shader for shader {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}", LogLevel.Detail);
-
-            return fragShaderPointer;
-        }
-        private int HandleVertexShader(string path)
-        {
-            string vertSource;
+            string source;
 
             try
             {
-                vertSource = File.ReadAllText(path);
+                source = File.ReadAllText(path);
             }
             catch (Exception ex)
             {
-                Logger.Log($"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(Handle)}:\n{ex.ToString()}", LogLevel.Error);
-                Logger.Log($"Using default vertex shader...", LogLevel.Warning);
-                vertSource = File.ReadAllText("Resources/Shaders/default.vert");
+                Logger.Log(
+                    $"An error occured while loading {LogColors.BrightWhite(path)} for {LogColors.BrightWhite(Handle)} for {LogColors.BrightWhite(type.ToString())}:\n{ex.ToString()}",
+                    LogLevel.Error
+                );
+                Logger.Log($"Exiting", LogLevel.Error);
+                throw;
             }
 
-            int vertShaderPointer = GL.CreateShader(ShaderType.VertexShader);
+            int shaderPointer = GL.CreateShader(type);
 
-            GL.ShaderSource(vertShaderPointer, vertSource);
+            GL.ShaderSource(shaderPointer, source);
 
-            GL.CompileShader(vertShaderPointer);
+            GL.CompileShader(shaderPointer);
 
-            GL.GetShader(vertShaderPointer, ShaderParameter.CompileStatus, out int vertShaderSuccess);
+            GL.GetShader(
+                shaderPointer,
+                ShaderParameter.CompileStatus,
+                out int shaderSuccess
+            );
 
-            if (vertShaderSuccess == 0)
+            if (shaderSuccess == 0)
             {
-                string errorLog = GL.GetShaderInfoLog(vertShaderPointer);
-                Logger.Log($"An error occured while loading shaders for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}", LogLevel.Error);
+                string errorLog = GL.GetShaderInfoLog(shaderPointer);
+                Logger.Log(
+                    $"An error occured while loading shaders for {LogColors.BrightWhite(Handle)}!\nError log:\n{errorLog}",
+                    LogLevel.Error
+                );
             }
 
-            Logger.Log($"Loaded vertex shader for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}", LogLevel.Detail);
+            Logger.Log(
+                $"Loaded {LogColors.BrightWhite(type)} shader for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}",
+                LogLevel.Detail
+            );
 
-            return vertShaderPointer;
+            return shaderPointer;
         }
+
         ~Shader()
         {
             if (disposed == false)
             {
-                Logger.Log($"GPU Resource leak for shader! Did you forget to call Dispose()?", LogLevel.Error);
+                Logger.Log(
+                    $"GPU Resource leak for shader! Did you forget to call Dispose()?",
+                    LogLevel.Error
+                );
             }
         }
+
         public void Use()
         {
             if (initalised == false)
             {
-                Logger.Log($"Shader with {LogColors.BrightWhite(Handle)} used without initalisation, initalising..", LogLevel.Warning);
+                Logger.Log(
+                    $"Shader with {LogColors.BrightWhite(Handle)} used without initalisation, initalising..",
+                    LogLevel.Warning
+                );
                 Init();
             }
             GL.UseProgram(Handle);
         }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
             {
                 GL.DeleteProgram(Handle);
-                Logger.Log($"{LogColors.BrightYellow("Disposed")} shader {LogColors.BrightWhite(Handle)}", LogLevel.Detail);
+                Logger.Log(
+                    $"{LogColors.BrightYellow("Disposed")} shader {LogColors.BrightWhite(Handle)}",
+                    LogLevel.Detail
+                );
                 disposed = true;
             }
         }
+
         public void Dispose()
         {
             Dispose(true);

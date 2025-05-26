@@ -13,7 +13,7 @@ out vec2 TexCoord; // Texture coordinates to fragment shader
 
 void main()
 {
-    FragPos = vec3(model * vec4(aPos, 1.0)); // Calculate world position
+    FragPos = vec3(vec4(aPos, 1.0) * model); // Calculate world position
     Normal = normalize(mat3(transpose(inverse(model))) * aNormal);
     // Normal = mat3(transpose(inverse(model))) * aNormal; // Transform normal to world space
     TexCoord = aTexCoord; // Pass texture coordinates

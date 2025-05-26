@@ -1,30 +1,32 @@
-﻿using OpenTK.Mathematics;
-using OpenTK.Graphics.OpenGL;
-using System.Diagnostics.CodeAnalysis;
-using OpenglTestConsole.Classes.API.misc;
-using OpenglTestConsole.Classes.Paths;
+﻿using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Shaders;
-using OpenglTestConsole.Classes.API.Rendering.Geometries;
 
 namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 {
     public partial class Mesh
     {
         #region Init
-        private Camera Camera { get => Scene.Camera; }
-        // make this geometry updateable with set => update buffer
-        public Geometry3D Geometry { get; set; }
+        private Camera Camera
+        {
+            get => Scene.Camera;
+        }
+
+        private Geometry3D _geometry;
+        public Geometry3D Geometry { get => _geometry; set { _geometry = value; _geometry.Apply(this.BufferManager); } }
         public Material Material { get; set; }
         public Transform Transform { get; set; } = new Transform();
         public BufferManager BufferManager { get; }
+
         // caps to enable before rendering
         public List<EnableCap> CapsToEnable { get; set; } = new();
+
         // caps to disable before rendering
         public List<EnableCap> CapsToDisable { get; set; } = new();
         public int VertexArrayObjectPointer { get; private set; }
+
         public Mesh(Geometry3D geometry, Material material)
         {
-            this.Geometry = geometry;
+            this._geometry = geometry;
             this.Material = material;
 
             VertexArrayObjectPointer = GL.GenVertexArray();
@@ -35,11 +37,11 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
         #endregion
 
 
-        #region Render  
+        #region Render
 
         public virtual void Render()
-        { // deadass render that shit cuh 
-          // on it boss ima render that shit cuh
+        { // deadass render that shit cuh
+            // on it boss ima render that shit cuh
 
             Enalbes();
 
@@ -55,12 +57,14 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 
             Material.Shader.UniformManager.SetMatrix4("model", Transform.GetModelMatrix());
 
+
             GL.BindVertexArray(VertexArrayObjectPointer);
 
             GL.DrawElements(type, Geometry.IndicesLength, DrawElementsType.UnsignedInt, 0);
 
             Disables();
         }
+
         private void Enalbes()
         {
             foreach (EnableCap cap in CapsToDisable)
@@ -79,11 +83,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
                 GL.Disable(cap);
         }
 
-
-
-
         #endregion
-
-
     }
 }

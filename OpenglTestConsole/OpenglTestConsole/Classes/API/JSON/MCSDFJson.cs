@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenglTestConsole.Classes.API.JSON;
-
-namespace OpenglTestConsole.Classes.API.JSON
+﻿namespace OpenglTestConsole.Classes.API.JSON
 {
     public class MCSDFJSON
     {
@@ -43,7 +36,7 @@ namespace OpenglTestConsole.Classes.API.JSON
         {
             public int unicode { get; set; }
             public float advance { get; set; }
-            public Bounds planeBounds { get; set; }   // Optional: some glyphs like space may not have this
+            public Bounds planeBounds { get; set; } // Optional: some glyphs like space may not have this
             public Bounds atlasBounds { get; set; }
         }
 
@@ -55,8 +48,8 @@ namespace OpenglTestConsole.Classes.API.JSON
         }
         #endregion
 
-        
-        public static FontJson? GetFontJson(string jsonPath) => LoadJsonFromFile<FontJson>.Load(jsonPath)!;
 
+        public static FontJson? GetFontJson(string jsonPath) =>
+            LoadJsonFromFile<FontJson>.Load(jsonPath)!;
     }
 }

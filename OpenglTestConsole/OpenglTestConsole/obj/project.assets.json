@@ -202,13 +202,20 @@
           }
         }
       },
-      "StbImageSharp/2.30.15": {
+      "SixLabors.ImageSharp/3.1.8": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/StbImageSharp.dll": {}
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/StbImageSharp.dll": {}
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/SixLabors.ImageSharp.props": {}
         }
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
@@ -456,17 +463,20 @@
         "opentk.windowing.graphicslibraryframework.nuspec"
       ]
     },
-    "StbImageSharp/2.30.15": {
-      "sha512": "7QqbupVhz2kcFUPTgMw4iHR9rYDHGundzzee19Mwmd1typ2Lnv8EVJcLJxlkeBM2+4ex0NwsMtdbGSJctp1XCQ==",
+    "SixLabors.ImageSharp/3.1.8": {
+      "sha512": "8eJkROLGh6DBQLR666q2aOpAaean2puZaZ6Ur9YxoyGzjaZhv8OJSxtnDou54+OXMkXtLUdyQC0so47sOsqZjg==",
       "type": "package",
-      "path": "stbimagesharp/2.30.15",
+      "path": "sixlabors.imagesharp/3.1.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/net471/StbImageSharp.dll",
-        "lib/netstandard2.0/StbImageSharp.dll",
-        "stbimagesharp.2.30.15.nupkg.sha512",
-        "stbimagesharp.nuspec"
+        "LICENSE",
+        "build/SixLabors.ImageSharp.props",
+        "lib/net6.0/SixLabors.ImageSharp.dll",
+        "lib/net6.0/SixLabors.ImageSharp.xml",
+        "sixlabors.imagesharp.128.png",
+        "sixlabors.imagesharp.3.1.8.nupkg.sha512",
+        "sixlabors.imagesharp.nuspec"
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/6.0.0": {
@@ -505,7 +515,7 @@
       "Newtonsoft.Json >= 13.0.3",
       "OpenTK >= 4.9.4",
       "ResourcesClassGenerator >= 1.0.0",
-      "StbImageSharp >= 2.30.15"
+      "SixLabors.ImageSharp >= 3.1.8"
     ]
   },
   "packageFolders": {
@@ -556,7 +566,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -570,9 +580,9 @@
             "target": "Package",
             "version": "[4.9.4, )"
           },
-          "StbImageSharp": {
+          "SixLabors.ImageSharp": {
             "target": "Package",
-            "version": "[2.30.15, )"
+            "version": "[3.1.8, )"
           }
         },
         "imports": [
@@ -591,7 +601,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

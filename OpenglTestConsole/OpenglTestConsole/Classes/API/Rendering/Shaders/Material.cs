@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenglTestConsole.Classes.API.Rendering.Shaders
+﻿namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 {
     public abstract class Material
     {
@@ -17,6 +11,5 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
         public Shader Shader { get; set; }
 
         public abstract void Apply();
-
     }
 }

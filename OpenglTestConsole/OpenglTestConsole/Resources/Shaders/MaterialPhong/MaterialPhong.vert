@@ -9,12 +9,13 @@ uniform mat4 projection;
 
 out vec3 FragPos; // Position to fragment shader
 out vec3 Normal; // Normal to fragment shader
+flat out vec3 flatNormal; // non interpolarated normal for flat shading
 out vec2 TexCoord; // Texture coordinates to fragment shader
 
 void main()
 {
-    FragPos = vec3(model * vec4(aPos, 1.0)); // Calculate world position
-    Normal = normalize(mat3(transpose(inverse(model))) * aNormal);
+    FragPos = vec3(vec4(aPos, 1.0) * model); // Calculate world position
+    flatNormal = Normal = normalize(mat3(transpose(inverse(model))) * aNormal);
     // Normal = mat3(transpose(inverse(model))) * aNormal; // Transform normal to world space
     TexCoord = aTexCoord; // Pass texture coordinates
 

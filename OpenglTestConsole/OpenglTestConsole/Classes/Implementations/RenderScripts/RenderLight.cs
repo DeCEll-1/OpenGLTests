@@ -1,34 +1,42 @@
 ﻿using OpenglTestConsole.Classes.API;
+using OpenglTestConsole.Classes.API.Extensions;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Materials;
 using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenTK.Graphics.OpenGL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenTK.Mathematics;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 {
     internal class RenderLight : RenderScript
     {
         private Mesh Mesh;
+
         public override void Init()
         {
-            this.Mesh = new Mesh(new Sphere(16, 16, 1f), PhongMaterial.Silver);
+            Sphere geometry = new Sphere(16, 16, 0.4f);
+
+            //MonoColorMaterial material = new(Color4.Silver.ToVector4());
+            PhongMaterial material = new PhongMaterial(new(1), new(1), new(1), 1);
+
+            this.Mesh = new Mesh(geometry, material);
+
+            Scene.Add(this.Mesh);
+
             this.Mesh.Transform.Position = Scene.Lights[0].Position;
+            this.Mesh.Transform.UpdateMatrix();
+
+
             this.Mesh.CapsToEnable.Add(EnableCap.CullFace);
         }
 
-        public override void Render()
+        public override void Advance()
         {
-            Mesh.Render();
         }
+
         public override void OnResourceRefresh()
         {
-            this.Mesh.Material = PhongMaterial.Silver;
+            this.Mesh.Material = new MonoColorMaterial(Color4.Silver.ToVector4());
         }
     }
 }
