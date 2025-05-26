@@ -1,0 +1,28 @@
+{
+  "canvas-format-brush:paste-canvas-format": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "V"
+    }
+  ],
+  "canvas-format-brush:copy-canvas-format": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "C"
+    }
+  ],
+  "canvas-format-brush:copy-canvas-color": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "C"
+    }
+  ]
+}
