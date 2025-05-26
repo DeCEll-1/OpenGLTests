@@ -1,5 +1,5 @@
 ﻿using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.misc;
+using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 

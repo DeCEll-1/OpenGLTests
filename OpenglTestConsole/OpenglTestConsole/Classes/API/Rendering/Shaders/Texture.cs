@@ -1,4 +1,4 @@
-﻿using OpenglTestConsole.Classes.API.misc;
+﻿using OpenglTestConsole.Classes.API.Misc;
 using OpenTK.Audio.OpenAL;
 using OpenTK.Mathematics;
 using SixLabors.ImageSharp;
@@ -115,7 +115,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
         public static Texture LoadFromSize(
             int width,
             int height,
-            PixelInternalFormat format = PixelInternalFormat.Rgba,
+            TextureTarget target = TextureTarget.Texture2D,
+            PixelInternalFormat pixelInternalFormat = PixelInternalFormat.Rgba,
+            PixelFormat pixelFormat = PixelFormat.Rgba,
             PixelType type = PixelType.UnsignedByte
         )
         {
@@ -137,13 +139,13 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureBaseLevel, 0);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 0);
             GL.TexImage2D(
-                TextureTarget.Texture2D,
+                target,
                 0,
-                format,
+                pixelInternalFormat,
                 width,
                 height,
                 0,
-                PixelFormat.Rgba,
+                pixelFormat,
                 type,
                 nint.Zero
             );

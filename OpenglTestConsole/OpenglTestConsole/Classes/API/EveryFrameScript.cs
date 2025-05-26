@@ -1,4 +1,4 @@
-﻿using OpenglTestConsole.Classes.API.Rendering;
+using OpenglTestConsole.Classes.API.Rendering;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 

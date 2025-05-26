@@ -1,5 +1,5 @@
 ﻿using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.misc;
+using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Rendering.Shaders;
 using OpenTK.Mathematics;

@@ -14,6 +14,7 @@ public static class ResourcePaths
         {
             public const string CoordinateSystem_png = "Resources/Textures/CoordinateSystem.png";
             public const string RotationSystem_png = "Resources/Textures/RotationSystem.png";
+            public const string Bell_Pepper_png = "Resources/Textures/Bell_Pepper.png";
             public const string cobble_stone_png = "Resources/Textures/cobble_stone.png";
         }
     }
@@ -43,6 +44,13 @@ public static class ResourcePaths
             public const string Name = "MonoColorMaterial";
             public const string Fragment = "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.frag";
             public const string Vertex = "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.vert";
+        }
+        public static class Standart
+        {
+            public const string Name = "StandartMaterial";
+            public const string Fragment = "Resources/Shaders/MaterialStandart/MaterialStandart.frag";
+            public const string Vertex = "Resources/Shaders/MaterialStandart/MaterialStandart.vert";
+            public const string Geometry = "Resources/Shaders/MaterialStandart/MaterialStandart.geom";
         }
     }
     public static class ComputeShaders

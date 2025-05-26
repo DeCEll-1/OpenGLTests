@@ -57,17 +57,12 @@ namespace OpenglTestConsole.Classes
             #region Render Scripts
             this.RenderScripts.AddRange(
                 [
-                    //new RenderCoordinates(),
-                    ////new TestSphere(),
-                    ////new TestCylinder(),
-                    //new RenderStarscapeMap(0.1f),
-                    //new RenderStarscapeConnections(0.1f),
-                    //new TextRendering(),
-                    new PhongTest(),
+                    //new PhongTest(),
                     new TextureMaterialTests(),
                     new SquareTest(),
                     new RenderLight(),
                     new ComputeShaderTest(),
+                    new StandartMaterialTest()
                 ]
             );
             #endregion

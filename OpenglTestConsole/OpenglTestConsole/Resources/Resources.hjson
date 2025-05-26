@@ -8,6 +8,7 @@
         "Textures": {
             "CoordinateSystem_png": "Resources/Textures/CoordinateSystem.png",
             "RotationSystem_png": "Resources/Textures/RotationSystem.png",
+            "Bell_Pepper_png": "Resources/Textures/Bell_Pepper.png",
             "cobble_stone_png": "Resources/Textures/cobble_stone.png"
         }
     },
@@ -32,6 +33,12 @@
             "Name": "MonoColorMaterial",
             "Fragment": "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.frag",
             "Vertex": "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.vert"
+        },
+        "Standart": {
+            "Name": "StandartMaterial",
+            "Fragment": "Resources/Shaders/MaterialStandart/MaterialStandart.frag",
+            "Vertex": "Resources/Shaders/MaterialStandart/MaterialStandart.vert",
+            "Geometry": "Resources/Shaders/MaterialStandart/MaterialStandart.geom"
         }
     },
     "ComputeShaders": {

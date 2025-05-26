@@ -1,4 +1,4 @@
-﻿using OpenglTestConsole.Classes.API.misc;
+﻿using OpenglTestConsole.Classes.API.Misc;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 {

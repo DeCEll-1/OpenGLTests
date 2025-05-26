@@ -1,6 +1,6 @@
 ﻿global using OpenTK.Graphics.OpenGL;
 using OpenglTestConsole.Classes;
-using OpenglTestConsole.Classes.API.misc;
+using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Windowing.Desktop;
 
@@ -17,7 +17,7 @@ namespace OpenglTestConsole
             GameWindowSettings gameWindowSettings = GameWindowSettings.Default;
             NativeWindowSettings nativeWindowSettings = new NativeWindowSettings
             {
-                ClientSize = new OpenTK.Mathematics.Vector2i(800, 800),
+                ClientSize = Settings.Resolution,
                 Title = "OpenGL Test Console",
                 DepthBits = 24,
             };

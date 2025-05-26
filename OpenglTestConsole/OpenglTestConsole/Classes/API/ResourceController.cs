@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Rendering.Shaders;
 using OpenglTestConsole.Classes.API.Rendering.Shaders.Compute;

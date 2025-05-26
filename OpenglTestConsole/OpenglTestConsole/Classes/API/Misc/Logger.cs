@@ -1,4 +1,4 @@
-﻿namespace OpenglTestConsole.Classes.API.misc
+﻿namespace OpenglTestConsole.Classes.API.Misc
 {
     public class Logger
     {

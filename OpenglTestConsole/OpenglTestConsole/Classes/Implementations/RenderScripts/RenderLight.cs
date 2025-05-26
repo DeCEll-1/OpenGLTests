@@ -16,8 +16,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
         {
             Sphere geometry = new Sphere(16, 16, 0.4f);
 
-            //MonoColorMaterial material = new(Color4.Silver.ToVector4());
-            PhongMaterial material = new PhongMaterial(new(1), new(1), new(1), 1);
+            MonoColorMaterial material = new(new(1f));
+            //PhongMaterial material = new PhongMaterial(new(1), new(1), new(1), 1);
 
             this.Mesh = new Mesh(geometry, material);
 
