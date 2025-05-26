@@ -126,6 +126,7 @@
       "fromSide": "left",
       "id": "dba54c0ef1a3fed2",
       "styleAttributes": {
+        "path": "long-dashed",
         "pathfindingMethod": "square"
       },
       "toNode": "ef1696964e68bf84",
@@ -316,7 +317,8 @@
       "fromSide": "left",
       "id": "d4bfea5ce38e8d51",
       "styleAttributes": {
-        "pathfindingMethod": "square"
+        "path": "long-dashed",
+        "pathfindingMethod": "a-star"
       },
       "toNode": "b4ae6f3872525dfd",
       "toSide": "right"
@@ -327,6 +329,7 @@
       "fromSide": "top",
       "id": "356c2c996726c4a0",
       "styleAttributes": {
+        "path": "long-dashed",
         "pathfindingMethod": "square"
       },
       "toNode": "6785275875bcb09e",
@@ -342,6 +345,41 @@
       },
       "toNode": "99dfd3b867cfa972",
       "toSide": "bottom"
+    },
+    {
+      "color": "5",
+      "fromNode": "6785275875bcb09e",
+      "fromSide": "left",
+      "id": "e31d7d4ae1b76bb6",
+      "styleAttributes": {
+        "path": "long-dashed",
+        "pathfindingMethod": "square"
+      },
+      "toNode": "57fa69f896976a8a",
+      "toSide": "top"
+    },
+    {
+      "color": "#5a751f",
+      "fromNode": "ef1696964e68bf84",
+      "fromSide": "left",
+      "id": "af4412b585414790",
+      "styleAttributes": {
+        "pathfindingMethod": "a-star"
+      },
+      "toNode": "57fa69f896976a8a",
+      "toSide": "right"
+    },
+    {
+      "color": "#8efe43",
+      "fromNode": "57fa69f896976a8a",
+      "fromSide": "bottom",
+      "id": "934eebd60e4c2b11",
+      "styleAttributes": {
+        "path": "long-dashed",
+        "pathfindingMethod": "square"
+      },
+      "toNode": "ef1696964e68bf84",
+      "toSide": "bottom"
     }
   ],
   "nodes": [
@@ -355,7 +393,7 @@
       },
       "type": "group",
       "width": 3440,
-      "x": -4000,
+      "x": -7320,
       "y": 1200
     },
     {
@@ -415,8 +453,20 @@
       },
       "type": "group",
       "width": 1600,
-      "x": -4000,
-      "y": -580
+      "x": -6400,
+      "y": -540
+    },
+    {
+      "color": "#8efe43",
+      "height": 765,
+      "id": "57fa69f896976a8a",
+      "label": "FBO",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 1520,
+      "x": -3480,
+      "y": 2069
     },
     {
       "color": "#b87f51",
@@ -452,7 +502,7 @@
       },
       "type": "group",
       "width": 1120,
-      "x": -3840,
+      "x": -7200,
       "y": 1980
     },
     {
@@ -465,7 +515,7 @@
       },
       "type": "group",
       "width": 1120,
-      "x": -1820,
+      "x": -5140,
       "y": 2100
     },
     {
@@ -490,7 +540,7 @@
       },
       "type": "group",
       "width": 1040,
-      "x": -3680,
+      "x": -7000,
       "y": 1440
     },
     {
@@ -506,55 +556,6 @@
       "y": -1260
     },
     {
-      "color": "2",
-      "file": "API/Rendering/Light.cs",
-      "height": 131,
-      "id": "a185a02c931d5b72",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -2840,
-      "y": 63
-    },
-    {
-      "color": "3",
-      "file": "API/Scene.cs",
-      "height": 205,
-      "id": "dd5a3f8e84d7f191",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3400,
-      "y": -420
-    },
-    {
-      "color": "5",
-      "height": 131,
-      "id": "b4ae6f3872525dfd",
-      "styleAttributes": {
-        "textAlign": "center"
-      },
-      "text": "Mesh List",
-      "type": "text",
-      "width": 400,
-      "x": -3400,
-      "y": -68
-    },
-    {
-      "color": "#94b0c2",
-      "file": "API/Rendering/Camera.cs",
-      "height": 131,
-      "id": "d02a84543b42c28d",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3960,
-      "y": 63
-    },
-    {
       "file": "Program.md",
       "height": 160,
       "id": "97f6ae139b8cad5d",
@@ -564,6 +565,42 @@
       "width": 400,
       "x": -2560,
       "y": -1600
+    },
+    {
+      "color": "#5a751f",
+      "file": "API/Rendering/Shaders/Texture.cs",
+      "height": 200,
+      "id": "ef1696964e68bf84",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 160,
+      "y": 2200
+    },
+    {
+      "color": "#5f56a4",
+      "file": "API/Rendering/Shaders/ShaderUniformManager.cs",
+      "height": 200,
+      "id": "c4de05930a556f3c",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 1840,
+      "y": 1240
+    },
+    {
+      "color": "#b82e85",
+      "file": "API/Rendering/Shaders/Compute/ComputeShaderUnitManager.cs",
+      "height": 200,
+      "id": "0f7779e266290cd6",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 1840,
+      "y": 2540
     },
     {
       "color": "4",
@@ -590,126 +627,6 @@
       "y": -915
     },
     {
-      "color": "2",
-      "file": "API/Rendering/Materials/PhongMaterial.cs",
-      "height": 180,
-      "id": "7f706f732c765556",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -1780,
-      "y": 2147
-    },
-    {
-      "color": "2",
-      "file": "API/Rendering/Materials/TextureMaterial.cs",
-      "height": 180,
-      "id": "9a87d2af19adfa99",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -1340,
-      "y": 2147
-    },
-    {
-      "color": "2",
-      "file": "API/Rendering/Shaders/Material.cs",
-      "height": 180,
-      "id": "6846b4d16d244eab",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -1960,
-      "y": 1590
-    },
-    {
-      "color": "5",
-      "file": "API/Rendering/MeshClasses/Mesh.cs",
-      "height": 290,
-      "id": "99dfd3b867cfa972",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3640,
-      "y": 1485
-    },
-    {
-      "color": "5",
-      "file": "API/Rendering/MeshClasses/BufferManager.cs",
-      "height": 160,
-      "id": "9c9b0ba14c7ee7d3",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3120,
-      "y": 1550
-    },
-    {
-      "color": "6",
-      "file": "API/Rendering/Geometries/Geometry3D.cs",
-      "height": 154,
-      "id": "ccbe598985060be6",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -2440,
-      "y": 2330
-    },
-    {
-      "color": "6",
-      "file": "API/Rendering/Geometries/MergedGeometry.cs",
-      "height": 154,
-      "id": "c100f8dc778d0400",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -2440,
-      "y": 2557
-    },
-    {
-      "color": "#5a751f",
-      "file": "API/Rendering/Shaders/Texture.cs",
-      "height": 200,
-      "id": "ef1696964e68bf84",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 160,
-      "y": 2200
-    },
-    {
-      "color": "6",
-      "file": "API/Rendering/Geometries/Sphere.cs",
-      "height": 154,
-      "id": "05ad698827cba06a",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3800,
-      "y": 2034
-    },
-    {
-      "color": "6",
-      "file": "API/Rendering/Geometries/Cylinder.cs",
-      "height": 154,
-      "id": "942f2af2ee5f67c8",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3800,
-      "y": 2253
-    },
-    {
       "color": "#5f56a4",
       "file": "API/Rendering/Shaders/Shader.cs",
       "height": 200,
@@ -734,18 +651,6 @@
       "y": 1800
     },
     {
-      "color": "6",
-      "file": "API/Rendering/Geometries/Cube.cs",
-      "height": 154,
-      "id": "1bc932936bb3bbaf",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3360,
-      "y": 2634
-    },
-    {
       "color": "#b82e85",
       "file": "API/Rendering/Shaders/Compute/ComputeShader.cs",
       "height": 200,
@@ -758,6 +663,175 @@
       "y": 2540
     },
     {
+      "color": "#94b0c2",
+      "file": "API/Rendering/Camera.cs",
+      "height": 131,
+      "id": "d02a84543b42c28d",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -6360,
+      "y": 103
+    },
+    {
+      "color": "3",
+      "file": "API/Scene.cs",
+      "height": 205,
+      "id": "dd5a3f8e84d7f191",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5800,
+      "y": -380
+    },
+    {
+      "color": "5",
+      "height": 131,
+      "id": "b4ae6f3872525dfd",
+      "styleAttributes": {
+        "textAlign": "center"
+      },
+      "text": "Mesh List",
+      "type": "text",
+      "width": 400,
+      "x": -5800,
+      "y": -28
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Light.cs",
+      "height": 131,
+      "id": "a185a02c931d5b72",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5240,
+      "y": 103
+    },
+    {
+      "color": "5",
+      "file": "API/Rendering/MeshClasses/Mesh.cs",
+      "height": 290,
+      "id": "99dfd3b867cfa972",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -6960,
+      "y": 1485
+    },
+    {
+      "color": "5",
+      "file": "API/Rendering/MeshClasses/BufferManager.cs",
+      "height": 160,
+      "id": "9c9b0ba14c7ee7d3",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -6440,
+      "y": 1550
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Shaders/Material.cs",
+      "height": 180,
+      "id": "6846b4d16d244eab",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5280,
+      "y": 1590
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Materials/PhongMaterial.cs",
+      "height": 180,
+      "id": "7f706f732c765556",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5100,
+      "y": 2147
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Materials/TextureMaterial.cs",
+      "height": 180,
+      "id": "9a87d2af19adfa99",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -4660,
+      "y": 2147
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Geometry3D.cs",
+      "height": 154,
+      "id": "ccbe598985060be6",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5760,
+      "y": 2330
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/MergedGeometry.cs",
+      "height": 154,
+      "id": "c100f8dc778d0400",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5760,
+      "y": 2557
+    },
+    {
+      "color": "#8efe43",
+      "file": "API/Rendering/FBO.cs",
+      "height": 200,
+      "id": "3c87a1dc8f07d730",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -3440,
+      "y": 2109
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Cylinder.cs",
+      "height": 154,
+      "id": "942f2af2ee5f67c8",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -7160,
+      "y": 2253
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/Cube.cs",
+      "height": 154,
+      "id": "1bc932936bb3bbaf",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -6720,
+      "y": 2634
+    },
+    {
       "color": "6",
       "file": "API/Rendering/Geometries/Square.cs",
       "height": 154,
@@ -766,32 +840,20 @@
       },
       "type": "file",
       "width": 400,
-      "x": -3800,
+      "x": -7160,
       "y": 2634
     },
     {
-      "color": "#5f56a4",
-      "file": "API/Rendering/Shaders/ShaderUniformManager.cs",
-      "height": 200,
-      "id": "c4de05930a556f3c",
+      "color": "6",
+      "file": "API/Rendering/Geometries/Sphere.cs",
+      "height": 154,
+      "id": "05ad698827cba06a",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
-      "x": 1840,
-      "y": 1240
-    },
-    {
-      "color": "#b82e85",
-      "file": "API/Rendering/Shaders/Compute/ComputeShaderUnitManager.cs",
-      "height": 200,
-      "id": "0f7779e266290cd6",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 1840,
-      "y": 2540
+      "x": -7160,
+      "y": 2034
     }
   ]
 }
