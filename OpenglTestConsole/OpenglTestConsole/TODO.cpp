@@ -19,4 +19,4 @@ TODO: PBR
     TODO: HDR
     TODO: normal mapping
 DONE: translate textures to init instead of initing on construction
-TODO: add init and dispose functions to cubemap
+DONE: add init and dispose functions to cubemap

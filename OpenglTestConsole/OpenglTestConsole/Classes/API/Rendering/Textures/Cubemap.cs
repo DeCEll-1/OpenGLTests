@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Textures
 {
-    public class Cubemap
+    public class Cubemap : IDisposable
     {
-        public int Handle { get; init; }
+        public int Handle { get; set; }
         public bool initalised = false;
         private bool _disposed = false;
         public bool disposed
@@ -30,7 +30,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
         public Texture Bottom { get; init; }
         public Texture Back { get; init; }
         public Texture Front { get; init; }
-        public Texture[] textures { get => [Right, Left, Top, Bottom, Back, Front]; }
+        public Texture[] textures { get => [Right, Left, Top, Bottom, Front, Back]; }
         #endregion
 
         public Cubemap(Texture[] inTextures)
@@ -38,9 +38,12 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             #pragma warning disable format
             Right   =   inTextures[0];      Left    =     inTextures[1];
             Top     =   inTextures[2];      Bottom  =     inTextures[3];
-            Front   =   inTextures[4];      Back    =     inTextures[5];      
+            Back    =   inTextures[4];      Front   =     inTextures[5];      
             #pragma warning restore format
+        }
 
+        public void Init()
+        {
             Handle = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, Handle);
 
@@ -52,7 +55,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 {
                     if (tex.initalised)
                     {
-                        initalisedTextures += $" {LogColors.BrightWhite(tex.Handle)}, ";
+                        initalisedTextures += $"{LogColors.BrightWhite(tex.Handle)}, ";
                     }
                 }
 
@@ -107,6 +110,39 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             GL.ActiveTexture(unit);
         }
 
+        #region disposal
+        ~Cubemap()
+        {
+            if (disposed == false)
+                Logger.Log(
+                    $"GPU Resource leak for cubemap! Did you forget to call Dispose()?",
+                    LogLevel.Error
+                );
+        }
 
+        protected virtual void Dispose(bool disposing, bool log = true)
+        {
+            if (!disposed)
+            {
+                if (log)
+                    Logger.Log(
+                    $"{LogColors.BrightYellow("Disposed")} Cubemap {LogColors.BrightWhite(Handle)}",
+                    LogLevel.Detail
+                );
+                foreach (var texture in textures)
+                    texture.Dispose();
+                GL.DeleteTexture(Handle);
+                Handle = 0;
+                disposed = true;
+            }
+        }
+        public bool logDisposal = true;
+
+        public void Dispose()
+        {
+            Dispose(true, logDisposal);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

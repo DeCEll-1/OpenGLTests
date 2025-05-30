@@ -149,9 +149,11 @@ namespace OpenglTestConsole.Classes.API
                     Texture.LoadFromFile(frontSide),
                 ];
 
+
             Logger.Log($"Loading {LogColors.Green("Cubemap")} {LogColors.BrightWhite(cubemapName)}", LogLevel.Detail);
 
             Resources.Cubemaps.Add(cubemapName, new(textures));
+            Resources.Cubemaps[cubemapName].Init();
         }
         #endregion
     }

@@ -300,7 +300,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             {
                 if (log)
                     Logger.Log(
-                    $"{LogColors.BrightYellow("Disposed")} texture {LogColors.BrightWhite(Handle)}",
+                    $"{LogColors.BrightYellow("Disposed")} Texture {LogColors.BrightWhite(Handle)}",
                     LogLevel.Detail
                 );
 

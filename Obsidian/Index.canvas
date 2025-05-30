@@ -61,6 +61,7 @@
       "fromSide": "top",
       "id": "0593b342e11e7d9f",
       "styleAttributes": {
+        "path": "long-dashed",
         "pathfindingMethod": "square"
       },
       "toNode": "6846b4d16d244eab",
@@ -129,29 +130,7 @@
         "path": "long-dashed",
         "pathfindingMethod": "square"
       },
-      "toNode": "ef1696964e68bf84",
-      "toSide": "bottom"
-    },
-    {
-      "color": "#5a751f",
-      "fromNode": "ef1696964e68bf84",
-      "fromSide": "right",
-      "id": "3131793da0e5a02b",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "564c4bc9e20bf73b",
-      "toSide": "top"
-    },
-    {
-      "color": "#5a751f",
-      "fromNode": "ef1696964e68bf84",
-      "fromSide": "right",
-      "id": "6d2a5efbe58abd7f",
-      "styleAttributes": {
-        "pathfindingMethod": "square"
-      },
-      "toNode": "5da87c1b0639e670",
+      "toNode": "57fa69f896976a8a",
       "toSide": "bottom"
     },
     {
@@ -198,7 +177,7 @@
         "path": "long-dashed",
         "pathfindingMethod": "square"
       },
-      "toNode": "ef1696964e68bf84",
+      "toNode": "57fa69f896976a8a",
       "toSide": "top"
     },
     {
@@ -324,18 +303,6 @@
       "toSide": "right"
     },
     {
-      "color": "5",
-      "fromNode": "47d149524c9dde5a",
-      "fromSide": "top",
-      "id": "356c2c996726c4a0",
-      "styleAttributes": {
-        "path": "long-dashed",
-        "pathfindingMethod": "square"
-      },
-      "toNode": "6785275875bcb09e",
-      "toSide": "bottom"
-    },
-    {
       "color": "#566da4",
       "fromNode": "77c0af78d13c4b2f",
       "fromSide": "left",
@@ -348,32 +315,91 @@
     },
     {
       "color": "5",
-      "fromNode": "6785275875bcb09e",
-      "fromSide": "left",
-      "id": "e31d7d4ae1b76bb6",
+      "fromNode": "47d149524c9dde5a",
+      "fromSide": "top",
+      "id": "356c2c996726c4a0",
       "styleAttributes": {
         "path": "long-dashed",
         "pathfindingMethod": "square"
       },
-      "toNode": "57fa69f896976a8a",
+      "toNode": "6785275875bcb09e",
+      "toSide": "bottom"
+    },
+    {
+      "color": "6",
+      "fromNode": "a4e55d871309cf74",
+      "fromSide": "right",
+      "id": "848fa8a5a161e3fe",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "d9d8325efffd6d35",
+      "toSide": "left"
+    },
+    {
+      "color": "6",
+      "fromNode": "d9d8325efffd6d35",
+      "fromSide": "right",
+      "id": "16e61b5f48037c57",
+      "styleAttributes": {
+        "pathfindingMethod": "square"
+      },
+      "toNode": "ccbe598985060be6",
+      "toSide": "right"
+    },
+    {
+      "color": "#5a751f",
+      "fromNode": "57fa69f896976a8a",
+      "fromSide": "right",
+      "id": "4518cf6121787d49",
+      "styleAttributes": {
+        "path": "long-dashed",
+        "pathfindingMethod": "square"
+      },
+      "toNode": "564c4bc9e20bf73b",
+      "toSide": "top"
+    },
+    {
+      "color": "#5a751f",
+      "fromNode": "57fa69f896976a8a",
+      "fromSide": "right",
+      "id": "c0581467f97c38f8",
+      "styleAttributes": {
+        "path": "long-dashed",
+        "pathfindingMethod": "square"
+      },
+      "toNode": "5da87c1b0639e670",
+      "toSide": "bottom"
+    },
+    {
+      "color": "#5a751f",
+      "fromNode": "ef1696964e68bf84",
+      "fromSide": "right",
+      "id": "a60f8c67bfb97755",
+      "styleAttributes": {
+        "path": "long-dashed",
+        "pathfindingMethod": "square"
+      },
+      "toNode": "70adf7be10a41c1c",
       "toSide": "top"
     },
     {
       "color": "#5a751f",
       "fromNode": "ef1696964e68bf84",
-      "fromSide": "left",
-      "id": "af4412b585414790",
+      "fromSide": "right",
+      "id": "09206e5b3f7ae739",
       "styleAttributes": {
-        "pathfindingMethod": "a-star"
+        "path": "long-dashed",
+        "pathfindingMethod": "square"
       },
-      "toNode": "57fa69f896976a8a",
-      "toSide": "right"
+      "toNode": "3c87a1dc8f07d730",
+      "toSide": "top"
     },
     {
       "color": "#8efe43",
-      "fromNode": "57fa69f896976a8a",
+      "fromNode": "3c87a1dc8f07d730",
       "fromSide": "bottom",
-      "id": "934eebd60e4c2b11",
+      "id": "480ddc0b2b0d831c",
       "styleAttributes": {
         "path": "long-dashed",
         "pathfindingMethod": "square"
@@ -417,8 +443,8 @@
       },
       "type": "group",
       "width": 2200,
-      "x": -1960,
-      "y": -580
+      "x": -2660,
+      "y": -560
     },
     {
       "color": "#a45687",
@@ -457,18 +483,6 @@
       "y": -540
     },
     {
-      "color": "#8efe43",
-      "height": 765,
-      "id": "57fa69f896976a8a",
-      "label": "FBO",
-      "styleAttributes": {
-      },
-      "type": "group",
-      "width": 1520,
-      "x": -3480,
-      "y": 2069
-    },
-    {
       "color": "#b87f51",
       "height": 1040,
       "id": "ac03b7d638727d89",
@@ -477,8 +491,8 @@
       },
       "type": "group",
       "width": 1100,
-      "x": -860,
-      "y": -480
+      "x": -1560,
+      "y": -460
     },
     {
       "color": "#51b8ac",
@@ -489,8 +503,8 @@
       },
       "type": "group",
       "width": 1100,
-      "x": -1960,
-      "y": -480
+      "x": -2660,
+      "y": -460
     },
     {
       "color": "6",
@@ -517,6 +531,18 @@
       "width": 1120,
       "x": -5140,
       "y": 2100
+    },
+    {
+      "color": "#5a751f",
+      "height": 520,
+      "id": "57fa69f896976a8a",
+      "label": "Texture",
+      "styleAttributes": {
+      },
+      "type": "group",
+      "width": 1520,
+      "x": -2200,
+      "y": 2120
     },
     {
       "color": "#566da4",
@@ -556,111 +582,16 @@
       "y": -1260
     },
     {
-      "file": "Program.md",
-      "height": 160,
-      "id": "97f6ae139b8cad5d",
+      "color": "5",
+      "file": "API/Rendering/MeshClasses/Mesh.cs",
+      "height": 290,
+      "id": "99dfd3b867cfa972",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
-      "x": -2560,
-      "y": -1600
-    },
-    {
-      "color": "#5a751f",
-      "file": "API/Rendering/Shaders/Texture.cs",
-      "height": 200,
-      "id": "ef1696964e68bf84",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 160,
-      "y": 2200
-    },
-    {
-      "color": "#5f56a4",
-      "file": "API/Rendering/Shaders/ShaderUniformManager.cs",
-      "height": 200,
-      "id": "c4de05930a556f3c",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 1840,
-      "y": 1240
-    },
-    {
-      "color": "#b82e85",
-      "file": "API/Rendering/Shaders/Compute/ComputeShaderUnitManager.cs",
-      "height": 200,
-      "id": "0f7779e266290cd6",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 1840,
-      "y": 2540
-    },
-    {
-      "color": "4",
-      "file": "API/ResourceController.cs",
-      "height": 160,
-      "id": "d30310ee032c7437",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -660,
-      "y": -1180
-    },
-    {
-      "color": "4",
-      "file": "API/Resources.cs",
-      "height": 160,
-      "id": "489ae8067549c062",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -660,
-      "y": -915
-    },
-    {
-      "color": "#5f56a4",
-      "file": "API/Rendering/Shaders/Shader.cs",
-      "height": 200,
-      "id": "0a8d16db93bba184",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 800,
-      "y": 1240
-    },
-    {
-      "color": "#566da4",
-      "file": "API/Rendering/Shaders/Geometry/Shader.cs",
-      "height": 200,
-      "id": "89275a94baea1cd0",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 800,
-      "y": 1800
-    },
-    {
-      "color": "#b82e85",
-      "file": "API/Rendering/Shaders/Compute/ComputeShader.cs",
-      "height": 200,
-      "id": "9025ee135ffb309c",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": 800,
-      "y": 2540
+      "x": -6960,
+      "y": 1485
     },
     {
       "color": "#94b0c2",
@@ -673,31 +604,6 @@
       "width": 400,
       "x": -6360,
       "y": 103
-    },
-    {
-      "color": "3",
-      "file": "API/Scene.cs",
-      "height": 205,
-      "id": "dd5a3f8e84d7f191",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -5800,
-      "y": -380
-    },
-    {
-      "color": "5",
-      "height": 131,
-      "id": "b4ae6f3872525dfd",
-      "styleAttributes": {
-        "textAlign": "center"
-      },
-      "text": "Mesh List",
-      "type": "text",
-      "width": 400,
-      "x": -5800,
-      "y": -28
     },
     {
       "color": "2",
@@ -713,27 +619,39 @@
     },
     {
       "color": "5",
-      "file": "API/Rendering/MeshClasses/Mesh.cs",
-      "height": 290,
-      "id": "99dfd3b867cfa972",
+      "height": 131,
+      "id": "b4ae6f3872525dfd",
       "styleAttributes": {
+        "textAlign": "center"
       },
-      "type": "file",
+      "text": "Mesh List",
+      "type": "text",
       "width": 400,
-      "x": -6960,
-      "y": 1485
+      "x": -5800,
+      "y": -28
     },
     {
-      "color": "5",
-      "file": "API/Rendering/MeshClasses/BufferManager.cs",
+      "file": "Program.md",
       "height": 160,
-      "id": "9c9b0ba14c7ee7d3",
+      "id": "97f6ae139b8cad5d",
       "styleAttributes": {
       },
       "type": "file",
       "width": 400,
-      "x": -6440,
-      "y": 1550
+      "x": -2560,
+      "y": -1600
+    },
+    {
+      "color": "3",
+      "file": "API/Scene.cs",
+      "height": 205,
+      "id": "dd5a3f8e84d7f191",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5800,
+      "y": -380
     },
     {
       "color": "2",
@@ -785,30 +703,6 @@
     },
     {
       "color": "6",
-      "file": "API/Rendering/Geometries/MergedGeometry.cs",
-      "height": 154,
-      "id": "c100f8dc778d0400",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -5760,
-      "y": 2557
-    },
-    {
-      "color": "#8efe43",
-      "file": "API/Rendering/FBO.cs",
-      "height": 200,
-      "id": "3c87a1dc8f07d730",
-      "styleAttributes": {
-      },
-      "type": "file",
-      "width": 400,
-      "x": -3440,
-      "y": 2109
-    },
-    {
-      "color": "6",
       "file": "API/Rendering/Geometries/Cylinder.cs",
       "height": 154,
       "id": "942f2af2ee5f67c8",
@@ -818,6 +712,54 @@
       "width": 400,
       "x": -7160,
       "y": 2253
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Materials/MonoColorMaterial.cs",
+      "height": 180,
+      "id": "d23e9ee57196a562",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5100,
+      "y": 2394
+    },
+    {
+      "color": "2",
+      "file": "API/Rendering/Materials/SkyboxMaterial.cs",
+      "height": 180,
+      "id": "d4c7b7afe5f12350",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -4660,
+      "y": 2394
+    },
+    {
+      "color": "4",
+      "file": "API/Resources.cs",
+      "height": 160,
+      "id": "489ae8067549c062",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -660,
+      "y": -915
+    },
+    {
+      "color": "4",
+      "file": "API/ResourceController.cs",
+      "height": 160,
+      "id": "d30310ee032c7437",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -660,
+      "y": -1180
     },
     {
       "color": "6",
@@ -845,6 +787,66 @@
     },
     {
       "color": "6",
+      "file": "API/Rendering/Geometries/Skybox.cs",
+      "height": 154,
+      "id": "3e0677517b258245",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -7160,
+      "y": 2440
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/MergedGeometry.cs",
+      "height": 154,
+      "id": "c100f8dc778d0400",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5760,
+      "y": 2540
+    },
+    {
+      "color": "#5f56a4",
+      "file": "API/Rendering/Shaders/Shader.cs",
+      "height": 200,
+      "id": "0a8d16db93bba184",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 800,
+      "y": 1240
+    },
+    {
+      "color": "#566da4",
+      "file": "API/Rendering/Shaders/Geometry/Shader.cs",
+      "height": 200,
+      "id": "89275a94baea1cd0",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 800,
+      "y": 1800
+    },
+    {
+      "color": "5",
+      "file": "API/Rendering/MeshClasses/BufferManager.cs",
+      "height": 160,
+      "id": "9c9b0ba14c7ee7d3",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -6440,
+      "y": 1550
+    },
+    {
+      "color": "6",
       "file": "API/Rendering/Geometries/Sphere.cs",
       "height": 154,
       "id": "05ad698827cba06a",
@@ -854,6 +856,90 @@
       "width": 400,
       "x": -7160,
       "y": 2034
+    },
+    {
+      "color": "6",
+      "file": "API/Rendering/Geometries/MergedGeometry.cs",
+      "height": 154,
+      "id": "d9d8325efffd6d35",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -5760,
+      "y": 2740
+    },
+    {
+      "color": "#b82e85",
+      "file": "API/Rendering/Shaders/Compute/ComputeShader.cs",
+      "height": 200,
+      "id": "9025ee135ffb309c",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 800,
+      "y": 2540
+    },
+    {
+      "color": "#5f56a4",
+      "file": "API/Rendering/Shaders/ShaderUniformManager.cs",
+      "height": 200,
+      "id": "c4de05930a556f3c",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 1840,
+      "y": 1240
+    },
+    {
+      "color": "#b82e85",
+      "file": "API/Rendering/Shaders/Compute/ComputeShaderUnitManager.cs",
+      "height": 200,
+      "id": "0f7779e266290cd6",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": 1840,
+      "y": 2540
+    },
+    {
+      "color": "#5a751f",
+      "file": "API/Rendering/Textures/Texture.cs",
+      "height": 200,
+      "id": "ef1696964e68bf84",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -2160,
+      "y": 2160
+    },
+    {
+      "color": "#8efe43",
+      "file": "API/Rendering/Textures/FBO.cs",
+      "height": 200,
+      "id": "3c87a1dc8f07d730",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1120,
+      "y": 2360
+    },
+    {
+      "color": "#5a751f",
+      "file": "API/Rendering/Textures/Cubemap.cs",
+      "height": 200,
+      "id": "70adf7be10a41c1c",
+      "styleAttributes": {
+      },
+      "type": "file",
+      "width": 400,
+      "x": -1560,
+      "y": 2360
     }
   ]
 }
