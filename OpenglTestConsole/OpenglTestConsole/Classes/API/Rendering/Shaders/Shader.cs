@@ -8,7 +8,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
         public bool initalised = false;
         public string vertexPath;
         public string fragmentPath;
-        public int Handle;
+        public int Handle { get; set; }
         private bool disposed = false;
         public ShaderUniformManager UniformManager;
 
@@ -92,7 +92,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             }
 
             Logger.Log(
-                $"Loaded {LogColors.BrightWhite(type)} shader for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}",
+                $"Loaded {LogColors.White(type)} for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}",
                 LogLevel.Detail
             );
 

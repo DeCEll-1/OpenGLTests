@@ -22,6 +22,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 
         // caps to disable before rendering
         public List<EnableCap> CapsToDisable { get; set; } = new();
+
+        // render type
+        public PrimitiveType type { get; set; } = PrimitiveType.Triangles;
+
         public int VertexArrayObjectPointer { get; private set; }
 
         public Mesh(Geometry3D geometry, Material material)
@@ -45,7 +49,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 
             Enalbes();
 
-            PrimitiveType type = PrimitiveType.Triangles;
 
             Material.Shader.Use();
 
@@ -59,7 +62,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 
 
             GL.BindVertexArray(VertexArrayObjectPointer);
-
+            if (Geometry.IndicesLength < 3) // check if we are using indices
+                GL.DrawArrays(type, 0, Geometry.VerticesLength);
             GL.DrawElements(type, Geometry.IndicesLength, DrawElementsType.UnsignedInt, 0);
 
             Disables();

@@ -1,5 +1,6 @@
 ﻿using OpenglTestConsole.Classes.API.Rendering.Shaders;
 using OpenglTestConsole.Classes.API.Rendering.Shaders.Compute;
+using OpenglTestConsole.Classes.API.Rendering.Textures;
 using static OpenglTestConsole.Classes.API.JSON.MCSDFJSON;
 
 namespace OpenglTestConsole.Classes.API
@@ -10,5 +11,6 @@ namespace OpenglTestConsole.Classes.API
         public static Dictionary<string, Shader> Shaders { get; set; } = new();
         public static Dictionary<string, ComputeShader> CompShaders { get; set; } = new();
         public static Dictionary<string, FontJson> Fonts { get; set; } = new();
+        public static Dictionary<string, Cubemap> Cubemaps { get; set; } = new();
     }
 }

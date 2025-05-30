@@ -40,7 +40,7 @@ namespace OpenglTestConsole.Classes
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
 
-            Scene.Lights.Add(new Light(new Vector3(0f, 0f, 5f), new Vector3(1.0f, 1.0f, 1.0f)));
+            Scene.Lights.Add(new Light(new Vector3(-70f, 50f, -50f), new Vector3(1.0f, 1.0f, 1.0f)));
 
             #region EFSs
             this.EveryFrameScripts.AddRange(
@@ -57,12 +57,13 @@ namespace OpenglTestConsole.Classes
             #region Render Scripts
             this.RenderScripts.AddRange(
                 [
-                    //new PhongTest(),
+                    new PhongTest(),
                     new TextureMaterialTests(),
                     new SquareTest(),
                     new RenderLight(),
                     new ComputeShaderTest(),
-                    new StandartMaterialTest()
+                    new StandartMaterialTest(),
+                    new SkyBoxTest(),
                 ]
             );
             #endregion

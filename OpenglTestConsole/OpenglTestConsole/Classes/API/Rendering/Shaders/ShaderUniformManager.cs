@@ -1,3 +1,4 @@
+using OpenglTestConsole.Classes.API.Rendering.Textures;
 using OpenTK.Mathematics;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Shaders
@@ -128,6 +129,25 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             {
                 uniformCache.Add(name, GL.GetUniformLocation(Handle, name));
                 SetTexture(name, tex, unit);
+            }
+        }
+
+        public void SetCubemap(string name, Cubemap cubemap, OpenTK.Graphics.OpenGL.TextureUnit unit)
+        {
+
+            cubemap.Activate(unit);
+            cubemap.Bind();
+
+            if (uniformCache.ContainsKey(name))
+            {
+                uniformCache.TryGetValue(name, out int loc);
+                int unitint = (int)unit - (int)TextureUnit.Texture0;
+                GL.Uniform1(loc, unitint);
+            }
+            else
+            {
+                uniformCache.Add(name, GL.GetUniformLocation(Handle, name));
+                SetCubemap(name, cubemap, unit);
             }
         }
 

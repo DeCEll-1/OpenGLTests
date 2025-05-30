@@ -28,30 +28,6 @@ void main()
     // i really, dont know why https://developer.download.nvidia.com/SDK/10/direct3d/Source/SolidWireframe/Doc/SolidWireframe.pdf
     // makes all these calculations, you can just put 1s in the triangles points and it interpolerates anyways?
 
-    // #region obsolete
-    // // vec4 p;
-
-    // // p = gl_in[0].gl_Position;
-    // // vec2 p0 = vec2(gViewportMatrix * (p / p.w));
-
-    // // p = gl_in[1].gl_Position;
-    // // vec2 p1 = vec2(gViewportMatrix * (p / p.w));
-
-    // // p = gl_in[2].gl_Position;
-    // // vec2 p2 = vec2(gViewportMatrix * (p / p.w));
-
-    // // float a = length(p1 - p2);
-    // // float b = length(p2 - p0);
-    // // float c = length(p1 - p0);
-
-    // // float alpha = acos((b * b + c * c - a * a) / (2.0 * b * c));
-    // // float beta = acos((a * a + c * c - b * b) / (2.0 * a * c));
-
-    // // float ha = abs(c * sin(beta));
-    // // float hb = abs(c * sin(alpha));
-    // // float hc = abs(b * sin(alpha));
-    // #endregion
-
     // #region first vertex of the triangle
     gl_Position = gl_in[0].gl_Position;
     gl_ClipDistance = gl_in[0].gl_ClipDistance;

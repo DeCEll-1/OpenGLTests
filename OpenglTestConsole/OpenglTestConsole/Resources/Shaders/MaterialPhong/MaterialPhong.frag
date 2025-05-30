@@ -37,7 +37,7 @@ void main()
     vec3 ambient = light.ambient * material.ambient; //Remember to use the material here.
 
     //diffuse
-    vec3 norm = normalize(flatNormal0);
+    vec3 norm = normalize(Normal0);
     vec3 lightDir = normalize(light.position - FragPos0);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = light.diffuse * (diff * material.diffuse); //Remember to use the material here.
@@ -53,12 +53,12 @@ void main()
     //over how each element is applied to different objects.
     vec3 result = ambient + diffuse + specular;
 
-    float d = min(EdgeDistance0.x, min(EdgeDistance0.y, EdgeDistance0.z));
+    float d = min(EdgeDistance0.x, min(EdgeDistance0.y, EdgeDistance0.z)) * 3.;
 
-    if (d < 0.01)
-        result = vec3(1.);
-    else
-        result = vec3(0.);
+    // if (d < .05)
+    //     result = vec3(1.);
+    // else
+    //     result = vec3(0.);
 
     FragColor = vec4(result, 1.);
 }

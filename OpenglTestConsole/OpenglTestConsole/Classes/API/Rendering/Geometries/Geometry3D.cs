@@ -6,10 +6,13 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
     public abstract class Geometry3D
     {
         public int size;
-        public int IndicesLength
-        {
-            get => this.Indices.Length;
-        }
+        #region length
+        public int IndicesLength { get => this.Indices.Length; }
+        public int VerticesLength { get => this.Vertices.Length; }
+        public int NormalsLength { get => this.Normals.Length; }
+        public int TexCoordsLength { get => this.TexCoords.Length; }
+        #endregion
+
         public uint[] Indices = [];
 
         public Vector3[] Vertices = Array.Empty<Vector3>();
@@ -18,7 +21,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 
         public virtual void Apply(BufferManager BufferManager)
         {
-            size = this.Vertices.Length; // almost forgor this lmao
+            size = this.VerticesLength; // almost forgor this lmao
             BufferManager.SetVector3(this.Vertices, 0);
             BufferManager.SetVector3(this.Normals, 1);
             BufferManager.SetVector2(this.TexCoords, 2);

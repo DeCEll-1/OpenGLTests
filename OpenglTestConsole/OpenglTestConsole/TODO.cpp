@@ -1,6 +1,7 @@
 ﻿DONE: add plane
     DONE: add cube
 TODO: add instanced rendering
+TODO: add text
 TODO: allow multiple lights
 TODO: add a proper material with lightning and other features
     features include but are not limited to:
@@ -11,3 +12,11 @@ TODO: add a proper material with lightning and other features
         normal mapping
         flat shading
 TODO: add gif rendering
+TODO: PBR
+    DONE: framebuffers
+    DONE: cubemaps
+    TODO: gamma correction
+    TODO: HDR
+    TODO: normal mapping
+DONE: translate textures to init instead of initing on construction
+TODO: add init and dispose functions to cubemap

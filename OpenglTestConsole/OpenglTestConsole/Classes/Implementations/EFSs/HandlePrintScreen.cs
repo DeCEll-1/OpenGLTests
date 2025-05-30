@@ -1,7 +1,7 @@
 ﻿using OpenglTestConsole.Classes.API;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.Classes.API.Rendering.Shaders;
+using OpenglTestConsole.Classes.API.Rendering.Textures;
 using OpenTK.Mathematics;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;

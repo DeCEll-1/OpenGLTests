@@ -52,6 +52,12 @@ public static class ResourcePaths
             public const string Vertex = "Resources/Shaders/MaterialStandart/MaterialStandart.vert";
             public const string Geometry = "Resources/Shaders/MaterialStandart/MaterialStandart.geom";
         }
+        public static class Skybox
+        {
+            public const string Name = "SkyboxMaterial";
+            public const string Fragment = "Resources/Shaders/MaterialSkybox/MaterialSkybox.frag";
+            public const string Vertex = "Resources/Shaders/MaterialSkybox/MaterialSkybox.vert";
+        }
     }
     public static class ComputeShaders
     {
@@ -68,6 +74,19 @@ public static class ResourcePaths
             public const string Name = "ComicSans";
             public const string JSON = "Resources/Fonts/ComicSans.json";
             public const string PNG = "Resources/Fonts/ComicSans.png";
+        }
+    }
+    public static class Cubemaps
+    {
+        public static class Sea
+        {
+            public const string Name = "Sea";
+            public const string Right = "Resources/SeaSkybox/right.jpg";
+            public const string Left = "Resources/SeaSkybox/left.jpg";
+            public const string Top = "Resources/SeaSkybox/top.jpg";
+            public const string Bottom = "Resources/SeaSkybox/bottom.jpg";
+            public const string Back = "Resources/SeaSkybox/back.jpg";
+            public const string Front = "Resources/SeaSkybox/front.jpg";
         }
     }
 }

@@ -3,8 +3,8 @@ using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Materials;
 using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenglTestConsole.Classes.API.Rendering.Shaders;
 using OpenglTestConsole.Classes.API.Rendering.Shaders.Compute;
+using OpenglTestConsole.Classes.API.Rendering.Textures;
 using OpenglTestConsole.Generated.Paths;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
@@ -20,8 +20,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
             this.Texture = Texture.LoadFromSize(
                 512,
                 512,
-                format: PixelInternalFormat.Rgba32f,
-                PixelType.Float
+                pixelInternalFormat: PixelInternalFormat.Rgba32f,
+                type: PixelType.Float
             );
             this.Shader = Resources.CompShaders[ResourcePaths.ComputeShaders.MyComputeShader.Name];
             Shader.UnitManager.SetImageTexture(this.Texture.Handle, 0);

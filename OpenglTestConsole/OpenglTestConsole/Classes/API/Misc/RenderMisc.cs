@@ -1,4 +1,4 @@
-﻿using OpenglTestConsole.Classes.API.Rendering.Shaders;
+﻿using OpenglTestConsole.Classes.API.Rendering.Textures;
 using OpenTK.Mathematics;
 
 namespace OpenglTestConsole.Classes.API.Misc

@@ -39,6 +39,11 @@
             "Fragment": "Resources/Shaders/MaterialStandart/MaterialStandart.frag",
             "Vertex": "Resources/Shaders/MaterialStandart/MaterialStandart.vert",
             "Geometry": "Resources/Shaders/MaterialStandart/MaterialStandart.geom"
+        },
+        "Skybox": {
+            "Name": "SkyboxMaterial",
+            "Fragment": "Resources/Shaders/MaterialSkybox/MaterialSkybox.frag",
+            "Vertex": "Resources/Shaders/MaterialSkybox/MaterialSkybox.vert"
         }
     },
     "ComputeShaders": {
@@ -52,6 +57,17 @@
             "Name": "ComicSans",
             "JSON": "Resources/Fonts/ComicSans.json",
             "PNG": "Resources/Fonts/ComicSans.png"
+        }
+    },
+    "Cubemaps": {
+        "Sea": {
+            "Name": "Sea",
+            "Right": "Resources/SeaSkybox/right.jpg",
+            "Left": "Resources/SeaSkybox/left.jpg",
+            "Top": "Resources/SeaSkybox/top.jpg",
+            "Bottom": "Resources/SeaSkybox/bottom.jpg",
+            "Back": "Resources/SeaSkybox/back.jpg",
+            "Front": "Resources/SeaSkybox/front.jpg"
         }
     }
 }

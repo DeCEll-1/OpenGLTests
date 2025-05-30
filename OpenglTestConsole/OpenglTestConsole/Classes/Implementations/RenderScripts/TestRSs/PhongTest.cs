@@ -15,6 +15,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
         {
             // create geometry
             Sphere geometry = new Sphere(16, 16, 1f);
+            //Cylinder geometry = new Cylinder(3, 16, 2, 1);
 
             // create material
             PhongMaterial material = PhongMaterial.Pearl;

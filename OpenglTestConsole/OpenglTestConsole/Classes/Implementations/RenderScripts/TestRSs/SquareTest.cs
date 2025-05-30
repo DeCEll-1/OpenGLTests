@@ -12,10 +12,10 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 
         public override void Init()
         {
-            //Sphere geometry = new Sphere(16, 16, 1f);
+            Sphere geometry = new Sphere(16, 16, 1f);
             //Cylinder geometry = new Cylinder(1, 3, 3f, 1f);
 
-            Cube geometry = new Cube(new(1));
+            //Cube geometry = new Cube(new(1));
             //Square geometry = new Square(new(1));
 
             PhongMaterial material = PhongMaterial.Pearl;

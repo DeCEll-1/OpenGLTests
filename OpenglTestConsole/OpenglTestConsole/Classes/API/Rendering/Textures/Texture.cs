@@ -5,35 +5,68 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System.IO;
+using static OpenglTestConsole.Generated.Paths.ResourcePaths.Materials;
 
-namespace OpenglTestConsole.Classes.API.Rendering.Shaders
+namespace OpenglTestConsole.Classes.API.Rendering.Textures
 {
     public class Texture : IDisposable
     {
         public int Handle { get; set; }
         public bool initalised = false;
-        public int width,
-            height;
-        private bool disposed = false;
+        public int width, height;
+        public bool disposed { get; private set; } = false;
 
+        #region creation
+        public TextureTarget Target { get; set; }
+        public PixelInternalFormat PixelInternalFormat { get; set; }
+        public PixelFormat PixelFormat { get; set; }
+        public PixelType PixelType { get; set; }
+        public TextureWrapMode TextureSWrapMode { get; set; }
+        public TextureWrapMode TextureTWrapMode { get; set; }
+        private byte[] bytes { get; set; }
+        public bool flipped = true;
         public Texture() { }
 
         public static Texture LoadFromFile(
             string path,
-            PixelInternalFormat format = PixelInternalFormat.Rgba,
-            PixelType type = PixelType.UnsignedByte
+            TextureTarget target = TextureTarget.Texture2D,
+            PixelInternalFormat pixelInternalFormat = PixelInternalFormat.Rgba,
+            PixelFormat pixelFormat = PixelFormat.Rgba,
+            PixelType type = PixelType.UnsignedByte,
+            TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
+            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat
+        ) => LoadFromTextureBytes(
+                 File.ReadAllBytes(path),
+                 target: target,
+                 pixelInternalFormat: pixelInternalFormat,
+                 pixelFormat: pixelFormat,
+                 type: type,
+                 textureSWrapMode: textureSWrapMode,
+                 textureTWrapMode: textureTWrapMode
+            );
+
+
+        public static Texture LoadFromTextureBytes(
+            byte[] bytes,
+            TextureTarget target = TextureTarget.Texture2D,
+            PixelInternalFormat pixelInternalFormat = PixelInternalFormat.Rgba,
+            PixelFormat pixelFormat = PixelFormat.Rgba,
+            PixelType type = PixelType.UnsignedByte,
+            TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
+            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat
         )
         {
+
             Image<Rgba32> image;
 
             try
             {
-                image = Image.Load<Rgba32>(File.ReadAllBytes(path));
+                image = Image.Load<Rgba32>(bytes);
             }
             catch (Exception ex)
             {
                 Logger.Log(
-                    $"An error occured while loading {LogColors.BrightWhite(path)}:\n{ex.ToString()}",
+                    $"An error occured while loading {LogColors.BrightWhite("LoadFromTextureBytes")}:\n{ex.ToString()}",
                     LogLevel.Error
                 );
                 // this aint working properly fix it sometime ig
@@ -43,15 +76,21 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 
 
             byte[] pixelDataArray = new byte[image.Width * image.Height * 4];
-            image.Mutate(s => s.Flip(FlipMode.Vertical));
             image.CopyPixelDataTo(pixelDataArray);
 
-            Texture texture = LoadFromBytes(bytes: pixelDataArray, width: image.Width, height: image.Height, format: format, type: type);
-
-            Logger.Log(
-                $"Loaded texture {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(path)}",
-                LogLevel.Detail
+            Texture texture = LoadFromBytes(
+                bytes: pixelDataArray,
+                width: image.Width,
+                height: image.Height,
+                target: target,
+                pixelInternalFormat: pixelInternalFormat,
+                pixelFormat: pixelFormat,
+                type: type,
+                textureSWrapMode: textureSWrapMode,
+                textureTWrapMode: textureTWrapMode
             );
+            image.Dispose();
+
             return texture;
         }
 
@@ -59,60 +98,85 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             byte[] bytes,
             int width,
             int height,
-            PixelInternalFormat format = PixelInternalFormat.Rgba,
-            PixelType type = PixelType.UnsignedByte
-            )
+            TextureTarget target = TextureTarget.Texture2D,
+            PixelInternalFormat pixelInternalFormat = PixelInternalFormat.Rgba,
+            PixelFormat pixelFormat = PixelFormat.Rgba,
+            PixelType type = PixelType.UnsignedByte,
+            TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
+            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat
+        )
         {
             Texture texture = new();
-            texture.Handle = GL.GenTexture();
-
-            if (texture.Handle == 0)
-                Logger.Log(
-                    $"Failed to generate texture for LoadFromBytes",
-                    LogLevel.Error
-                );
-
-            GL.BindTexture(TextureTarget.Texture2D, texture.Handle);
-
+            texture.bytes = bytes;
             texture.width = width;
             texture.height = height;
+            texture.Target = target;
+            texture.PixelInternalFormat = pixelInternalFormat;
+            texture.PixelFormat = pixelFormat;
+            texture.PixelType = type;
+            texture.TextureSWrapMode = textureSWrapMode;
+            texture.TextureTWrapMode = textureTWrapMode;
+
+            return texture;
+        }
+
+        public void Init()
+        {
+            this.Handle = GL.GenTexture();
+
+            if (flipped)
+            {
+                var image = Image.LoadPixelData<Rgba32>(
+                    data: bytes,
+                    width: width,
+                    height: height
+                );
+                image.Mutate(s => s.Flip(FlipMode.Vertical));
+                image.CopyPixelDataTo(bytes);
+                image.Dispose();
+            }
+
+            if (this.Handle == 0)
+                Logger.Log(
+                    $"Failed to generate texture for LoadFromBytes",
+                LogLevel.Error
+                );
+
+            GL.BindTexture(TextureTarget.Texture2D, this.Handle);
 
             GL.TexParameter(
                 TextureTarget.Texture2D,
                 TextureParameterName.TextureWrapS,
-                (int)TextureWrapMode.Repeat
+                (int)TextureSWrapMode
             );
             GL.TexParameter(
                 TextureTarget.Texture2D,
                 TextureParameterName.TextureWrapT,
-                (int)TextureWrapMode.Repeat
+                (int)TextureTWrapMode
             );
 
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureBaseLevel, 0);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 0);
             GL.TexImage2D(
-                TextureTarget.Texture2D,
+                this.Target,
                 0,
-                format,
+                this.PixelInternalFormat,
                 width,
                 height,
                 0,
-                PixelFormat.Rgba,
-                type,
+                this.PixelFormat,
+                this.PixelType,
                 bytes
             );
-            texture.width = width;
-            texture.height = height;
-
-            texture.initalised = true;
+            this.initalised = true;
+            this.bytes = [];
             Logger.Log(
-                $"Loaded texture {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite("FromBytes")}",
+                $"Initalized texture {LogColors.BrightWhite(this.Handle)}",
                 LogLevel.Detail
             );
-            return texture;
         }
 
-        public static Texture LoadFromSize(
+        public static Texture LoadFromSize( // shouldnt need an init
             int width,
             int height,
             TextureTarget target = TextureTarget.Texture2D,
@@ -151,17 +215,19 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             );
             texture.initalised = true;
             Logger.Log(
-                $"Loaded empty texture {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(width)}x{LogColors.BrightWhite(height)}",
+                $"Initalized empty texture {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(width)}x{LogColors.BrightWhite(height)}",
                 LogLevel.Detail
             );
             return texture;
         }
+        #endregion
 
+        #region opengl functions
         private void Check()
         {
             if (initalised)
                 return;
-            Logger.Log($"Texture {Handle} used without initalisation..", LogLevel.Error);
+            Logger.Log($"Texture {Handle} used without initalisation", LogLevel.Error);
         }
 
         public void Bind()
@@ -175,26 +241,27 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             Check();
             GL.ActiveTexture(unit);
         }
+        #endregion
 
         public byte[] GetBytes()
         {
             byte[] output = new byte[
                 4 *
-                this.width *
-                this.height
+                width *
+                height
             ];
 
             unsafe
             {
                 fixed (byte* outputPtr = output)
                 {
-                    this.Bind();
+                    Bind();
                     GL.GetTexImage(
                         TextureTarget.Texture2D,
                         0,
                         PixelFormat.Rgba,
                         PixelType.UnsignedByte,
-                        (IntPtr)outputPtr
+                        (nint)outputPtr
                     );
                 }
             }
@@ -217,6 +284,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             );
         }
 
+        #region disposal
         ~Texture()
         {
             if (disposed == false)
@@ -242,10 +310,12 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             }
         }
         public bool logDisposal = true;
+
         public void Dispose()
         {
             Dispose(true, logDisposal);
             GC.SuppressFinalize(this);
         }
+        #endregion
     }
 }

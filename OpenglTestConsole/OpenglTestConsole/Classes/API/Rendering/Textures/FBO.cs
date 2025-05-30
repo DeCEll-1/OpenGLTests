@@ -1,7 +1,6 @@
-﻿using OpenglTestConsole.Classes.API.Rendering.Shaders;
-using OpenglTestConsole.Classes.Implementations.Classes;
+﻿using OpenglTestConsole.Classes.Implementations.Classes;
 
-namespace OpenglTestConsole.Classes.API.Rendering
+namespace OpenglTestConsole.Classes.API.Rendering.Textures
 {
     public class FBO
     {

@@ -1,6 +1,7 @@
 ﻿using OpenglTestConsole.Classes.API.Rendering.Shaders;
 using OpenTK.Mathematics;
 using OpenglTestConsole.Generated.Paths;
+using OpenglTestConsole.Classes.API.Rendering.Textures;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Materials
 {
