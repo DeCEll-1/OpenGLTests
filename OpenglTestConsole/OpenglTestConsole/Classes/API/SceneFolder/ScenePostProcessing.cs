@@ -17,12 +17,10 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
         // one effect reads from the ping and writes to pong, now ping is free
         // the next one reads from the pong and writes to ping
         // that way we can have as many post processing effects with just 2 FBOs
-        private PingPongFBO pingPong = new();
-        private FBO MainFBO = new(); // this is the main FBO we are writing to for our render
+        public PingPongFBO pingPong { get; private set; } = new();
+        public FBO MainFBO = new(); // this is the main FBO we are writing to for our render
         public List<PostProcess> processes = new List<PostProcess>()
-        {
-
-        };
+        { };
         private PostProcess passthroughPostProcess =
                 new PostProcess(
                     new PostProcessingMaterial(
@@ -33,7 +31,7 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
         private void InitPostProcesses()
         {
             pingPong.Init();
-            MainFBO.Init();
+            MainFBO.Init(name: "Main");
 
             MainFBO.Bind();
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -65,7 +63,6 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
 
                 }
             }
-            i++;
             FBO.SetToDefaultFBO();
 
             passthroughPostProcess.Apply(FBOToWriteTo: 0, FBOToReadFrom: pingPong.ReadFrom);// write to the screen
@@ -74,8 +71,9 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
         }
 
 
-        private class PingPongFBO
+        public class PingPongFBO
         {
+            internal PingPongFBO() { }
             public FBO Ping { get; } = new();
             public FBO Pong { get; } = new();
             private bool writeToPing = true;
@@ -94,7 +92,7 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
             }
             internal void Init()
             {
-                Ping.Init();
+                Ping.Init(name: "Ping");
                 Ping.Bind();
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
                 GL.Enable(EnableCap.DepthTest);
@@ -102,7 +100,7 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
 
                 GL.ClearColor(0.0f, 0.1f, 0.05f, 1.0f);
 
-                Pong.Init();
+                Pong.Init(name: "Pong");
                 Pong.Bind();
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
                 GL.Enable(EnableCap.DepthTest);

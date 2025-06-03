@@ -11,6 +11,16 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
 {
     public class Cubemap : IDisposable
     {
+        // for prettier texture inits
+        string[] faceNames = 
+        [
+            "TextureCubeMapPositiveX",
+            "TextureCubeMapNegativeX",
+            "TextureCubeMapPositiveY",
+            "TextureCubeMapNegativeY",
+            "TextureCubeMapPositiveZ",
+            "TextureCubeMapNegativeZ"
+        ];
         public int Handle { get; set; }
         public bool initalised = false;
         private bool _disposed = false;
@@ -67,7 +77,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 Texture tex = textures[i]; // set the cube map type of the texture
                 tex.Target = TextureTarget.TextureCubeMapPositiveX + i;
                 tex.flipped = false;
-                tex.Init(); // init it while we are binded to the cubemap, which will attatch the texture to the cubemap
+                // init it while we are binded to the cubemap, which will attatch the texture to the cubemap
+                tex.Init(name: faceNames[i]);
             }
 
             /* 

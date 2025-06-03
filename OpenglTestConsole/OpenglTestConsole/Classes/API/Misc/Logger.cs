@@ -175,6 +175,25 @@
 
         public static string BrightWhiteBackground(object source) =>
             BRIGHT_WHITE_BACKGROUND + source.ToString() + NORMAL;
+        #region aliases
+        public static string K(object source) => Black(source);
+        public static string R(object source) => Red(source);
+        public static string G(object source) => Green(source);
+        public static string Y(object source) => Yellow(source);
+        public static string B(object source) => Blue(source);
+        public static string M(object source) => Magenta(source);
+        public static string C(object source) => Cyan(source);
+        public static string W(object source) => White(source);
+
+        public static string BK(object source) => BrightBlack(source);
+        public static string BR(object source) => BrightRed(source);
+        public static string BG(object source) => BrightGreen(source);
+        public static string BY(object source) => BrightYellow(source);
+        public static string BB(object source) => BrightBlue(source);
+        public static string BM(object source) => BrightMagenta(source);
+        public static string BC(object source) => BrightCyan(source);
+        public static string BW(object source) => BrightWhite(source);
+        #endregion
         #endregion
 
         #region Functions

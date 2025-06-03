@@ -135,7 +135,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             return texture;
         }
 
-        public void Init()
+        public void Init(string? name = null)
         {
             this.Handle = GL.GenTexture();
 
@@ -191,7 +191,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             this.initalised = true;
             this.bytes = [];
             Logger.Log(
-                $"Loaded {LogColors.BrightCyan("Texture")} {LogColors.BrightWhite(this.Handle)}",
+                $"Loaded {LogColors.BC("Texture")} {LogColors.BrightWhite(this.Handle)}{(name != null ? $", named {LogColors.BW(name)}" : "")}",
                 LogLevel.Detail
             );
         }

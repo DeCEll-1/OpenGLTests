@@ -8,6 +8,7 @@ namespace OpenglTestConsole.Classes.API.Misc
 
         public static Texture GetScreenTexture()
         {
+            Main.mainScene.pingPong.ReadFrom.Bind();
             int[] k = new int[4];
 
             GL.GetInteger(GetIndexedPName.Viewport, 0, k);
@@ -37,7 +38,9 @@ namespace OpenglTestConsole.Classes.API.Misc
             }
 
             Texture tex = Texture.LoadFromBytes(output, k[2], k[3]);
+            tex.flipped = false;
 
+            FBO.SetToDefaultFBO();
             return tex;
         }
     

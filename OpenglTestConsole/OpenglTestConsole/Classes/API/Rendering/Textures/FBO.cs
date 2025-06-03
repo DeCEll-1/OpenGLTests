@@ -10,7 +10,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
         public Texture ColorTexture { get; private set; }
         public int RenderBuffer { get; private set; }
         public FBO() { }
-        public void Init(Vector2i? size = null)
+        public void Init(Vector2i? size = null, string name = "")
         {
             // you just HAD to do shit with pointers
             unsafe
@@ -76,10 +76,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             else
             {
                 Logger.Log(
-                    $"Loaded {LogColors.BrightCyan("FBO")} {LogColors.BrightWhite(Handle)}:\n" +
-                    $"Color {LogColors.BrightCyan("Texture")}: {LogColors.BrightWhite(ColorTexture.Handle)}\n" +
-                    $"Depth & Stencil {LogColors.BrightCyan("Render Buffer")}: {LogColors.BrightWhite(RenderBuffer)}",
-                   LogLevel.Detail
+                    $"Loaded {LogColors.BC("FBO")} {LogColors.BW(Handle)}{(name != null ? $", named {LogColors.BW(name)}" : "")}:\n" +
+                    $"Color {LogColors.BC("Texture")}: {LogColors.BW(ColorTexture.Handle)}\n" +
+                    $"Depth & Stencil {LogColors.BrightCyan("Render Buffer")}: {LogColors.BW(RenderBuffer)}",
+                    LogLevel.Detail
                 );
             }
             // execute victory dance

@@ -16,6 +16,7 @@ TODO: PBR
     DONE: framebuffers
         DONE: implement post processing
         TODO: implement disposal
+        DONE: fix screenshot, its taking a blank screenshot currently
     DONE: cubemaps
     TODO: gamma correction
     TODO: HDR

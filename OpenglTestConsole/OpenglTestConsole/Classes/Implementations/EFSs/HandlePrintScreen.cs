@@ -36,8 +36,10 @@ namespace OpenglTestConsole.Classes.Implementations.EFSs
                 + ".jpg";
 
             Texture tex = RenderMisc.GetScreenTexture();
+
+            tex.Init(name: "Print Screen");
             tex.SaveToFile(folder + file);
-            tex.logDisposal = false;
+            //tex.logDisposal = false;
             tex.Dispose();
 
             Logger.Log(
