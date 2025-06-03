@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 {
     public partial class Shader
-    {
+    { // geometry part of the shader
         public string geometryPath { get; set; } = "NULL";
         public Shader(string vertexPath, string fragmentPath, string geometryPath)
         { this.vertexPath = vertexPath; this.fragmentPath = fragmentPath; this.geometryPath = geometryPath; }

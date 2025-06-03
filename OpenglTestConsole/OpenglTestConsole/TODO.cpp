@@ -14,6 +14,7 @@ TODO: add a proper material with lightning and other features
 TODO: add gif rendering
 TODO: PBR
     DONE: framebuffers
+        TODO: implement post processing
     DONE: cubemaps
     TODO: gamma correction
     TODO: HDR

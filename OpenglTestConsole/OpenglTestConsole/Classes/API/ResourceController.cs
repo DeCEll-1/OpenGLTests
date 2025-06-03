@@ -21,10 +21,15 @@ namespace OpenglTestConsole.Classes.API
             foreach (KeyValuePair<string, Texture> item in Resources.Textures)
                 item.Value.Dispose();
 
+            foreach (KeyValuePair<string, Cubemap> item in Resources.Cubemaps)
+                item.Value.Dispose();
+
+
             Resources.Shaders.Clear();
             Resources.Textures.Clear();
             Resources.CompShaders.Clear();
             Resources.Fonts.Clear();
+            Resources.Cubemaps.Clear();
 
             Init();
         }
@@ -71,8 +76,12 @@ namespace OpenglTestConsole.Classes.API
         {
             string shaderName = (string)type!.GetField("Name")!.GetValue(null)!;
             string compute = (string)type!.GetField("Compute")!.GetValue(null)!;
+            
             // add the shader to the resources
             Resources.CompShaders.Add(shaderName, new(compute));
+            
+            Logger.Log($"Loading {LogColors.Green("Compute Shader")} {LogColors.BrightWhite(shaderName)}", LogLevel.Detail);
+            
             Resources.CompShaders[shaderName].Init();
         }
         #endregion

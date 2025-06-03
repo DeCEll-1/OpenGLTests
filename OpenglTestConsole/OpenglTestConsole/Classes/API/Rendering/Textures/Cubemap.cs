@@ -86,7 +86,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
             GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapR, (int)TextureWrapMode.ClampToEdge);
             Logger.Log(
-                $"Initalized Cubemap {LogColors.BrightWhite(Handle)}",
+                $"Loaded {LogColors.BrightCyan("Cubemap")} {LogColors.BrightWhite(Handle)}",
                 LogLevel.Detail
             );
 

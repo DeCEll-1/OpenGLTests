@@ -92,7 +92,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             }
 
             Logger.Log(
-                $"Loaded {LogColors.White(type)} for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}",
+                $"Loaded {LogColors.BrightCyan(type)} for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}",
                 LogLevel.Detail
             );
 

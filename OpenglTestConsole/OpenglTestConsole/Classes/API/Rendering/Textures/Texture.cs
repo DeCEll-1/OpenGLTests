@@ -171,7 +171,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             this.initalised = true;
             this.bytes = [];
             Logger.Log(
-                $"Initalized texture {LogColors.BrightWhite(this.Handle)}",
+                $"Loaded {LogColors.BrightCyan("Texture")} {LogColors.BrightWhite(this.Handle)}",
                 LogLevel.Detail
             );
         }
@@ -182,7 +182,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             TextureTarget target = TextureTarget.Texture2D,
             PixelInternalFormat pixelInternalFormat = PixelInternalFormat.Rgba,
             PixelFormat pixelFormat = PixelFormat.Rgba,
-            PixelType type = PixelType.UnsignedByte
+            PixelType type = PixelType.UnsignedByte,
+            TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
+            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat
         )
         {
             Texture texture = new Texture();
@@ -190,16 +192,18 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             texture.width = width;
             texture.height = height;
             GL.BindTexture(TextureTarget.Texture2D, texture.Handle);
+
             GL.TexParameter(
                 TextureTarget.Texture2D,
                 TextureParameterName.TextureWrapS,
-                (int)TextureWrapMode.Repeat
+                (int)textureSWrapMode
             );
             GL.TexParameter(
                 TextureTarget.Texture2D,
                 TextureParameterName.TextureWrapT,
-                (int)TextureWrapMode.Repeat
+                (int)textureTWrapMode
             );
+
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureBaseLevel, 0);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 0);
             GL.TexImage2D(
@@ -215,7 +219,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             );
             texture.initalised = true;
             Logger.Log(
-                $"Initalized empty texture {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(width)}x{LogColors.BrightWhite(height)}",
+                $"Loaded {LogColors.BrightYellow("empty")} {LogColors.BrightCyan("Texture")} {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(width)}x{LogColors.BrightWhite(height)}",
                 LogLevel.Detail
             );
             return texture;

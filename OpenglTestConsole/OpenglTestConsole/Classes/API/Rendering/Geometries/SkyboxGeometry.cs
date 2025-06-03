@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Geometries
 {
-    public class Skybox : Geometry3D
+    public class SkyboxGeometry : Geometry3D
     {
-        public Skybox()
+        public SkyboxGeometry()
         {
             Init();
         }

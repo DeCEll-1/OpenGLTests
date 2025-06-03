@@ -18,22 +18,22 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
         public Mesh Mesh { get; set; }
         public override void Init()
         {
-            Skybox geometry = new Skybox();
+            //SkyboxGeometry geometry = new SkyboxGeometry();
 
-            Cubemap map = Resources.Cubemaps[ResourcePaths.Cubemaps.Sea.Name];
+            //Cubemap map = Resources.Cubemaps[ResourcePaths.Cubemaps.Sea.Name];
 
-            SkyboxMaterial material = new SkyboxMaterial(map);
-
-
-            this.Mesh = new Mesh(geometry, material);
-            this.Mesh.type = PrimitiveType.Triangles;
+            //SkyboxMaterial material = new SkyboxMaterial(map);
 
 
-            Scene.Add(Mesh);
+            //this.Mesh = new Mesh(geometry, material);
+            //this.Mesh.type = PrimitiveType.Triangles;
+
+
+            //Scene.Add(Mesh);
 
         }
-        public override void BeforeRender() => GL.DepthFunc(DepthFunction.Lequal);
-        public override void AfterRender() => GL.DepthFunc(DepthFunction.Less);
+        //public override void BeforeRender() => GL.DepthFunc(DepthFunction.Lequal);
+        //public override void AfterRender() => GL.DepthFunc(DepthFunction.Less);
         public override void Advance()
         {
 

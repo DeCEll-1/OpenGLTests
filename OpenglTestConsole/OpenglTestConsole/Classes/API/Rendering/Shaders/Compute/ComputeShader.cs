@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.IO;
+using System.Numerics;
 using OpenglTestConsole.Classes.API.Misc;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Shaders.Compute
@@ -41,6 +42,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders.Compute
                 );
             }
 
+
             // get the group size
             int[] size = new int[3];
             GL.GetProgram(Handle, (GetProgramParameterName)All.ComputeWorkGroupSize, size);
@@ -50,6 +52,11 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders.Compute
             GL.DeleteShader(computeShaderPointer);
 
             initalised = true;
+
+            Logger.Log(
+                $"Loaded {LogColors.BrightCyan(ShaderType.ComputeShader)} for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(computeShaderPath)}",
+                LogLevel.Detail
+            );
         }
 
         public int HandleComputeShader(string path)

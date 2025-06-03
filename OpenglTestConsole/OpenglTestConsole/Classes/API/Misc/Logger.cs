@@ -29,7 +29,7 @@
         public static void Log(string info, string color)
         {
             // replace return to normals with the current color so we can change the color of texts
-            Console.WriteLine(color + info.Replace(LogColors.NORMAL, color));
+            Console.WriteLine(color + info.Replace(LogColors.NORMAL, color + LogColors.BLACK_BACKGROUND));
         }
     }
 
