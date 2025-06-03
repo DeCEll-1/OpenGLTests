@@ -15,41 +15,51 @@
     "Materials": {
         "MCSDF": {
             "Name": "MCSDF",
-            "Fragment": "Resources/Shaders/MaterialMCSDF/MCSDF.frag",
-            "Vertex": "Resources/Shaders/MaterialMCSDF/MCSDF.vert"
+            "Fragment": "Resources/Shaders/MaterialMCSDF/MaterialMCSDF.frag",
+            "Vertex": "Resources/Shaders/MaterialMCSDF/MaterialMCSDF.vert"
         },
         "Phong": {
             "Name": "PhongMaterial",
-            "Fragment": "Resources/Shaders/MaterialPhong/MaterialPhong.frag",
-            "Vertex": "Resources/Shaders/MaterialPhong/MaterialPhong.vert",
-            "Geometry": "Resources/Shaders/MaterialPhong/MaterialPhong.geom"
+            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.frag",
+            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.vert",
+            "Geometry": "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.geom"
         },
         "Texture": {
             "Name": "TextureMaterial",
-            "Fragment": "Resources/Shaders/MaterialTexture/MaterialTexture.frag",
-            "Vertex": "Resources/Shaders/MaterialTexture/MaterialTexture.vert"
+            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialTexture/MaterialTexture.frag",
+            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialTexture/MaterialTexture.vert"
         },
         "MonoColor": {
             "Name": "MonoColorMaterial",
-            "Fragment": "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.frag",
-            "Vertex": "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.vert"
+            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialMonoColor/MaterialMonoColor.frag",
+            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialMonoColor/MaterialMonoColor.vert"
         },
         "Standart": {
             "Name": "StandartMaterial",
-            "Fragment": "Resources/Shaders/MaterialStandart/MaterialStandart.frag",
-            "Vertex": "Resources/Shaders/MaterialStandart/MaterialStandart.vert",
-            "Geometry": "Resources/Shaders/MaterialStandart/MaterialStandart.geom"
+            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.frag",
+            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.vert",
+            "Geometry": "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.geom"
         },
         "Skybox": {
             "Name": "SkyboxMaterial",
-            "Fragment": "Resources/Shaders/MaterialSkybox/MaterialSkybox.frag",
-            "Vertex": "Resources/Shaders/MaterialSkybox/MaterialSkybox.vert"
+            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialSkybox/MaterialSkybox.frag",
+            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialSkybox/MaterialSkybox.vert"
+        },
+        "PPWriteFBO": {
+            "Name": "PPWriteFBO",
+            "Fragment": "Resources/Shaders/PostProcesses/WriteFBO/WriteFBO.frag",
+            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert"
+        },
+        "PPInversion": {
+            "Name": "PPInversion",
+            "Fragment": "Resources/Shaders/PostProcesses/Inversion/Inversion.frag",
+            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert"
         }
     },
     "ComputeShaders": {
         "MyComputeShader": {
             "Name": "MyComputeShader",
-            "Compute": "Resources/Shaders/Comp/MyComputeShader.comp"
+            "Compute": "Resources/Shaders/Comp/MyComputeShader/MyComputeShader.comp"
         }
     },
     "Fonts": {

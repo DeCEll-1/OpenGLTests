@@ -23,40 +23,52 @@ public static class ResourcePaths
         public static class MCSDF
         {
             public const string Name = "MCSDF";
-            public const string Fragment = "Resources/Shaders/MaterialMCSDF/MCSDF.frag";
-            public const string Vertex = "Resources/Shaders/MaterialMCSDF/MCSDF.vert";
+            public const string Fragment = "Resources/Shaders/MaterialMCSDF/MaterialMCSDF.frag";
+            public const string Vertex = "Resources/Shaders/MaterialMCSDF/MaterialMCSDF.vert";
         }
         public static class Phong
         {
             public const string Name = "PhongMaterial";
-            public const string Fragment = "Resources/Shaders/MaterialPhong/MaterialPhong.frag";
-            public const string Vertex = "Resources/Shaders/MaterialPhong/MaterialPhong.vert";
-            public const string Geometry = "Resources/Shaders/MaterialPhong/MaterialPhong.geom";
+            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.frag";
+            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.vert";
+            public const string Geometry = "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.geom";
         }
         public static class Texture
         {
             public const string Name = "TextureMaterial";
-            public const string Fragment = "Resources/Shaders/MaterialTexture/MaterialTexture.frag";
-            public const string Vertex = "Resources/Shaders/MaterialTexture/MaterialTexture.vert";
+            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialTexture/MaterialTexture.frag";
+            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialTexture/MaterialTexture.vert";
         }
         public static class MonoColor
         {
             public const string Name = "MonoColorMaterial";
-            public const string Fragment = "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.frag";
-            public const string Vertex = "Resources/Shaders/MaterialMonoColor/MaterialMonoColor.vert";
+            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialMonoColor/MaterialMonoColor.frag";
+            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialMonoColor/MaterialMonoColor.vert";
         }
         public static class Standart
         {
             public const string Name = "StandartMaterial";
-            public const string Fragment = "Resources/Shaders/MaterialStandart/MaterialStandart.frag";
-            public const string Vertex = "Resources/Shaders/MaterialStandart/MaterialStandart.vert";
-            public const string Geometry = "Resources/Shaders/MaterialStandart/MaterialStandart.geom";
+            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.frag";
+            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.vert";
+            public const string Geometry = "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.geom";
         }
         public static class Skybox
         {
             public const string Name = "SkyboxMaterial";
-            public const string Fragment = "Resources/Shaders/MaterialSkybox/MaterialSkybox.frag";
-            public const string Vertex = "Resources/Shaders/MaterialSkybox/MaterialSkybox.vert";
+            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialSkybox/MaterialSkybox.frag";
+            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialSkybox/MaterialSkybox.vert";
+        }
+        public static class PPWriteFBO
+        {
+            public const string Name = "PPWriteFBO";
+            public const string Fragment = "Resources/Shaders/PostProcesses/WriteFBO/WriteFBO.frag";
+            public const string Vertex = "Resources/Shaders/PostProcesses/MasterVertex.vert";
+        }
+        public static class PPInversion
+        {
+            public const string Name = "PPInversion";
+            public const string Fragment = "Resources/Shaders/PostProcesses/Inversion/Inversion.frag";
+            public const string Vertex = "Resources/Shaders/PostProcesses/MasterVertex.vert";
         }
     }
     public static class ComputeShaders
@@ -64,7 +76,7 @@ public static class ResourcePaths
         public static class MyComputeShader
         {
             public const string Name = "MyComputeShader";
-            public const string Compute = "Resources/Shaders/Comp/MyComputeShader.comp";
+            public const string Compute = "Resources/Shaders/Comp/MyComputeShader/MyComputeShader.comp";
         }
     }
     public static class Fonts

@@ -1,5 +1,6 @@
 ﻿using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Shaders;
+using OpenglTestConsole.Classes.API.SceneFolder;
 
 namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 {
@@ -64,7 +65,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
             GL.BindVertexArray(VertexArrayObjectPointer);
             if (Geometry.IndicesLength < 3) // check if we are using indices
                 GL.DrawArrays(type, 0, Geometry.VerticesLength);
-            GL.DrawElements(type, Geometry.IndicesLength, DrawElementsType.UnsignedInt, 0);
+            else
+                GL.DrawElements(type, Geometry.IndicesLength, DrawElementsType.UnsignedInt, 0);
 
             Disables();
         }

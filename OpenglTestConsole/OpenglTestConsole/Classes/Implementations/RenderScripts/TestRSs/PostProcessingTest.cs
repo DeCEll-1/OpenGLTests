@@ -3,6 +3,7 @@ using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Materials;
 using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
+using OpenglTestConsole.Classes.API.Rendering.Shaders;
 using OpenglTestConsole.Classes.API.Rendering.Textures;
 using OpenglTestConsole.Generated.Paths;
 using System;
@@ -13,27 +14,18 @@ using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 {
-    public class SkyBoxTest : RenderScript
+    public class PostProcessingTest : RenderScript
     {
         public Mesh Mesh { get; set; }
         public override void Init()
         {
-            //SkyboxGeometry geometry = new SkyboxGeometry();
 
-            //Cubemap map = Resources.Cubemaps[ResourcePaths.Cubemaps.Sea.Name];
+            PostProcessingMaterial PPMaterial = new PostProcessingMaterial(Resources.Shaders[ResourcePaths.Materials.PPInversion.Name]);
 
-            //SkyboxMaterial material = new SkyboxMaterial(map);
-
-
-            //this.Mesh = new Mesh(geometry, material);
-            //this.Mesh.type = PrimitiveType.Triangles;
-
-
-            //Scene.Add(Mesh);
+            PostProcess Effect = new PostProcess(PPMaterial);
+            Scene.processes.Add(Effect);
 
         }
-        //public override void BeforeRender() => GL.DepthFunc(DepthFunction.Lequal);
-        //public override void AfterRender() => GL.DepthFunc(DepthFunction.Less);
         public override void Advance()
         {
 

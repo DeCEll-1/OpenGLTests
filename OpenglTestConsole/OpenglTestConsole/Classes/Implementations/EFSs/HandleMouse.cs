@@ -1,6 +1,8 @@
 ﻿using OpenglTestConsole.Classes.API;
 using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace OpenglTestConsole.Classes.impl.EFSs
 {
@@ -8,11 +10,26 @@ namespace OpenglTestConsole.Classes.impl.EFSs
     {
         private bool _firstMove = true;
         private Vector2 _lastPos;
-
+        private CursorState cursorState;
         public override void Init() { }
 
         public override void Advance()
         {
+            if (KeyboardState.IsKeyPressed(Keys.R))
+            {
+                if (cursorState == CursorState.Grabbed)
+                {
+                    cursorState = CursorState.Normal;
+                    MainInstance.CursorState = cursorState;
+                }
+                else
+                {
+                    cursorState = CursorState.Grabbed;
+                    MainInstance.CursorState = cursorState;
+                }
+            }
+
+
             var mouse = MouseState;
 
             if (_firstMove) // This bool variable is initially set to true.

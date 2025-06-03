@@ -5,6 +5,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System.IO;
+using System.Reflection.Metadata;
 using static OpenglTestConsole.Generated.Paths.ResourcePaths.Materials;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Textures
@@ -23,6 +24,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
         public PixelType PixelType { get; set; }
         public TextureWrapMode TextureSWrapMode { get; set; }
         public TextureWrapMode TextureTWrapMode { get; set; }
+        public TextureMinFilter TextureMinFilter { get; set; }
+        public TextureMagFilter TextureMagFilter { get; set; }
         private byte[] bytes { get; set; }
         public bool flipped = true;
         public Texture() { }
@@ -34,7 +37,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             PixelFormat pixelFormat = PixelFormat.Rgba,
             PixelType type = PixelType.UnsignedByte,
             TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
-            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat
+            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat,
+            TextureMinFilter textureMinFilter = TextureMinFilter.Linear,
+            TextureMagFilter textureMagFilter = TextureMagFilter.Linear
         ) => LoadFromTextureBytes(
                  File.ReadAllBytes(path),
                  target: target,
@@ -42,7 +47,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                  pixelFormat: pixelFormat,
                  type: type,
                  textureSWrapMode: textureSWrapMode,
-                 textureTWrapMode: textureTWrapMode
+                 textureTWrapMode: textureTWrapMode,
+                 textureMinFilter: textureMinFilter,
+                 textureMagFilter: textureMagFilter
             );
 
 
@@ -53,7 +60,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             PixelFormat pixelFormat = PixelFormat.Rgba,
             PixelType type = PixelType.UnsignedByte,
             TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
-            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat
+            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat,
+            TextureMinFilter textureMinFilter = TextureMinFilter.Linear,
+            TextureMagFilter textureMagFilter = TextureMagFilter.Linear
         )
         {
 
@@ -87,7 +96,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 pixelFormat: pixelFormat,
                 type: type,
                 textureSWrapMode: textureSWrapMode,
-                textureTWrapMode: textureTWrapMode
+                textureTWrapMode: textureTWrapMode,
+                textureMinFilter: textureMinFilter,
+                textureMagFilter: textureMagFilter
             );
             image.Dispose();
 
@@ -103,7 +114,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             PixelFormat pixelFormat = PixelFormat.Rgba,
             PixelType type = PixelType.UnsignedByte,
             TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
-            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat
+            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat,
+            TextureMinFilter textureMinFilter = TextureMinFilter.Linear,
+            TextureMagFilter textureMagFilter = TextureMagFilter.Linear
         )
         {
             Texture texture = new();
@@ -116,6 +129,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             texture.PixelType = type;
             texture.TextureSWrapMode = textureSWrapMode;
             texture.TextureTWrapMode = textureTWrapMode;
+            texture.TextureMinFilter = textureMinFilter;
+            texture.TextureMagFilter = textureMagFilter;
 
             return texture;
         }
@@ -155,8 +170,13 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 (int)TextureTWrapMode
             );
 
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter);
+
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureBaseLevel, 0);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 0);
+
+
             GL.TexImage2D(
                 this.Target,
                 0,
@@ -184,7 +204,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             PixelFormat pixelFormat = PixelFormat.Rgba,
             PixelType type = PixelType.UnsignedByte,
             TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
-            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat
+            TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat,
+            TextureMinFilter textureMinFilter = TextureMinFilter.Linear,
+            TextureMagFilter textureMagFilter = TextureMagFilter.Linear
         )
         {
             Texture texture = new Texture();
@@ -204,18 +226,24 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 (int)textureTWrapMode
             );
 
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)textureMinFilter);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)textureMagFilter);
+
+
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureBaseLevel, 0);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 0);
+
+
             GL.TexImage2D(
                 target,
-                0,
+                0, // mipmap level
                 pixelInternalFormat,
                 width,
                 height,
-                0,
+                0, // border
                 pixelFormat,
                 type,
-                nint.Zero
+                nint.Zero // initilisation pixels
             );
             texture.initalised = true;
             Logger.Log(

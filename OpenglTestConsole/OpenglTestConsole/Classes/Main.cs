@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using OpenglTestConsole.Classes.API;
 using OpenglTestConsole.Classes.API.Rendering;
+using OpenglTestConsole.Classes.API.SceneFolder;
 using OpenglTestConsole.Classes.impl.EFSs;
 using OpenglTestConsole.Classes.Implementations.EFSs;
 using OpenglTestConsole.Classes.Implementations.RenderScripts;
@@ -63,7 +64,7 @@ namespace OpenglTestConsole.Classes
                     new RenderLight(),
                     new ComputeShaderTest(),
                     new StandartMaterialTest(),
-                    new SkyBoxTest(),
+                    new PostProcessingTest(),
                 ]
             );
             #endregion
