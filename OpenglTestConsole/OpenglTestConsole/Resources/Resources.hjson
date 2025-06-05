@@ -54,6 +54,16 @@
             "Name": "PPInversion",
             "Fragment": "Resources/Shaders/PostProcesses/Inversion/Inversion.frag",
             "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert"
+        },
+        "PPDepthDisplay": {
+            "Name": "PPDepthDisplay",
+            "Fragment": "Resources/Shaders/PostProcesses/DepthDisplay/DepthDisplay.frag",
+            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert"
+        },
+        "PPGammaCorrection": {
+            "Name": "PPGammaCorrection",
+            "Fragment": "Resources/Shaders/PostProcesses/GammaCorrection/GammaCorrection.frag",
+            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert"
         }
     },
     "ComputeShaders": {

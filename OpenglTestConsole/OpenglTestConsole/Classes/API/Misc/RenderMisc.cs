@@ -1,4 +1,5 @@
 ﻿using OpenglTestConsole.Classes.API.Rendering.Textures;
+using OpenglTestConsole.Classes.API.SceneFolder;
 using OpenTK.Mathematics;
 
 namespace OpenglTestConsole.Classes.API.Misc
@@ -8,7 +9,10 @@ namespace OpenglTestConsole.Classes.API.Misc
 
         public static Texture GetScreenTexture()
         {
-            Main.mainScene.pingPong.ReadFrom.Bind();
+            Scene Scene = Main.mainScene;
+            FBO sourceFBO = Scene.processes.Count == 0
+                ? Scene.MainFBO
+                : Scene.pingPong.ReadFrom;
             int[] k = new int[4];
 
             GL.GetInteger(GetIndexedPName.Viewport, 0, k);
@@ -43,6 +47,6 @@ namespace OpenglTestConsole.Classes.API.Misc
             FBO.SetToDefaultFBO();
             return tex;
         }
-    
+
     }
 }

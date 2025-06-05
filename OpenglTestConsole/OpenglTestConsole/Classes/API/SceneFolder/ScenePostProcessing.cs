@@ -30,7 +30,6 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
         private int i = 0; // counter so we can switch ping and pong
         private void InitPostProcesses()
         {
-            pingPong.Init();
             MainFBO.Init(name: "Main");
 
             MainFBO.Bind();
@@ -40,6 +39,9 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
 
             GL.ClearColor(0.0f, 0.1f, 0.05f, 1.0f);
             MainFBO.Unbind();
+
+            pingPong.Init(MainFBO);
+
         }
         private void HandlePostProcesses()
         {
@@ -85,14 +87,14 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
             internal void Clear()
             {
                 Ping.Bind();
-                GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+                GL.Clear(ClearBufferMask.ColorBufferBit);
                 Pong.Bind();
-                GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+                GL.Clear(ClearBufferMask.ColorBufferBit);
                 FBO.SetToDefaultFBO();
             }
-            internal void Init()
+            internal void Init(FBO main)
             {
-                Ping.Init(name: "Ping");
+                Ping.Init(name: "Ping", depthStencilTexture: main.DepthStencilTexture);
                 Ping.Bind();
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
                 GL.Enable(EnableCap.DepthTest);
@@ -100,7 +102,7 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
 
                 GL.ClearColor(0.0f, 0.1f, 0.05f, 1.0f);
 
-                Pong.Init(name: "Pong");
+                Pong.Init(name: "Pong", depthStencilTexture: main.DepthStencilTexture);
                 Pong.Bind();
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
                 GL.Enable(EnableCap.DepthTest);

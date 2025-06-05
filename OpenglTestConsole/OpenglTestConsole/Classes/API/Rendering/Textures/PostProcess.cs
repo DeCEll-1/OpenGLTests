@@ -16,6 +16,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
         public PostProcess(PostProcessingMaterial effect)
         {
             ScreenMesh = new Mesh(new ScreenGeometry(), effect);
+            ScreenMesh.CapsToDisable.Add(EnableCap.DepthTest);
+            ScreenMesh.BeforeRender = delegate { GL.DepthMask(false); };
+            ScreenMesh.AfterRender = delegate { GL.DepthMask(true); };
+            
         }
         public PostProcessingMaterial Effect { get => (PostProcessingMaterial)this.ScreenMesh.Material; private set => this.ScreenMesh.Material = value; }
         private Mesh ScreenMesh { get; set; }

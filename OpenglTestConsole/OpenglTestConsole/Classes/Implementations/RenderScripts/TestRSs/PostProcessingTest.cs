@@ -20,7 +20,11 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
         public override void Init()
         {
 
-            PostProcessingMaterial PPMaterial = new PostProcessingMaterial(Resources.Shaders[ResourcePaths.Materials.PPInversion.Name]);
+            //PostProcessingMaterial PPMaterial = new PostProcessingMaterial(Resources.Shaders[ResourcePaths.Materials.PPInversion.Name]);
+            //PostProcessingMaterial PPMaterial = new PPFogMaterial();
+            PostProcessingMaterial PPMaterial = new PPGammaCorrection();
+
+
 
             PostProcess Effect = new PostProcess(PPMaterial);
             Scene.processes.Add(Effect);

@@ -8,9 +8,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
     {
         public int Handle { get; set; }
         public Texture ColorTexture { get; private set; }
-        public int RenderBuffer { get; private set; }
+        public Texture DepthStencilTexture { get; private set; }
+        public int StencilRenderBuffer { get; private set; }
         public FBO() { }
-        public void Init(Vector2i? size = null, string name = "")
+        public void Init(Vector2i? size = null, string name = "", Texture? colorTexture = null, Texture? depthStencilTexture = null)
         {
             // you just HAD to do shit with pointers
             unsafe
@@ -32,19 +33,25 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 x = size.Value.X; y = size.Value.Y;
             }
 
-
-            // create texture thats the same size as the window (not required)
-            ColorTexture = Texture.LoadFromSize(
-                x, y,
-                target: TextureTarget.Texture2D,
-                pixelInternalFormat: PixelInternalFormat.Rgba,
-                pixelFormat: PixelFormat.Rgba,
-                type: PixelType.UnsignedByte,
-
-
-                textureMinFilter: TextureMinFilter.Linear,
-                textureMagFilter: TextureMagFilter.Linear
-            );
+            if (colorTexture == null)
+            {
+                // create texture thats the same size as the window (not required)
+                ColorTexture = Texture.LoadFromSize(
+                    x, y,
+                    target: TextureTarget.Texture2D,
+                    pixelInternalFormat: PixelInternalFormat.Rgba,
+                    pixelFormat: PixelFormat.Rgba,
+                    type: PixelType.UnsignedByte,
+                    // wrap mode s
+                    // wrap mode t
+                    textureMinFilter: TextureMinFilter.Linear,
+                    textureMagFilter: TextureMagFilter.Linear
+                );
+            }
+            else
+            {
+                ColorTexture = colorTexture;
+            }
 
             GL.FramebufferTexture2D( // attatch the texture
                 FramebufferTarget.Framebuffer, // the frame buffer will write to this texture
@@ -54,15 +61,47 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 0 // mipmap level
             );
 
+            /* however i need to sample them now
             // create render buffer, as we wont be reading the depth and stencil as texture so it can stay as render buffer
             // which is faster 
-            RenderBuffer = GL.GenRenderbuffer();
-            GL.BindRenderbuffer(RenderbufferTarget.Renderbuffer, RenderBuffer);
-            GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer, RenderbufferStorage.Depth24Stencil8, x, y);
+            StencilRenderBuffer = GL.GenRenderbuffer();
+            GL.BindRenderbuffer(RenderbufferTarget.Renderbuffer, StencilRenderBuffer);
+            GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer, RenderbufferStorage.StencilIndex8, x, y);
             GL.BindRenderbuffer(RenderbufferTarget.Renderbuffer, 0); // unbind
 
             // attatch the render buffer
-            GL.FramebufferRenderbuffer(FramebufferTarget.Framebuffer, FramebufferAttachment.DepthStencilAttachment, RenderbufferTarget.Renderbuffer, RenderBuffer);
+            GL.FramebufferRenderbuffer(FramebufferTarget.Framebuffer, FramebufferAttachment.StencilAttachment, RenderbufferTarget.Renderbuffer, StencilRenderBuffer);
+            */
+
+            if (depthStencilTexture == null)
+            {
+                DepthStencilTexture = Texture.LoadFromSize(
+                    x, y,
+                    target: TextureTarget.Texture2D,
+                    pixelInternalFormat: PixelInternalFormat.Depth24Stencil8,
+                    pixelFormat: PixelFormat.DepthStencil,
+                    type: PixelType.UnsignedInt248,
+                    // wrap mode s
+                    // wrap mode t
+                    textureMinFilter: TextureMinFilter.Linear,
+                    textureMagFilter: TextureMagFilter.Linear
+                );
+            }
+            else
+            {
+                DepthStencilTexture = depthStencilTexture;
+            }
+
+
+            GL.FramebufferTexture2D( // attatch the texture
+                FramebufferTarget.Framebuffer, // the frame buffer will write to this texture
+                FramebufferAttachment.DepthStencilAttachment, // attatchment type
+                TextureTarget.Texture2D, // texture type
+                DepthStencilTexture.Handle,
+                0 // mipmap level
+            );
+
+
 
 
             if (GL.CheckFramebufferStatus(FramebufferTarget.Framebuffer) != FramebufferErrorCode.FramebufferComplete)
@@ -78,7 +117,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 Logger.Log(
                     $"Loaded {LogColors.BC("FBO")} {LogColors.BW(Handle)}{(name != null ? $", named {LogColors.BW(name)}" : "")}:\n" +
                     $"Color {LogColors.BC("Texture")}: {LogColors.BW(ColorTexture.Handle)}\n" +
-                    $"Depth & Stencil {LogColors.BrightCyan("Render Buffer")}: {LogColors.BW(RenderBuffer)}",
+                    $"Depth & Stencil {LogColors.BrightCyan("Texture")}: {LogColors.BW(DepthStencilTexture.Handle)}",
                     LogLevel.Detail
                 );
             }

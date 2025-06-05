@@ -1,5 +1,6 @@
 ﻿DONE: add plane
     DONE: add cube
+DONE: added basic opengl error logging to the logger function
 TODO: add instanced rendering
 TODO: add text
 TODO: allow multiple lights
@@ -18,7 +19,7 @@ TODO: PBR
         TODO: implement disposal
         DONE: fix screenshot, its taking a blank screenshot currently
     DONE: cubemaps
-    TODO: gamma correction
+    DONE: gamma correction
     TODO: HDR
     TODO: normal mapping
 DONE: translate textures to init instead of initing on construction

@@ -1,3 +1,4 @@
+using OpenglTestConsole.Classes.API.Extensions;
 using OpenglTestConsole.Classes.API.Rendering.Textures;
 using OpenTK.Mathematics;
 
@@ -100,7 +101,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             }
         }
 
-        public void SetColor(string name, Color4 color)
+        public void SetColor4(string name, Color4 color)
         {
             if (uniformCache.ContainsKey(name))
             {
@@ -110,7 +111,21 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             else
             {
                 uniformCache.Add(name, GL.GetUniformLocation(Handle, name));
-                SetColor(name, color);
+                SetColor4(name, color);
+            }
+        }
+
+        public void SetColor3(string name, Color4 color)
+        {
+            if (uniformCache.ContainsKey(name))
+            {
+                uniformCache.TryGetValue(name, out int loc);
+                GL.Uniform3(loc, new Vector3(color.ToVector4()));
+            }
+            else
+            {
+                uniformCache.Add(name, GL.GetUniformLocation(Handle, name));
+                SetColor3(name, color);
             }
         }
 

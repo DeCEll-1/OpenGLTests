@@ -70,6 +70,18 @@ public static class ResourcePaths
             public const string Fragment = "Resources/Shaders/PostProcesses/Inversion/Inversion.frag";
             public const string Vertex = "Resources/Shaders/PostProcesses/MasterVertex.vert";
         }
+        public static class PPDepthDisplay
+        {
+            public const string Name = "PPDepthDisplay";
+            public const string Fragment = "Resources/Shaders/PostProcesses/DepthDisplay/DepthDisplay.frag";
+            public const string Vertex = "Resources/Shaders/PostProcesses/MasterVertex.vert";
+        }
+        public static class PPGammaCorrection
+        {
+            public const string Name = "PPGammaCorrection";
+            public const string Fragment = "Resources/Shaders/PostProcesses/GammaCorrection/GammaCorrection.frag";
+            public const string Vertex = "Resources/Shaders/PostProcesses/MasterVertex.vert";
+        }
     }
     public static class ComputeShaders
     {

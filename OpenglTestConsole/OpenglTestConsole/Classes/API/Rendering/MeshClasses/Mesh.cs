@@ -23,7 +23,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 
         // caps to disable before rendering
         public List<EnableCap> CapsToDisable { get; set; } = new();
-
+        public Action BeforeRender = delegate { };
+        public Action AfterRender = delegate { };
         // render type
         public PrimitiveType type { get; set; } = PrimitiveType.Triangles;
 
@@ -63,10 +64,12 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 
 
             GL.BindVertexArray(VertexArrayObjectPointer);
+            this.BeforeRender();
             if (Geometry.IndicesLength < 3) // check if we are using indices
                 GL.DrawArrays(type, 0, Geometry.VerticesLength);
             else
                 GL.DrawElements(type, Geometry.IndicesLength, DrawElementsType.UnsignedInt, 0);
+            this.AfterRender();
 
             Disables();
         }

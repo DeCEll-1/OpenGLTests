@@ -10,11 +10,13 @@ namespace OpenglTestConsole.Classes.API.Rendering.Materials
 {
     public class PostProcessingMaterial : Material
     {
+        protected PostProcessingMaterial() { }
         public PostProcessingMaterial(Shader shader) { this.Shader = shader; }
-        public FBO FBOToReadFrom { get; set; }
+        public FBO? FBOToReadFrom { get; set; }
         public override void Apply()
-        {
-            Shader.UniformManager.SetTexture("screen", FBOToReadFrom.ColorTexture, TextureUnit.Texture0);
+        {// remember that we use tex 0 and 1 for these while making shaders
+            Shader.UniformManager.SetTexture("colorBuffer", FBOToReadFrom!.ColorTexture, TextureUnit.Texture0);
+            Shader.UniformManager.SetTexture("depthBuffer", FBOToReadFrom.DepthStencilTexture, TextureUnit.Texture1);
         }
     }
 }

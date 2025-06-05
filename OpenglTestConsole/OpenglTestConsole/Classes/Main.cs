@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using OpenglTestConsole.Classes.API;
+using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.SceneFolder;
 using OpenglTestConsole.Classes.impl.EFSs;
@@ -125,6 +126,12 @@ namespace OpenglTestConsole.Classes
                 script.Camera = this.Camera;
                 script.MainInstance = this;
                 script.Advance();
+            }
+
+            OpenTK.Graphics.OpenGL.ErrorCode error = GL.GetError();
+            if (error != OpenTK.Graphics.OpenGL.ErrorCode.NoError)
+            {
+                Logger.LogWithoutGLErrorCheck(error.ToString(), LogLevel.Error);
             }
 
             if (KeyboardState.IsKeyDown(Keys.Escape))

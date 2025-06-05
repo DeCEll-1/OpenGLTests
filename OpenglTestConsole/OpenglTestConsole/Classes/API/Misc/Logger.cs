@@ -2,7 +2,29 @@
 {
     public class Logger
     {
-        public static void Log(string info, LogLevel level)
+        public static unsafe void Log(string info, LogLevel level)
+        {
+            OpenTK.Windowing.GraphicsLibraryFramework.Window* window = OpenTK.Windowing.GraphicsLibraryFramework.GLFW.GetCurrentContext();
+            if (window != null)
+            {
+                ErrorCode error = GL.GetError();
+                if (error != ErrorCode.NoError )
+                {
+                    LogWithoutGLErrorCheck(error.ToString(), LogLevel.Error);
+                }
+            }
+
+            LogWithoutGLErrorCheck(info, level);
+
+        }
+
+        public static void Log(string info, string color)
+        {
+            // replace return to normals with the current color so we can change the color of texts
+            Console.WriteLine(color + info.Replace(LogColors.NORMAL, color + LogColors.BLACK_BACKGROUND));
+        }
+
+        public static void LogWithoutGLErrorCheck(string info, LogLevel level)
         {
             switch (level)
             {
@@ -24,12 +46,6 @@
             }
             // since we change the color when we log, logging without us changing color means the app crashed, so we should set the color to red
             Console.ForegroundColor = ConsoleColor.Red;
-        }
-
-        public static void Log(string info, string color)
-        {
-            // replace return to normals with the current color so we can change the color of texts
-            Console.WriteLine(color + info.Replace(LogColors.NORMAL, color + LogColors.BLACK_BACKGROUND));
         }
     }
 
