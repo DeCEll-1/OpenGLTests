@@ -15,6 +15,7 @@ namespace OpenglTestConsole.Classes.impl.EFSs
 
         public override void Advance()
         {
+            var mouse = MouseState;
             if (KeyboardState.IsKeyPressed(Keys.R))
             {
                 if (cursorState == CursorState.Grabbed)
@@ -25,12 +26,14 @@ namespace OpenglTestConsole.Classes.impl.EFSs
                 else
                 {
                     cursorState = CursorState.Grabbed;
+                    _lastPos = new Vector2(mouse.X, mouse.Y);
                     MainInstance.CursorState = cursorState;
                 }
             }
+            if (MainInstance.CursorState == CursorState.Normal)
+                return;
 
 
-            var mouse = MouseState;
 
             if (_firstMove) // This bool variable is initially set to true.
             {
