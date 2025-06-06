@@ -1,15 +1,18 @@
 ﻿using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenTK.Mathematics;
+using System.Xml.Linq;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Textures
 {
-    public class FBO
+    public class FBO : IDisposable
     {
+        private bool disposed = false;
+        public string name = "";
         public int Handle { get; set; }
+        //public int StencilRenderBuffer { get; private set; }
         public Texture ColorTexture { get; private set; }
         public Texture DepthStencilTexture { get; private set; }
-        public int StencilRenderBuffer { get; private set; }
         public FBO() { }
         public void Init(Vector2i? size = null, string name = "", Texture? colorTexture = null, Texture? depthStencilTexture = null)
         {
@@ -45,7 +48,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                     // wrap mode s
                     // wrap mode t
                     textureMinFilter: TextureMinFilter.Linear,
-                    textureMagFilter: TextureMagFilter.Linear
+                    textureMagFilter: TextureMagFilter.Linear,
+                    name: "Color"
                 );
             }
             else
@@ -84,7 +88,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                     // wrap mode s
                     // wrap mode t
                     textureMinFilter: TextureMinFilter.Linear,
-                    textureMagFilter: TextureMagFilter.Linear
+                    textureMagFilter: TextureMagFilter.Linear,
+                    name: "Depth & Stencil"
                 );
             }
             else
@@ -122,6 +127,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 );
             }
             // execute victory dance
+            this.name = name;
             Unbind();
         }
 
@@ -138,5 +144,46 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
         public static void BindToFBO(int handle) => GL.BindFramebuffer(FramebufferTarget.Framebuffer, handle);
         public static void SetToDefaultFBO() => GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
 
+        #region disposal
+        ~FBO()
+        {
+            if (disposed == false)
+                Logger.Log(
+                    $"GPU Resource leak for FBO! Did you forget to call Dispose()?",
+                    LogLevel.Error
+                );
+        }
+
+        protected virtual void Dispose(bool disposing, bool log = true)
+        {
+            if (!disposed)
+            {
+                if (log)
+                {
+                    this.ColorTexture.logDisposal = log;
+                    this.ColorTexture.Dispose();
+
+                    this.DepthStencilTexture.logDisposal = log;
+                    this.DepthStencilTexture.Dispose();
+
+                    Logger.Log(
+            $"{LogColors.BrightYellow("Disposed")} {LogColors.BC("FBO")} {LogColors.BW(Handle)}{(name != null ? $", named {LogColors.BW(name)}" : "")}",
+                    LogLevel.Detail
+                    );
+                }
+
+                GL.DeleteFramebuffer(Handle);
+                Handle = 0;
+                disposed = true;
+            }
+        }
+        public bool logDisposal = true;
+
+        public void Dispose()
+        {
+            Dispose(true, logDisposal);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

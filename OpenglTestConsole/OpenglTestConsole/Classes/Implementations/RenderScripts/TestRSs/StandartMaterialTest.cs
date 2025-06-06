@@ -21,7 +21,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
             var geometry = new Cube(new(1f));
             var material = new TextureMaterial(Resources.Textures[ResourcePaths.Resources.Textures.Bell_Pepper_png]);
             //var material = new StandartMaterial();
-            Mesh = new Mesh(geometry, material);
+            Mesh = new Mesh(geometry, material, name: "bell, pepper");
             Scene.Add(Mesh);
         }
 

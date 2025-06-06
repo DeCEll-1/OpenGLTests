@@ -6,8 +6,8 @@ namespace OpenglTestConsole.Classes.API.Rendering
     public class Camera
     {
         public Vector3 Position = Vector3.Zero;
-        public int screenWidth;
-        public int screenHeight;
+        public int screenWidth { get => Settings.Resolution.X; }
+        public int screenHeight { get => Settings.Resolution.Y; }
         public float depthNear = 0.1f;
         public float depthFar = 400f;
         private float _pitch;
@@ -39,10 +39,8 @@ namespace OpenglTestConsole.Classes.API.Rendering
             }
         }
 
-        public Camera(int screenWidth, int screenHeight)
+        public Camera()
         {
-            this.screenWidth = screenWidth;
-            this.screenHeight = screenHeight;
         }
 
         public Matrix4 GetViewMatrix()
@@ -51,10 +49,10 @@ namespace OpenglTestConsole.Classes.API.Rendering
         }
 
         public Matrix4 GetProjectionMatrix()
-        {
+        { // TODO: refresh this once every frame instead of calculating it for each object
             return Matrix4.CreatePerspectiveFieldOfView(
                 Settings.FOVRadian,
-                screenWidth / screenHeight,
+                (float)screenWidth / (float)screenHeight,
                 //1.333f, // 1.333 looks less trippy so
                 //1f,
                 depthNear,
@@ -78,6 +76,22 @@ namespace OpenglTestConsole.Classes.API.Rendering
             // not be what you need for all cameras so keep this in mind if you do not want a FPS camera.
             _right = Vector3.Normalize(Vector3.Cross(_front, Vector3.UnitY));
             _up = Vector3.Normalize(Vector3.Cross(_right, _front));
+        }
+
+        public override string ToString()
+        {
+            return
+                $"Resolution: {Settings.Resolution.ToString()}\n" +
+                $"Aspect Ratio: {(float)screenWidth / (float)screenHeight}\n" +
+                $"Near: {depthNear}\n" +
+                $"Far: {depthFar}\n" +
+                $"FoV: {Settings.Fov.ToString()}\n"+
+                $"Pitch: {Pitch}\n" +
+                $"Yaw: {Yaw}\n" +
+                $"Position: {Position.ToString()}\n" +
+                $"Projection Matrix:\n{GetProjectionMatrix().ToString()}"
+                ;
+
         }
     }
 }

@@ -21,7 +21,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 512,
                 512,
                 pixelInternalFormat: PixelInternalFormat.Rgba32f,
-                type: PixelType.Float
+                type: PixelType.Float, 
+                name: "ComputeShaderTestTexture"
             );
             this.Shader = Resources.CompShaders[ResourcePaths.ComputeShaders.MyComputeShader.Name];
             Shader.UnitManager.SetImageTexture(this.Texture.Handle, 0);
@@ -29,7 +30,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
             Square geometry = new Square(new(1));
             TextureMaterial material = new TextureMaterial(Texture);
 
-            this.Mesh = new Mesh(geometry, material);
+            this.Mesh = new Mesh(geometry, material, name: "Compute shader test");
             //this.Mesh.CapsToEnable.Add(EnableCap.CullFace);
             this.Mesh.Transform.Position.Y = 3;
             this.Mesh.Transform.UpdateMatrix();

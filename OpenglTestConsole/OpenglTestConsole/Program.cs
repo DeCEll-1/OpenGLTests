@@ -8,6 +8,7 @@ namespace OpenglTestConsole
 {
     public class Program
     {
+        public static Main main;
         static void Main(string[] args)
         {
             Logger.Log($"Started app with arguments:\n{string.Concat(args)}", LogLevel.Info);
@@ -24,7 +25,7 @@ namespace OpenglTestConsole
 
             gameWindowSettings.UpdateFrequency = 60;
 
-            Main main = new Main(gameWindowSettings, nativeWindowSettings);
+            main = new Main(gameWindowSettings, nativeWindowSettings);
             main.Run();
         }
     }

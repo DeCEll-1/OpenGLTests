@@ -77,7 +77,7 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
             }
 
             // render the meshes added by the render scripts
-            renderList.ForEach(scriptRenders => scriptRenders.ForEach(mesh => mesh?.Render()));
+            Meshes.ForEach(scriptRenders => scriptRenders.ForEach(mesh => mesh?.Render()));
 
             // after render
             foreach (RenderScript script in renderScripts)

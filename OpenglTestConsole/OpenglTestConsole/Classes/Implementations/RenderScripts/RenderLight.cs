@@ -19,7 +19,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
             MonoColorMaterial material = new(new(1f));
             //PhongMaterial material = new PhongMaterial(new(1), new(1), new(1), 1);
 
-            this.Mesh = new Mesh(geometry, material);
+            this.Mesh = new Mesh(geometry, material, name: "Light");
 
             Scene.Add(this.Mesh);
 

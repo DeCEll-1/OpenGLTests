@@ -1,9 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using ImGuiNET;
 using OpenglTestConsole.Classes.API;
+using OpenglTestConsole.Classes.API.ImGuiHelpers;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.SceneFolder;
 using OpenglTestConsole.Classes.impl.EFSs;
+using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenglTestConsole.Classes.Implementations.EFSs;
 using OpenglTestConsole.Classes.Implementations.RenderScripts;
 using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
@@ -16,6 +19,8 @@ namespace OpenglTestConsole.Classes
 {
     public class Main : GameWindow
     {
+        ImGuiController _controller;
+
         public static Scene mainScene = new Scene();
         public List<EveryFrameScript> EveryFrameScripts { get; set; } =
             new List<EveryFrameScript>();
@@ -29,10 +34,7 @@ namespace OpenglTestConsole.Classes
         )
             : base(gameWindowSettings, nativeWindowSettings)
         {
-            Scene.Camera = new Camera(
-                nativeWindowSettings.ClientSize.X,
-                nativeWindowSettings.ClientSize.Y
-            );
+            Scene.Camera = new Camera();
             Scene.Camera.Position.Z = 3f;
             CursorState = CursorState.Grabbed;
 
@@ -66,6 +68,8 @@ namespace OpenglTestConsole.Classes
                     new ComputeShaderTest(),
                     new StandartMaterialTest(),
                     new PostProcessingTest(),
+                    new HandleImGuiAppInfo(),
+                    new WindowSizeSettings(),
                 ]
             );
             #endregion
@@ -90,25 +94,33 @@ namespace OpenglTestConsole.Classes
 
                 script.Init();
             }
+
+
+            _controller = new ImGuiController(ClientSize.X, ClientSize.Y);
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             base.OnRenderFrame(args);
+            _controller.Update(this, (float)args.Time);
 
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
+            // rendered everything we need to render
             mainScene.Render(renderScripts: RenderScripts, args: args);
 
-            SwapBuffers();
-        }
+            GL.Disable(EnableCap.DepthTest);
+            GL.DepthMask(false);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            GL.Enable(EnableCap.Blend);
 
-        protected override void OnFramebufferResize(FramebufferResizeEventArgs e)
-        { // this straight up doesnt work
-            base.OnFramebufferResize(e);
-            Camera.screenWidth = e.Width;
-            Camera.screenHeight = e.Height;
-            GL.Viewport(0, 0, e.Width, e.Height);
+            _controller.Render();
+
+            GL.DepthMask(true);
+            GL.Enable(EnableCap.DepthTest);
+            GL.Disable(EnableCap.Blend);
+            ImGuiController.CheckGLError("End of frame");
+
+            SwapBuffers();
         }
 
         protected override void OnUpdateFrame(FrameEventArgs args)
@@ -138,6 +150,37 @@ namespace OpenglTestConsole.Classes
             {
                 Close();
             }
+        }
+
+        protected override void OnResize(ResizeEventArgs e)
+        {
+            base.OnResize(e);
+            if (Settings.Resolution == new Vector2(e.Width, e.Height))
+                return;
+
+            Settings.Resolution = new(e.Width, e.Height);
+            // Update the opengl viewport
+            GL.Viewport(0, 0, e.Width, e.Height);
+
+            // Tell ImGui of the new size
+            _controller.WindowResized(e.Width, e.Height);
+
+            mainScene.UpdateFBOs();
+        }
+
+        protected override void OnTextInput(TextInputEventArgs e)
+        {
+            base.OnTextInput(e);
+
+
+            _controller.PressChar((char)e.Unicode);
+        }
+
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            base.OnMouseWheel(e);
+
+            _controller.MouseScroll(e.Offset);
         }
     }
 }

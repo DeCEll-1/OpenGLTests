@@ -103,7 +103,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             {
                 if (log)
                     Logger.Log(
-                    $"{LogColors.BrightYellow("Disposed")} Texture {LogColors.BrightWhite(Handle)}",
+                    $"{LogColors.BY("Disposed")} {LogColors.BC("Texture")} {LogColors.BW(Handle)}{(name != "" ? $", named {LogColors.BW(name)}" : "")}",
                     LogLevel.Detail
                 );
 

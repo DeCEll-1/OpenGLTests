@@ -22,6 +22,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
         public TextureMagFilter TextureMagFilter { get; set; }
         private byte[] bytes { get; set; }
         public bool flipped = true;
+        public string name { get; private set; } = "";
         public Texture() { }
 
         public static Texture LoadFromFile(
@@ -129,7 +130,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             return texture;
         }
 
-        public void Init(string? name = null)
+        public void Init(string? name = "")
         {
             this.Handle = GL.GenTexture();
 
@@ -184,8 +185,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             );
             this.initalised = true;
             this.bytes = [];
+
+            this.name = name;
             Logger.Log(
-                $"Loaded {LogColors.BC("Texture")} {LogColors.BrightWhite(this.Handle)}{(name != null ? $", named {LogColors.BW(name)}" : "")}",
+                $"Loaded {LogColors.BC("Texture")} {LogColors.BrightWhite(this.Handle)}{(name != "" ? $", named {LogColors.BW(name)}" : "")}",
                 LogLevel.Detail
             );
         }
@@ -200,11 +203,13 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
             TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat,
             TextureMinFilter textureMinFilter = TextureMinFilter.Linear,
-            TextureMagFilter textureMagFilter = TextureMagFilter.Linear
+            TextureMagFilter textureMagFilter = TextureMagFilter.Linear,
+            string? name = ""
         )
         {
             Texture texture = new Texture();
             texture.Handle = GL.GenTexture();
+            texture.name = name;
             texture.width = width;
             texture.height = height;
             GL.BindTexture(TextureTarget.Texture2D, texture.Handle);
@@ -240,8 +245,9 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 nint.Zero // initilisation pixels
             );
             texture.initalised = true;
-            Logger.Log(
-                $"Loaded {LogColors.BrightYellow("empty")} {LogColors.BrightCyan("Texture")} {LogColors.BrightWhite(texture.Handle)}: {LogColors.BrightWhite(width)}x{LogColors.BrightWhite(height)}",
+            
+            Logger.Log( // one must sacrifice readability in the pursuit of nice colors
+$"Loaded {LogColors.BY("empty")} {LogColors.BC("Texture")} {LogColors.BW(texture.Handle)}{(name != "" ? $", named {LogColors.BW(name)}": "")}: {LogColors.BW(width)}x{LogColors.BW(height)}",
                 LogLevel.Detail
             );
             return texture;

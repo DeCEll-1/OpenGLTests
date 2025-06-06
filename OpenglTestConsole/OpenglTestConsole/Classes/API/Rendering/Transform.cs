@@ -46,5 +46,14 @@ namespace OpenglTestConsole.Classes.API.Rendering
             Scale = Vector3.One;
             UpdateMatrix();
         }
+
+        public override string ToString()
+        {
+            return
+                $"Position: {Position.ToString()}\n"+
+                $"Rotation: {Rotation.ToString()}\n"+
+                $"Scale:    {Scale.ToString()}"
+                ;
+        }
     }
 }

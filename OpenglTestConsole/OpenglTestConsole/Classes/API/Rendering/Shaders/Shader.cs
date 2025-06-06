@@ -6,14 +6,15 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
     {
         #region Main Shader Functions
         public bool initalised = false;
-        public string vertexPath;
-        public string fragmentPath;
+        public string vertexPath { get; private set; }
+        public string fragmentPath { get; private set; }
+        public string name { get; private set; }
         public int Handle { get; set; }
         private bool disposed = false;
         public ShaderUniformManager UniformManager;
 
-        public Shader(string vertexPath, string fragmentPath)
-        { this.vertexPath = vertexPath; this.fragmentPath = fragmentPath; }
+        public Shader(string vertexPath, string fragmentPath, string name = "")
+        { this.vertexPath = vertexPath; this.fragmentPath = fragmentPath;  this.name = name ?? ""; }
 
         public void Init()
         {

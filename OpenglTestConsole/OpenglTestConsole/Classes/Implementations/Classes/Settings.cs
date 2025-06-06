@@ -14,6 +14,6 @@ namespace OpenglTestConsole.Classes.Implementations.Classes
             set { FOVRadian = MathHelper.DegreesToRadians(value); }
         }
         public static float Gamma = 2.2f;
-        public static Vector2i Resolution { get; set; } = new(800, 800);
+        public static Vector2i Resolution { get; set; } = new(1600, 900);
     }
 }

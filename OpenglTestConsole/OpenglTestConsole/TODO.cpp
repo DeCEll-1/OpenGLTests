@@ -1,6 +1,7 @@
 ﻿DONE: add plane
     DONE: add cube
 DONE: added basic opengl error logging to the logger function
+DONE: added imgui
 TODO: add instanced rendering
 TODO: add text
 TODO: allow multiple lights
@@ -16,6 +17,7 @@ TODO: add gif rendering
 TODO: PBR
     DONE: framebuffers
         DONE: implement post processing
+        TODO: update PP FBO size when screen size changes
         TODO: implement disposal
         DONE: fix screenshot, its taking a blank screenshot currently
     DONE: cubemaps

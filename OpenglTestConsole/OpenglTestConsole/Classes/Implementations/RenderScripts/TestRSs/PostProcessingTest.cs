@@ -1,4 +1,5 @@
-﻿using OpenglTestConsole.Classes.API;
+﻿using ImGuiNET;
+using OpenglTestConsole.Classes.API;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.Rendering.Materials;
@@ -27,7 +28,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 
 
             PostProcess Effect = new PostProcess(PPMaterial);
-            Scene.processes.Add(Effect);
+            Scene.PostProcesses.Add(Effect);
 
         }
         public override void Advance()

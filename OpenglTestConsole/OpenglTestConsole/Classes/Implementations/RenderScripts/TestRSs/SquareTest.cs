@@ -20,7 +20,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
 
             PhongMaterial material = PhongMaterial.Pearl;
 
-            this.Mesh = new Mesh(geometry, material);
+            this.Mesh = new Mesh(geometry, material, name: "Sin Sphere");
 
             Scene.Add(this.Mesh);
             this.Mesh.Transform.Position.X += 10;

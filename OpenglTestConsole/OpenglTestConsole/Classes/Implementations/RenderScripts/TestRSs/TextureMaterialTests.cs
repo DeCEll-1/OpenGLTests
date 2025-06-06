@@ -19,7 +19,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 Resources.Textures[ResourcePaths.Resources.Textures.cobble_stone_png]
             );
 
-            this.Mesh = new Mesh(geometry, material);
+            this.Mesh = new Mesh(geometry, material, "Texture sphere");
 
             Mesh.Transform.Position.X += 3;
             this.Mesh.Transform.UpdateMatrix();

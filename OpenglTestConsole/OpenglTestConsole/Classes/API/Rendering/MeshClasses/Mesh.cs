@@ -11,6 +11,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
         {
             get => Scene.Camera;
         }
+        public string Name { get; set; }
 
         private Geometry3D _geometry;
         public Geometry3D Geometry { get => _geometry; set { _geometry = value; _geometry.Apply(this.BufferManager); } }
@@ -23,15 +24,18 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 
         // caps to disable before rendering
         public List<EnableCap> CapsToDisable { get; set; } = new();
-        public Action BeforeRender = delegate { };
-        public Action AfterRender = delegate { };
+
+        public Action BeforeRender;
+
+        public Action AfterRender;
         // render type
         public PrimitiveType type { get; set; } = PrimitiveType.Triangles;
 
         public int VertexArrayObjectPointer { get; private set; }
 
-        public Mesh(Geometry3D geometry, Material material)
+        public Mesh(Geometry3D geometry, Material material, string name = "")
         {
+            this.Name = (name == "") ? Guid.NewGuid().ToString() : name;
             this._geometry = geometry;
             this.Material = material;
 
@@ -64,12 +68,12 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
 
 
             GL.BindVertexArray(VertexArrayObjectPointer);
-            this.BeforeRender();
+            this.BeforeRender?.Invoke();
             if (Geometry.IndicesLength < 3) // check if we are using indices
                 GL.DrawArrays(type, 0, Geometry.VerticesLength);
             else
                 GL.DrawElements(type, Geometry.IndicesLength, DrawElementsType.UnsignedInt, 0);
-            this.AfterRender();
+            this.AfterRender?.Invoke();
 
             Disables();
         }

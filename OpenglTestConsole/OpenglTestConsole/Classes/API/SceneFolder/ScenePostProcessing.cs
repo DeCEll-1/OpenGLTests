@@ -19,7 +19,7 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
         // that way we can have as many post processing effects with just 2 FBOs
         public PingPongFBO pingPong { get; private set; } = new();
         public FBO MainFBO = new(); // this is the main FBO we are writing to for our render
-        public List<PostProcess> processes = new List<PostProcess>()
+        public List<PostProcess> PostProcesses = new List<PostProcess>()
         { };
         private PostProcess passthroughPostProcess =
                 new PostProcess(
@@ -45,22 +45,22 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
         }
         private void HandlePostProcesses()
         {
-            if (processes.Count == 0)
+            if (PostProcesses.Count == 0)
             {
                 passthroughPostProcess.Apply(FBOToWriteTo: 0, FBOToReadFrom: MainFBO);
                 return;
             }
             pingPong.Clear();
 
-            processes[0].Apply(FBOToWriteTo: pingPong.WriteTo.Handle, FBOToReadFrom: MainFBO); // write to Ping from our main FBO
+            PostProcesses[0].Apply(FBOToWriteTo: pingPong.WriteTo.Handle, FBOToReadFrom: MainFBO); // write to Ping from our main FBO
             pingPong.Swap();
-            if (processes.Count > 1)
+            if (PostProcesses.Count > 1)
             {
                 for (i = 1; // we already did 0th
-                    i < processes.Count - 1; // minus 1 because we want to write to buffer 0 on the last step, which is the screen
+                    i < PostProcesses.Count - 1; // minus 1 because we want to write to buffer 0 on the last step, which is the screen
                     i++)
                 {
-                    processes[i].Apply(FBOToWriteTo: pingPong.WriteTo.Handle, FBOToReadFrom: pingPong.ReadFrom); // write to Ping from our main FBO
+                    PostProcesses[i].Apply(FBOToWriteTo: pingPong.WriteTo.Handle, FBOToReadFrom: pingPong.ReadFrom); // write to Ping from our main FBO
                     pingPong.Swap();
 
                 }
@@ -72,12 +72,19 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
 
         }
 
+        public void UpdateFBOs()
+        {
+            this.MainFBO.Dispose();
+            this.MainFBO = new FBO();
+            this.pingPong.UpdateFBOs();
+            this.InitPostProcesses();
+        }
 
         public class PingPongFBO
         {
             internal PingPongFBO() { }
-            public FBO Ping { get; } = new();
-            public FBO Pong { get; } = new();
+            public FBO Ping { get; private set; } = new();
+            public FBO Pong { get; private set; } = new();
             private bool writeToPing = true;
 
             public FBO ReadFrom => writeToPing ? Pong : Ping;
@@ -109,6 +116,15 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
                 GL.DepthFunc(DepthFunction.Less);
 
                 GL.ClearColor(0.0f, 0.1f, 0.05f, 1.0f);
+            }
+
+            internal void UpdateFBOs()
+            {
+                this.Ping.Dispose();
+                this.Ping = new();
+
+                this.Pong.Dispose();
+                this.Pong = new();
             }
         }
 

@@ -76,12 +76,12 @@ namespace OpenglTestConsole.Classes.API
         {
             string shaderName = (string)type!.GetField("Name")!.GetValue(null)!;
             string compute = (string)type!.GetField("Compute")!.GetValue(null)!;
-            
+
             // add the shader to the resources
             Resources.CompShaders.Add(shaderName, new(compute));
-            
+
             Logger.Log($"Loading {LogColors.Green("Compute Shader")} {LogColors.BrightWhite(shaderName)}", LogLevel.Detail);
-            
+
             Resources.CompShaders[shaderName].Init();
         }
         #endregion
@@ -101,9 +101,9 @@ namespace OpenglTestConsole.Classes.API
 
             string? geometry = (string?)type?.GetField("Geometry")?.GetValue(null);
             if (string.IsNullOrEmpty(geometry))
-                Resources.Shaders.Add(shaderName, new(vertex, fragment));
+                Resources.Shaders.Add(shaderName, new(vertex, fragment, name: shaderName));
             else
-                Resources.Shaders.Add(shaderName, new(vertex, fragment, geometry));
+                Resources.Shaders.Add(shaderName, new(vertex, fragment, geometry, name: shaderName));
             // add the shader to the resources
             Logger.Log($"Loading {LogColors.Green("Shader")} {LogColors.BrightWhite(shaderName)}", LogLevel.Detail);
 

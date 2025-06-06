@@ -21,7 +21,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
             PhongMaterial material = PhongMaterial.Pearl;
 
             // create mesh
-            this.Mesh = new Mesh(geometry, material);
+            this.Mesh = new Mesh(geometry, material, name: "Circle movement sphere");
 
             // add our mesh to the scene
             Scene.Add(this.Mesh);
