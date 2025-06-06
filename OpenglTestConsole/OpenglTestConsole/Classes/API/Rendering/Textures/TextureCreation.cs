@@ -199,7 +199,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             TextureTarget target = TextureTarget.Texture2D,
             PixelInternalFormat pixelInternalFormat = PixelInternalFormat.Rgba,
             PixelFormat pixelFormat = PixelFormat.Rgba,
-            PixelType type = PixelType.UnsignedByte,
+            PixelType pixelType = PixelType.UnsignedByte,
             TextureWrapMode textureSWrapMode = TextureWrapMode.Repeat,
             TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat,
             TextureMinFilter textureMinFilter = TextureMinFilter.Linear,
@@ -208,6 +208,16 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
         )
         {
             Texture texture = new Texture();
+            #region texture info
+            texture.Target = target;
+            texture.PixelInternalFormat = pixelInternalFormat;
+            texture.PixelFormat = pixelFormat;
+            texture.PixelType = pixelType;
+            texture.TextureSWrapMode = textureSWrapMode;
+            texture.TextureTWrapMode = textureTWrapMode;
+            texture.TextureMinFilter = textureMinFilter;
+            texture.TextureMagFilter = textureMagFilter;
+            #endregion
             texture.Handle = GL.GenTexture();
             texture.name = name;
             texture.width = width;
@@ -241,7 +251,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 height,
                 0, // border
                 pixelFormat,
-                type,
+                pixelType,
                 nint.Zero // initilisation pixels
             );
             texture.initalised = true;

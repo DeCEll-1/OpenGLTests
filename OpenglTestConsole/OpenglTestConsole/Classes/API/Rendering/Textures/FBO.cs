@@ -44,7 +44,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                     target: TextureTarget.Texture2D,
                     pixelInternalFormat: PixelInternalFormat.Rgba,
                     pixelFormat: PixelFormat.Rgba,
-                    type: PixelType.UnsignedByte,
+                    pixelType: PixelType.UnsignedByte,
                     // wrap mode s
                     // wrap mode t
                     textureMinFilter: TextureMinFilter.Linear,
@@ -84,7 +84,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                     target: TextureTarget.Texture2D,
                     pixelInternalFormat: PixelInternalFormat.Depth24Stencil8,
                     pixelFormat: PixelFormat.DepthStencil,
-                    type: PixelType.UnsignedInt248,
+                    pixelType: PixelType.UnsignedInt248,
                     // wrap mode s
                     // wrap mode t
                     textureMinFilter: TextureMinFilter.Linear,

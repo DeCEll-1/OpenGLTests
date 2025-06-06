@@ -21,7 +21,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 512,
                 512,
                 pixelInternalFormat: PixelInternalFormat.Rgba32f,
-                type: PixelType.Float, 
+                pixelType: PixelType.Float, 
                 name: "ComputeShaderTestTexture"
             );
             this.Shader = Resources.CompShaders[ResourcePaths.ComputeShaders.MyComputeShader.Name];

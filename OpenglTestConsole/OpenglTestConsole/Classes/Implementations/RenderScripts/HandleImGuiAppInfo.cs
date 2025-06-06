@@ -116,7 +116,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                     var fieldVal = field.GetValue(itemToList);
                     if (fieldVal == null)
                         continue;
-                    if (field.FieldType.IsPrimitive || ReflectionMisc.OverridesToString(fieldVal))
+                    if (field.FieldType.IsPrimitive || ReflectionMisc.OverridesToString(fieldVal) || field.FieldType.IsEnum)
                         ImGui.Text(field.Name + ": " + fieldVal?.ToString());
                     else
                         RecursiveListType(fieldVal, name: field.Name);
@@ -126,7 +126,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                     var propVal = property.GetValue(itemToList);
                     if (propVal == null)
                         continue;
-                    if (property.PropertyType.IsPrimitive || ReflectionMisc.OverridesToString(propVal))
+                    if (property.PropertyType.IsPrimitive || ReflectionMisc.OverridesToString(propVal) || property.PropertyType.IsEnum)
                         ImGui.Text(property.Name + ": " + propVal?.ToString());
                     else
                         RecursiveListType(propVal, name: property.Name);
