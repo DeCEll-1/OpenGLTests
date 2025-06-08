@@ -4,12 +4,14 @@ using OpenglTestConsole.Classes.API;
 using OpenglTestConsole.Classes.API.ImGuiHelpers;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Rendering;
+using OpenglTestConsole.Classes.API.Rendering.Geometries;
 using OpenglTestConsole.Classes.API.SceneFolder;
 using OpenglTestConsole.Classes.impl.EFSs;
 using OpenglTestConsole.Classes.Implementations.Classes;
 using OpenglTestConsole.Classes.Implementations.EFSs;
 using OpenglTestConsole.Classes.Implementations.RenderScripts;
 using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
+using OpenglTestConsole.Generated.Paths;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -151,6 +153,8 @@ namespace OpenglTestConsole.Classes
             {
                 Close();
             }
+
+
         }
 
         protected override void OnResize(ResizeEventArgs e)

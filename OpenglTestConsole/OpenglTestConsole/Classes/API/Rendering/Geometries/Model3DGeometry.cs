@@ -36,22 +36,26 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
         public static (Vector3[] Vertices, Vector3[] Normals, Vector2[] TexCoords, uint[] indices) LoadFromOBJ(string path)
         {
             List<Vector3> vertices = [];
-            List<Vector3> finalVertices= [];
+            List<Vector3> finalVertices = [];
             List<Vector3> normals = [];
-            List<Vector3> finalNormals= [];
+            List<Vector3> finalNormals = [];
             List<Vector2> texCoords = [];
-            List<Vector2> finalTexCoords= [];
+            List<Vector2> finalTexCoords = [];
             List<uint> indices = [];
             Dictionary<(int, int, int), uint> uniqueMap = [];
 
             Logger.BeginTimingBlock();
+
+            using var reader = new StreamReader(path);
+
+            string? line = "";
             uint nextIndex = 0;
-            foreach (string line in File.ReadLines(path))
+            while ((line = reader.ReadLine()) != null)
             {
                 bool skip = true;
                 string op = "";
-                foreach (string c in new[] { "v ", "vt", "vn", "f" })
-                    if (line.StartsWith(c) && skip == true) // check if we care about the line
+                foreach (string c in new[] { "v ", "vt", "vn", "f " })
+                    if (skip == true && line.Length > 3 && line[0] == c[0] && line[1] == c[1]) // check if we care about the line
                     {
                         op = c;
                         skip = false;

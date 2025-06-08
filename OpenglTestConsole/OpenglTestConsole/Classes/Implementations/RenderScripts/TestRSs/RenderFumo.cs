@@ -26,9 +26,13 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
             Mesh mesh = new Mesh(geometry, material, name: "CiRNO HELL YEAH");
             Scene.Add(mesh);
 
+            mesh.Transform.Scale = new(0.1f);
             mesh.Transform.Position.X += 5;
-            mesh.Transform.Position.Y += 5;
+            mesh.Transform.Position.Y += 3;
+            mesh.Transform.Rotation.Z += 90;
             mesh.Transform.UpdateMatrix();
+
+            mesh.CapsToEnable.Add(EnableCap.CullFace);
 
         }
 
