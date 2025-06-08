@@ -6,7 +6,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System.IO;
 using System.Reflection.Metadata;
-using static OpenglTestConsole.Generated.Paths.ResourcePaths.Materials;
+using static OpenglTestConsole.Generated.Paths.ResourcePaths.Shaders;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Textures
 {

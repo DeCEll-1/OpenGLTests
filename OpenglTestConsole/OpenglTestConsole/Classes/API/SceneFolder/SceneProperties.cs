@@ -16,7 +16,11 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
     {
         public static List<Light> Lights { get; set; } = new();
         public static Camera Camera { get; set; } = new Camera();
-        public Stopwatch Timer = new Stopwatch();
+        public static Stopwatch Timer = new Stopwatch();
+        static Scene()
+        {
+            Timer.Start();
+        }
         public List<List<Mesh>> Meshes { get; private set; } = [];
         private Cubemap _SkyboxMap = Resources.Cubemaps[ResourcePaths.Cubemaps.Sea.Name];
         public Cubemap SkyboxMap

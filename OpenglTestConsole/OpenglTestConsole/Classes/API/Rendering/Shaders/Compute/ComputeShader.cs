@@ -23,6 +23,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders.Compute
 
         public void Init()
         {
+            Logger.BeginTimingBlock();
             Handle = GL.CreateProgram();
 
             int computeShaderPointer = HandleComputeShader(computeShaderPath);
@@ -54,7 +55,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders.Compute
             initalised = true;
 
             Logger.Log(
-                $"Loaded {LogColors.BrightCyan(ShaderType.ComputeShader)} for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(computeShaderPath)}",
+                $"Loaded {LogColors.BC(ShaderType.ComputeShader)} for {LogColors.BW(Handle)} : {LogColors.BW(computeShaderPath)} in {LogColors.BG(Logger.EndTimingBlockFormatted())}",
                 LogLevel.Detail
             );
         }

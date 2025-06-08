@@ -4,6 +4,8 @@ using OpenglTestConsole.Classes.API;
 using OpenglTestConsole.Classes.API.Misc;
 using OpenglTestConsole.Classes.API.Rendering;
 using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
+using OpenTK.Mathematics;
+using System.Collections;
 using System.Reflection;
 using System.Threading.Tasks;
 using Scene = OpenglTestConsole.Classes.API.SceneFolder.Scene;
@@ -62,6 +64,8 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
 
                 RecursiveListType(mesh.Material, prename: "Material: ");
 
+                RecursiveListType(mesh.Geometry, prename: "Geometry: ");
+
 
                 if (ImGui.TreeNodeEx("Caps To Enable: " + mesh.CapsToEnable.Count))
                 {
@@ -91,7 +95,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                 ImGui.TreePop();
             }
         }
-
+        private static Type[] toStringedTypes = [];
         private void RecursiveListType(object? itemToList, string name = "", string prename = "")
         {
             if (itemToList == null)
@@ -111,12 +115,18 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                     return;
                 }
 
+
                 foreach (var field in fields)
                 {
                     var fieldVal = field.GetValue(itemToList);
                     if (fieldVal == null)
                         continue;
-                    if (field.FieldType.IsPrimitive || ReflectionMisc.OverridesToString(fieldVal) || field.FieldType.IsEnum)
+                    if (
+                        field.FieldType.IsPrimitive ||
+                        ReflectionMisc.OverridesToString(fieldVal) ||
+                        toStringedTypes.Any(field.FieldType.IsSubclassOf) ||
+                        field.FieldType.IsEnum
+                    )
                         ImGui.Text(field.Name + ": " + fieldVal?.ToString());
                     else
                         RecursiveListType(fieldVal, name: field.Name);
@@ -126,10 +136,37 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts
                     var propVal = property.GetValue(itemToList);
                     if (propVal == null)
                         continue;
-                    if (property.PropertyType.IsPrimitive || ReflectionMisc.OverridesToString(propVal) || property.PropertyType.IsEnum)
+                    if (
+                        property.PropertyType.IsPrimitive ||
+                        ReflectionMisc.OverridesToString(propVal) ||
+                        toStringedTypes.Any(property.PropertyType.IsSubclassOf) ||
+                        property.PropertyType.IsEnum
+                    )
                         ImGui.Text(property.Name + ": " + propVal?.ToString());
                     else
                         RecursiveListType(propVal, name: property.Name);
+                }
+
+                if (type.IsArray)
+                {
+                    ICollection? items = itemToList as ICollection;
+                    if (ImGui.TreeNodeEx("Values: "))
+                    {
+                        foreach (object? item in items)
+                        {
+                            Type itemType = item.GetType();
+                            if (
+                                itemType.IsPrimitive ||
+                                ReflectionMisc.OverridesToString(item) ||
+                                toStringedTypes.Any(itemType.IsSubclassOf) ||
+                                itemType.IsEnum
+                            )
+                                ImGui.Text(itemType.Name + ": " + item?.ToString());
+                            else
+                                RecursiveListType(item, name: itemType.Name);
+                        }
+                        ImGui.TreePop();
+                    }
                 }
 
                 ImGui.TreePop();

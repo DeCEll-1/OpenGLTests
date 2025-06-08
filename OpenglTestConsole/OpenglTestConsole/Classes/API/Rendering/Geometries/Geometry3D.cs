@@ -1,4 +1,5 @@
-﻿using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
+﻿using OpenglTestConsole.Classes.API.Misc;
+using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
 using OpenTK.Mathematics;
 
 namespace OpenglTestConsole.Classes.API.Rendering.Geometries
@@ -66,5 +67,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
             mergedGeometry.Indices = indices.ToArray();
             return mergedGeometry;
         }
+
+        
     }
 }

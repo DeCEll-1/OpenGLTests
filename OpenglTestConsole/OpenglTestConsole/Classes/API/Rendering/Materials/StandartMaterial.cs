@@ -12,6 +12,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Materials
         public bool Wireframe { get; set; }
         public bool FlatShaded { get; set; }
 
+        public override Shader Shader => throw new NotImplementedException();
+
         public StandartMaterial() { }
         public override void Apply()
         {

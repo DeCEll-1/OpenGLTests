@@ -19,10 +19,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Materials
         // size of the specular light
         public float Shininess { get; set; }
 
-        public PhongMaterial()
-        {
-            this.Shader = Resources.Shaders[ResourcePaths.Materials.Phong.Name];
-        }
+        public override Shader Shader => Resources.Shaders[ResourcePaths.Shaders.Phong.Name];
 
         public PhongMaterial(Vector3 ambient, Vector3 diffuse, Vector3 specular, float shininess)
         {
@@ -30,7 +27,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.Materials
             this.Diffuse = diffuse;
             this.Specular = specular;
             this.Shininess = shininess * 128f;
-            this.Shader = Resources.Shaders[ResourcePaths.Materials.Phong.Name];
         }
 
         public override void Apply()

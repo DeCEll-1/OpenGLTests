@@ -18,45 +18,51 @@ public static class ResourcePaths
             public const string cobble_stone_png = "Resources/Textures/cobble_stone.png";
         }
     }
-    public static class Materials
+    public static class Shaders
     {
         public static class MCSDF
         {
             public const string Name = "MCSDF";
-            public const string Fragment = "Resources/Shaders/MaterialMCSDF/MaterialMCSDF.frag";
-            public const string Vertex = "Resources/Shaders/MaterialMCSDF/MaterialMCSDF.vert";
+            public const string Fragment = "Resources/Shaders/RenderShaders/MCSDF/MCSDF.frag";
+            public const string Vertex = "Resources/Shaders/RenderShaders/MCSDF/MCSDF.vert";
         }
         public static class Phong
         {
-            public const string Name = "PhongMaterial";
-            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.frag";
-            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.vert";
-            public const string Geometry = "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.geom";
+            public const string Name = "Phong";
+            public const string Fragment = "Resources/Shaders/RenderShaders/Phong/Phong.frag";
+            public const string Vertex = "Resources/Shaders/RenderShaders/Phong/Phong.vert";
+            public const string Geometry = "Resources/Shaders/RenderShaders/Phong/Phong.geom";
         }
         public static class Texture
         {
-            public const string Name = "TextureMaterial";
-            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialTexture/MaterialTexture.frag";
-            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialTexture/MaterialTexture.vert";
+            public const string Name = "Texture";
+            public const string Fragment = "Resources/Shaders/RenderShaders/Texture/Texture.frag";
+            public const string Vertex = "Resources/Shaders/RenderShaders/Texture/Texture.vert";
         }
         public static class MonoColor
         {
-            public const string Name = "MonoColorMaterial";
-            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialMonoColor/MaterialMonoColor.frag";
-            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialMonoColor/MaterialMonoColor.vert";
+            public const string Name = "MonoColor";
+            public const string Fragment = "Resources/Shaders/RenderShaders/MonoColor/MonoColor.frag";
+            public const string Vertex = "Resources/Shaders/RenderShaders/MonoColor/MonoColor.vert";
         }
         public static class Standart
         {
-            public const string Name = "StandartMaterial";
-            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.frag";
-            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.vert";
-            public const string Geometry = "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.geom";
+            public const string Name = "Standart";
+            public const string Fragment = "Resources/Shaders/RenderShaders/Standart/Standart.frag";
+            public const string Vertex = "Resources/Shaders/RenderShaders/Standart/Standart.vert";
+            public const string Geometry = "Resources/Shaders/RenderShaders/Standart/Standart.geom";
         }
         public static class Skybox
         {
-            public const string Name = "SkyboxMaterial";
-            public const string Fragment = "Resources/Shaders/ObjectMaterials/MaterialSkybox/MaterialSkybox.frag";
-            public const string Vertex = "Resources/Shaders/ObjectMaterials/MaterialSkybox/MaterialSkybox.vert";
+            public const string Name = "Skybox";
+            public const string Fragment = "Resources/Shaders/RenderShaders/Skybox/Skybox.frag";
+            public const string Vertex = "Resources/Shaders/RenderShaders/Skybox/Skybox.vert";
+        }
+        public static class Model
+        {
+            public const string Name = "Model";
+            public const string Fragment = "Resources/Shaders/RenderShaders/Model/Model.frag";
+            public const string Vertex = "Resources/Shaders/RenderShaders/Model/Model.vert";
         }
         public static class PPWriteFBO
         {
@@ -111,6 +117,20 @@ public static class ResourcePaths
             public const string Bottom = "Resources/SeaSkybox/bottom.jpg";
             public const string Back = "Resources/SeaSkybox/back.jpg";
             public const string Front = "Resources/SeaSkybox/front.jpg";
+        }
+    }
+    public static class Geometries
+    {
+        public static class Models
+        {
+            public static class Cirno
+            {
+                public const string Name = "Cirno";
+                public const string OBJ = "Resources/Models/CirnoFumo/Cirno.obj";
+                public const string Color = "Resources/Models/CirnoFumo/Cirno.jpg";
+                public const string Occlusion = "Resources/Models/CirnoFumo/Occlusion.png";
+                public const string Normal = "Resources/Models/CirnoFumo/Normals.png";
+            }
         }
     }
 }

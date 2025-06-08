@@ -70,6 +70,7 @@ namespace OpenglTestConsole.Classes
                     new PostProcessingTest(),
                     new HandleImGuiAppInfo(),
                     new WindowSizeSettings(),
+                    new RenderFumo(),
                 ]
             );
             #endregion

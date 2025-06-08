@@ -1,6 +1,8 @@
 using System.Reflection;
 using OpenglTestConsole.Classes.API.JSON;
 using OpenglTestConsole.Classes.API.Misc;
+using OpenglTestConsole.Classes.API.Rendering.Geometries;
+using OpenglTestConsole.Classes.API.Rendering.Materials;
 using OpenglTestConsole.Classes.API.Rendering.Shaders;
 using OpenglTestConsole.Classes.API.Rendering.Shaders.Compute;
 using OpenglTestConsole.Classes.API.Rendering.Textures;
@@ -30,6 +32,7 @@ namespace OpenglTestConsole.Classes.API
             Resources.CompShaders.Clear();
             Resources.Fonts.Clear();
             Resources.Cubemaps.Clear();
+            Resources.Geometries.Clear();
 
             Init();
         }
@@ -45,22 +48,24 @@ namespace OpenglTestConsole.Classes.API
             AddComputeShaders();
             AddFonts();
             AddCubemaps();
+            AddModels();
         }
         #region textures
         private static void AddTextures()
         {
             foreach (FieldInfo texture in typeof(ResourcePaths.Resources.Textures).GetFields())
-                AddTexture(texture);
+                AddTexture((string)texture.GetValue(null)!);
         }
 
-        private static void AddTexture(FieldInfo texture)
+        private static Texture AddTexture(string texturePath)
         {
-            // get the constant path value from the class
-            string texturePath = (string)texture.GetValue(null)!;
             // add the texture to the resources
             Resources.Textures.Add(texturePath, Texture.LoadFromFile(texturePath));
             Logger.Log($"Loading {LogColors.Green("Texture")} {LogColors.BrightWhite(texturePath)}", LogLevel.Detail);
+            Logger.PushIndentLevel();
             Resources.Textures[texturePath].Init();
+            Logger.PopIndentLevel();
+            return Resources.Textures[texturePath];
         }
         #endregion
         #region compute shaders
@@ -81,14 +86,15 @@ namespace OpenglTestConsole.Classes.API
             Resources.CompShaders.Add(shaderName, new(compute));
 
             Logger.Log($"Loading {LogColors.Green("Compute Shader")} {LogColors.BrightWhite(shaderName)}", LogLevel.Detail);
-
+            Logger.PushIndentLevel();
             Resources.CompShaders[shaderName].Init();
+            Logger.PopIndentLevel();
         }
         #endregion
         #region shaders
         private static void AddShaders()
         {
-            foreach (var shader in typeof(ResourcePaths.Materials).GetNestedTypes())
+            foreach (var shader in typeof(ResourcePaths.Shaders).GetNestedTypes())
                 AddShader(shader);
         }
 
@@ -104,10 +110,13 @@ namespace OpenglTestConsole.Classes.API
                 Resources.Shaders.Add(shaderName, new(vertex, fragment, name: shaderName));
             else
                 Resources.Shaders.Add(shaderName, new(vertex, fragment, geometry, name: shaderName));
+
             // add the shader to the resources
             Logger.Log($"Loading {LogColors.Green("Shader")} {LogColors.BrightWhite(shaderName)}", LogLevel.Detail);
 
+
             Resources.Shaders[shaderName].Init();
+
         }
         #endregion
         #region fonts
@@ -123,10 +132,11 @@ namespace OpenglTestConsole.Classes.API
         {
             string fontName = (string)type!.GetField("Name")!.GetValue(null)!;
             string fontJSONPath = (string)type!.GetField("JSON")!.GetValue(null)!;
-            FieldInfo fontPNGField = type.GetField("PNG")!;
+            string fontPNGPath = (string)type!.GetField("PNG")!.GetValue(null)!;
+
             Resources.Fonts.Add(fontName, MCSDFJSON.GetFontJson(fontJSONPath)!);
 
-            AddTexture(fontPNGField);
+            AddTexture(fontPNGPath);
         }
         #endregion
         #region cubemaps
@@ -160,10 +170,48 @@ namespace OpenglTestConsole.Classes.API
 
 
             Logger.Log($"Loading {LogColors.Green("Cubemap")} {LogColors.BrightWhite(cubemapName)}", LogLevel.Detail);
+            Logger.PushIndentLevel();
 
             Resources.Cubemaps.Add(cubemapName, new(textures));
             Resources.Cubemaps[cubemapName].Init();
+
+            Logger.PopIndentLevel();
         }
+        #endregion
+        #region models
+        private static void AddModels()
+        {
+            foreach (var map in typeof(ResourcePaths.Geometries.Models).GetNestedTypes())
+                AddModel(map);
+        }
+        private static void AddModel(Type type)
+        {
+            // get the cubemap information
+            string modelName = (string)type!.GetField("Name")!.GetValue(null)!;
+
+            string objPath = (string)type!.GetField("OBJ")!.GetValue(null)!;
+
+            string colorTexturePath = (string)type!.GetField("Color")!.GetValue(null)!;
+            string occlusionTexturePath = (string)type!.GetField("Occlusion")!.GetValue(null)!;
+            string normalTextureMap = (string)type!.GetField("Normal")!.GetValue(null)!;
+
+            Logger.Log($"Loading {LogColors.G("Model")} {LogColors.BW(modelName)}", LogLevel.Detail);
+
+            Logger.PushIndentLevel();
+
+            Resources.Materials.Add(modelName, new ModelMaterial(
+                color: AddTexture(colorTexturePath),
+                occlusion: AddTexture(occlusionTexturePath),
+                normal: AddTexture(normalTextureMap)
+            ));
+
+
+            Resources.Geometries.Add(modelName, new Model3DGeometry(objPath));
+
+            Logger.PopIndentLevel();
+
+        }
+
         #endregion
     }
 }

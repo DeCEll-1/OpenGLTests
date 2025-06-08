@@ -24,7 +24,7 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
         private PostProcess passthroughPostProcess =
                 new PostProcess(
                     new PostProcessingMaterial(
-                        Resources.Shaders[ResourcePaths.Materials.PPWriteFBO.Name]
+                        Resources.Shaders[ResourcePaths.Shaders.PPWriteFBO.Name]
                     )
                 ); // the post process we will use if theresnt any processes
         private int i = 0; // counter so we can switch ping and pong

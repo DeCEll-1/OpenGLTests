@@ -12,38 +12,43 @@
             "cobble_stone_png": "Resources/Textures/cobble_stone.png"
         }
     },
-    "Materials": {
+    "Shaders": {
         "MCSDF": {
             "Name": "MCSDF",
-            "Fragment": "Resources/Shaders/MaterialMCSDF/MaterialMCSDF.frag",
-            "Vertex": "Resources/Shaders/MaterialMCSDF/MaterialMCSDF.vert"
+            "Fragment": "Resources/Shaders/RenderShaders/MCSDF/MCSDF.frag",
+            "Vertex": "Resources/Shaders/RenderShaders/MCSDF/MCSDF.vert"
         },
         "Phong": {
-            "Name": "PhongMaterial",
-            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.frag",
-            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.vert",
-            "Geometry": "Resources/Shaders/ObjectMaterials/MaterialPhong/MaterialPhong.geom"
+            "Name": "Phong",
+            "Fragment": "Resources/Shaders/RenderShaders/Phong/Phong.frag",
+            "Vertex": "Resources/Shaders/RenderShaders/Phong/Phong.vert",
+            "Geometry": "Resources/Shaders/RenderShaders/Phong/Phong.geom"
         },
         "Texture": {
-            "Name": "TextureMaterial",
-            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialTexture/MaterialTexture.frag",
-            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialTexture/MaterialTexture.vert"
+            "Name": "Texture",
+            "Fragment": "Resources/Shaders/RenderShaders/Texture/Texture.frag",
+            "Vertex": "Resources/Shaders/RenderShaders/Texture/Texture.vert"
         },
         "MonoColor": {
-            "Name": "MonoColorMaterial",
-            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialMonoColor/MaterialMonoColor.frag",
-            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialMonoColor/MaterialMonoColor.vert"
+            "Name": "MonoColor",
+            "Fragment": "Resources/Shaders/RenderShaders/MonoColor/MonoColor.frag",
+            "Vertex": "Resources/Shaders/RenderShaders/MonoColor/MonoColor.vert"
         },
         "Standart": {
-            "Name": "StandartMaterial",
-            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.frag",
-            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.vert",
-            "Geometry": "Resources/Shaders/ObjectMaterials/MaterialStandart/MaterialStandart.geom"
+            "Name": "Standart",
+            "Fragment": "Resources/Shaders/RenderShaders/Standart/Standart.frag",
+            "Vertex": "Resources/Shaders/RenderShaders/Standart/Standart.vert",
+            "Geometry": "Resources/Shaders/RenderShaders/Standart/Standart.geom"
         },
         "Skybox": {
-            "Name": "SkyboxMaterial",
-            "Fragment": "Resources/Shaders/ObjectMaterials/MaterialSkybox/MaterialSkybox.frag",
-            "Vertex": "Resources/Shaders/ObjectMaterials/MaterialSkybox/MaterialSkybox.vert"
+            "Name": "Skybox",
+            "Fragment": "Resources/Shaders/RenderShaders/Skybox/Skybox.frag",
+            "Vertex": "Resources/Shaders/RenderShaders/Skybox/Skybox.vert"
+        },
+        "Model": {
+            "Name": "Model",
+            "Fragment": "Resources/Shaders/RenderShaders/Model/Model.frag",
+            "Vertex": "Resources/Shaders/RenderShaders/Model/Model.vert"
         },
         "PPWriteFBO": {
             "Name": "PPWriteFBO",
@@ -88,6 +93,17 @@
             "Bottom": "Resources/SeaSkybox/bottom.jpg",
             "Back": "Resources/SeaSkybox/back.jpg",
             "Front": "Resources/SeaSkybox/front.jpg"
+        }
+    },
+    "Geometries": {
+        "Models": {
+            "Cirno": {
+                "Name": "Cirno",
+                "OBJ": "Resources/Models/CirnoFumo/Cirno.obj",
+                "Color": "Resources/Models/CirnoFumo/Cirno.jpg",
+                "Occlusion": "Resources/Models/CirnoFumo/Occlusion.png",
+                "Normal": "Resources/Models/CirnoFumo/Normals.png"
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Materials
 {
     internal class PPGammaCorrection : PostProcessingMaterial
     {
-        public PPGammaCorrection() { this.Shader = Resources.Shaders[ResourcePaths.Materials.PPGammaCorrection.Name]; }
+        public PPGammaCorrection() { this.PPShader = Resources.Shaders[ResourcePaths.Shaders.PPGammaCorrection.Name]; }
 
         public override void Apply()
         {

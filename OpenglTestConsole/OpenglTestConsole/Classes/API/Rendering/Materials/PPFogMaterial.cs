@@ -14,7 +14,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Materials
     {
         public PPFogMaterial()
         {
-            this.Shader = Resources.Shaders[ResourcePaths.Materials.PPDepthDisplay.Name];
+            this.PPShader = Resources.Shaders[ResourcePaths.Shaders.PPDepthDisplay.Name];
         }
 
         public override void Apply()

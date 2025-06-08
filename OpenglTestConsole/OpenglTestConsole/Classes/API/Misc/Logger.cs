@@ -1,4 +1,7 @@
-﻿namespace OpenglTestConsole.Classes.API.Misc
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using OpenglTestConsole.Classes.API.SceneFolder;
+
+namespace OpenglTestConsole.Classes.API.Misc
 {
     public class Logger
     {
@@ -8,7 +11,7 @@
             if (window != null)
             {
                 ErrorCode error = GL.GetError();
-                if (error != ErrorCode.NoError )
+                if (error != ErrorCode.NoError)
                 {
                     LogWithoutGLErrorCheck(error.ToString(), LogLevel.Error);
                 }
@@ -17,13 +20,15 @@
             LogWithoutGLErrorCheck(info, level);
 
         }
-
         public static void Log(string info, string color)
         {
             // replace return to normals with the current color so we can change the color of texts
-            Console.WriteLine(color + info.Replace(LogColors.NORMAL, color + LogColors.BLACK_BACKGROUND));
+            Console.WriteLine(Indent + color + info.Replace(LogColors.NORMAL, color + LogColors.BLACK_BACKGROUND));
         }
-
+        public static void LogRaw(string text)
+        {
+            Console.WriteLine(text);
+        }
         public static void LogWithoutGLErrorCheck(string info, LogLevel level)
         {
             switch (level)
@@ -47,6 +52,36 @@
             // since we change the color when we log, logging without us changing color means the app crashed, so we should set the color to red
             Console.ForegroundColor = ConsoleColor.Red;
         }
+
+        private static Stack<double> startTimes = new Stack<double>();
+        private static double CurrTime => Scene.Timer.Elapsed.TotalMilliseconds;
+        public static void BeginTimingBlock()
+        {
+            startTimes.Push(CurrTime);
+        }
+        public static double EndTimingBlock()
+        {
+            return CurrTime - startTimes.Pop();
+        }
+        public static string EndTimingBlockFormatted()
+        {
+            return $"{EndTimingBlock():F3}ms";
+        }
+        private const int IndentLenght = 2;
+        private static int IndentLevel = 0;
+        private static string Indent = "";
+        public static void PushIndentLevel()
+        {
+            IndentLevel++;
+            Indent = new(' ', IndentLevel * IndentLenght);
+        }
+        public static void PopIndentLevel()
+        {
+            IndentLevel--;
+            Indent = new(' ', IndentLevel * IndentLenght);
+        }
+
+
     }
 
     public enum LogLevel

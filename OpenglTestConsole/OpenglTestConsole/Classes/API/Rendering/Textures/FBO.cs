@@ -16,6 +16,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
         public FBO() { }
         public void Init(Vector2i? size = null, string name = "", Texture? colorTexture = null, Texture? depthStencilTexture = null)
         {
+            Logger.BeginTimingBlock();
             // you just HAD to do shit with pointers
             unsafe
             {
@@ -49,7 +50,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                     // wrap mode t
                     textureMinFilter: TextureMinFilter.Linear,
                     textureMagFilter: TextureMagFilter.Linear,
-                    name: "Color"
+                    name: "Color",
+                    logCreation: false
                 );
             }
             else
@@ -89,7 +91,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                     // wrap mode t
                     textureMinFilter: TextureMinFilter.Linear,
                     textureMagFilter: TextureMagFilter.Linear,
-                    name: "Depth & Stencil"
+                    name: "Depth & Stencil",
+                    logCreation: false
                 );
             }
             else
@@ -121,9 +124,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             {
                 Logger.Log(
                     $"Loaded {LogColors.BC("FBO")} {LogColors.BW(Handle)}{(name != null ? $", named {LogColors.BW(name)}" : "")}:\n" +
-                    $"Color {LogColors.BC("Texture")}: {LogColors.BW(ColorTexture.Handle)}\n" +
-                    $"Depth & Stencil {LogColors.BrightCyan("Texture")}: {LogColors.BW(DepthStencilTexture.Handle)}",
-                    LogLevel.Detail
+                    $"  Color {LogColors.BC("Texture")}: {LogColors.BW(ColorTexture.Handle)}\n" +
+                    $"  Depth & Stencil {LogColors.BrightCyan("Texture")}: {LogColors.BW(DepthStencilTexture.Handle)}\n" +
+                    $"  In {LogColors.BG(Logger.EndTimingBlockFormatted())}"
+                    , LogLevel.Detail
                 );
             }
             // execute victory dance

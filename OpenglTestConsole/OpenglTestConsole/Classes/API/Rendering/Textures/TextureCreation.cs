@@ -20,6 +20,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
         public TextureWrapMode TextureTWrapMode { get; set; }
         public TextureMinFilter TextureMinFilter { get; set; }
         public TextureMagFilter TextureMagFilter { get; set; }
+        public bool logCreation = true;
         private byte[] bytes { get; set; }
         public bool flipped = true;
         public string name { get; private set; } = "";
@@ -132,6 +133,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
 
         public void Init(string? name = "")
         {
+            Logger.BeginTimingBlock();
             this.Handle = GL.GenTexture();
 
             if (flipped)
@@ -187,10 +189,11 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             this.bytes = [];
 
             this.name = name;
-            Logger.Log(
-                $"Loaded {LogColors.BC("Texture")} {LogColors.BrightWhite(this.Handle)}{(name != "" ? $", named {LogColors.BW(name)}" : "")}",
-                LogLevel.Detail
-            );
+            if (logCreation)
+                Logger.Log(
+                    $"Loaded {LogColors.BC("Texture")} {LogColors.BrightWhite(this.Handle)}{(name != "" ? $", named {LogColors.BW(name)}" : "")} in {LogColors.BG(Logger.EndTimingBlockFormatted())}",
+                    LogLevel.Detail
+                );
         }
 
         public static Texture LoadFromSize( // shouldnt need an init
@@ -204,9 +207,11 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
             TextureWrapMode textureTWrapMode = TextureWrapMode.Repeat,
             TextureMinFilter textureMinFilter = TextureMinFilter.Linear,
             TextureMagFilter textureMagFilter = TextureMagFilter.Linear,
-            string? name = ""
+            string? name = "",
+            bool logCreation = true
         )
         {
+            Logger.BeginTimingBlock();
             Texture texture = new Texture();
             #region texture info
             texture.Target = target;
@@ -255,9 +260,10 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
                 nint.Zero // initilisation pixels
             );
             texture.initalised = true;
-            
-            Logger.Log( // one must sacrifice readability in the pursuit of nice colors
-$"Loaded {LogColors.BY("empty")} {LogColors.BC("Texture")} {LogColors.BW(texture.Handle)}{(name != "" ? $", named {LogColors.BW(name)}": "")}: {LogColors.BW(width)}x{LogColors.BW(height)}",
+
+            if (logCreation)
+                Logger.Log( // one must sacrifice readability in the pursuit of nice colors
+$"Loaded {LogColors.BY("empty")} {LogColors.BC("Texture")} {LogColors.BW(texture.Handle)}{(name != "" ? $", named {LogColors.BW(name)}" : "")}: {LogColors.BW(width)}x{LogColors.BW(height)} in {LogColors.BG(Logger.EndTimingBlockFormatted())}",
                 LogLevel.Detail
             );
             return texture;

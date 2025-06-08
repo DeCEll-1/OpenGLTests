@@ -7,17 +7,14 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
     public partial class Mesh
     {
         #region Init
-        private Camera Camera
-        {
-            get => Scene.Camera;
-        }
+        internal Camera Camera { get => Scene.Camera; }
         public string Name { get; set; }
 
-        private Geometry3D _geometry;
+        internal Geometry3D _geometry;
         public Geometry3D Geometry { get => _geometry; set { _geometry = value; _geometry.Apply(this.BufferManager); } }
         public Material Material { get; set; }
         public Transform Transform { get; set; } = new Transform();
-        public BufferManager BufferManager { get; }
+        public BufferManager BufferManager { get; internal set; }
 
         // caps to enable before rendering
         public List<EnableCap> CapsToEnable { get; set; } = new();
@@ -31,7 +28,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
         // render type
         public PrimitiveType type { get; set; } = PrimitiveType.Triangles;
 
-        public int VertexArrayObjectPointer { get; private set; }
+        public int VertexArrayObjectPointer { get; internal set; }
 
         public Mesh(Geometry3D geometry, Material material, string name = "")
         {
@@ -43,7 +40,6 @@ namespace OpenglTestConsole.Classes.API.Rendering.MeshClasses
             BufferManager = new BufferManager(VertexArrayObjectPointer);
             this.Geometry.Apply(this.BufferManager);
         }
-
         #endregion
 
 

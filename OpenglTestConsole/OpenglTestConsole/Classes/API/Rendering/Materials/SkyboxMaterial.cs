@@ -14,9 +14,11 @@ namespace OpenglTestConsole.Classes.API.Rendering.Materials
         private Cubemap cubemap;
         public SkyboxMaterial(Cubemap cubemap)
         {
-            this.Shader = Resources.Shaders[ResourcePaths.Materials.Skybox.Name];
             this.cubemap = cubemap;
         }
+
+        public override Shader Shader => Resources.Shaders[ResourcePaths.Shaders.Skybox.Name];
+
         public override void Apply()
         { // set shader values here
             Shader.UniformManager.SetCubemap("skybox", cubemap, TextureUnit.Texture0);

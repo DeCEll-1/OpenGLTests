@@ -8,7 +8,7 @@
         // so ill just use generalised types like Mesh<T> extends material or w/e
         public Material() { }
 
-        public Shader Shader { get; set; }
+        public abstract Shader Shader { get; }
 
         public abstract void Apply();
     }

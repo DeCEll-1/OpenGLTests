@@ -13,8 +13,6 @@ namespace OpenglTestConsole.Classes.API.SceneFolder
     { // i am going for a threejs like api
         public Scene()
         {
-            Timer = new Stopwatch();
-            Timer.Start();
         }
 
         public void Init(List<RenderScript> renderScripts, Camera? camera = null)

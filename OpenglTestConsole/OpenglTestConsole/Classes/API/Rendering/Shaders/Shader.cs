@@ -55,6 +55,8 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
 
         private int HandleShader(string path, ShaderType type)
         {
+            Logger.BeginTimingBlock();
+            Logger.PushIndentLevel();
             string source;
 
             try
@@ -93,9 +95,11 @@ namespace OpenglTestConsole.Classes.API.Rendering.Shaders
             }
 
             Logger.Log(
-                $"Loaded {LogColors.BrightCyan(type)} for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)}",
+                $"Loaded {LogColors.BrightCyan(type)} for {LogColors.BrightWhite(Handle)} : {LogColors.BrightWhite(path)} in {LogColors.BG(Logger.EndTimingBlockFormatted())}",
                 LogLevel.Detail
             );
+
+            Logger.PopIndentLevel();
 
             return shaderPointer;
         }

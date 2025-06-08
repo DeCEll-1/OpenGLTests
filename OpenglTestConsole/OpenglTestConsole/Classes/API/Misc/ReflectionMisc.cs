@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text;
+using OpenTK.Mathematics;
 using System.Threading.Tasks;
 
 namespace OpenglTestConsole.Classes.API.Misc
