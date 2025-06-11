@@ -42,10 +42,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ResourcesClassGenerator\ResourcesClassGenerator.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Folder Include="Classes\Implementations\Rendering\" />
 		<Folder Include="Generated\" />
 		<Folder Include="Screenshots\" />

@@ -92,7 +92,7 @@ namespace OpenglTestConsole.Classes.API.Rendering.Geometries
                     ));
                     continue;
                 }
-                if (op == "f")
+                if (op == "f ")
                 {
                     // iterate over the triangle corners
                     for (int i = 1; i <= 3; i++)

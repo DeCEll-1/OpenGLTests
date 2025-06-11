@@ -263,7 +263,13 @@ namespace OpenglTestConsole.Classes.API.Rendering.Textures
 
             if (logCreation)
                 Logger.Log( // one must sacrifice readability in the pursuit of nice colors
-$"Loaded {LogColors.BY("empty")} {LogColors.BC("Texture")} {LogColors.BW(texture.Handle)}{(name != "" ? $", named {LogColors.BW(name)}" : "")}: {LogColors.BW(width)}x{LogColors.BW(height)} in {LogColors.BG(Logger.EndTimingBlockFormatted())}",
+                    $"Loaded " +
+                    $"{LogColors.BY("empty")} " +
+                    $"{LogColors.BC("Texture")} " +
+                    $"{LogColors.BW(texture.Handle)}" +
+                    $"{(name != "" ? $", named {LogColors.BW(name)}" : "")}: " +
+                    $"{LogColors.BW(width)}x{LogColors.BW(height)} in " +
+                    $"{LogColors.BG(Logger.EndTimingBlockFormatted())}",
                 LogLevel.Detail
             );
             return texture;

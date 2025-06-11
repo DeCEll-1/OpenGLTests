@@ -346,19 +346,6 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
-      },
-      "ResourcesClassGenerator/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3"
-        },
-        "compile": {
-          "bin/placeholder/ResourcesClassGenerator.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ResourcesClassGenerator.dll": {}
-        }
       }
     }
   },
@@ -780,11 +767,6 @@
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt"
       ]
-    },
-    "ResourcesClassGenerator/1.0.0": {
-      "type": "project",
-      "path": "../ResourcesClassGenerator/ResourcesClassGenerator.csproj",
-      "msbuildProject": "../ResourcesClassGenerator/ResourcesClassGenerator.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -793,7 +775,6 @@
       "ImGui.NET >= 1.91.6.1",
       "Newtonsoft.Json >= 13.0.3",
       "OpenTK >= 4.9.4",
-      "ResourcesClassGenerator >= 1.0.0",
       "SixLabors.ImageSharp >= 3.1.8"
     ]
   },
@@ -828,11 +809,7 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {
-            "D:\\Github\\OpenGLTests\\OpenglTestConsole\\ResourcesClassGenerator\\ResourcesClassGenerator.csproj": {
-              "projectPath": "D:\\Github\\OpenGLTests\\OpenglTestConsole\\ResourcesClassGenerator\\ResourcesClassGenerator.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
