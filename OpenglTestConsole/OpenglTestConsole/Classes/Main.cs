@@ -1,23 +1,23 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using ImGuiNET;
-using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.ImGuiHelpers;
-using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.API.Rendering.Geometries;
-using OpenglTestConsole.Classes.API.SceneFolder;
-using OpenglTestConsole.Classes.impl.EFSs;
-using OpenglTestConsole.Classes.Implementations.Classes;
-using OpenglTestConsole.Classes.Implementations.EFSs;
-using OpenglTestConsole.Classes.Implementations.RenderScripts;
-using OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs;
-using OpenglTestConsole.Generated.Paths;
+using RGL.Classes.API.Rendering;
+using RGL.API.Rendering.Geometries;
+using RGL.API.SceneFolder;
+using RGL.Classes.impl.EFSs;
+using RGL.Classes.Implementations.EFSs;
+using RGL.Classes.Implementations.RenderScripts;
+using RGL.Classes.Implementations.RenderScripts.TestRSs;
+using RGL.Generated.Paths;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using RGL.API;
+using RGL.API.Rendering;
+using RGL.API.ImGuiHelpers;
+using RGL.API.Misc;
 
-namespace OpenglTestConsole.Classes
+namespace RGL.Classes
 {
     public class Main : GameWindow
     {
@@ -70,14 +70,14 @@ namespace OpenglTestConsole.Classes
                     new ComputeShaderTest(),
                     new StandartMaterialTest(),
                     new PostProcessingTest(),
-                    new HandleImGuiAppInfo(),
+                    new DisplaySceneInfo(),
                     new WindowSizeSettings(),
                     new RenderFumo(),
                 ]
             );
             #endregion
 
-            ResourceController.Init();
+            ResourceController.Init(typeof(AppResources));
         }
 
         protected override void OnLoad()
@@ -87,6 +87,7 @@ namespace OpenglTestConsole.Classes
             GL.ClearColor(0.0f, 0.1f, 0.05f, 1.0f);
 
             mainScene.Init(renderScripts: RenderScripts);
+            mainScene.SkyboxCubeMap = Resources.Cubemaps[AppResources.Cubemaps.Sea.Name];
 
             foreach (var script in EveryFrameScripts)
             {
@@ -109,18 +110,18 @@ namespace OpenglTestConsole.Classes
             _controller.Update(this, (float)args.Time);
 
             // rendered everything we need to render
-            mainScene.Render(renderScripts: RenderScripts, args: args);
+            mainScene.Render(args: args);
 
-            GL.Disable(EnableCap.DepthTest);
-            GL.DepthMask(false);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            GL.Enable(EnableCap.Blend);
+            //GL.Disable(EnableCap.DepthTest);
+            //GL.DepthMask(false);
+            //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            //GL.Enable(EnableCap.Blend);
 
             _controller.Render();
 
-            GL.DepthMask(true);
-            GL.Enable(EnableCap.DepthTest);
-            GL.Disable(EnableCap.Blend);
+            //GL.DepthMask(true);
+            //GL.Enable(EnableCap.DepthTest);
+            //GL.Disable(EnableCap.Blend);
             ImGuiController.CheckGLError("End of frame");
 
             SwapBuffers();
@@ -160,10 +161,11 @@ namespace OpenglTestConsole.Classes
         protected override void OnResize(ResizeEventArgs e)
         {
             base.OnResize(e);
-            if (Settings.Resolution == new Vector2(e.Width, e.Height))
+            if (APISettings.Resolution == new Vector2(e.Width, e.Height))
                 return;
 
-            Settings.Resolution = new(e.Width, e.Height);
+            APISettings.Resolution = new(e.Width, e.Height);
+            APISettings.SceneResolution = new(e.Width, e.Height);
             // Update the opengl viewport
             GL.Viewport(0, 0, e.Width, e.Height);
 

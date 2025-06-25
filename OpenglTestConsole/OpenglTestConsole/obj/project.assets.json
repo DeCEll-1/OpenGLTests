@@ -346,6 +346,23 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "RGL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "ICSharpCode.Decompiler": "9.1.0.7988",
+          "ImGui.NET": "1.91.6.1",
+          "Newtonsoft.Json": "13.0.3",
+          "OpenTK": "4.9.4",
+          "SixLabors.ImageSharp": "3.1.8"
+        },
+        "compile": {
+          "bin/placeholder/RGL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RGL.dll": {}
+        }
       }
     }
   },
@@ -767,6 +784,11 @@
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "RGL/1.0.0": {
+      "type": "project",
+      "path": "../RGL/RGL.csproj",
+      "msbuildProject": "../RGL/RGL.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -775,6 +797,7 @@
       "ImGui.NET >= 1.91.6.1",
       "Newtonsoft.Json >= 13.0.3",
       "OpenTK >= 4.9.4",
+      "RGL >= 1.0.0",
       "SixLabors.ImageSharp >= 3.1.8"
     ]
   },
@@ -809,7 +832,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Github\\OpenGLTests\\OpenglTestConsole\\RGL\\RGL.csproj": {
+              "projectPath": "D:\\Github\\OpenGLTests\\OpenglTestConsole\\RGL\\RGL.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

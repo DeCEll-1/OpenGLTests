@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>RGL</id>
+    <version>1.0.0</version>
+    <authors>RGL</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="c9d6436a228141140e1a3a2cf46f681e8e7dadc3" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="ICSharpCode.Decompiler" version="9.1.0.7988" exclude="Build,Analyzers" />
+        <dependency id="ImGui.NET" version="1.91.6.1" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.3" exclude="Build,Analyzers" />
+        <dependency id="OpenTK" version="4.9.4" exclude="Build,Analyzers" />
+        <dependency id="SixLabors.ImageSharp" version="3.1.8" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Github\OpenGLTests\OpenglTestConsole\RGL\bin\Release\net8.0\RGL.dll" target="lib\net8.0\RGL.dll" />
+  </files>
+</package>

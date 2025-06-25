@@ -1,8 +1,8 @@
-﻿using OpenglTestConsole.Classes.API;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using RGL.API;
 
-namespace OpenglTestConsole.Classes.impl.EFSs
+namespace RGL.Classes.impl.EFSs
 {
     public class HandleMovement : EveryFrameScript
     {

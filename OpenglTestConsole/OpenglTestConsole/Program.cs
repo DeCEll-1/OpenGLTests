@@ -1,10 +1,12 @@
 ﻿global using OpenTK.Graphics.OpenGL;
-using OpenglTestConsole.Classes;
-using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.Classes.Implementations.Classes;
+global using OpenglTestConsole.Generated.Paths;
+global using RGL.Generated.Paths;
+using RGL.Classes;
 using OpenTK.Windowing.Desktop;
+using RGL.API;
+using RGL.API.Misc;
 
-namespace OpenglTestConsole
+namespace RGL
 {
     public class Program
     {
@@ -13,12 +15,12 @@ namespace OpenglTestConsole
         {
             Logger.Log($"Started app with arguments:\n{string.Concat(args)}", LogLevel.Info);
 
-            Settings.Fov = 90f;
+            APISettings.Fov = 90f;
 
             GameWindowSettings gameWindowSettings = GameWindowSettings.Default;
             NativeWindowSettings nativeWindowSettings = new NativeWindowSettings
             {
-                ClientSize = Settings.Resolution,
+                ClientSize = APISettings.Resolution,
                 Title = "OpenGL Test Console",
                 DepthBits = 24,
             };

@@ -1,13 +1,14 @@
-﻿using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.API.Rendering.Geometries;
-using OpenglTestConsole.Classes.API.Rendering.Materials;
-using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenglTestConsole.Classes.API.Rendering.Shaders.Compute;
-using OpenglTestConsole.Classes.API.Rendering.Textures;
-using OpenglTestConsole.Generated.Paths;
+﻿using OpenglTestConsole.Generated.Paths;
+using RGL.API;
+using RGL.API.Rendering;
+using RGL.API.Rendering.Geometries;
+using RGL.API.Rendering.Materials;
+using RGL.API.Rendering.MeshClasses;
+using RGL.API.Rendering.Shaders.Compute;
+using RGL.API.Rendering.Textures;
+using RGL.Generated.Paths;
 
-namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
+namespace RGL.Classes.Implementations.RenderScripts.TestRSs
 {
     public class ComputeShaderTest : RenderScript
     {
@@ -24,7 +25,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
                 pixelType: PixelType.Float, 
                 name: "ComputeShaderTestTexture"
             );
-            this.Shader = Resources.CompShaders[ResourcePaths.ComputeShaders.MyComputeShader.Name];
+            this.Shader = Resources.CompShaders[AppResources.ComputeShaders.MyComputeShader.Name];
             Shader.UnitManager.SetImageTexture(this.Texture.Handle, 0);
 
             Square geometry = new Square(new(1));

@@ -1,19 +1,20 @@
 ﻿using ImGuiNET;
-using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.API.Rendering.Geometries;
-using OpenglTestConsole.Classes.API.Rendering.Materials;
-using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenglTestConsole.Classes.API.Rendering.Shaders;
-using OpenglTestConsole.Classes.API.Rendering.Textures;
-using OpenglTestConsole.Generated.Paths;
+using RGL.API.Rendering;
+using RGL.API.Rendering.Materials;
+using RGL.API.Rendering.MeshClasses;
+using RGL.API.Rendering.Textures;
+using RGL.Classes.API;
+using RGL.API.Rendering.Geometries;
+using RGL.API.Rendering.Materials;
+using RGL.Classes.API.Rendering.Shaders;
+using RGL.Generated.Paths;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
+namespace RGL.Classes.Implementations.RenderScripts.TestRSs
 {
     public class PostProcessingTest : RenderScript
     {

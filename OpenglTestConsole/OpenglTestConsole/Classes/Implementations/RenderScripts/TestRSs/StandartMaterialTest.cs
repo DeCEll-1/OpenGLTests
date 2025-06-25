@@ -1,25 +1,25 @@
-﻿using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.API.Rendering.Geometries;
-using OpenglTestConsole.Classes.API.Rendering.Materials;
-using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenglTestConsole.Generated.Paths;
+﻿using RGL.API;
+using RGL.API.Rendering;
+using RGL.API.Rendering.MeshClasses;
+using RGL.API.Rendering.Geometries;
+using RGL.API.Rendering.Materials;
+using RGL.Generated.Paths;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
+namespace RGL.Classes.Implementations.RenderScripts.TestRSs
 {
-    internal class StandartMaterialTest : RenderScript
+    public class StandartMaterialTest : RenderScript
     {
         private Mesh Mesh;
         public override void Init()
         {
             //var geometry = new Sphere(16, 16, 1f);
             var geometry = new Cube(new(1f));
-            var material = new TextureMaterial(Resources.Textures[ResourcePaths.Resources.Textures.Bell_Pepper_png]);
+            var material = new TextureMaterial(Resources.Textures[AppResources.Textures.Bell_Pepper_png]);
             //var material = new StandartMaterial();
             Mesh = new Mesh(geometry, material, name: "bell, pepper");
             Scene.Add(Mesh);

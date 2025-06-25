@@ -1,7 +1,7 @@
-﻿using OpenglTestConsole.Classes.API;
-using OpenTK.Windowing.GraphicsLibraryFramework;
+﻿using OpenTK.Windowing.GraphicsLibraryFramework;
+using RGL.API;
 
-namespace OpenglTestConsole.Classes.Implementations.EFSs
+namespace RGL.Classes.Implementations.EFSs
 {
     public class HandleResourceRefreshes : EveryFrameScript
     {
@@ -13,7 +13,7 @@ namespace OpenglTestConsole.Classes.Implementations.EFSs
                 return;
             ResourceController.Refresh();
 
-            foreach (var script in MainInstance.RenderScripts)
+            foreach (var script in ((Main)MainInstance).RenderScripts)
                 script.OnResourceRefresh();
         }
     }

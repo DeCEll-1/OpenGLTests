@@ -1,11 +1,11 @@
-﻿using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.API.Rendering.Geometries;
-using OpenglTestConsole.Classes.API.Rendering.Materials;
-using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
+﻿using RGL.API.Rendering.Materials;
 using OpenTK.Mathematics;
+using RGL.API.Rendering;
+using RGL.API.Rendering.MeshClasses;
+using RGL.API.Misc;
+using RGL.API.Rendering.Geometries;
 
-namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
+namespace RGL.Classes.Implementations.RenderScripts.TestRSs
 {
     internal class PhongTest : RenderScript
     {

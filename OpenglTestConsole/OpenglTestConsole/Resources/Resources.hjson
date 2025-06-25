@@ -4,72 +4,13 @@
             "cylinders_json": "Resources/StarscapeMapDatas/cylinders.json",
             "links_json": "Resources/StarscapeMapDatas/links.json",
             "map_json": "Resources/StarscapeMapDatas/map.json"
-        },
-        "Textures": {
-            "CoordinateSystem_png": "Resources/Textures/CoordinateSystem.png",
-            "RotationSystem_png": "Resources/Textures/RotationSystem.png",
-            "Bell_Pepper_png": "Resources/Textures/Bell_Pepper.png",
-            "cobble_stone_png": "Resources/Textures/cobble_stone.png"
         }
     },
-    "Shaders": {
-        "MCSDF": {
-            "Name": "MCSDF",
-            "Fragment": "Resources/Shaders/RenderShaders/MCSDF/MCSDF.frag",
-            "Vertex": "Resources/Shaders/RenderShaders/MCSDF/MCSDF.vert"
-        },
-        "Phong": {
-            "Name": "Phong",
-            "Fragment": "Resources/Shaders/RenderShaders/Phong/Phong.frag",
-            "Vertex": "Resources/Shaders/RenderShaders/Phong/Phong.vert",
-            "Geometry": "Resources/Shaders/RenderShaders/Phong/Phong.geom"
-        },
-        "Texture": {
-            "Name": "Texture",
-            "Fragment": "Resources/Shaders/RenderShaders/Texture/Texture.frag",
-            "Vertex": "Resources/Shaders/RenderShaders/Texture/Texture.vert"
-        },
-        "MonoColor": {
-            "Name": "MonoColor",
-            "Fragment": "Resources/Shaders/RenderShaders/MonoColor/MonoColor.frag",
-            "Vertex": "Resources/Shaders/RenderShaders/MonoColor/MonoColor.vert"
-        },
-        "Standart": {
-            "Name": "Standart",
-            "Fragment": "Resources/Shaders/RenderShaders/Standart/Standart.frag",
-            "Vertex": "Resources/Shaders/RenderShaders/Standart/Standart.vert",
-            "Geometry": "Resources/Shaders/RenderShaders/Standart/Standart.geom"
-        },
-        "Skybox": {
-            "Name": "Skybox",
-            "Fragment": "Resources/Shaders/RenderShaders/Skybox/Skybox.frag",
-            "Vertex": "Resources/Shaders/RenderShaders/Skybox/Skybox.vert"
-        },
-        "Model": {
-            "Name": "Model",
-            "Fragment": "Resources/Shaders/RenderShaders/Model/Model.frag",
-            "Vertex": "Resources/Shaders/RenderShaders/Model/Model.vert"
-        },
-        "PPWriteFBO": {
-            "Name": "PPWriteFBO",
-            "Fragment": "Resources/Shaders/PostProcesses/WriteFBO/WriteFBO.frag",
-            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert"
-        },
-        "PPInversion": {
-            "Name": "PPInversion",
-            "Fragment": "Resources/Shaders/PostProcesses/Inversion/Inversion.frag",
-            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert"
-        },
-        "PPDepthDisplay": {
-            "Name": "PPDepthDisplay",
-            "Fragment": "Resources/Shaders/PostProcesses/DepthDisplay/DepthDisplay.frag",
-            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert"
-        },
-        "PPGammaCorrection": {
-            "Name": "PPGammaCorrection",
-            "Fragment": "Resources/Shaders/PostProcesses/GammaCorrection/GammaCorrection.frag",
-            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert"
-        }
+    "Textures": {
+        "CoordinateSystem_png": "Resources/Textures/CoordinateSystem.png",
+        "RotationSystem_png": "Resources/Textures/RotationSystem.png",
+        "Bell_Pepper_png": "Resources/Textures/Bell_Pepper.png",
+        "cobble_stone_png": "Resources/Textures/cobble_stone.png"
     },
     "ComputeShaders": {
         "MyComputeShader": {

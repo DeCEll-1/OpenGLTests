@@ -1,12 +1,12 @@
-﻿using OpenglTestConsole.Classes.API.Extensions;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.API.Rendering.Geometries;
-using OpenglTestConsole.Classes.API.Rendering.Materials;
-using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenglTestConsole.Classes.API.SceneFolder;
+﻿using RGL.API.SceneFolder;
 using OpenTK.Mathematics;
+using RGL.API.Rendering;
+using RGL.API.Rendering.MeshClasses;
+using RGL.API.Extensions;
+using RGL.API.Rendering.Materials;
+using RGL.API.Rendering.Geometries;
 
-namespace OpenglTestConsole.Classes.Implementations.RenderScripts
+namespace RGL.Classes.Implementations.RenderScripts
 {
     internal class RenderLight : RenderScript
     {

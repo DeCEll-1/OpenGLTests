@@ -1,0 +1,105 @@
+{
+    "Shaders": {
+        "MCSDF": {
+            "Name": "MCSDF",
+            "Fragment": "Resources/Shaders/RenderShaders/MCSDF/MCSDF.frag",
+            "FragmentFileContent": "Resources/Shaders/RenderShaders/MCSDF/MCSDF.frag",
+            #
+            "Vertex": "Resources/Shaders/RenderShaders/MCSDF/MCSDF.vert",
+            "VertexFileContent": "Resources/Shaders/RenderShaders/MCSDF/MCSDF.vert" #
+        },
+        "Phong": {
+            "Name": "Phong",
+            "Fragment": "Resources/Shaders/RenderShaders/Phong/Phong.frag",
+            "FragmentFileContent": "Resources/Shaders/RenderShaders/Phong/Phong.frag",
+            #
+            "Vertex": "Resources/Shaders/RenderShaders/Phong/Phong.vert",
+            "VertexFileContent": "Resources/Shaders/RenderShaders/Phong/Phong.vert",
+            #
+            "Geometry": "Resources/Shaders/RenderShaders/Phong/Phong.geom",
+            "GeometryFileContent": "Resources/Shaders/RenderShaders/Phong/Phong.geom"
+        },
+        "Texture": {
+            "Name": "Texture",
+            "Fragment": "Resources/Shaders/RenderShaders/Texture/Texture.frag",
+            "FragmentFileContent": "Resources/Shaders/RenderShaders/Texture/Texture.frag",
+            #
+            "Vertex": "Resources/Shaders/RenderShaders/Texture/Texture.vert",
+            "VertexFileContent": "Resources/Shaders/RenderShaders/Texture/Texture.vert" #
+        },
+        "MonoColor": {
+            "Name": "MonoColor",
+            "Fragment": "Resources/Shaders/RenderShaders/MonoColor/MonoColor.frag",
+            "FragmentFileContent": "Resources/Shaders/RenderShaders/MonoColor/MonoColor.frag",
+            #
+            "Vertex": "Resources/Shaders/RenderShaders/MonoColor/MonoColor.vert",
+            "VertexFileContent": "Resources/Shaders/RenderShaders/MonoColor/MonoColor.vert" #
+        },
+        "Standart": {
+            "Name": "Standart",
+            "Fragment": "Resources/Shaders/RenderShaders/Standart/Standart.frag",
+            "FragmentFileContent": "Resources/Shaders/RenderShaders/Standart/Standart.frag",
+            #
+            "Vertex": "Resources/Shaders/RenderShaders/Standart/Standart.vert",
+            "VertexFileContent": "Resources/Shaders/RenderShaders/Standart/Standart.vert",
+            #
+            "Geometry": "Resources/Shaders/RenderShaders/Standart/Standart.geom",
+            "GeometryFileContent": "Resources/Shaders/RenderShaders/Standart/Standart.geom"
+        },
+        "Skybox": {
+            "Name": "Skybox",
+            "Fragment": "Resources/Shaders/RenderShaders/Skybox/Skybox.frag",
+            "FragmentFileContent": "Resources/Shaders/RenderShaders/Skybox/Skybox.frag",
+            #
+            "Vertex": "Resources/Shaders/RenderShaders/Skybox/Skybox.vert",
+            "VertexFileContent": "Resources/Shaders/RenderShaders/Skybox/Skybox.vert" #
+        },
+        "Model": {
+            "Name": "Model",
+            "Fragment": "Resources/Shaders/RenderShaders/Model/Model.frag",
+            "FragmentFileContent": "Resources/Shaders/RenderShaders/Model/Model.frag",
+            #
+            "Vertex": "Resources/Shaders/RenderShaders/Model/Model.vert",
+            "VertexFileContent": "Resources/Shaders/RenderShaders/Model/Model.vert" #
+        },
+        "PPWriteFBO": {
+            "Name": "PPWriteFBO",
+            "Fragment": "Resources/Shaders/PostProcesses/WriteFBO/WriteFBO.frag",
+            "FragmentFileContent": "Resources/Shaders/PostProcesses/WriteFBO/WriteFBO.frag",
+            #
+            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert",
+            "VertexFileContent": "Resources/Shaders/PostProcesses/MasterVertex.vert" #
+        },
+        "PPInversion": {
+            "Name": "PPInversion",
+            "Fragment": "Resources/Shaders/PostProcesses/Inversion/Inversion.frag",
+            "FragmentFileContent": "Resources/Shaders/PostProcesses/Inversion/Inversion.frag",
+            #
+            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert",
+            "VertexFileContent": "Resources/Shaders/PostProcesses/MasterVertex.vert" #
+        },
+        "PPDepthDisplay": {
+            "Name": "PPDepthDisplay",
+            "Fragment": "Resources/Shaders/PostProcesses/DepthDisplay/DepthDisplay.frag",
+            "FragmentFileContent": "Resources/Shaders/PostProcesses/DepthDisplay/DepthDisplay.frag",
+            #
+            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert",
+            "VertexFileContent": "Resources/Shaders/PostProcesses/MasterVertex.vert" #
+        },
+        "PPGammaCorrection": {
+            "Name": "PPGammaCorrection",
+            "Fragment": "Resources/Shaders/PostProcesses/GammaCorrection/GammaCorrection.frag",
+            "FragmentFileContent": "Resources/Shaders/PostProcesses/GammaCorrection/GammaCorrection.frag",
+            #
+            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert",
+            "VertexFileContent": "Resources/Shaders/PostProcesses/MasterVertex.vert" #
+        }
+    },
+    "ComputeShaders": {},
+    "Textures": {},
+    "Fonts": {},
+    "Cubemaps": {},
+    "Geometries": {
+        "Models": {}
+    }
+}

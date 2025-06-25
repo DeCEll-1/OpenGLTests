@@ -1,9 +1,8 @@
-﻿using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.Classes.Implementations.Classes;
-using OpenTK.Windowing.GraphicsLibraryFramework;
+﻿using OpenTK.Windowing.GraphicsLibraryFramework;
+using RGL.API;
+using RGL.API.Misc;
 
-namespace OpenglTestConsole.Classes.impl.EFSs
+namespace RGL.Classes.impl.EFSs
 {
     public class HandleZoom : EveryFrameScript
     {
@@ -18,8 +17,8 @@ namespace OpenglTestConsole.Classes.impl.EFSs
 
         public override void Init()
         {
-            this.mainSensitivity = Settings.MouseSensitivity;
-            this.mainFov = Settings.Fov;
+            this.mainSensitivity = APISettings.MouseSensitivity;
+            this.mainFov = APISettings.Fov;
         }
 
         public override void Advance()
@@ -44,8 +43,8 @@ namespace OpenglTestConsole.Classes.impl.EFSs
 
         private void UpdateView()
         {
-            Settings.Fov = mainFov - (EasingFunctions.InOutCubic(zoomPercent) * zoomAmount);
-            Settings.MouseSensitivity =
+            APISettings.Fov = mainFov - (EasingFunctions.InOutCubic(zoomPercent) * zoomAmount);
+            APISettings.MouseSensitivity =
                 mainSensitivity
                 - (EasingFunctions.InOutCubic(zoomPercent) * sensitivityChangeAmount);
         }

@@ -1,23 +1,23 @@
-﻿using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.API.Rendering.Geometries;
-using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenglTestConsole.Classes.API.Rendering.Shaders;
-using OpenglTestConsole.Generated.Paths;
+﻿using RGL.API;
+using RGL.API.Rendering;
+using RGL.API.Rendering.Geometries;
+using RGL.API.Rendering.MeshClasses;
+using RGL.API.Rendering.Shaders;
+using RGL.Generated.Paths;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
+namespace RGL.Classes.Implementations.RenderScripts.TestRSs
 {
     public class RenderFumo : RenderScript
     {
         public override void Init()
         {
-            Geometry3D geometry = Resources.Geometries[ResourcePaths.Geometries.Models.Cirno.Name];
-            Material material = Resources.Materials[ResourcePaths.Geometries.Models.Cirno.Name];
+            Geometry3D geometry = Resources.Geometries[AppResources.Geometries.Models.Cirno.Name];
+            Material material = Resources.Materials[AppResources.Geometries.Models.Cirno.Name];
             Transform temp = new();
             temp.Rotation.Y = -90;
             temp.UpdateMatrix();

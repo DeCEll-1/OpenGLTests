@@ -1,0 +1,13 @@
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\RGL.csproj.AssemblyReference.cache
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\RGL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\RGL.AssemblyInfoInputs.cache
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\RGL.AssemblyInfo.cs
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\RGL.csproj.CoreCompileInputs.cache
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\RGL.sourcelink.json
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\bin\Debug\net8.0\RGL.deps.json
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\bin\Debug\net8.0\RGL.dll
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\bin\Debug\net8.0\RGL.pdb
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\RGL.dll
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\refint\RGL.dll
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\RGL.pdb
+D:\Github\OpenGLTests\OpenglTestConsole\RGL\obj\Debug\net8.0\ref\RGL.dll

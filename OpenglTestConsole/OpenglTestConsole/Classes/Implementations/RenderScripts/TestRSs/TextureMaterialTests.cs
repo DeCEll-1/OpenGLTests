@@ -1,11 +1,11 @@
-﻿using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.Rendering;
-using OpenglTestConsole.Classes.API.Rendering.Geometries;
-using OpenglTestConsole.Classes.API.Rendering.Materials;
-using OpenglTestConsole.Classes.API.Rendering.MeshClasses;
-using OpenglTestConsole.Generated.Paths;
+﻿using RGL.API;
+using RGL.API.Rendering;
+using RGL.API.Rendering.Geometries;
+using RGL.API.Rendering.Materials;
+using RGL.API.Rendering.MeshClasses;
+using RGL.Generated.Paths;
 
-namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
+namespace RGL.Classes.Implementations.RenderScripts.TestRSs
 {
     internal class TextureMaterialTests : RenderScript
     {
@@ -16,7 +16,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
             Sphere geometry = new Sphere(16, 16, 1f);
             //Cylinder geometry = new Cylinder(1, 3, 3f, 1f);
             TextureMaterial material = new TextureMaterial(
-                Resources.Textures[ResourcePaths.Resources.Textures.cobble_stone_png]
+                Resources.Textures[AppResources.Textures.cobble_stone_png]
             );
 
             this.Mesh = new Mesh(geometry, material, "Texture sphere");
@@ -36,7 +36,7 @@ namespace OpenglTestConsole.Classes.Implementations.RenderScripts.TestRSs
         public override void OnResourceRefresh()
         {
             Mesh.Material = new TextureMaterial(
-                Resources.Textures[ResourcePaths.Resources.Textures.cobble_stone_png]
+                Resources.Textures[AppResources.Textures.cobble_stone_png]
             );
         }
     }

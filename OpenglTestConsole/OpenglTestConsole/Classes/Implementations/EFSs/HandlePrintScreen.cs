@@ -1,13 +1,13 @@
-﻿using OpenglTestConsole.Classes.API;
-using OpenglTestConsole.Classes.API.Misc;
-using OpenglTestConsole.Classes.API.Rendering.Textures;
+﻿using RGL.API.Rendering.Textures;
 using OpenTK.Mathematics;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using GLGLF = OpenTK.Windowing.GraphicsLibraryFramework;
+using RGL.API;
+using RGL.API.Misc;
 
-namespace OpenglTestConsole.Classes.Implementations.EFSs
+namespace RGL.Classes.Implementations.EFSs
 {
     public class HandlePrintScreen : EveryFrameScript
     {
@@ -35,7 +35,7 @@ namespace OpenglTestConsole.Classes.Implementations.EFSs
                 + currTime.Second
                 + ".jpg";
 
-            Texture tex = RenderMisc.GetScreenTexture();
+            Texture tex = RenderMisc.GetSceneTexture(Main.mainScene);
 
             tex.Init(name: "Print Screen");
             tex.SaveToFile(folder + file);

@@ -1,4 +1,4 @@
-﻿namespace OpenglTestConsole.Classes
+﻿namespace RGL.Classes
 {
     internal class Paths
     {
