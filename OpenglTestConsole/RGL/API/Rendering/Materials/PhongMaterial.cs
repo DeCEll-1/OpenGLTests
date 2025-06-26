@@ -38,10 +38,10 @@ namespace RGL.API.Rendering.Materials
             Shader.UniformManager.SetFloat("material.shininess", Shininess);
 
             // update this to allow more lights
-            Shader.UniformManager.SetVector3("light.position", Scene.Lights[0].Position);
-            Shader.UniformManager.SetVector3("light.specular", Scene.Lights[0].Specular);
-            Shader.UniformManager.SetVector3("light.diffuse", Scene.Lights[0].Diffuse);
-            Shader.UniformManager.SetVector3("light.ambient", Scene.Lights[0].Ambient);
+            Shader.UniformManager.SetVector3("light.position", scene.Lights[0].Position);
+            Shader.UniformManager.SetVector3("light.specular", scene.Lights[0].Specular);
+            Shader.UniformManager.SetVector3("light.diffuse", scene.Lights[0].Diffuse);
+            Shader.UniformManager.SetVector3("light.ambient", scene.Lights[0].Ambient);
 
             Shader.UniformManager.SetVector3("viewPos", scene.Camera.Position);
         }

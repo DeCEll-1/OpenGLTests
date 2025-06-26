@@ -16,6 +16,7 @@ using RGL.API;
 using RGL.API.Rendering;
 using RGL.API.ImGuiHelpers;
 using RGL.API.Misc;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace RGL.Classes
 {
@@ -49,7 +50,7 @@ namespace RGL.Classes
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
 
-            Scene.Lights.Add(new Light(new Vector3(-70f, 50f, -50f), new Vector3(1.0f, 1.0f, 1.0f)));
+            mainScene.Lights.Add(new Light(new Vector3(-70f, 50f, -50f), new Vector3(1.0f, 1.0f, 1.0f)));
 
             #region EFSs
             this.EveryFrameScripts.AddRange(

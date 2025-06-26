@@ -29,7 +29,7 @@ namespace RGL.API.SceneFolder
         public bool IsMouseOverFBO = true;
 
 
-        public static List<Light> Lights { get; set; } = new();
+        public List<Light> Lights { get; set; } = new();
         public Camera Camera { get; set; } = new Camera();
 
 

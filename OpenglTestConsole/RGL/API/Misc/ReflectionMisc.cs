@@ -49,7 +49,7 @@ namespace RGL.API.Misc
             return isOverridden;
         }
 
-        public static IEnumerable<PropertyInfo> GetPublicProperties(Type type, BindingFlags flags)
+        public static IEnumerable<PropertyInfo> GetProperties(Type type, BindingFlags flags)
         {
             if (type == null)
                 yield break;
@@ -57,7 +57,7 @@ namespace RGL.API.Misc
             foreach (var prop in type.GetProperties(flags))
                 yield return prop;
 
-            foreach (var baseProp in GetPublicProperties(type.BaseType, flags))
+            foreach (var baseProp in GetProperties(type.BaseType, flags))
                 yield return baseProp;
         }
 

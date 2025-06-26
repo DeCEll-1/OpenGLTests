@@ -79,6 +79,44 @@ namespace RGL.API.Misc
         }
 
 
+        public static void LogOpenglAttributes()
+        {
+            // Single-value parameters
+            LogInt(GetPName.MaxVertexAttribs, "Max Vertex Attribs");
+            LogInt(GetPName.MaxTextureImageUnits, "Max Texture Image Units");
+            LogInt(GetPName.MaxVertexUniformComponents, "Max Vertex Uniform Components");
+            LogInt(GetPName.MaxFragmentUniformComponents, "Max Fragment Uniform Components");
+            LogInt(GetPName.MaxCombinedTextureImageUnits, "Max Combined Texture Image Units");
+            LogInt(GetPName.MaxTextureSize, "Max Texture Size");
+            LogInt(GetPName.MaxCubeMapTextureSize, "Max Cube Map Texture Size");
+            LogInt(GetPName.MaxRenderbufferSize, "Max Renderbuffer Size");
+            LogInt(GetPName.MaxDrawBuffers, "Max Draw Buffers");
+            LogInt(GetPName.MaxElementsIndices, "Max Elements Indices");
+            LogInt(GetPName.MaxElementsVertices, "Max Elements Vertices");
+            LogInt(GetPName.MaxUniformBufferBindings, "Max Uniform Buffer Bindings");
+            LogInt(GetPName.MaxUniformBlockSize, "Max Uniform Block Size");
+            LogInt(GetPName.MaxVertexUniformBlocks, "Max Vertex Uniform Blocks");
+            LogInt(GetPName.MaxFragmentUniformBlocks, "Max Fragment Uniform Blocks");
+            LogInt(GetPName.MaxCombinedUniformBlocks, "Max Combined Uniform Blocks");
+            LogInt(GetPName.MaxSamples, "Max Samples");
+            LogInt(GetPName.MaxVertexOutputComponents, "Max Vertex Output Components");
+            LogInt(GetPName.MaxFragmentInputComponents, "Max Fragment Input Components");
+            LogInt(GetPName.MaxColorAttachments, "Max Color Attachments");
+
+            LogInt2(GetPName.MaxViewportDims, "Max Viewport Dims");
+        }
+
+        public static void LogInt(GetPName pname, string label)
+        {
+            int value = GL.GetInteger(pname);
+            Logger.Log($"{label}: {value}", LogLevel.Info);
+        }
+        public static void LogInt2(GetPName pname, string label)
+        {
+            int[] values = new int[2];
+            GL.GetInteger(pname, values);
+            Logger.Log($"{label}: {values[0]} x {values[1]}", LogLevel.Info);
+        }
     }
 
     public enum LogLevel
