@@ -1,4 +1,5 @@
 ﻿using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Desktop;
 using RGL.API.SceneFolder;
 using System.Diagnostics;
 
@@ -10,7 +11,8 @@ namespace RGL.API.Rendering
         public Camera Camera { get; set; }
         public Stopwatch Timer { get; set; }
         public Scene Scene { get; set; }
-        public bool dispose = false;
+        public GameWindow Window { get; set; }
+        public bool disposed = false;
         public abstract void Init();
         public abstract void Advance();
 

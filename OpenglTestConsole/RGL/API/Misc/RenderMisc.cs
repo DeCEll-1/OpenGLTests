@@ -1,20 +1,22 @@
 ﻿using OpenTK.Mathematics;
+using RGL.API.Rendering.Materials;
+using RGL.API.Rendering.MeshClasses;
+using RGL.API.Rendering.Shaders;
 using RGL.API.Rendering.Textures;
 using RGL.API.SceneFolder;
+using RGL.Generated.Paths;
 
 namespace RGL.API.Misc
 {
     public class RenderMisc
     {
-        public static FBO GetScreenFBO(Scene Scene)
+        public static FBO GetSceneFBO(Scene scene)
         {
-            return Scene.PostProcesses.Count == 0
-                ? Scene.MainFBO
-                : Scene.pingPong.WriteTo;
+            return scene.MainFBO;
         }
-        public static Texture GetSceneTexture(Scene Scene)
+        public static Texture GetSceneTexture(Scene scene)
         {
-            FBO sourceFBO = GetScreenFBO(Scene);
+            FBO sourceFBO = GetSceneFBO(scene);
             int[] k = new int[4];
 
             GL.GetInteger(GetIndexedPName.Viewport, 0, k);
@@ -49,6 +51,17 @@ namespace RGL.API.Misc
 
             FBO.SetToDefaultFBO();
             return tex;
+        }
+
+        private static PostProcess passthroughProcess = new PostProcess(
+                    new PostProcessingMaterial(
+                        Resources.Shaders[RGLResources.Shaders.PPWriteFBO.Name]
+                    )
+                );
+
+        public static void RenderSceneToScreen(Scene scene)
+        {
+            passthroughProcess.Apply(FBOToWriteTo: 0, FBOToReadFrom: scene.MainFBO, scene);
         }
 
     }

@@ -20,16 +20,16 @@ namespace RGL.Classes.impl.EFSs
                 if (cursorState == CursorState.Grabbed)
                 {
                     cursorState = CursorState.Normal;
-                    MainInstance.CursorState = cursorState;
+                    Window.CursorState = cursorState;
                 }
                 else
                 {
                     cursorState = CursorState.Grabbed;
                     _lastPos = new Vector2(mouse.X, mouse.Y);
-                    MainInstance.CursorState = cursorState;
+                    Window.CursorState = cursorState;
                 }
             }
-            if (MainInstance.CursorState == CursorState.Normal)
+            if (Window.CursorState == CursorState.Normal)
                 return;
 
 

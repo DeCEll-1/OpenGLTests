@@ -30,7 +30,7 @@ namespace RGL.API.Rendering.Materials
             this.Shininess = shininess * 128f;
         }
 
-        public override void Apply()
+        public override void Apply(Scene scene)
         {
             Shader.UniformManager.SetVector3("material.ambient", Ambient);
             Shader.UniformManager.SetVector3("material.diffuse", Diffuse);
@@ -43,7 +43,7 @@ namespace RGL.API.Rendering.Materials
             Shader.UniformManager.SetVector3("light.diffuse", Scene.Lights[0].Diffuse);
             Shader.UniformManager.SetVector3("light.ambient", Scene.Lights[0].Ambient);
 
-            Shader.UniformManager.SetVector3("viewPos", Scene.Camera.Position);
+            Shader.UniformManager.SetVector3("viewPos", scene.Camera.Position);
         }
     }
 }

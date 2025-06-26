@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using RGL.API.Rendering.Shaders;
+using RGL.API.SceneFolder;
 using RGL.Classes.API.Rendering.Shaders;
 using RGL.Generated.Paths;
 
@@ -15,7 +16,7 @@ namespace RGL.API.Rendering.Materials
         }
 
 
-        public override void Apply()
+        public override void Apply(Scene scene)
         {
             Shader.UniformManager.SetVector4("color", color);
         }

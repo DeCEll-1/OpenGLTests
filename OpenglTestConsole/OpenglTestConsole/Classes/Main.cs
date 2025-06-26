@@ -27,7 +27,7 @@ namespace RGL.Classes
         public List<EveryFrameScript> EveryFrameScripts { get; set; } =
             new List<EveryFrameScript>();
         public List<RenderScript> RenderScripts { get; set; } = new List<RenderScript>();
-        private Camera Camera => Scene.Camera;
+        private Camera Camera => mainScene.Camera;
 
         [SetsRequiredMembers]
         public Main(
@@ -36,8 +36,11 @@ namespace RGL.Classes
         )
             : base(gameWindowSettings, nativeWindowSettings)
         {
-            Scene.Camera = new Camera();
-            Scene.Camera.Position.Z = 3f;
+            ResourceController.Init(typeof(AppResources));
+            mainScene.Camera = new Camera();
+            mainScene.Camera.Position.Z = 3f;
+            mainScene.Camera.screenWidth = APISettings.Resolution.X;
+            mainScene.Camera.screenHeight = APISettings.Resolution.Y;
             CursorState = CursorState.Grabbed;
 
             //Logger.Log($"{GL.GetInteger(GetPName.MaxVertexAttribs)}", LogLevel.Info);
@@ -77,7 +80,6 @@ namespace RGL.Classes
             );
             #endregion
 
-            ResourceController.Init(typeof(AppResources));
         }
 
         protected override void OnLoad()
@@ -86,18 +88,11 @@ namespace RGL.Classes
 
             GL.ClearColor(0.0f, 0.1f, 0.05f, 1.0f);
 
-            mainScene.Init(renderScripts: RenderScripts);
+            mainScene.Resolution = APISettings.Resolution;
+            mainScene.Init(renderScripts: RenderScripts, everyFrameScripts: EveryFrameScripts, this);
             mainScene.SkyboxCubeMap = Resources.Cubemaps[AppResources.Cubemaps.Sea.Name];
 
-            foreach (var script in EveryFrameScripts)
-            {
-                script.KeyboardState = this.KeyboardState;
-                script.MouseState = this.MouseState;
-                script.Camera = Scene.Camera;
-                script.MainInstance = this;
 
-                script.Init();
-            }
 
 
             _controller = new ImGuiController(ClientSize.X, ClientSize.Y);
@@ -107,21 +102,18 @@ namespace RGL.Classes
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             base.OnRenderFrame(args);
+
+            if (!IsFocused) // check to see if the window is focused
+                return;
+
             _controller.Update(this, (float)args.Time);
 
             // rendered everything we need to render
-            mainScene.Render(args: args);
-
-            //GL.Disable(EnableCap.DepthTest);
-            //GL.DepthMask(false);
-            //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            //GL.Enable(EnableCap.Blend);
+            mainScene.Render(args: args, window: this);
+            RenderMisc.RenderSceneToScreen(mainScene);
 
             _controller.Render();
 
-            //GL.DepthMask(true);
-            //GL.Enable(EnableCap.DepthTest);
-            //GL.Disable(EnableCap.Blend);
             ImGuiController.CheckGLError("End of frame");
 
             SwapBuffers();
@@ -134,15 +126,7 @@ namespace RGL.Classes
             if (!IsFocused) // check to see if the window is focused
                 return;
 
-            foreach (var script in EveryFrameScripts)
-            {
-                script.args = args;
-                script.KeyboardState = this.KeyboardState;
-                script.MouseState = this.MouseState;
-                script.Camera = this.Camera;
-                script.MainInstance = this;
-                script.Advance();
-            }
+            mainScene.RunEveryFrameScripts(args: args, window: this);
 
             OpenTK.Graphics.OpenGL.ErrorCode error = GL.GetError();
             if (error != OpenTK.Graphics.OpenGL.ErrorCode.NoError)
@@ -165,7 +149,7 @@ namespace RGL.Classes
                 return;
 
             APISettings.Resolution = new(e.Width, e.Height);
-            APISettings.SceneResolution = new(e.Width, e.Height);
+            mainScene.Resolution = new(e.Width, e.Height);
             // Update the opengl viewport
             GL.Viewport(0, 0, e.Width, e.Height);
 

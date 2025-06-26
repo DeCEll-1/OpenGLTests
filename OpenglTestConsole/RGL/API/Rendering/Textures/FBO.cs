@@ -162,11 +162,19 @@ namespace RGL.API.Rendering.Textures
             {
                 if (log)
                 {
-                    ColorTexture.logDisposal = log;
-                    ColorTexture.Dispose();
+                    //if (ColorTexture != null)
+                    //{
+                        ColorTexture.logDisposal = log;
+                        ColorTexture.Dispose();
+                    //}
 
-                    DepthStencilTexture.logDisposal = log;
-                    DepthStencilTexture.Dispose();
+                    //if (DepthStencilTexture != null)
+                    //{
+                        DepthStencilTexture.logDisposal = log;
+                        DepthStencilTexture.Dispose();
+                    //}
+
+
 
                     Logger.Log(
             $"{LogColors.BrightYellow("Disposed")} {LogColors.BC("FBO")} {LogColors.BW(Handle)}{(name != null ? $", named {LogColors.BW(name)}" : "")}",

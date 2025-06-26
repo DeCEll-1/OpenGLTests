@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using RGL.API.Rendering.Materials;
+using RGL.API.Rendering.Shaders;
 using RGL.API.Rendering.Textures;
 using RGL.Generated.Paths;
 
@@ -24,7 +25,7 @@ namespace RGL.API.SceneFolder
         private int i = 0; // counter so we can switch ping and pong
         private void InitPostProcesses()
         {
-            MainFBO.Init(name: "Main", size: new Vector2i(APISettings.SceneResolution.X, APISettings.SceneResolution.Y));
+            MainFBO.Init(name: "Main", size: new Vector2i(this.Resolution.X, this.Resolution.Y));
 
             MainFBO.Bind();
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -40,13 +41,11 @@ namespace RGL.API.SceneFolder
         private void HandlePostProcesses()
         {
             if (PostProcesses.Count == 0)
-            {
-                passthroughPostProcess.Apply(FBOToWriteTo: 0, FBOToReadFrom: MainFBO);
                 return;
-            }
+
             pingPong.Clear();
 
-            PostProcesses[0].Apply(FBOToWriteTo: pingPong.WriteTo.Handle, FBOToReadFrom: MainFBO); // write to Ping from our main FBO
+            PostProcesses[0].Apply(FBOToWriteTo: pingPong.WriteTo.Handle, FBOToReadFrom: MainFBO, this); // write to Ping from our main FBO
             pingPong.Swap();
             if (PostProcesses.Count > 1)
             {
@@ -54,14 +53,14 @@ namespace RGL.API.SceneFolder
                     i < PostProcesses.Count - 1; // minus 1 because we want to write to buffer 0 on the last step, which is the screen
                     i++)
                 {
-                    PostProcesses[i].Apply(FBOToWriteTo: pingPong.WriteTo.Handle, FBOToReadFrom: pingPong.ReadFrom); // write to Ping from our main FBO
+                    PostProcesses[i].Apply(FBOToWriteTo: pingPong.WriteTo.Handle, FBOToReadFrom: pingPong.ReadFrom,this );
                     pingPong.Swap();
 
                 }
             }
             FBO.SetToDefaultFBO();
 
-            passthroughPostProcess.Apply(FBOToWriteTo: 0, FBOToReadFrom: pingPong.ReadFrom);// write to the screen
+            passthroughPostProcess.Apply(FBOToWriteTo: MainFBO.Handle, FBOToReadFrom: pingPong.ReadFrom, this);// write to main fbo
             i = 0;
 
         }
@@ -98,7 +97,7 @@ namespace RGL.API.SceneFolder
                 Ping.Init(
                     name: "Ping",
                     depthStencilTexture: main.DepthStencilTexture,
-                    size: new Vector2i(APISettings.SceneResolution.X, APISettings.SceneResolution.Y)
+                    size: new Vector2i(main.ColorTexture.width, main.ColorTexture.height)
                 );
                 Ping.Bind();
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -110,7 +109,7 @@ namespace RGL.API.SceneFolder
                 Pong.Init(
                     name: "Pong",
                     depthStencilTexture: main.DepthStencilTexture,
-                    size: new Vector2i(APISettings.SceneResolution.X, APISettings.SceneResolution.Y)
+                    size: new Vector2i(main.ColorTexture.width, main.ColorTexture.height)
                 );
                 Pong.Bind();
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);

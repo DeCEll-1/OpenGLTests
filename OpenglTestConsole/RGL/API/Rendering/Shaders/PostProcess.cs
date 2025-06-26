@@ -1,8 +1,10 @@
 ﻿using RGL.API.Rendering.Geometries;
 using RGL.API.Rendering.Materials;
 using RGL.API.Rendering.MeshClasses;
+using RGL.API.Rendering.Textures;
+using RGL.API.SceneFolder;
 
-namespace RGL.API.Rendering.Textures
+namespace RGL.API.Rendering.Shaders
 {
     public class PostProcess
     {
@@ -17,13 +19,13 @@ namespace RGL.API.Rendering.Textures
         public PostProcessingMaterial Effect { get => (PostProcessingMaterial)ScreenMesh.Material; private set => ScreenMesh.Material = value; }
         public Mesh ScreenMesh { get; private set; }
 
-        public void Apply(int FBOToWriteTo, FBO FBOToReadFrom)
+        public void Apply(int FBOToWriteTo, FBO FBOToReadFrom, Scene scene)
         {
             FBO.BindToFBO(FBOToWriteTo);
 
 
             Effect.FBOToReadFrom = FBOToReadFrom;
-            ScreenMesh.Render();
+            ScreenMesh.Render(scene);
 
             FBO.SetToDefaultFBO();
         }

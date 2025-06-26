@@ -1,4 +1,5 @@
-﻿using RGL.Classes.API.Rendering.Shaders;
+﻿using RGL.API.SceneFolder;
+using RGL.Classes.API.Rendering.Shaders;
 
 namespace RGL.API.Rendering.Shaders
 {
@@ -12,6 +13,6 @@ namespace RGL.API.Rendering.Shaders
 
         public abstract Shader Shader { get; }
 
-        public abstract void Apply();
+        public abstract void Apply(Scene scene);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using OpenTK.Mathematics;
 using RGL.API.Rendering.Shaders;
 using RGL.API.Rendering.Textures;
+using RGL.API.SceneFolder;
 using RGL.Classes.API.Rendering.Shaders;
 using RGL.Generated.Paths;
 
@@ -16,7 +17,7 @@ namespace RGL.API.Rendering.Materials
         {
             Texture = texture; Color = color ?? new Vector4(1f, 1f, 1f, 1f);
         }
-        public override void Apply()
+        public override void Apply(Scene scene)
         {
             Shader.UniformManager.SetTexture("material.texture", Texture, TextureUnit.Texture0);
             Shader.UniformManager.SetVector4("material.colMultiplier", Color);

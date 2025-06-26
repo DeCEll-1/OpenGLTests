@@ -5,8 +5,8 @@ namespace RGL.API.Rendering
     public class Camera
     {
         public Vector3 Position = Vector3.Zero;
-        public int screenWidth { get => APISettings.SceneResolution.X; }
-        public int screenHeight { get => APISettings.SceneResolution.Y; }
+        public int screenWidth { get => field; set => field = value; }
+        public int screenHeight { get => field; set => field = value; }
         public float depthNear { get => APISettings.CameraDepthNear; }
         public float depthFar { get => APISettings.CameraDepthFar; }
         private float _pitch;
@@ -78,7 +78,7 @@ namespace RGL.API.Rendering
         public override string ToString()
         {
             return
-                $"Resolution: {APISettings.SceneResolution.ToString()}\n" +
+                $"Resolution: {new Vector2(screenWidth, screenHeight).ToString()}\n" +
                 $"Aspect Ratio: {screenWidth / (float)screenHeight}\n" +
                 $"Near: {depthNear}\n" +
                 $"Far: {depthFar}\n" +
@@ -86,7 +86,7 @@ namespace RGL.API.Rendering
                 $"Pitch: {Pitch}\n" +
                 $"Yaw: {Yaw}\n" +
                 $"Position: {Position.ToString()}\n" +
-                $"Projection Matrix:\n{GetProjectionMatrix().ToString()}\n" + 
+                $"Projection Matrix:\n{GetProjectionMatrix().ToString()}\n" +
                 $"View Matrix:\n{GetViewMatrix().ToString()}"
                 ;
 

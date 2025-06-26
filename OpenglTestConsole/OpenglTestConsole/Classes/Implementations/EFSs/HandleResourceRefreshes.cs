@@ -13,7 +13,7 @@ namespace RGL.Classes.Implementations.EFSs
                 return;
             ResourceController.Refresh();
 
-            foreach (var script in ((Main)MainInstance).RenderScripts)
+            foreach (var script in ((Main)Window).RenderScripts)
                 script.OnResourceRefresh();
         }
     }

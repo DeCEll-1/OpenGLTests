@@ -7,7 +7,6 @@ namespace RGL.API.Rendering.MeshClasses
     public partial class Mesh
     {
         #region Init
-        internal Camera Camera { get => Scene.Camera; }
         public string Name { get; set; }
 
         internal Geometry3D _geometry;
@@ -45,7 +44,7 @@ namespace RGL.API.Rendering.MeshClasses
 
         #region Render
 
-        public virtual void Render()
+        public virtual void Render(Scene scene)
         { // deadass render that shit cuh
             // on it boss ima render that shit cuh
 
@@ -54,11 +53,11 @@ namespace RGL.API.Rendering.MeshClasses
 
             Material.Shader.Use();
 
-            Material.Apply();
+            Material.Apply(scene);
 
-            Material.Shader.UniformManager.SetMatrix4("projection", Camera.GetProjectionMatrix());
+            Material.Shader.UniformManager.SetMatrix4("projection", scene.Camera.GetProjectionMatrix());
 
-            Material.Shader.UniformManager.SetMatrix4("view", Camera.GetViewMatrix());
+            Material.Shader.UniformManager.SetMatrix4("view", scene.Camera.GetViewMatrix());
 
             Material.Shader.UniformManager.SetMatrix4("model", Transform.GetModelMatrix());
 

@@ -1,5 +1,6 @@
 ﻿using RGL.API.Rendering.Shaders;
 using RGL.API.Rendering.Textures;
+using RGL.API.SceneFolder;
 using RGL.Classes.API.Rendering.Shaders;
 using RGL.Generated.Paths;
 
@@ -18,7 +19,7 @@ namespace RGL.API.Rendering.Materials
             Occlusion = occlusion;
             Normals = normal;
         }
-        public override void Apply()
+        public override void Apply(Scene scene)
         {
             Shader.UniformManager.SetTexture("color", Color, TextureUnit.Texture0);
             Shader.UniformManager.SetTexture("occlusion", Occlusion, TextureUnit.Texture1);

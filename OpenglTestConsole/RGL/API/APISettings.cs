@@ -25,7 +25,6 @@ namespace RGL.API
         public static float Gamma { get; set; } = 2.2f;
 
         public static Vector2i Resolution { get; set; } = new(1600, 900);
-        public static Vector2i SceneResolution { get; set; } = new(1600, 900);
 
         [SliderLimits(0.1f, 1f)]
         public static float CameraDepthNear { get; set; } = 0.1f;

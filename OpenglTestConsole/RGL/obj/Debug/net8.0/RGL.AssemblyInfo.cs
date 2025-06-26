@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RGL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c9d6436a228141140e1a3a2cf46f681e8e7dadc3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35aa7c51185e6a3fd5dc90134183f4e63aa05c81")]
 [assembly: System.Reflection.AssemblyProductAttribute("RGL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RGL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

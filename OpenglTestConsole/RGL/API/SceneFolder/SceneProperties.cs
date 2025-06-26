@@ -1,4 +1,5 @@
-﻿using RGL.API.Rendering;
+﻿using OpenTK.Mathematics;
+using RGL.API.Rendering;
 using RGL.API.Rendering.Geometries;
 using RGL.API.Rendering.Materials;
 using RGL.API.Rendering.MeshClasses;
@@ -17,9 +18,19 @@ namespace RGL.API.SceneFolder
 
         private List<RenderScript> RenderScripts = [];
 
+        private List<EveryFrameScript> EveryFrameScripts = [];
+
+        public Vector2i Resolution
+        {
+            get => field;
+            set => field = value;
+        }
+
+        public bool IsMouseOverFBO = true;
+
 
         public static List<Light> Lights { get; set; } = new();
-        public static Camera Camera { get; set; } = new Camera();
+        public Camera Camera { get; set; } = new Camera();
 
 
         public Cubemap SkyboxCubeMap
