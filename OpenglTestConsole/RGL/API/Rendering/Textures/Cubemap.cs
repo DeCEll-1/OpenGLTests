@@ -48,7 +48,7 @@ namespace RGL.API.Rendering.Textures
         public void Init()
         {
             Handle = GL.GenTexture();
-            GL.BindTexture(TextureTarget.Texture2D, Handle);
+            GL.BindTexture(TextureTarget.TextureCubeMap, Handle);
 
 
             if (textures.Any(tex => tex.initalised == true))
@@ -69,7 +69,7 @@ namespace RGL.API.Rendering.Textures
                 tex.Target = TextureTarget.TextureCubeMapPositiveX + i;
                 tex.flipped = false;
                 // init it while we are binded to the cubemap, which will attatch the texture to the cubemap
-                tex.Init(name: faceNames[i]);
+                tex.Init(name: faceNames[i], isCubemap: true, cubemapHandle: this.Handle);
             }
 
             /* 
@@ -82,7 +82,7 @@ namespace RGL.API.Rendering.Textures
              */
 
             GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureMagFilter, (int)TextureMinFilter.Linear);
+            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
 
             GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
             GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
@@ -104,7 +104,7 @@ namespace RGL.API.Rendering.Textures
         public void Bind()
         {
             Check();
-            GL.BindTexture(TextureTarget.Texture2D, Handle);
+            GL.BindTexture(TextureTarget.TextureCubeMap, Handle);
         }
         public void Activate(TextureUnit unit)
         {
@@ -126,14 +126,15 @@ namespace RGL.API.Rendering.Textures
         {
             if (!disposed)
             {
+
+                foreach (var texture in textures)
+                    texture.Dispose();
+                GL.DeleteTexture(Handle);
                 if (log)
                     Logger.Log(
                     $"{LogColors.BrightYellow("Disposed")} Cubemap {LogColors.BrightWhite(Handle)}",
                     LogLevel.Detail
                 );
-                foreach (var texture in textures)
-                    texture.Dispose();
-                GL.DeleteTexture(Handle);
                 Handle = 0;
                 disposed = true;
             }

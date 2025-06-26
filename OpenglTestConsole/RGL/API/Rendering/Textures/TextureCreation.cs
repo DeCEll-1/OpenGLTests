@@ -1,7 +1,7 @@
-﻿using RGL.API.Misc;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ImageMagick;
+using RGL.API.Misc;
+using System.Buffers;
 
 namespace RGL.API.Rendering.Textures
 {
@@ -58,32 +58,17 @@ namespace RGL.API.Rendering.Textures
             TextureMagFilter textureMagFilter = TextureMagFilter.Linear
         )
         {
+            using var ms = new MemoryStream(bytes);
+            using var image = new MagickImage(ms);
+            using var pixelDataArray = image.GetPixels();
 
-            Image<Rgba32> image;
+            PixelMapping mapping = pixelFormat == PixelFormat.Rgb ? PixelMapping.RGB : PixelMapping.RGBA;
+            byte[] pixelArray = pixelDataArray.ToByteArray(0, 0, image.Width, image.Height, mapping)!;
 
-            try
-            {
-                image = Image.Load<Rgba32>(bytes);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(
-                    $"An error occured while loading {LogColors.BrightWhite("LoadFromTextureBytes")}:\n{ex.ToString()}",
-                    LogLevel.Error
-                );
-                // this aint working properly fix it sometime ig
-                Logger.Log($"Using default texture...", LogLevel.Warning);
-                image = Image.Load<Rgba32>(File.ReadAllBytes("Resources/Textures/PlaceHolder.png"));
-            }
-
-
-            byte[] pixelDataArray = new byte[image.Width * image.Height * 4];
-            image.CopyPixelDataTo(pixelDataArray);
-
-            Texture texture = LoadFromBytes(
-                bytes: pixelDataArray,
-                width: image.Width,
-                height: image.Height,
+            return LoadFromBytes(
+                bytes: pixelArray,
+                width: (int)image.Width,
+                height: (int)image.Height,
                 target: target,
                 pixelInternalFormat: pixelInternalFormat,
                 pixelFormat: pixelFormat,
@@ -93,10 +78,9 @@ namespace RGL.API.Rendering.Textures
                 textureMinFilter: textureMinFilter,
                 textureMagFilter: textureMagFilter
             );
-            image.Dispose();
-
-            return texture;
         }
+
+
 
         public static Texture LoadFromBytes(
             byte[] bytes,
@@ -128,22 +112,19 @@ namespace RGL.API.Rendering.Textures
             return texture;
         }
 
-        public void Init(string? name = "")
+
+        public void Init(string? name = "", bool isCubemap = false, int cubemapHandle = -1)
         {
             Logger.BeginTimingBlock();
-            this.Handle = GL.GenTexture();
-
-            if (flipped)
+            var paramTarget = this.Target;
+            if (isCubemap)
             {
-                var image = Image.LoadPixelData<Rgba32>(
-                    data: bytes,
-                    width: width,
-                    height: height
-                );
-                image.Mutate(s => s.Flip(FlipMode.Vertical));
-                image.CopyPixelDataTo(bytes);
-                image.Dispose();
+                this.Handle = cubemapHandle;
+                paramTarget = TextureTarget.TextureCubeMap;
             }
+            else
+                this.Handle = GL.GenTexture();
+
 
             if (this.Handle == 0)
                 Logger.Log(
@@ -151,25 +132,54 @@ namespace RGL.API.Rendering.Textures
                 LogLevel.Error
                 );
 
-            GL.BindTexture(TextureTarget.Texture2D, this.Handle);
+            if (flipped)
+            {
+                try
+                {
+                    var imageLoadFormat = PixelFormat == PixelFormat.Rgb ? MagickFormat.Rgb : MagickFormat.Rgba;
+                    var settings = new MagickReadSettings
+                    {
+                        Width = (uint)width,
+                        Height = (uint)height,
+                        Format = imageLoadFormat
+                    };
+
+                    using var ms = new MemoryStream(bytes!);
+                    using var image = new MagickImage(ms, settings);
+                    image.Flip();
+
+                    using var pixelDataArray = image.GetPixels();
+                    var mapping = PixelFormat == PixelFormat.Rgb ? PixelMapping.RGB : PixelMapping.RGBA;
+
+                    bytes = pixelDataArray.ToByteArray(0, 0, image.Width, image.Height, mapping)!;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log($"Error flipping image: {ex.ToString()}", LogLevel.Error);
+                }
+            }
+
+
+
+            GL.BindTexture(paramTarget, this.Handle);
 
             GL.TexParameter(
-                TextureTarget.Texture2D,
+                paramTarget,
                 TextureParameterName.TextureWrapS,
                 (int)TextureSWrapMode
             );
+
             GL.TexParameter(
-                TextureTarget.Texture2D,
+                paramTarget,
                 TextureParameterName.TextureWrapT,
                 (int)TextureTWrapMode
             );
 
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter);
+            GL.TexParameter(paramTarget, TextureParameterName.TextureMinFilter, (int)TextureMinFilter);
+            GL.TexParameter(paramTarget, TextureParameterName.TextureMagFilter, (int)TextureMagFilter);
 
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureBaseLevel, 0);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 0);
-
+            GL.TexParameter(paramTarget, TextureParameterName.TextureBaseLevel, 0);
+            GL.TexParameter(paramTarget, TextureParameterName.TextureMaxLevel, 0);
 
             GL.TexImage2D(
                 this.Target,
@@ -183,6 +193,7 @@ namespace RGL.API.Rendering.Textures
                 bytes
             );
             this.initalised = true;
+
             this.bytes = null;
 
             this.name = name;

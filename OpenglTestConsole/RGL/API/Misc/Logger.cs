@@ -78,6 +78,42 @@ namespace RGL.API.Misc
             Indent = new(' ', IndentLevel * IndentLenght);
         }
 
+        private static Stack<long> startMemoryUsages = new Stack<long>();
+        private static long CurrMemory => GC.GetTotalMemory(forceFullCollection: false);
+        public static void BeginMemoryBlock()
+        {
+            startMemoryUsages.Push(CurrMemory);
+        }
+        public static long EndMemoryBlock()
+        {
+            return CurrMemory - startMemoryUsages.Pop();
+        }
+        public static string EndMemoryBlockFormatted()
+        {
+            long delta = EndMemoryBlock();
+            return FormatBytes(delta) + " RAM";
+        }
+        public static string FormatBytes(long bytes)
+        {
+            bool isNegative = (bytes < 0);
+            bytes = Math.Abs(bytes);
+            const long KB = 1024;
+            const long MB = 1024 * KB;
+            const long GB = 1024 * MB;
+
+            string negative = "";
+            if (isNegative)
+                negative = "-";
+
+            if (bytes >= GB) return $"{negative}{bytes / (double)GB:F2} GB";
+            if (bytes >= MB) return $"{negative}{bytes / (double)MB:F2} MB";
+            if (bytes >= KB) return $"{negative}{bytes / (double)KB:F2} KB";
+
+            return $"{negative}{bytes} B";
+        }
+
+
+
 
         public static void LogOpenglAttributes()
         {
@@ -106,12 +142,12 @@ namespace RGL.API.Misc
             LogInt2(GetPName.MaxViewportDims, "Max Viewport Dims");
         }
 
-        public static void LogInt(GetPName pname, string label)
+        private static void LogInt(GetPName pname, string label)
         {
             int value = GL.GetInteger(pname);
             Logger.Log($"{label}: {value}", LogLevel.Info);
         }
-        public static void LogInt2(GetPName pname, string label)
+        private static void LogInt2(GetPName pname, string label)
         {
             int[] values = new int[2];
             GL.GetInteger(pname, values);

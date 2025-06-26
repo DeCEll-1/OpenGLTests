@@ -1,3 +1,4 @@
+using ImageMagick;
 using RGL.API.JSON;
 using RGL.API.Misc;
 using RGL.API.Rendering.Geometries;
@@ -7,6 +8,7 @@ using RGL.API.Rendering.Textures;
 using RGL.Classes.API.Rendering.Shaders;
 using RGL.Generated.Paths;
 using System.Reflection;
+using System.Runtime;
 using static RGL.Generated.Paths.RGLResources.Geometries;
 
 namespace RGL.API
@@ -38,18 +40,55 @@ namespace RGL.API
 
             Init();
         }
+        static ResourceController()
+        {
+        }
 
         public static void Init(Type appResources = null)
         {
             if (appResources != null)
                 AppResources = appResources;
 
+
+            Logger.BeginMemoryBlock();
             AddTextures();
+            Logger.Log($"Loaded Textures, Consting: {LogColors.BR(Logger.EndMemoryBlockFormatted())}", LogLevel.Detail);
+
+            Logger.BeginMemoryBlock();
             AddShaders();
+            Logger.Log($"Loaded Shaders, Consting: {LogColors.BR(Logger.EndMemoryBlockFormatted())}", LogLevel.Detail);
+
+            Logger.BeginMemoryBlock();
             AddComputeShaders();
+            Logger.Log($"Loaded Compute Shaders, Consting: {LogColors.BR(Logger.EndMemoryBlockFormatted())}", LogLevel.Detail);
+
+            Logger.BeginMemoryBlock();
             AddFonts();
+            Logger.Log($"Loaded Fonts, Consting: {LogColors.BR(Logger.EndMemoryBlockFormatted())}", LogLevel.Detail);
+
+            Logger.BeginMemoryBlock();
             AddCubemaps();
+            Logger.Log($"Loaded Cubemaps, Consting: {LogColors.BR(Logger.EndMemoryBlockFormatted())}", LogLevel.Detail);
+
+
+            Logger.BeginMemoryBlock();
             AddModels();
+            Logger.Log($"Loaded Models, Consting: {LogColors.BR(Logger.EndMemoryBlockFormatted())}", LogLevel.Detail);
+
+            Logger.BeginMemoryBlock();
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(2000);
+                GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+                Logger.Log($"Saved {LogColors.BR(Logger.FormatBytes(-Logger.EndMemoryBlock()))} By Force GC Call", LogLevel.Detail);
+            });
+
+
+
         }
         #region textures
         private static void AddTextures()
@@ -181,6 +220,7 @@ namespace RGL.API
             string fontJSONPath = (string)type!.GetField("JSON")!.GetValue(null)!;
             string fontPNGPath = (string)type!.GetField("PNG")!.GetValue(null)!;
 
+            Logger.Log($"Loading {LogColors.Green("Font JSON")} {LogColors.BrightWhite(fontName)}", LogLevel.Detail);
             Resources.Fonts.Add(fontName, MCSDFJSON.GetFontJson(fontJSONPath)!);
 
             AddTexture(fontPNGPath);

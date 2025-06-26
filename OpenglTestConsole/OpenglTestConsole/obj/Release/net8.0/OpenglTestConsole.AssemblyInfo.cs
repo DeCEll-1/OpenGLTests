@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OpenglTestConsole")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa5370e40924dc0b75293fd70a98fde8e39ded9f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d433cfd1f4ca48d3fa8f883a75c33f16f450efd3")]
 [assembly: System.Reflection.AssemblyProductAttribute("OpenglTestConsole")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OpenglTestConsole")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

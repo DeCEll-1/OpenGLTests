@@ -1,8 +1,5 @@
 ﻿using RGL.API.Rendering.Textures;
 using OpenTK.Mathematics;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
 using GLGLF = OpenTK.Windowing.GraphicsLibraryFramework;
 using RGL.API;
 using RGL.API.Misc;

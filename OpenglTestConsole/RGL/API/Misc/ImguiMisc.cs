@@ -23,7 +23,7 @@ namespace RGL.API.Misc
             {
                 ImGui.Text("Triangle Count: " + indiceCount / 3);
                 indiceCount = 0;
-                foreach (Mesh mesh in Scene.Meshes.SelectMany(s => s).Distinct())
+                foreach (Mesh mesh in Scene.Meshes.SelectMany(s => s).Concat([Scene.Skybox]).Distinct())
                 {
                     indiceCount += mesh.Geometry.IndicesLength;
                     ListMesh(mesh);
@@ -44,7 +44,7 @@ namespace RGL.API.Misc
             }
         }
 
-        const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance;
+        const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
 
         private static void ListMesh(Mesh mesh)

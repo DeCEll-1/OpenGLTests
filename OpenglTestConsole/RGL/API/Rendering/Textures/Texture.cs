@@ -1,8 +1,8 @@
-﻿using OpenTK.Mathematics;
+﻿using ImageMagick;
+using Newtonsoft.Json.Linq;
+using OpenTK.Mathematics;
 using RGL.API.Misc;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
+using System.Buffers;
 
 namespace RGL.API.Rendering.Textures
 {
@@ -70,13 +70,40 @@ namespace RGL.API.Rendering.Textures
 
         public void SaveToFile(string filePath)
         {
-            Vector2i size = new(width, height);
-            var image = Image.LoadPixelData<Rgba32>(GetBytes(), size.X, size.Y);
-            image.Mutate(s => s.Flip(FlipMode.Vertical));
-            if (filePath.Contains(".jpg") || filePath.Contains(".jpeg"))
-                image.SaveAsJpeg(filePath);
+            MagickFormat format = MagickFormat.Rgb;
+            if (this.PixelFormat == PixelFormat.Rgba)
+            {
+                format = MagickFormat.Rgba;
+            }
+
+            // Create MagickReadSettings for raw pixel data (assuming RGBA)
+            var settings = new MagickReadSettings
+            {
+                Width = (uint?)width,
+                Height = (uint?)height,
+                Format = format,
+            };
+            using var ms = new MemoryStream(GetBytes());
+            using var image = new MagickImage(ms, settings);
+
+
+            // Flip vertically
+            image.Flip();
+
+            // Save as JPEG or PNG depending on file extension
+            if (filePath.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                filePath.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
+            {
+                image.Format = MagickFormat.Jpeg;
+                image.Write(filePath);
+            }
             else
-                image.SaveAsPng(filePath);
+            {
+                image.Format = MagickFormat.Png;
+                image.Write(filePath);
+            }
+
+
             Logger.Log(
                 $"Saved Texture with {LogColors.BrightWhite(Handle)} as {LogColors.BrightWhite(filePath)}",
                 LogLevel.Detail
@@ -97,13 +124,13 @@ namespace RGL.API.Rendering.Textures
         {
             if (!disposed)
             {
+
+                GL.DeleteTexture(Handle);
                 if (log)
                     Logger.Log(
                     $"{LogColors.BY("Disposed")} {LogColors.BC("Texture")} {LogColors.BW(Handle)}{(name != "" ? $", named {LogColors.BW(name)}" : "")}",
                     LogLevel.Detail
                 );
-
-                GL.DeleteTexture(Handle);
                 Handle = 0;
                 disposed = true;
             }

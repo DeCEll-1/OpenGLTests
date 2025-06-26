@@ -50,6 +50,6 @@
 
 
         public static FontJson? GetFontJson(string jsonPath) =>
-            LoadJsonFromFile<FontJson>.Load(jsonPath)!;
+            JsonUtil.LoadFromFile<FontJson>(jsonPath)!;
     }
 }

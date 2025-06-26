@@ -5,6 +5,7 @@ using RGL.API.Rendering.Shaders;
 using RGL.API.Rendering.Textures;
 using RGL.API.SceneFolder;
 using RGL.Generated.Paths;
+using System.Buffers;
 
 namespace RGL.API.Misc
 {
@@ -17,22 +18,19 @@ namespace RGL.API.Misc
         public static Texture GetSceneTexture(Scene scene)
         {
             FBO sourceFBO = GetSceneFBO(scene);
-            int[] k = new int[4];
+            int[] viewport = new int[4];
+            GL.GetInteger(GetIndexedPName.Viewport, 0, viewport);
 
-            GL.GetInteger(GetIndexedPName.Viewport, 0, k);
+            Vector2i size = new(viewport[2], viewport[3]);
 
-            Vector2i size = new(k[2], k[3]);
+            int bufferLength = 4 * size.X * size.Y; // RGBA * width * height
 
-
-            byte[] output = new byte[
-                4 *
-                size.X *
-                size.Y
-            ];
+            // Allocate new byte array instead of renting from pool
+            byte[] buffer = new byte[bufferLength];
 
             unsafe
             {
-                fixed (byte* outputPtr = output)
+                fixed (byte* bufferPtr = buffer)
                 {
                     GL.ReadPixels(
                         0,
@@ -41,17 +39,21 @@ namespace RGL.API.Misc
                         size.Y,
                         PixelFormat.Rgba,
                         PixelType.UnsignedByte,
-                        (nint)outputPtr
+                        (nint)bufferPtr
                     );
                 }
             }
 
-            Texture tex = Texture.LoadFromBytes(output, k[2], k[3]);
+            // Create texture from the byte array
+            Texture tex = Texture.LoadFromBytes(buffer, size.X, size.Y);
             tex.flipped = false;
 
             FBO.SetToDefaultFBO();
+
             return tex;
         }
+
+
 
         private static PostProcess passthroughProcess = new PostProcess(
                     new PostProcessingMaterial(
