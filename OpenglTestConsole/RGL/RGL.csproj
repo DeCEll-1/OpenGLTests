@@ -21,4 +21,8 @@
 		<Folder Include="Resources\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Include="API\JSON\JsonConverters.cs" />
+	</ItemGroup>
+
 </Project>

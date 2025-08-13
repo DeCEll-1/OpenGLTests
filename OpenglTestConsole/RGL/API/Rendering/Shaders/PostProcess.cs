@@ -1,5 +1,5 @@
 ﻿using RGL.API.Rendering.Geometries;
-using RGL.API.Rendering.Materials;
+using RGL.API.Rendering.Materials.PPMaterials;
 using RGL.API.Rendering.MeshClasses;
 using RGL.API.Rendering.Textures;
 using RGL.API.SceneFolder;

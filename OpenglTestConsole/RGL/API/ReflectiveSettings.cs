@@ -23,7 +23,8 @@ namespace RGL.API
                 new Vector3JsonConverter(),
                 new Vector3iJsonConverter(),
                 new Vector4JsonConverter(),
-                new Vector4iJsonConverter()
+                new Vector4iJsonConverter(),
+                new DirectoryInfoJsonConverter(),
             }
         };
 

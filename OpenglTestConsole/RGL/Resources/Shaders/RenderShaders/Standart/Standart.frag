@@ -1,5 +1,3 @@
-#version 330 core
-
 in vec3 FragPos0; // moved frag pos
 in vec3 Normal0; // normals from the cpu
 flat in vec3 flatNormal0; // normals from the cpu

@@ -16,8 +16,6 @@ namespace RGL.API.Rendering.Shaders.Compute
         public ComputeShader(string computeShaderPath)
         {
             this.computeShaderPath = computeShaderPath;
-            UnitManager = new ComputeShaderUnitManager(Handle);
-            UniformManager = new ShaderUniformManager(Handle);
         }
 
         public void Init()
@@ -51,6 +49,8 @@ namespace RGL.API.Rendering.Shaders.Compute
             GL.DetachShader(Handle, computeShaderPointer);
             GL.DeleteShader(computeShaderPointer);
 
+            UnitManager = new ComputeShaderUnitManager(Handle);
+            UniformManager = new ShaderUniformManager(Handle);
             initalised = true;
 
             Logger.Log(

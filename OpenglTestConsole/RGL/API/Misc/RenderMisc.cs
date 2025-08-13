@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using RGL.API.Rendering.Materials;
+using RGL.API.Rendering.Materials.PPMaterials;
 using RGL.API.Rendering.MeshClasses;
 using RGL.API.Rendering.Shaders;
 using RGL.API.Rendering.Textures;
@@ -57,7 +58,7 @@ namespace RGL.API.Misc
 
         private static PostProcess passthroughProcess = new PostProcess(
                     new PostProcessingMaterial(
-                        Resources.Shaders[RGLResources.Shaders.PPWriteFBO.Name]
+                        Resources.Shaders[RGLResources.Shaders.PPWriteFBO.Name].Opaque
                     )
                 );
 

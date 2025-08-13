@@ -24,6 +24,8 @@
         }
 
         private int Handle;
+
+        private Dictionary<int, int> ssboBindings = new Dictionary<int, int>(); // binding point -> buffer handle
         private List<ImageBinding> imageBindings = new List<ImageBinding>();
 
         public ComputeShaderUnitManager(int handle)
@@ -58,6 +60,48 @@
                     binding.Format // Must match texture's internal format
                 );
             }
+        }
+
+
+        // --- SSBO Management ---
+
+        // Set a float array as a SSBO at a binding point
+        public void SetFloatArraySSBO(float[] data, int binding)
+        {
+            int buffer;
+            if (ssboBindings.TryGetValue(binding, out buffer))
+            {
+                // Update existing buffer
+                GL.BindBuffer(BufferTarget.ShaderStorageBuffer, buffer);
+                GL.BufferData(BufferTarget.ShaderStorageBuffer, sizeof(float) * data.Length, data, BufferUsageHint.DynamicDraw);
+            }
+            else
+            {
+                buffer = GL.GenBuffer();
+                GL.BindBuffer(BufferTarget.ShaderStorageBuffer, buffer);
+                GL.BufferData(BufferTarget.ShaderStorageBuffer, sizeof(float) * data.Length, data, BufferUsageHint.DynamicDraw);
+                ssboBindings[binding] = buffer;
+            }
+            GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, binding, buffer);
+        }
+
+        // Set an int array as a SSBO at a binding point
+        public void SetIntArraySSBO(int[] data, int binding)
+        {
+            int buffer;
+            if (ssboBindings.TryGetValue(binding, out buffer))
+            {
+                GL.BindBuffer(BufferTarget.ShaderStorageBuffer, buffer);
+                GL.BufferData(BufferTarget.ShaderStorageBuffer, sizeof(int) * data.Length, data, BufferUsageHint.DynamicDraw);
+            }
+            else
+            {
+                buffer = GL.GenBuffer();
+                GL.BindBuffer(BufferTarget.ShaderStorageBuffer, buffer);
+                GL.BufferData(BufferTarget.ShaderStorageBuffer, sizeof(int) * data.Length, data, BufferUsageHint.DynamicDraw);
+                ssboBindings[binding] = buffer;
+            }
+            GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, binding, buffer);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ImGuiNET;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ImGuiNET;
 using RGL.API.Rendering.MeshClasses;
 using RGL.API.SceneFolder;
 using System;
@@ -15,19 +16,44 @@ namespace RGL.API.Misc
     {
 
         static long indiceCount = 0;
+        public static bool DisplayNonPublicVariables { get => APISettings.DisplayNonPublicVariablesForSceneDebug; set => APISettings.DisplayNonPublicVariablesForSceneDebug = value; }
+
+
         public static void RenderSceneDebugInfo(Scene Scene)
         {
+
+            if (DisplayNonPublicVariables)
+                bindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
+            else
+                bindingFlags = BindingFlags.Public | BindingFlags.Instance;
+
+
             RecursiveListType(Scene.Camera);
 
             if (ImGui.TreeNodeEx("Meshes"))
             {
+                if (ImGui.TreeNodeEx("Opaque Objects"))
+                {
+                    foreach (Mesh mesh in Scene.Meshes.SelectMany(s => s).Concat([Scene.Skybox]).Distinct())
+                    {
+                        indiceCount += mesh.Geometry.IndicesLength;
+                        ListMesh(mesh);
+                    }
+                    ImGui.TreePop();
+                }
+
+                if (ImGui.TreeNodeEx("Transparent Objects"))
+                {
+                    foreach (Mesh mesh in Scene.TransparentMeshes.SelectMany(s => s).Concat([Scene.Skybox]).Distinct())
+                    {
+                        indiceCount += mesh.Geometry.IndicesLength;
+                        ListMesh(mesh);
+                    }
+                    ImGui.TreePop();
+                }
+
                 ImGui.Text("Triangle Count: " + indiceCount / 3);
                 indiceCount = 0;
-                foreach (Mesh mesh in Scene.Meshes.SelectMany(s => s).Concat([Scene.Skybox]).Distinct())
-                {
-                    indiceCount += mesh.Geometry.IndicesLength;
-                    ListMesh(mesh);
-                }
                 ImGui.TreePop();
             }
 
@@ -44,7 +70,7 @@ namespace RGL.API.Misc
             }
         }
 
-        const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+        private static BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance;
 
 
         private static void ListMesh(Mesh mesh)
@@ -109,68 +135,48 @@ namespace RGL.API.Misc
                     return;
                 }
 
+                bool hitIndexer = false;
+
                 foreach (var field in fields)
                 {
                     var fieldVal = field.GetValue(itemToList);
-                    if (fieldVal == null)
-                        continue;
-                    if (
-                        field.FieldType.IsPrimitive ||
-                        ReflectionMisc.OverridesToString(fieldVal) ||
-                        toStringedTypes.Any(field.FieldType.IsSubclassOf) ||
-                        field.FieldType.IsEnum
-                    )
-                    {
+                    PrintField(field, fieldVal);
 
-                        if (field.FieldType == typeof(string))
-                        {
-                            if (((string)fieldVal).Contains("\n") || ((string)fieldVal).Contains("\r"))
-                            {
-                                if (ImGui.TreeNodeEx(field.Name))
-                                {
-                                    ImGui.Text(fieldVal?.ToString());
-                                    ImGui.TreePop();
-                                }
-                            }
-                        }
-                        else
-                            ImGui.Text(field.Name + ": " + fieldVal?.ToString());
-
-                    }
-                    else
-                        RecursiveListType(fieldVal, name: field.Name);
                 }
-                foreach (var property in properties)
+                foreach (PropertyInfo property in properties)
                 {
-                    var propVal = property.GetValue(itemToList);
-                    if (propVal == null)
-                        continue;
-                    if (
-                        property.PropertyType.IsPrimitive ||
-                        ReflectionMisc.OverridesToString(propVal) ||
-                        toStringedTypes.Any(property.PropertyType.IsSubclassOf) ||
-                        property.PropertyType.IsEnum
-                    )
-                    {
 
-                        if (property.PropertyType == typeof(string))
+                    if (property.GetIndexParameters().Length == 1 && typeof(IDictionary).IsAssignableFrom(type))
+                    { // we have an indexer that takes 1 argument and is a dictionary
+
+                        if (hitIndexer)
+                            continue;
+                        hitIndexer = true;
+
+                        // cast it to dictionary
+                        var dict = (IDictionary)itemToList;
+
+                        if (ImGui.TreeNodeEx("Items: "))
                         {
-                            if (((string)propVal).Contains("\n"))
-                            {
-                                if (ImGui.TreeNodeEx(property.Name))
-                                {
-                                    ImGui.Text(propVal?.ToString());
-                                    ImGui.TreePop();
-                                }
-                            }
-                        }
-                        else
-                            ImGui.Text(property.Name + ": " + propVal?.ToString());
+                            foreach (var key in dict.Keys)
+                            { // iterate over the dictionary
+                              // get the value from the key
+                                var value = property.GetValue(itemToList, new object[] { key })!;
 
+                                // print it
+                                PrintProperty(property, value, key: key.ToString());
+                            }
+                            ImGui.TreePop();
+                        }
+                        continue;
                     }
-                    else
-                        RecursiveListType(propVal, name: property.Name);
+
+
+                    var propVal = property.GetValue(itemToList);
+
+                    PrintProperty(property, propVal);
                 }
+
 
                 if (type.IsArray)
                 {
@@ -198,7 +204,68 @@ namespace RGL.API.Misc
             }
         }
 
+        private static void PrintProperty(PropertyInfo property, object propVal, string key = null)
+        {
+            if (propVal == null)
+                return;
+            if (
+                property.PropertyType.IsPrimitive ||
+                ReflectionMisc.OverridesToString(propVal) ||
+                toStringedTypes.Any(property.PropertyType.IsSubclassOf) ||
+                property.PropertyType.IsEnum
+            )
+            {
 
+                if (property.PropertyType == typeof(string))
+                {
+                    if (((string)propVal).Contains("\n"))
+                    {
+                        if (ImGui.TreeNodeEx(property.Name))
+                        {
+                            ImGui.Text(key + propVal?.ToString());
+                            ImGui.TreePop();
+                        }
+                    }
+                }
+                else
+                    ImGui.Text((String.IsNullOrEmpty(key) ? $"{property.Name}: {propVal?.ToString()}" : $"{key}: {propVal?.ToString()}"));
+                //ImGui.Text(property.Name + ": " + (String.IsNullOrEmpty(key) ? "" : $"{key}, ") + propVal?.ToString());
+
+            }
+            else
+                RecursiveListType(propVal, name: property.Name);
+        }
+
+        private static void PrintField(FieldInfo field, object fieldVal)
+        {
+            if (fieldVal == null)
+                return;
+            if (
+                field.FieldType.IsPrimitive ||
+                ReflectionMisc.OverridesToString(fieldVal) ||
+                toStringedTypes.Any(field.FieldType.IsSubclassOf) ||
+                field.FieldType.IsEnum
+            )
+            {
+
+                if (field.FieldType == typeof(string))
+                {
+                    if (((string)fieldVal).Contains("\n") || ((string)fieldVal).Contains("\r"))
+                    {
+                        if (ImGui.TreeNodeEx(field.Name))
+                        {
+                            ImGui.Text(fieldVal?.ToString());
+                            ImGui.TreePop();
+                        }
+                    }
+                }
+                else
+                    ImGui.Text(field.Name + ": " + fieldVal?.ToString());
+
+            }
+            else
+                RecursiveListType(fieldVal, name: field.Name);
+        }
 
     }
 }

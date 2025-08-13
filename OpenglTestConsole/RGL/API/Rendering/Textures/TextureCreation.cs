@@ -235,38 +235,50 @@ namespace RGL.API.Rendering.Textures
             texture.name = name;
             texture.width = width;
             texture.height = height;
-            GL.BindTexture(TextureTarget.Texture2D, texture.Handle);
-
-            GL.TexParameter(
-                TextureTarget.Texture2D,
-                TextureParameterName.TextureWrapS,
-                (int)textureSWrapMode
-            );
-            GL.TexParameter(
-                TextureTarget.Texture2D,
-                TextureParameterName.TextureWrapT,
-                (int)textureTWrapMode
-            );
-
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)textureMinFilter);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)textureMagFilter);
 
 
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureBaseLevel, 0);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 0);
+            GL.BindTexture(target, texture.Handle);
 
+            GL.TexParameter(target, TextureParameterName.TextureWrapS, (int)textureSWrapMode);
 
-            GL.TexImage2D(
-                target,
-                0, // mipmap level
-                pixelInternalFormat,
-                width,
-                height,
-                0, // border
-                pixelFormat,
-                pixelType,
-                nint.Zero // initilisation pixels
-            );
+            if (target == TextureTarget.Texture2D)
+                GL.TexParameter(target, TextureParameterName.TextureWrapT, (int)textureTWrapMode);
+
+            GL.TexParameter(target, TextureParameterName.TextureMinFilter, (int)textureMinFilter);
+            GL.TexParameter(target, TextureParameterName.TextureMagFilter, (int)textureMagFilter);
+
+            GL.TexParameter(target, TextureParameterName.TextureBaseLevel, 0);
+            GL.TexParameter(target, TextureParameterName.TextureMaxLevel, 0);
+
+            // Texture creation
+            if (target == TextureTarget.Texture1D)
+            {
+                GL.TexImage1D(
+                    target,
+                    0, // mipmap level
+                    pixelInternalFormat,
+                    width,
+                    0, // border
+                    pixelFormat,
+                    pixelType,
+                    nint.Zero // initialization pixels
+                );
+            }
+            else if (target == TextureTarget.Texture2D)
+            {
+                GL.TexImage2D(
+                    target,
+                    0, // mipmap level
+                    pixelInternalFormat,
+                    width,
+                    height,
+                    0, // border
+                    pixelFormat,
+                    pixelType,
+                    nint.Zero // initialization pixels
+                );
+            }
+
             texture.initalised = true;
 
             if (logCreation)

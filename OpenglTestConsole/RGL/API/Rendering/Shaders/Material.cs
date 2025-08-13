@@ -12,7 +12,9 @@ namespace RGL.API.Rendering.Shaders
         public Material() { }
 
         public abstract Shader Shader { get; }
+        public bool Transparent { get; set; } = false;
 
+        public virtual void BeforeUse(Scene scene) { }
         public abstract void Apply(Scene scene);
     }
 }

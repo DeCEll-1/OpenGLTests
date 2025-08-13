@@ -8,7 +8,16 @@ namespace RGL.API.Rendering.Materials
 {
     public class ModelMaterial : Material
     {
-        public override Shader Shader => Resources.Shaders[RGLResources.Shaders.Model.Name];
+        public override Shader Shader
+        {
+            get
+            {
+                if (this.Transparent)
+                    return Resources.Shaders[RGLResources.Shaders.Model.Name].Transparent;
+                else
+                    return Resources.Shaders[RGLResources.Shaders.Model.Name].Opaque;
+            }
+        }
         public Texture Color { get; }
         public Texture Occlusion { get; }
         public Texture Normals { get; }

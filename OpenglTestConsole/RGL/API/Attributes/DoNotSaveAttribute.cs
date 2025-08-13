@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RGL.API.Attributes
 {
-    internal class DoNotSaveAttribute : Attribute
+    public class DoNotSaveAttribute : Attribute
     {
         public DoNotSaveAttribute() { }
     }

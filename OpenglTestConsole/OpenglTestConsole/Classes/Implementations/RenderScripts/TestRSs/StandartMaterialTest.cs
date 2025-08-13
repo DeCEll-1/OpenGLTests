@@ -22,6 +22,7 @@ namespace RGL.Classes.Implementations.RenderScripts.TestRSs
             var material = new TextureMaterial(Resources.Textures[AppResources.Textures.Bell_Pepper_png]);
             //var material = new StandartMaterial();
             Mesh = new Mesh(geometry, material, name: "bell, pepper");
+            Mesh.IsTransparent = true;
             Scene.Add(Mesh);
         }
 

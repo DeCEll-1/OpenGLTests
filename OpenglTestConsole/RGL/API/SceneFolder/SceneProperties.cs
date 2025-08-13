@@ -44,7 +44,7 @@ namespace RGL.API.SceneFolder
                     SkyboxMaterial mat = new(field);
                     SkyboxGeometry geometry = new SkyboxGeometry();
 
-                    Skybox = new Mesh(geometry, mat);
+                    Skybox = new Mesh(geometry, mat, name: "Scene Skybox");
                     Skybox.type = PrimitiveType.Triangles;
 
                 }
@@ -57,8 +57,41 @@ namespace RGL.API.SceneFolder
         public Mesh Skybox { get; private set; } = null;
 
         public List<List<Mesh>> Meshes { get; private set; } = [];
-        public void Add(Mesh mesh) => Meshes.Add([mesh]);
+        public List<List<Mesh>> TransparentMeshes { get; private set; } = [];
+        DrawBuffersEnum[] TransparencyBufferEnum =
+                [
+                    DrawBuffersEnum.ColorAttachment0,
+                    DrawBuffersEnum.ColorAttachment1,
+                ];
+        public void Add(Mesh mesh)
+        {
+            if (mesh.IsTransparent)
+                TransparentMeshes.Add([mesh]);
+            else
+                Meshes.Add([mesh]);
+        }
 
-        public void Add(List<Mesh> mesh) => Meshes.Add(mesh);
+        public void Add(List<Mesh> mesh)
+        {
+            if (mesh.TrueForAll(s => s.IsTransparent))
+            {
+                TransparentMeshes.Add(mesh);
+                return;
+            }
+            if (mesh.TrueForAll(s => !s.IsTransparent))
+            {
+                Meshes.Add(mesh);
+                return;
+            }
+
+            foreach (Mesh mes in mesh)
+            {
+                if (mes.IsTransparent)
+                    TransparentMeshes.Add([mes]);
+                else
+                    Meshes.Add([mes]);
+            }
+
+        }
     }
 }

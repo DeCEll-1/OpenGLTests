@@ -14,7 +14,8 @@ namespace RGL.API.Rendering.Materials
             this.cubemap = cubemap;
         }
 
-        public override Shader Shader => Resources.Shaders[RGLResources.Shaders.Skybox.Name];
+        public override Shader Shader => Resources.Shaders[RGLResources.Shaders.Skybox.Name].Opaque;
+
 
         public override void Apply(Scene scene)
         { // set shader values here

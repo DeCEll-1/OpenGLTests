@@ -9,13 +9,17 @@ namespace RGL.Classes.API.Rendering.Shaders
         public bool initalised = false;
         public string vertexSource { get; private set; }
         public string fragmentSource { get; private set; }
-        public string name { get; private set; }
+        public string name { get; set; }
         public int Handle { get; set; }
         private bool disposed = false;
         public ShaderUniformManager UniformManager;
 
         public Shader(string vertexSource, string fragmentSource, string name = "")
-        { this.vertexSource = vertexSource; this.fragmentSource = fragmentSource; this.name = name ?? ""; }
+        {
+            this.vertexSource = "#version 330 core\n" + vertexSource;
+            this.fragmentSource = "#version 330 core\n" + fragmentSource;
+            this.name = name ?? "";
+        }
 
         public void Init()
         {

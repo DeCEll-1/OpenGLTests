@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RGL.API.JSON;
-
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using OpenTK.Mathematics;
+
+namespace RGL.API.JSON;
+
 
 public class Vector2JsonConverter : JsonConverter<Vector2>
 {
@@ -94,3 +95,16 @@ public class Vector4iJsonConverter : JsonConverter<Vector4i>
     }
 }
 
+public class DirectoryInfoJsonConverter : JsonConverter<DirectoryInfo>
+{
+    public override DirectoryInfo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        string val = JsonSerializer.Deserialize<string>(ref reader, options)!;
+        return new DirectoryInfo(val);
+    }
+
+    public override void Write(Utf8JsonWriter writer, DirectoryInfo value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(writer, value.FullName, options);
+    }
+}

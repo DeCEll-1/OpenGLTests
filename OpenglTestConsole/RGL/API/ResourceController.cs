@@ -1,8 +1,10 @@
 using ImageMagick;
+using RGL.API.Helpers;
 using RGL.API.JSON;
 using RGL.API.Misc;
 using RGL.API.Rendering.Geometries;
 using RGL.API.Rendering.Materials;
+using RGL.API.Rendering.Shaders;
 using RGL.API.Rendering.Shaders.Compute;
 using RGL.API.Rendering.Textures;
 using RGL.Classes.API.Rendering.Shaders;
@@ -18,8 +20,10 @@ namespace RGL.API
         private static Type AppResources;
         public static void Refresh()
         {
-            foreach (KeyValuePair<string, Shader> item in Resources.Shaders)
-                item.Value.Dispose();
+            foreach (KeyValuePair<string, ShaderVariants> item in Resources.Shaders)
+            {
+                item.Value.Opaque.Dispose(); item.Value.Transparent.Dispose();
+            }
 
             foreach (KeyValuePair<string, ComputeShader> item in Resources.CompShaders)
                 item.Value.Dispose();
@@ -38,10 +42,9 @@ namespace RGL.API
             Resources.Cubemaps.Clear();
             Resources.Geometries.Clear();
 
+            GCLoop.StopGcLoop();
+
             Init();
-        }
-        static ResourceController()
-        {
         }
 
         public static void Init(Type appResources = null)
@@ -77,26 +80,17 @@ namespace RGL.API
 
             Logger.BeginMemoryBlock();
 
-            Task.Run(async () =>
-            {
-                await Task.Delay(2000);
-                GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
-                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
-                GC.WaitForPendingFinalizers();
-                GC.Collect();
-                Logger.Log($"Saved {LogColors.BR(Logger.FormatBytes(-Logger.EndMemoryBlock()))} By Force GC Call", LogLevel.Detail);
-            });
-
-
-
+            GCLoop.StartGcLoop();
         }
+
+        private static GCLoop GCLoop = new GCLoop();
         #region textures
-        private static void AddTextures()
+        private static void AddTextures()   
         {
             foreach (FieldInfo texture in typeof(RGLResources.Textures).GetFields())
                 AddTexture((string)texture.GetValue(null)!);
 
-            Type? appTextures = AppResources.GetNestedType("Textures");
+            Type? appTextures = AppResources?.GetNestedType("Textures");
             if (appTextures == null)
                 return;
 
@@ -104,8 +98,7 @@ namespace RGL.API
                 AddTexture((string)texture.GetValue(null)!);
         }
 
-
-        private static Texture AddTexture(string texturePath)
+        public static Texture AddTexture(string texturePath)
         {
             // add the texture to the resources
             Resources.Textures.Add(texturePath, Texture.LoadFromFile(texturePath));
@@ -122,7 +115,7 @@ namespace RGL.API
             foreach (Type compShader in typeof(RGLResources.ComputeShaders).GetNestedTypes())
                 AddComputeShader(compShader);
 
-            Type? appCompShaders = AppResources.GetNestedType("ComputeShaders");
+            Type? appCompShaders = AppResources?.GetNestedType("ComputeShaders");
             if (appCompShaders == null)
                 return;
 
@@ -150,7 +143,7 @@ namespace RGL.API
             foreach (var shader in typeof(RGLResources.Shaders).GetNestedTypes())
                 AddShader(shader);
 
-            Type? appShaders = AppResources.GetNestedType("Shaders");
+            Type? appShaders = AppResources?.GetNestedType("Shaders");
             if (appShaders == null)
                 return;
 
@@ -165,37 +158,37 @@ namespace RGL.API
 
             string fragmentPath = (string)type.GetField("Fragment")!.GetValue(null)!;
             string? fragmentContent = type.GetField("FragmentFileContent")?.GetValue(null) as string;
+            string fragmentSource = fragmentContent ?? File.ReadAllText(fragmentPath);
 
             string vertexPath = (string)type.GetField("Vertex")!.GetValue(null)!;
             string? vertexContent = type.GetField("VertexFileContent")?.GetValue(null) as string;
+            string vertexSource = vertexContent ?? File.ReadAllText(vertexPath);
 
             string? geometryPath = type.GetField("Geometry")?.GetValue(null) as string;
             string? geometryContent = type.GetField("GeometryFileContent")?.GetValue(null) as string;
+            string? geometrySource = geometryContent ?? (geometryPath != null ? File.ReadAllText(geometryPath) : null);
 
-            Shader shader;
-            if (string.IsNullOrEmpty(geometryContent) && string.IsNullOrEmpty(geometryPath))
-            {
-                shader = new Shader(
-                    vertexSource: vertexContent ?? File.ReadAllText(vertexPath),
-                    fragmentSource: fragmentContent ?? File.ReadAllText(fragmentPath),
-                    name: shaderName
-                );
-            }
-            else
-            {
-                shader = new Shader(
-                    vertexSource: vertexContent ?? File.ReadAllText(vertexPath),
-                    fragmentSource: fragmentContent ?? File.ReadAllText(fragmentPath),
-                    geometrySource: geometryContent! ?? File.ReadAllText(geometryPath!),
-                    name: shaderName
-                );
-            }
+            // Opaque shader
+            Shader opaqueShader = geometrySource == null
+                ? new Shader(vertexSource, fragmentSource, name: shaderName + "_opaque")
+                : new Shader(vertexSource, fragmentSource, geometrySource, name: shaderName + "_opaque");
 
-            // Add to resources and initialize
-            Resources.Shaders.Add(shaderName, shader);
+            // Transparent shader — inject #define
+            string transparentFragment = "#define TRANSPARENT\n" + fragmentSource;
+            string? transparentGeometry = geometrySource != null ? "#define TRANSPARENT\n" + geometrySource : null;
 
-            Logger.Log($"Loading {LogColors.Green("Shader")} {LogColors.BrightWhite(shaderName)}", LogLevel.Detail);
-            shader.Init();
+            Shader transparentShader = transparentGeometry == null
+                ? new Shader(vertexSource, transparentFragment, name: shaderName + "_transparent")
+                : new Shader(vertexSource, transparentFragment, transparentGeometry, name: shaderName + "_transparent");
+
+            opaqueShader.Init();
+            transparentShader.Init();
+
+            // Add to resources
+            var variants = new ShaderVariants(opaqueShader, transparentShader);
+            Resources.Shaders.Add(shaderName, variants);
+
+            Logger.Log($"Loading {LogColors.Green("Shader Variants")} {LogColors.BrightWhite(shaderName)}", LogLevel.Detail);
         }
 
         #endregion
@@ -205,7 +198,7 @@ namespace RGL.API
             foreach (var font in typeof(RGLResources.Fonts).GetNestedTypes())
                 AddFont(font);
 
-            Type? appFonts = AppResources.GetNestedType("Fonts");
+            Type? appFonts = AppResources?.GetNestedType("Fonts");
             if (appFonts == null)
                 return;
 
@@ -232,7 +225,7 @@ namespace RGL.API
             foreach (var map in typeof(RGLResources.Cubemaps).GetNestedTypes())
                 AddCubemap(map);
 
-            Type? appCubemaps = AppResources.GetNestedType("Cubemaps");
+            Type? appCubemaps = AppResources?.GetNestedType("Cubemaps");
             if (appCubemaps == null)
                 return;
 
@@ -279,7 +272,7 @@ namespace RGL.API
             foreach (var map in typeof(Models).GetNestedTypes())
                 AddModel(map);
 
-            Type? appModels = AppResources.GetNestedType("Geometries")?.GetNestedType("Models");
+            Type? appModels = AppResources?.GetNestedType("Geometries")?.GetNestedType("Models");
 
             if (appModels == null)
                 return;

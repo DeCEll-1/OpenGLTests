@@ -17,8 +17,8 @@ namespace RGL.API.Rendering.Textures
         public void Paramater(TextureParameterName name, int param)
         {
             GL.TexParameter(
-                TextureTarget.Texture2D,
-                TextureParameterName.TextureWrapS,
+                this.Target,
+                name,
                 param
             );
         }
@@ -32,7 +32,7 @@ namespace RGL.API.Rendering.Textures
         public void Bind()
         {
             Check();
-            GL.BindTexture(TextureTarget.Texture2D, Handle);
+            GL.BindTexture(this.Target, Handle);
         }
 
         public void Activate(TextureUnit unit)

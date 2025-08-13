@@ -20,7 +20,16 @@ namespace RGL.API.Rendering.Materials
         // size of the specular light
         public float Shininess { get; set; }
 
-        public override Shader Shader => Resources.Shaders[RGLResources.Shaders.Phong.Name];
+        public override Shader Shader
+        {
+            get
+            {
+                if (this.Transparent)
+                    return Resources.Shaders[RGLResources.Shaders.Phong.Name].Transparent;
+                else
+                    return Resources.Shaders[RGLResources.Shaders.Phong.Name].Opaque;
+            }
+        }
 
         public PhongMaterial(Vector3 ambient, Vector3 diffuse, Vector3 specular, float shininess)
         {

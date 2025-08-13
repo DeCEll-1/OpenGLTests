@@ -3,7 +3,7 @@ using RGL.API.Rendering.Textures;
 using RGL.API.SceneFolder;
 using RGL.Classes.API.Rendering.Shaders;
 
-namespace RGL.API.Rendering.Materials
+namespace RGL.API.Rendering.Materials.PPMaterials
 {
     public class PostProcessingMaterial : Material
     {

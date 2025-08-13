@@ -79,13 +79,37 @@ namespace RGL.API.Extensions
         public static string ToHex(this Vector4 color) =>
             $"{(int)(color.X * 255):X2}{(int)(color.Y * 255):X2}{(int)(color.Z * 255):X2}{(int)(color.W * 255):X2}";
 
-        public static Vector4 FromHex(string hex) =>
-            new Vector4(
+        public static Color4 ToColor4(this string hex) =>
+            new Color4(
                 byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber) / 255f,
                 byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber) / 255f,
                 byte.Parse(hex.Substring(4, 2), NumberStyles.HexNumber) / 255f,
                 byte.Parse(hex.Substring(6, 2), NumberStyles.HexNumber) / 255f
             );
+
+        public static uint ToUInt(this Vector4i color) =>
+            ((uint)(color.X & 0xFF) << 24) |
+            ((uint)(color.Y & 0xFF) << 16) |
+            ((uint)(color.Z & 0xFF) << 8) |
+            ((uint)(color.W & 0xFF));
+
+        public static uint ToUIntForImgui(this Vector4i color) =>
+            ((uint)(color.W & 0xFF) << 24) |
+            ((uint)(color.Z & 0xFF) << 16) |
+            ((uint)(color.Y & 0xFF) << 8) |
+            ((uint)(color.X & 0xFF));
+
+        public static uint ToUInt(this Color4 color) =>
+            ((uint)((int)(color.R * 255f) & 0xFF) << 24) |
+            ((uint)((int)(color.G * 255f) & 0xFF) << 16) |
+            ((uint)((int)(color.B * 255f) & 0xFF) << 8) |
+            ((uint)((int)(color.A * 255f) & 0xFF));
+
+        public static uint ToUIntForImgui(this Color4 color) =>
+            ((uint)((int)(color.A * 255f) & 0xFF) << 24) |
+            ((uint)((int)(color.B * 255f) & 0xFF) << 16) |
+            ((uint)((int)(color.G * 255f) & 0xFF) << 8) |
+            ((uint)((int)(color.R * 255f) & 0xFF));
         #endregion
     }
 }

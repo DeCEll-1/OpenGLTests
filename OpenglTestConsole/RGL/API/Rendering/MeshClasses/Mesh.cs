@@ -26,6 +26,14 @@ namespace RGL.API.Rendering.MeshClasses
         public Action AfterRender;
         // render type
         public PrimitiveType type { get; set; } = PrimitiveType.Triangles;
+        public bool IsTransparent
+        {
+            get; set
+            {
+                field = value;
+                this.Material.Transparent = value;
+            }
+        } = false;
 
         public int VertexArrayObjectPointer { get; internal set; }
 
@@ -50,6 +58,7 @@ namespace RGL.API.Rendering.MeshClasses
 
             Enalbes();
 
+            Material.BeforeUse(scene);
 
             Material.Shader.Use();
 

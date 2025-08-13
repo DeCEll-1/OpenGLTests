@@ -3,6 +3,19 @@ using RGL.API.Misc;
 
 namespace RGL.API.Rendering.Textures
 {
+    public struct TextureInfo
+    {
+        public PixelInternalFormat InternalFormat;
+        public PixelFormat Format;
+        public PixelType Type;
+        public TextureInfo(PixelInternalFormat internalFormat, PixelFormat format, PixelType type)
+        {
+            InternalFormat = internalFormat;
+            Format = format;
+            Type = type;
+        }
+    }
+
     public class FBO : IDisposable
     {
         private bool disposed = false;
@@ -12,7 +25,9 @@ namespace RGL.API.Rendering.Textures
         public Texture ColorTexture { get; private set; }
         public Texture DepthStencilTexture { get; private set; }
         public FBO() { }
-        public void Init(Vector2i? size = null, string name = "", Texture? colorTexture = null, Texture? depthStencilTexture = null)
+        public List<Texture> ColorTextures = new(); // supports MRT
+
+        public void Init(Vector2i? size = null, string name = "", Texture? depthStencilTexture = null, TextureInfo[]? colorAttachments = null)
         {
             Logger.BeginTimingBlock();
             // you just HAD to do shit with pointers
@@ -35,35 +50,71 @@ namespace RGL.API.Rendering.Textures
                 x = size.Value.X; y = size.Value.Y;
             }
 
-            if (colorTexture == null)
+            ColorTextures.Clear();
+
+
+            if (colorAttachments != null && colorAttachments.Length > 0)
             {
-                // create texture thats the same size as the window (not required)
+                for (int i = 0; i < colorAttachments.Length; i++)
+                {
+                    var info = colorAttachments[i];
+                    var tex = Texture.LoadFromSize(
+                        x, y,
+                        target: TextureTarget.Texture2D,
+                        pixelInternalFormat: info.InternalFormat,
+                        pixelFormat: info.Format,
+                        pixelType: info.Type,
+                        textureMinFilter: TextureMinFilter.Linear,
+                        textureMagFilter: TextureMagFilter.Linear,
+                        name: $"Color_{i}",
+                        logCreation: false
+                    );
+                    ColorTextures.Add(tex);
+
+                    //FramebufferAttachment attachmentType = FramebufferAttachment.ColorAttachment0;
+                    //switch (i)
+                    //{
+                    //    case 0:
+                    //        attachmentType = FramebufferAttachment.ColorAttachment0; break;
+                    //    case 1:
+                    //        attachmentType = FramebufferAttachment.ColorAttachment1; break;
+                    //    default:
+                    //        break;
+                    //}
+
+                    GL.FramebufferTexture2D(
+                        FramebufferTarget.Framebuffer,
+                        FramebufferAttachment.ColorAttachment0 + i,
+                        TextureTarget.Texture2D,
+                        tex.Handle,
+                        0
+                    );
+                }
+            }
+            else
+            {
                 ColorTexture = Texture.LoadFromSize(
                     x, y,
                     target: TextureTarget.Texture2D,
                     pixelInternalFormat: PixelInternalFormat.Rgba,
                     pixelFormat: PixelFormat.Rgba,
                     pixelType: PixelType.UnsignedByte,
-                    // wrap mode s
-                    // wrap mode t
                     textureMinFilter: TextureMinFilter.Linear,
                     textureMagFilter: TextureMagFilter.Linear,
                     name: "Color",
                     logCreation: false
                 );
-            }
-            else
-            {
-                ColorTexture = colorTexture;
-            }
 
-            GL.FramebufferTexture2D( // attatch the texture
-                FramebufferTarget.Framebuffer, // the frame buffer will write to this texture
-                FramebufferAttachment.ColorAttachment0, // attatchment type
-                TextureTarget.Texture2D, // texture type
-                ColorTexture.Handle,
-                0 // mipmap level
-            );
+                ColorTextures.Add(ColorTexture);
+
+                GL.FramebufferTexture2D( // attatch the texture
+                    FramebufferTarget.Framebuffer, // the frame buffer will write to this texture
+                    FramebufferAttachment.ColorAttachment0, // attatchment type
+                    TextureTarget.Texture2D, // texture type
+                    ColorTexture.Handle,
+                    0 // mipmap level
+                );
+            }
 
             /* however i need to sample them now
             // create render buffer, as we wont be reading the depth and stencil as texture so it can stay as render buffer
@@ -120,12 +171,34 @@ namespace RGL.API.Rendering.Textures
             }
             else
             {
+                string colorAttachmentLog = "";
+
+                if (ColorTextures.Count > 1)
+                {
+                    for (int i = 0; i < ColorTextures.Count; i++)
+                    {
+                        var tex = ColorTextures[i];
+                        colorAttachmentLog +=
+                            $"  Color Attachment {i}: {LogColors.BC("Texture")} {LogColors.BW(tex.Handle)} " +
+                            $"{LogColors.BW(tex.width)}x{LogColors.BW(tex.height)}\n";
+                    }
+                }
+                else if (ColorTexture != null)
+                {
+                    colorAttachmentLog =
+                        $"  Color {LogColors.BC("Texture")}: {LogColors.BW(ColorTexture.Handle)} " +
+                        $"{LogColors.BW(ColorTexture.width)}x{LogColors.BW(ColorTexture.height)}\n";
+                }
+
                 Logger.Log(
-                    $"Loaded {LogColors.BC("FBO")} {LogColors.BW(Handle)}{(name != null ? $", named {LogColors.BW(name)}" : "")}:\n" +
-                    $"  Color {LogColors.BC("Texture")}: {LogColors.BW(ColorTexture.Handle)} {LogColors.BW(ColorTexture.width)}x{LogColors.BW(ColorTexture.height)}\n" +
-                    $"  Depth & Stencil {LogColors.BrightCyan("Texture")}: {LogColors.BW(DepthStencilTexture.Handle)} {LogColors.BW(DepthStencilTexture.width)}x{LogColors.BW(DepthStencilTexture.height)}\n" +
-                    $"  In {LogColors.BG(Logger.EndTimingBlockFormatted())}"
-                    , LogLevel.Detail
+                    $"Loaded {LogColors.BC("FBO")} {LogColors.BW(Handle)}" +
+                    $"{(string.IsNullOrWhiteSpace(name) ? "" : $", named {LogColors.BW(name)}")}:\n" +
+                    colorAttachmentLog +
+                    $"  Depth & Stencil {LogColors.BrightCyan("Texture")}: " +
+                    $"{LogColors.BW(DepthStencilTexture.Handle)} " +
+                    $"{LogColors.BW(DepthStencilTexture.width)}x{LogColors.BW(DepthStencilTexture.height)}\n" +
+                    $"  In {LogColors.BG(Logger.EndTimingBlockFormatted())}",
+                    LogLevel.Detail
                 );
             }
             // execute victory dance
@@ -164,15 +237,23 @@ namespace RGL.API.Rendering.Textures
                 {
                     //if (ColorTexture != null)
                     //{
-                        ColorTexture.logDisposal = log;
-                        ColorTexture.Dispose();
+                    ColorTexture.logDisposal = log;
+                    ColorTexture.Dispose();
                     //}
 
                     //if (DepthStencilTexture != null)
                     //{
-                        DepthStencilTexture.logDisposal = log;
-                        DepthStencilTexture.Dispose();
+                    DepthStencilTexture.logDisposal = log;
+                    DepthStencilTexture.Dispose();
                     //}
+
+                    foreach (var tex in ColorTextures)
+                    {
+                        tex.logDisposal = log;
+                        tex.Dispose();
+                    }
+                    ColorTextures.Clear();
+
 
 
 

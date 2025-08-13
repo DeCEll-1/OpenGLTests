@@ -38,9 +38,9 @@ namespace RGL.API.Rendering
             }
         }
 
-        public Camera()
-        {
-        }
+        public Camera() { }
+
+        public Camera(Vector2i resolution) { this.screenWidth = resolution.X; this.screenHeight = resolution.Y; }
 
         public Matrix4 GetViewMatrix()
         {

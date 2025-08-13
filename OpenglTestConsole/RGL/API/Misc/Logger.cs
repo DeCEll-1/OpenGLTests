@@ -1,4 +1,5 @@
-﻿using RGL.API.SceneFolder;
+﻿using RGL.API.ImGuiHelpers;
+using RGL.API.SceneFolder;
 
 namespace RGL.API.Misc
 {
@@ -20,7 +21,10 @@ namespace RGL.API.Misc
         public static void Log(string info, string color)
         {
             // replace return to normals with the current color so we can change the color of texts
-            Console.WriteLine(Indent + color + info.Replace(LogColors.NORMAL, color + LogColors.BLACK_BACKGROUND));
+            string text = Indent + color + info.Replace(LogColors.NORMAL, color + LogColors.BLACK_BACKGROUND);
+            Console.WriteLine(text);
+            if (APISettings.DisplayLogsInNotifications)
+                ImguiNotification.DisplayNotification("Log", text, APISettings.LogNotificationDurationMS);
         }
         public static void LogRaw(string text)
         {
@@ -114,7 +118,7 @@ namespace RGL.API.Misc
 
 
 
-
+        public static void PrintEmptyLine() => Console.WriteLine();
         public static void LogOpenglAttributes()
         {
             // Single-value parameters

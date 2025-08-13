@@ -10,7 +10,7 @@ namespace RGL.API
     public static class Resources
     {
         public static Dictionary<string, Texture> Textures { get; set; } = new();
-        public static Dictionary<string, Shader> Shaders { get; set; } = new();
+        public static Dictionary<string, ShaderVariants> Shaders { get; set; } = new();
         public static Dictionary<string, ComputeShader> CompShaders { get; set; } = new();
         public static Dictionary<string, FontJson> Fonts { get; set; } = new();
         public static Dictionary<string, Cubemap> Cubemaps { get; set; } = new();

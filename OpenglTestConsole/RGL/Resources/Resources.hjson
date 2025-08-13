@@ -93,6 +93,14 @@
             #
             "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert",
             "VertexFileContent": "Resources/Shaders/PostProcesses/MasterVertex.vert" #
+        },
+        "PPWBOITCompositePass": {
+            "Name": "PPWBOITCompositePass",
+            "Fragment": "Resources/Shaders/PostProcesses/WBOIT/CompositePass.frag",
+            "FragmentFileContent": "Resources/Shaders/PostProcesses/WBOIT/CompositePass.frag",
+            #
+            "Vertex": "Resources/Shaders/PostProcesses/MasterVertex.vert",
+            "VertexFileContent": "Resources/Shaders/PostProcesses/MasterVertex.vert" #
         }
     },
     "ComputeShaders": {},

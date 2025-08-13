@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "68ELCCExff4=",
+  "dgSpecHash": "YfsvDBr1CjM=",
   "success": true,
   "projectFilePath": "D:\\Github\\OpenGLTests\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj",
   "expectedPackageFiles": [
@@ -26,5 +26,18 @@
     "C:\\Users\\DeCell\\.nuget\\packages\\system.reflection.metadata\\6.0.0\\system.reflection.metadata.6.0.0.nupkg.sha512",
     "C:\\Users\\DeCell\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'Magick.NET-Q8-AnyCPU' 14.6.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-vmhh-8rxq-fp9g",
+      "projectPath": "D:\\Github\\OpenGLTests\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\Github\\OpenGLTests\\OpenglTestConsole\\OpenglTestConsole\\OpenglTestConsole.csproj",
+      "libraryId": "Magick.NET-Q8-AnyCPU",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

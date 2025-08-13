@@ -101,6 +101,34 @@ namespace RGL.API.Rendering.Shaders
             }
         }
 
+        public void SetFloatArray(string name, float[] values)
+        {
+            if (uniformCache.ContainsKey(name))
+            {
+                uniformCache.TryGetValue(name, out int loc);
+                GL.Uniform1(loc, values.Length, values);
+            }
+            else
+            {
+                uniformCache.Add(name, GL.GetUniformLocation(Handle, name));
+                SetFloatArray(name, values);
+            }
+        }
+
+        public void SetIntArray(string name, int[] values)
+        {
+            if (uniformCache.ContainsKey(name))
+            {
+                uniformCache.TryGetValue(name, out int loc);
+                GL.Uniform1(loc, values.Length, values);
+            }
+            else
+            {
+                uniformCache.Add(name, GL.GetUniformLocation(Handle, name));
+                SetIntArray(name, values);
+            }
+        }
+
         public void SetColor4(string name, Color4 color)
         {
             if (uniformCache.ContainsKey(name))
