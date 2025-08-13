@@ -33,8 +33,8 @@ namespace RGL.API.SceneFolder
                 name: "WBOIT",
                 colorAttachments: new[]
                 {
-                    new TextureInfo(PixelInternalFormat.Rgba16f, PixelFormat.Rgba, PixelType.Float), // accum
-                    new TextureInfo(PixelInternalFormat.R16f, PixelFormat.Red, PixelType.Float),     // reveal
+                    new TextureInfo(PixelInternalFormat.Rgba16f, PixelFormat.Rgba, PixelType.HalfFloat), // accum
+                    new TextureInfo(PixelInternalFormat.R8, PixelFormat.Red, PixelType.Float),     // reveal
                 },
                 depthStencilTexture: MainFBO.DepthStencilTexture
             );

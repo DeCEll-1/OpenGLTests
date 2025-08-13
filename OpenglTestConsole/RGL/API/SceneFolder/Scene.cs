@@ -111,9 +111,16 @@ namespace RGL.API.SceneFolder
 
         private void RenderTransparentObjects()
         {
+
+            MainFBO.Bind();
+            foreach (var scriptRenders in TransparentMeshes)
+                foreach (var mesh in scriptRenders)
+                    mesh?.Render(this, false);
+
             WBOITFBO.Bind();
 
             GL.DepthMask(false);
+
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(0, BlendingFactorSrc.One, BlendingFactorDest.One);
             GL.BlendFunc(1, BlendingFactorSrc.Zero, BlendingFactorDest.OneMinusSrcColor);
@@ -125,14 +132,20 @@ namespace RGL.API.SceneFolder
 
             foreach (var scriptRenders in TransparentMeshes)
                 foreach (var mesh in scriptRenders)
-                    mesh?.Render(this);
+                    mesh?.Render(this, true);
+
+            WBOITFBO.Unbind();
 
             // restore state
-            GL.DepthMask(true); // Re-enable depth writing
-            GL.Disable(EnableCap.Blend); // Optional: if no blending needed next
+            GL.DepthMask(true); 
+            GL.Enable(EnableCap.DepthTest);
+            GL.DepthFunc(DepthFunction.Less);
+
+            GL.Disable(EnableCap.Blend); 
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha); // Restore default
-            WBOITFBO.Unbind();
             MainFBO.Bind();
+
+
         }
 
         public void RunEveryFrameScripts(FrameEventArgs args, GameWindow window)

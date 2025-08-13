@@ -23,6 +23,8 @@ namespace RGL.Classes.Implementations.RenderScripts.TestRSs
             //var material = new StandartMaterial();
             Mesh = new Mesh(geometry, material, name: "bell, pepper");
             Mesh.IsTransparent = true;
+            //Mesh.CapsToEnable.Add(EnableCap.CullFace);
+
             Scene.Add(Mesh);
         }
 

@@ -52,9 +52,12 @@ namespace RGL.API.Rendering.MeshClasses
 
         #region Render
 
-        public virtual void Render(Scene scene)
+        public virtual void Render(Scene scene, bool? Transparent = null)
         { // deadass render that shit cuh
             // on it boss ima render that shit cuh
+
+            bool realTransparency = this.IsTransparent;
+            this.IsTransparent = Transparent ?? this.IsTransparent;
 
             Enalbes();
 
@@ -63,6 +66,7 @@ namespace RGL.API.Rendering.MeshClasses
             Material.Shader.Use();
 
             Material.Apply(scene);
+
 
             Material.Shader.UniformManager.SetMatrix4("projection", scene.Camera.GetProjectionMatrix());
 
@@ -80,6 +84,7 @@ namespace RGL.API.Rendering.MeshClasses
             AfterRender?.Invoke();
 
             Disables();
+            this.IsTransparent = realTransparency;
         }
 
         private void Enalbes()
