@@ -12,9 +12,6 @@ uniform Material material;
 #ifdef TRANSPARENT
 layout(location = 0) out vec4 outAccum; // accumulation buffer (RGBA)
 layout(location = 1) out float outRevealage; // revealage buffer (R)
-
-uniform sampler2D accumBuffer;
-
 #else
 out vec4 FragColor;
 #endif

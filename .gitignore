@@ -9,3 +9,5 @@
 /OpenglTestConsole/ResourcesClassGenerator/bin/Release
 /Obsidian/API
 *.dmp
+/OpenglTestConsole/OpenglTestConsole/bin
+/OpenglTestConsole/RGL/obj

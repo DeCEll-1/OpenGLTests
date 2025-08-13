@@ -66,7 +66,7 @@ namespace RGL.API.SceneFolder
             if (PostProcesses.Count > 1)
             {
                 for (i = 1; // we already did 0th
-                    i < PostProcesses.Count - 1; // minus 1 because we want to write to buffer 0 on the last step, which is the screen
+                    i < PostProcesses.Count ;
                     i++)
                 {
                     PostProcesses[i].Apply(FBOToWriteTo: pingPong.WriteTo.Handle, FBOToReadFrom: pingPong.ReadFrom, this);

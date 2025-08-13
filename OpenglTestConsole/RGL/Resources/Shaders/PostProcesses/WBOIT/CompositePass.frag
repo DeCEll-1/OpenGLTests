@@ -43,6 +43,18 @@ void main()
     // prevent floating point precision bug
     vec3 average_color = accumulation.rgb / max(accumulation.a, EPSILON);
 
+    vec3 screenCol = texture(colorBuffer, TexCoords).rgb;
+
+    float alpha = 1.0 - revealage; // combined transparency
+
     // blend pixels
-    FragColor = vec4(average_color, 1.0f - revealage);
+    // you see, transparency doesnt work properly
+    // why? i dunno
+
+    vec3
+    outCol = average_color * alpha + screenCol * (1.0 - alpha);
+
+    FragColor = vec4(outCol, 1.0); // keep final alpha = 1 for display
+
+    // FragColor = vec4((1. - average_color) * (screenCol * (1.0f - revealage)), 1.);
 }

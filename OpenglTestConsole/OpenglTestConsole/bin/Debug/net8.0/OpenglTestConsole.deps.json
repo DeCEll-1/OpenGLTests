@@ -10,7 +10,7 @@
         "dependencies": {
           "ICSharpCode.Decompiler": "9.1.0.7988",
           "ImGui.NET": "1.91.6.1",
-          "Magick.NET-Q8-AnyCPU": "14.6.0",
+          "Magick.NET-Q8-AnyCPU": "14.8.0",
           "Newtonsoft.Json": "13.0.3",
           "OpenTK": "4.9.4",
           "RGL": "1.0.0"
@@ -71,14 +71,14 @@
           }
         }
       },
-      "Magick.NET-Q8-AnyCPU/14.6.0": {
+      "Magick.NET-Q8-AnyCPU/14.8.0": {
         "dependencies": {
-          "Magick.NET.Core": "14.6.0"
+          "Magick.NET.Core": "14.8.0"
         },
         "runtime": {
           "lib/net8.0/Magick.NET-Q8-AnyCPU.dll": {
-            "assemblyVersion": "14.6.0.0",
-            "fileVersion": "14.6.0.0"
+            "assemblyVersion": "14.8.0.0",
+            "fileVersion": "14.8.0.0"
           }
         },
         "runtimeTargets": {
@@ -110,25 +110,25 @@
           "runtimes/win-arm64/native/Magick.Native-Q8-arm64.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "7.1.1.46"
+            "fileVersion": "10.2.0.0"
           },
           "runtimes/win-x64/native/Magick.Native-Q8-x64.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "7.1.1.46"
+            "fileVersion": "10.2.0.0"
           },
           "runtimes/win-x86/native/Magick.Native-Q8-x86.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "7.1.1.46"
+            "fileVersion": "10.2.0.0"
           }
         }
       },
-      "Magick.NET.Core/14.6.0": {
+      "Magick.NET.Core/14.8.0": {
         "runtime": {
           "lib/net8.0/Magick.NET.Core.dll": {
-            "assemblyVersion": "14.6.0.0",
-            "fileVersion": "14.6.0.0"
+            "assemblyVersion": "14.8.0.0",
+            "fileVersion": "14.8.0.0"
           }
         }
       },
@@ -296,7 +296,7 @@
         "dependencies": {
           "ICSharpCode.Decompiler": "9.1.0.7988",
           "ImGui.NET": "1.91.6.1",
-          "Magick.NET-Q8-AnyCPU": "14.6.0",
+          "Magick.NET-Q8-AnyCPU": "14.8.0",
           "Newtonsoft.Json": "13.0.3",
           "OpenTK": "4.9.4"
         },
@@ -329,19 +329,19 @@
       "path": "imgui.net/1.91.6.1",
       "hashPath": "imgui.net.1.91.6.1.nupkg.sha512"
     },
-    "Magick.NET-Q8-AnyCPU/14.6.0": {
+    "Magick.NET-Q8-AnyCPU/14.8.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-B0/qIiJ3Y+saxSLVOcPCBQe/5UZYU0FedxXu+ZvSL7DXOhEzbcOgnaTtUhpUZhMWSOB/zrkduKFHnCj+7W0GOg==",
-      "path": "magick.net-q8-anycpu/14.6.0",
-      "hashPath": "magick.net-q8-anycpu.14.6.0.nupkg.sha512"
+      "sha512": "sha512-pKS7o1OH2lj40h82ryl0pdxGjnnpE+G0fqI8/NKD+s4851v7XY5B0hBvHFbmjj4qBjZGHU2TgeMpJyvz/Nb5bg==",
+      "path": "magick.net-q8-anycpu/14.8.0",
+      "hashPath": "magick.net-q8-anycpu.14.8.0.nupkg.sha512"
     },
-    "Magick.NET.Core/14.6.0": {
+    "Magick.NET.Core/14.8.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hyXMoLiq6iHooL54iTYzKtiWOAQOiwrwVMeoglGifwYAduAzVfeG+/BxgIz1SaxfczBfQFlcWKTrRU0RNBucUw==",
-      "path": "magick.net.core/14.6.0",
-      "hashPath": "magick.net.core.14.6.0.nupkg.sha512"
+      "sha512": "sha512-H5mrY7/vF9bz+rzCXiJvWnE4IrFQXNxaMWikfrwejFIqtsyDBigaR3U4x6KOZjbO8lo2/dXTuqoYfKgwC+QpJg==",
+      "path": "magick.net.core/14.8.0",
+      "hashPath": "magick.net.core.14.8.0.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",

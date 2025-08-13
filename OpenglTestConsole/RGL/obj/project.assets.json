@@ -59,10 +59,10 @@
           }
         }
       },
-      "Magick.NET-Q8-AnyCPU/14.6.0": {
+      "Magick.NET-Q8-AnyCPU/14.8.0": {
         "type": "package",
         "dependencies": {
-          "Magick.NET.Core": "14.6.0"
+          "Magick.NET.Core": "14.8.0"
         },
         "compile": {
           "lib/net8.0/Magick.NET-Q8-AnyCPU.dll": {
@@ -112,7 +112,7 @@
           }
         }
       },
-      "Magick.NET.Core/14.6.0": {
+      "Magick.NET.Core/14.8.0": {
         "type": "package",
         "compile": {
           "lib/net8.0/Magick.NET.Core.dll": {
@@ -440,18 +440,15 @@
         "runtimes/win-x86/native/cimgui.dll"
       ]
     },
-    "Magick.NET-Q8-AnyCPU/14.6.0": {
-      "sha512": "B0/qIiJ3Y+saxSLVOcPCBQe/5UZYU0FedxXu+ZvSL7DXOhEzbcOgnaTtUhpUZhMWSOB/zrkduKFHnCj+7W0GOg==",
+    "Magick.NET-Q8-AnyCPU/14.8.0": {
+      "sha512": "pKS7o1OH2lj40h82ryl0pdxGjnnpE+G0fqI8/NKD+s4851v7XY5B0hBvHFbmjj4qBjZGHU2TgeMpJyvz/Nb5bg==",
       "type": "package",
-      "path": "magick.net-q8-anycpu/14.6.0",
+      "path": "magick.net-q8-anycpu/14.8.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Magick.NET.icon.png",
-        "Notice.linux-musl.txt",
-        "Notice.linux.txt",
-        "Notice.osx.txt",
-        "Notice.win.txt",
+        "Notice.txt",
         "build/netstandard20/Magick.NET-Q8-AnyCPU.targets",
         "buildTransitive/netstandard20/Magick.NET-Q8-AnyCPU.targets",
         "docs/Readme.md",
@@ -459,7 +456,7 @@
         "lib/net8.0/Magick.NET-Q8-AnyCPU.xml",
         "lib/netstandard20/Magick.NET-Q8-AnyCPU.dll",
         "lib/netstandard20/Magick.NET-Q8-AnyCPU.xml",
-        "magick.net-q8-anycpu.14.6.0.nupkg.sha512",
+        "magick.net-q8-anycpu.14.8.0.nupkg.sha512",
         "magick.net-q8-anycpu.nuspec",
         "runtimes/linux-arm64/native/Magick.Native-Q8-arm64.dll.so",
         "runtimes/linux-musl-x64/native/Magick.Native-Q8-x64.dll.so",
@@ -471,10 +468,10 @@
         "runtimes/win-x86/native/Magick.Native-Q8-x86.dll"
       ]
     },
-    "Magick.NET.Core/14.6.0": {
-      "sha512": "hyXMoLiq6iHooL54iTYzKtiWOAQOiwrwVMeoglGifwYAduAzVfeG+/BxgIz1SaxfczBfQFlcWKTrRU0RNBucUw==",
+    "Magick.NET.Core/14.8.0": {
+      "sha512": "H5mrY7/vF9bz+rzCXiJvWnE4IrFQXNxaMWikfrwejFIqtsyDBigaR3U4x6KOZjbO8lo2/dXTuqoYfKgwC+QpJg==",
       "type": "package",
-      "path": "magick.net.core/14.6.0",
+      "path": "magick.net.core/14.8.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -485,7 +482,7 @@
         "lib/net8.0/Magick.NET.Core.xml",
         "lib/netstandard20/Magick.NET.Core.dll",
         "lib/netstandard20/Magick.NET.Core.xml",
-        "magick.net.core.14.6.0.nupkg.sha512",
+        "magick.net.core.14.8.0.nupkg.sha512",
         "magick.net.core.nuspec"
       ]
     },
@@ -856,7 +853,7 @@
     "net8.0": [
       "ICSharpCode.Decompiler >= 9.1.0.7988",
       "ImGui.NET >= 1.91.6.1",
-      "Magick.NET-Q8-AnyCPU >= 14.6.0",
+      "Magick.NET-Q8-AnyCPU >= 14.8.0",
       "Newtonsoft.Json >= 13.0.3",
       "OpenTK >= 4.9.4"
     ]
@@ -921,7 +918,7 @@
           },
           "Magick.NET-Q8-AnyCPU": {
             "target": "Package",
-            "version": "[14.6.0, )"
+            "version": "[14.8.0, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",
@@ -951,17 +948,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Magick.NET-Q8-AnyCPU' 14.6.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-vmhh-8rxq-fp9g",
-      "libraryId": "Magick.NET-Q8-AnyCPU",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  }
 }

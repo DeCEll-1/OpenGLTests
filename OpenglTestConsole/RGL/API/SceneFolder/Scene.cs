@@ -21,8 +21,8 @@ namespace RGL.API.SceneFolder
 
         public void Init(List<RenderScript> renderScripts, List<EveryFrameScript> everyFrameScripts, GameWindow window)
         {
-
-            this.PostProcesses.Insert(0, new PostProcess(new WBOITCompositeMaterial(WBOITFBO)));
+            PostProcess TransparencyPP = new PostProcess(new WBOITCompositeMaterial(WBOITFBO));
+            this.PostProcesses.Insert(0, TransparencyPP);
             this.RenderScripts = renderScripts;
             this.EveryFrameScripts = everyFrameScripts;
 
